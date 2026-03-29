@@ -27,36 +27,36 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 ## Checklist 30 trang tiếp theo
 
-- [x] `.vitepress/config.ts`
-- [x] `src/translations/index.md`
-- [x] `src/glossary/index.md`
-- [x] `src/error-reference/index.md`
-- [x] `src/examples/index.md`
-- [x] `src/guide/best-practices/performance.md`
-- [x] `src/guide/best-practices/production-deployment.md`
-- [x] `src/guide/best-practices/security.md`
-- [x] `src/guide/built-ins/keep-alive.md`
-- [x] `src/guide/built-ins/suspense.md`
-- [x] `src/guide/built-ins/teleport.md`
-- [x] `src/guide/built-ins/transition-group.md`
-- [x] `src/guide/built-ins/transition.md`
-- [x] `src/guide/components/async.md`
-- [x] `src/guide/components/attrs.md`
-- [x] `src/guide/components/events.md`
-- [x] `src/guide/components/props.md`
-- [x] `src/guide/components/provide-inject.md`
-- [x] `src/guide/components/registration.md`
-- [x] `src/guide/components/slots.md`
-- [x] `src/guide/components/v-model.md`
-- [x] `src/guide/extras/animation.md`
-- [x] `src/guide/extras/composition-api-faq.md`
-- [x] `src/guide/extras/reactivity-in-depth.md`
-- [x] `src/guide/extras/reactivity-transform.md`
-- [x] `src/guide/extras/render-function.md`
-- [x] `src/guide/extras/rendering-mechanism.md`
-- [x] `src/guide/extras/ways-of-using-vue.md`
-- [x] `src/guide/extras/web-components.md`
-- [x] `src/guide/reusability/composables.md`
+- [x] `src/guide/scaling-up/sfc.md`
+- [ ] `src/guide/scaling-up/ssr.md`
+- [ ] `src/guide/scaling-up/state-management.md`
+- [ ] `src/guide/scaling-up/testing.md`
+- [ ] `src/guide/scaling-up/tooling.md`
+- [ ] `src/guide/typescript/composition-api.md`
+- [ ] `src/guide/typescript/options-api.md`
+- [ ] `src/guide/typescript/overview.md`
+- [ ] `src/api/application.md`
+- [ ] `src/api/built-in-components.md`
+- [ ] `src/api/built-in-directives.md`
+- [ ] `src/api/built-in-special-attributes.md`
+- [ ] `src/api/built-in-special-elements.md`
+- [ ] `src/api/compile-time-flags.md`
+- [ ] `src/api/component-instance.md`
+- [ ] `src/api/composition-api-dependency-injection.md`
+- [ ] `src/api/composition-api-helpers.md`
+- [ ] `src/api/composition-api-lifecycle.md`
+- [ ] `src/api/composition-api-setup.md`
+- [ ] `src/api/custom-elements.md`
+- [ ] `src/api/custom-renderer.md`
+- [ ] `src/api/general.md`
+- [ ] `src/api/index.md`
+- [ ] `src/api/options-composition.md`
+- [ ] `src/api/options-lifecycle.md`
+- [ ] `src/api/options-misc.md`
+- [ ] `src/api/options-rendering.md`
+- [ ] `src/api/options-state.md`
+- [ ] `src/api/reactivity-advanced.md`
+- [ ] `src/api/reactivity-core.md`
 
 ## Ưu tiên sprint đầu
 
@@ -139,7 +139,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/reusability/custom-directives.md`
 - [x] `src/guide/reusability/plugins.md`
 - [x] `src/guide/scaling-up/routing.md`
-- [ ] `src/guide/scaling-up/sfc.md`
+- [x] `src/guide/scaling-up/sfc.md`
 - [ ] `src/guide/scaling-up/ssr.md`
 - [ ] `src/guide/scaling-up/state-management.md`
 - [ ] `src/guide/scaling-up/testing.md`

@@ -132,6 +132,10 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | tooling | công cụ phát triển | Tùy ngữ cảnh có thể rút gọn thành "công cụ" |
 | style guide | hướng dẫn phong cách | Khi dùng cho mục điều hướng |
 | performance | hiệu năng | |
+| colocate / colocation | đặt cạnh nhau / việc đặt cạnh nhau | Dùng khi nói về template, logic, style trong cùng ngữ cảnh |
+| separation of concerns | tách biệt mối quan tâm | |
+| compile-time optimization | tối ưu hóa ở thời điểm biên dịch | |
+| Hot Module Replacement (HMR) | Hot Module Replacement (HMR) | Giữ nguyên tên kỹ thuật phổ biến |
 | page load performance | hiệu năng tải trang | |
 | update performance | hiệu năng cập nhật | |
 | profiling | đo hiệu năng | Tùy ngữ cảnh có thể dịch là "profile" khi nói về thao tác |

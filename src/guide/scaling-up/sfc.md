@@ -1,8 +1,8 @@
 # Single-File Components {#single-file-components}
 
-## Introduction {#introduction}
+## Giới Thiệu {#introduction}
 
-Vue Single-File Components (a.k.a. `*.vue` files, abbreviated as **SFC**) is a special file format that allows us to encapsulate the template, logic, **and** styling of a Vue component in a single file. Here's an example SFC:
+Vue Single-File Components (hay file `*.vue`, viết tắt là **SFC**) là một định dạng file đặc biệt cho phép ta đóng gói template, logic **và** style của một component Vue trong cùng một file. Dưới đây là một ví dụ về SFC:
 
 <div class="options-api">
 
@@ -53,32 +53,32 @@ const greeting = ref('Hello World!')
 
 </div>
 
-As we can see, Vue SFC is a natural extension of the classic trio of HTML, CSS and JavaScript. The `<template>`, `<script>`, and `<style>` blocks encapsulate and colocate the view, logic and styling of a component in the same file. The full syntax is defined in the [SFC Syntax Specification](/api/sfc-spec).
+Như bạn thấy, Vue SFC là phần mở rộng rất tự nhiên từ bộ ba kinh điển HTML, CSS và JavaScript. Các khối `<template>`, `<script>` và `<style>` giúp đóng gói và đặt phần view, logic và style của một component cạnh nhau trong cùng một file. Cú pháp đầy đủ được định nghĩa trong [Đặc tả cú pháp SFC](/api/sfc-spec).
 
-## Why SFC {#why-sfc}
+## Vì Sao Dùng SFC {#why-sfc}
 
-While SFCs require a build step, there are numerous benefits in return:
+SFC cần một bước build, nhưng đổi lại có rất nhiều lợi ích:
 
-- Author modularized components using familiar HTML, CSS and JavaScript syntax
-- [Colocation of inherently coupled concerns](#what-about-separation-of-concerns)
-- Pre-compiled templates without runtime compilation cost
-- [Component-scoped CSS](/api/sfc-css-features)
-- [More ergonomic syntax when working with Composition API](/api/sfc-script-setup)
-- More compile-time optimizations by cross-analyzing template and script
-- [IDE support](/guide/scaling-up/tooling#ide-support) with auto-completion and type-checking for template expressions
-- Out-of-the-box Hot-Module Replacement (HMR) support
+- Viết component theo kiểu mô-đun bằng cú pháp HTML, CSS và JavaScript quen thuộc
+- [Đặt cạnh nhau những mối quan tâm vốn gắn chặt với nhau](#what-about-separation-of-concerns)
+- Template được biên dịch trước, không tốn chi phí biên dịch lúc chạy
+- [CSS được giới hạn phạm vi theo component](/api/sfc-css-features)
+- [Cú pháp gọn và thuận tiện hơn khi làm việc với Composition API](/api/sfc-script-setup)
+- Có thêm tối ưu hóa ở thời điểm biên dịch nhờ phân tích chéo giữa template và script
+- [Hỗ trợ IDE](/guide/scaling-up/tooling#ide-support) với tự động hoàn thành và kiểm tra kiểu cho biểu thức trong template
+- Hỗ trợ sẵn Hot Module Replacement (HMR)
 
-SFC is a defining feature of Vue as a framework, and is the recommended approach for using Vue in the following scenarios:
+SFC là một đặc trưng định hình Vue với tư cách framework, đồng thời là cách tiếp cận được khuyến nghị khi dùng Vue trong các trường hợp sau:
 
 - Single-Page Applications (SPA)
 - Static Site Generation (SSG)
-- Any non-trivial frontend where a build step can be justified for better development experience (DX).
+- Mọi frontend không quá đơn giản, nơi bước build là hợp lý để đổi lấy trải nghiệm phát triển (DX) tốt hơn.
 
-That said, we do realize there are scenarios where SFCs can feel like overkill. This is why Vue can still be used via plain JavaScript without a build step. If you are just looking for enhancing largely static HTML with light interactions, you can also check out [petite-vue](https://github.com/vuejs/petite-vue), a 6 kB subset of Vue optimized for progressive enhancement.
+Dù vậy, chúng tôi hiểu rằng có những tình huống mà SFC có thể là quá tay. Vì vậy, Vue vẫn có thể được dùng bằng JavaScript thuần mà không cần bước build. Nếu bạn chỉ muốn tăng cường một trang HTML phần lớn là tĩnh bằng một vài tương tác nhẹ, hãy xem thêm [petite-vue](https://github.com/vuejs/petite-vue), một tập con 6 kB của Vue được tối ưu cho progressive enhancement.
 
-## How It Works {#how-it-works}
+## Cách Nó Hoạt Động {#how-it-works}
 
-Vue SFC is a framework-specific file format and must be pre-compiled by [@vue/compiler-sfc](https://github.com/vuejs/core/tree/main/packages/compiler-sfc) into standard JavaScript and CSS. A compiled SFC is a standard JavaScript (ES) module - which means with proper build setup you can import an SFC like a module:
+Vue SFC là một định dạng file riêng của framework và phải được [@vue/compiler-sfc](https://github.com/vuejs/core/tree/main/packages/compiler-sfc) biên dịch trước thành JavaScript và CSS tiêu chuẩn. Một SFC sau khi biên dịch là một module JavaScript (ES) tiêu chuẩn, tức là với cấu hình build phù hợp, bạn có thể import SFC như một module:
 
 ```js
 import MyComponent from './MyComponent.vue'
@@ -90,18 +90,18 @@ export default {
 }
 ```
 
-`<style>` tags inside SFCs are typically injected as native `<style>` tags during development to support hot updates. For production they can be extracted and merged into a single CSS file.
+Các thẻ `<style>` bên trong SFC thường được chèn dưới dạng thẻ `<style>` gốc trong quá trình phát triển để hỗ trợ cập nhật nóng. Ở môi trường production, chúng có thể được tách ra và gộp thành một file CSS duy nhất.
 
-You can play with SFCs and explore how they are compiled in the [Vue SFC Playground](https://play.vuejs.org/).
+Bạn có thể thử nghiệm SFC và xem cách chúng được biên dịch trong [Vue SFC Playground](https://play.vuejs.org/).
 
-In actual projects, we typically integrate the SFC compiler with a build tool such as [Vite](https://vite.dev/) or [Vue CLI](http://cli.vuejs.org/) (which is based on [webpack](https://webpack.js.org/)), and Vue provides official scaffolding tools to get you started with SFCs as fast as possible. Check out more details in the [SFC Tooling](/guide/scaling-up/tooling) section.
+Trong các dự án thực tế, ta thường tích hợp trình biên dịch SFC với một build tool như [Vite](https://vite.dev/) hoặc [Vue CLI](http://cli.vuejs.org/) (dựa trên [webpack](https://webpack.js.org/)), và Vue cung cấp các công cụ khởi tạo chính thức để bạn bắt đầu với SFC nhanh nhất có thể. Xem thêm chi tiết ở phần [Công cụ cho SFC](/guide/scaling-up/tooling).
 
-## What About Separation of Concerns? {#what-about-separation-of-concerns}
+## Còn Việc Tách Biệt Mối Quan Tâm Thì Sao? {#what-about-separation-of-concerns}
 
-Some users coming from a traditional web development background may have the concern that SFCs are mixing different concerns in the same place - which HTML/CSS/JS were supposed to separate!
+Một số người dùng có nền tảng phát triển web truyền thống có thể lo rằng SFC đang trộn nhiều mối quan tâm khác nhau vào cùng một chỗ, trong khi HTML/CSS/JS vốn được tạo ra để tách chúng ra.
 
-To answer this question, it is important for us to agree that **separation of concerns is not equal to the separation of file types**. The ultimate goal of engineering principles is to improve the maintainability of codebases. Separation of concerns, when applied dogmatically as separation of file types, does not help us reach that goal in the context of increasingly complex frontend applications.
+Để trả lời câu hỏi này, trước hết ta cần thống nhất rằng **tách biệt mối quan tâm không đồng nghĩa với tách biệt loại file**. Mục tiêu cuối cùng của các nguyên tắc kỹ thuật là cải thiện khả năng bảo trì của codebase. Trong bối cảnh các ứng dụng frontend ngày càng phức tạp, việc áp dụng máy móc nguyên tắc này thành tách riêng theo loại file không giúp ta đạt được mục tiêu đó.
 
-In modern UI development, we have found that instead of dividing the codebase into three huge layers that interweave with one another, it makes much more sense to divide them into loosely-coupled components and compose them. Inside a component, its template, logic, and styles are inherently coupled, and colocating them actually makes the component more cohesive and maintainable.
+Trong quá trình phát triển UI hiện đại, chúng tôi nhận ra rằng thay vì chia codebase thành ba tầng lớn đan xen chặt chẽ với nhau, việc chia nó thành các component liên kết lỏng và ghép chúng lại với nhau hợp lý hơn nhiều. Bên trong một component, template, logic và style vốn dĩ gắn chặt với nhau, nên việc đặt chúng cạnh nhau thực ra giúp component gắn kết hơn và dễ bảo trì hơn.
 
-Note even if you don't like the idea of Single-File Components, you can still leverage its hot-reloading and pre-compilation features by separating your JavaScript and CSS into separate files using [Src Imports](/api/sfc-spec#src-imports).
+Lưu ý rằng ngay cả khi bạn không thích ý tưởng Single-File Components, bạn vẫn có thể tận dụng khả năng tải nóng lại và biên dịch trước của nó bằng cách tách JavaScript và CSS ra các file riêng qua [Src Imports](/api/sfc-spec#src-imports).
