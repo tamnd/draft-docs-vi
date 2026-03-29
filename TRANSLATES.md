@@ -21,105 +21,130 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - Giữ nguyên marker của Vue docs, ví dụ `### <script setup> ** {#script-setup}`.
 - Ưu tiên văn phong kỹ thuật rõ ràng, ngắn, dễ đọc.
 - Tên API, directive, component, package, và code sample giữ nguyên tiếng Anh.
-- Thuật ngữ khó thống nhất phải được cập nhật lại trong file này trước khi dùng rộng rãi.
+- Thuật ngữ cần được thống nhất trong [GLOSSARY.md](./GLOSSARY.md) trước khi dùng rộng rãi.
 - Text ngoài nội dung markdown cũng cần dịch, đặc biệt là `.vitepress/config.ts`.
 - Ảnh có chữ cần xử lý riêng; tạo file ảnh mới thay vì ghi đè asset gốc nếu cần biến thể tiếng Việt.
 
-## Thuật ngữ thống nhất ban đầu
+## Checklist 30 trang tiếp theo
 
-- Progressive JavaScript Framework -> Framework JavaScript Tiến Bộ
-- Guide -> Hướng dẫn
-- Essentials -> Kiến thức cốt lõi
-- Components -> Thành phần
-- Composables -> Composable
-- Reactivity -> Tính phản ứng
-- Rendering -> Kết xuất
-- Lifecycle Hooks -> Hook vòng đời
-- Fallthrough Attributes -> Thuộc tính kế thừa
-- Slots -> Slot
-- Watchers -> Watcher
-- Built-in Components -> Thành phần dựng sẵn
-- Custom Directives -> Directive tùy chỉnh
-- Single-File Components -> Single-File Component
-- Server-Side Rendering -> Kết xuất phía máy chủ
+- [x] `src/guide/scaling-up/sfc.md`
+- [x] `src/guide/scaling-up/ssr.md`
+- [x] `src/guide/scaling-up/state-management.md`
+- [x] `src/guide/scaling-up/testing.md`
+- [x] `src/guide/scaling-up/tooling.md`
+- [x] `src/guide/typescript/composition-api.md`
+- [ ] `src/guide/typescript/options-api.md`
+- [ ] `src/guide/typescript/overview.md`
+- [ ] `src/api/application.md`
+- [ ] `src/api/built-in-components.md`
+- [ ] `src/api/built-in-directives.md`
+- [ ] `src/api/built-in-special-attributes.md`
+- [ ] `src/api/built-in-special-elements.md`
+- [ ] `src/api/compile-time-flags.md`
+- [ ] `src/api/component-instance.md`
+- [ ] `src/api/composition-api-dependency-injection.md`
+- [ ] `src/api/composition-api-helpers.md`
+- [ ] `src/api/composition-api-lifecycle.md`
+- [ ] `src/api/composition-api-setup.md`
+- [ ] `src/api/custom-elements.md`
+- [ ] `src/api/custom-renderer.md`
+- [ ] `src/api/general.md`
+- [ ] `src/api/index.md`
+- [ ] `src/api/options-composition.md`
+- [ ] `src/api/options-lifecycle.md`
+- [ ] `src/api/options-misc.md`
+- [ ] `src/api/options-rendering.md`
+- [ ] `src/api/options-state.md`
+- [ ] `src/api/reactivity-advanced.md`
+- [ ] `src/api/reactivity-core.md`
 
 ## Ưu tiên sprint đầu
 
 - [x] `README.md`
 - [x] `TRANSLATES.md`
-- [ ] `.vitepress/config.ts`
-- [ ] `src/index.md`
-- [ ] `src/guide/introduction.md`
-- [ ] `src/guide/quick-start.md`
-- [ ] `src/guide/essentials/application.md`
-- [ ] `src/guide/essentials/template-syntax.md`
+- [x] `.vitepress/config.ts`
+- [x] `src/index.md`
+- [x] `src/guide/introduction.md`
+- [x] `src/guide/quick-start.md`
+- [x] `src/guide/essentials/application.md`
+- [x] `src/guide/essentials/template-syntax.md`
+- [x] `src/guide/essentials/class-and-style.md`
+- [x] `src/guide/essentials/component-basics.md`
+- [x] `src/guide/essentials/computed.md`
+- [x] `src/guide/essentials/conditional.md`
+- [x] `src/guide/essentials/event-handling.md`
+- [x] `src/guide/essentials/forms.md`
+- [x] `src/guide/essentials/lifecycle.md`
+- [x] `src/guide/essentials/list.md`
+- [x] `src/guide/essentials/reactivity-fundamentals.md`
+- [x] `src/guide/essentials/template-refs.md`
 
 ## Repo meta
 
 - [x] `README.md`
 - [x] `TRANSLATES.md`
-- [ ] `.vitepress/config.ts`
+- [x] `.vitepress/config.ts`
 
 ## Landing and shared pages
 
-- [ ] `src/index.md`
-- [ ] `src/translations/index.md`
-- [ ] `src/glossary/index.md`
-- [ ] `src/error-reference/index.md`
-- [ ] `src/examples/index.md`
+- [x] `src/index.md`
+- [x] `src/translations/index.md`
+- [x] `src/glossary/index.md`
+- [x] `src/error-reference/index.md`
+- [x] `src/examples/index.md`
 
 ## Guide
 
-- [ ] `src/guide/best-practices/accessibility.md`
-- [ ] `src/guide/best-practices/performance.md`
-- [ ] `src/guide/best-practices/production-deployment.md`
-- [ ] `src/guide/best-practices/security.md`
-- [ ] `src/guide/built-ins/keep-alive.md`
-- [ ] `src/guide/built-ins/suspense.md`
-- [ ] `src/guide/built-ins/teleport.md`
-- [ ] `src/guide/built-ins/transition-group.md`
-- [ ] `src/guide/built-ins/transition.md`
-- [ ] `src/guide/components/async.md`
-- [ ] `src/guide/components/attrs.md`
-- [ ] `src/guide/components/events.md`
-- [ ] `src/guide/components/props.md`
-- [ ] `src/guide/components/provide-inject.md`
-- [ ] `src/guide/components/registration.md`
-- [ ] `src/guide/components/slots.md`
-- [ ] `src/guide/components/v-model.md`
-- [ ] `src/guide/essentials/application.md`
-- [ ] `src/guide/essentials/class-and-style.md`
-- [ ] `src/guide/essentials/component-basics.md`
-- [ ] `src/guide/essentials/computed.md`
-- [ ] `src/guide/essentials/conditional.md`
-- [ ] `src/guide/essentials/event-handling.md`
-- [ ] `src/guide/essentials/forms.md`
-- [ ] `src/guide/essentials/lifecycle.md`
-- [ ] `src/guide/essentials/list.md`
-- [ ] `src/guide/essentials/reactivity-fundamentals.md`
-- [ ] `src/guide/essentials/template-refs.md`
-- [ ] `src/guide/essentials/template-syntax.md`
-- [ ] `src/guide/essentials/watchers.md`
-- [ ] `src/guide/extras/animation.md`
-- [ ] `src/guide/extras/composition-api-faq.md`
-- [ ] `src/guide/extras/reactivity-in-depth.md`
-- [ ] `src/guide/extras/reactivity-transform.md`
-- [ ] `src/guide/extras/render-function.md`
-- [ ] `src/guide/extras/rendering-mechanism.md`
-- [ ] `src/guide/extras/ways-of-using-vue.md`
-- [ ] `src/guide/extras/web-components.md`
-- [ ] `src/guide/introduction.md`
-- [ ] `src/guide/quick-start.md`
-- [ ] `src/guide/reusability/composables.md`
-- [ ] `src/guide/reusability/custom-directives.md`
-- [ ] `src/guide/reusability/plugins.md`
-- [ ] `src/guide/scaling-up/routing.md`
-- [ ] `src/guide/scaling-up/sfc.md`
-- [ ] `src/guide/scaling-up/ssr.md`
-- [ ] `src/guide/scaling-up/state-management.md`
-- [ ] `src/guide/scaling-up/testing.md`
-- [ ] `src/guide/scaling-up/tooling.md`
-- [ ] `src/guide/typescript/composition-api.md`
+- [x] `src/guide/best-practices/accessibility.md`
+- [x] `src/guide/best-practices/performance.md`
+- [x] `src/guide/best-practices/production-deployment.md`
+- [x] `src/guide/best-practices/security.md`
+- [x] `src/guide/built-ins/keep-alive.md`
+- [x] `src/guide/built-ins/suspense.md`
+- [x] `src/guide/built-ins/teleport.md`
+- [x] `src/guide/built-ins/transition-group.md`
+- [x] `src/guide/built-ins/transition.md`
+- [x] `src/guide/components/async.md`
+- [x] `src/guide/components/attrs.md`
+- [x] `src/guide/components/events.md`
+- [x] `src/guide/components/props.md`
+- [x] `src/guide/components/provide-inject.md`
+- [x] `src/guide/components/registration.md`
+- [x] `src/guide/components/slots.md`
+- [x] `src/guide/components/v-model.md`
+- [x] `src/guide/essentials/application.md`
+- [x] `src/guide/essentials/class-and-style.md`
+- [x] `src/guide/essentials/component-basics.md`
+- [x] `src/guide/essentials/computed.md`
+- [x] `src/guide/essentials/conditional.md`
+- [x] `src/guide/essentials/event-handling.md`
+- [x] `src/guide/essentials/forms.md`
+- [x] `src/guide/essentials/lifecycle.md`
+- [x] `src/guide/essentials/list.md`
+- [x] `src/guide/essentials/reactivity-fundamentals.md`
+- [x] `src/guide/essentials/template-refs.md`
+- [x] `src/guide/essentials/template-syntax.md`
+- [x] `src/guide/essentials/watchers.md`
+- [x] `src/guide/extras/animation.md`
+- [x] `src/guide/extras/composition-api-faq.md`
+- [x] `src/guide/extras/reactivity-in-depth.md`
+- [x] `src/guide/extras/reactivity-transform.md`
+- [x] `src/guide/extras/render-function.md`
+- [x] `src/guide/extras/rendering-mechanism.md`
+- [x] `src/guide/extras/ways-of-using-vue.md`
+- [x] `src/guide/extras/web-components.md`
+- [x] `src/guide/introduction.md`
+- [x] `src/guide/quick-start.md`
+- [x] `src/guide/reusability/composables.md`
+- [x] `src/guide/reusability/custom-directives.md`
+- [x] `src/guide/reusability/plugins.md`
+- [x] `src/guide/scaling-up/routing.md`
+- [x] `src/guide/scaling-up/sfc.md`
+- [x] `src/guide/scaling-up/ssr.md`
+- [x] `src/guide/scaling-up/state-management.md`
+- [x] `src/guide/scaling-up/testing.md`
+- [x] `src/guide/scaling-up/tooling.md`
+- [x] `src/guide/typescript/composition-api.md`
 - [ ] `src/guide/typescript/options-api.md`
 - [ ] `src/guide/typescript/overview.md`
 

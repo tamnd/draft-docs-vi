@@ -1,28 +1,28 @@
-# Vue and Web Components {#vue-and-web-components}
+# Vue Và Web Components {#vue-and-web-components}
 
-[Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) is an umbrella term for a set of web native APIs that allows developers to create reusable custom elements.
+[Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) là tên gọi chung cho một tập API gốc của nền tảng web, cho phép developer tạo ra các custom element có thể tái sử dụng.
 
-We consider Vue and Web Components to be primarily complementary technologies. Vue has excellent support for both consuming and creating custom elements. Whether you are integrating custom elements into an existing Vue application, or using Vue to build and distribute custom elements, you are in good company.
+Chúng tôi xem Vue và Web Components chủ yếu là hai công nghệ bổ trợ cho nhau. Vue hỗ trợ rất tốt cả việc dùng custom element lẫn tạo custom element. Dù bạn đang tích hợp custom element vào một ứng dụng Vue sẵn có, hay đang dùng Vue để xây và phát hành custom element, đây đều là những trường hợp sử dụng rất phù hợp.
 
-## Using Custom Elements in Vue {#using-custom-elements-in-vue}
+## Dùng Custom Elements Trong Vue {#using-custom-elements-in-vue}
 
-Vue [scores a perfect 100% in the Custom Elements Everywhere tests](https://custom-elements-everywhere.com/libraries/vue/results/results.html). Consuming custom elements inside a Vue application largely works the same as using native HTML elements, with a few things to keep in mind:
+Vue [đạt điểm tuyệt đối 100% trong bộ kiểm thử Custom Elements Everywhere](https://custom-elements-everywhere.com/libraries/vue/results/results.html). Việc dùng custom element bên trong một ứng dụng Vue nhìn chung hoạt động tương tự như khi dùng phần tử HTML gốc, chỉ có một vài điểm cần lưu ý:
 
-### Skipping Component Resolution {#skipping-component-resolution}
+### Bỏ Qua Bước Resolve Component {#skipping-component-resolution}
 
-By default, Vue will attempt to resolve a non-native HTML tag as a registered Vue component before falling back to rendering it as a custom element. This will cause Vue to emit a "failed to resolve component" warning during development. To let Vue know that certain elements should be treated as custom elements and skip component resolution, we can specify the [`compilerOptions.isCustomElement` option](/api/application#app-config-compileroptions).
+Mặc định, Vue sẽ cố resolve một thẻ HTML không phải native thành component Vue đã đăng ký trước, rồi mới fallback sang render nó như custom element. Điều này sẽ khiến Vue phát cảnh báo "failed to resolve component" trong lúc phát triển. Để báo cho Vue biết rằng một số phần tử nhất định cần được xem là custom element và bỏ qua bước resolve component, ta có thể cấu hình [`compilerOptions.isCustomElement`](/api/application#app-config-compileroptions).
 
-If you are using Vue with a build setup, the option should be passed via build configs since it is a compile-time option.
+Nếu bạn đang dùng Vue với một thiết lập build, option này nên được truyền qua cấu hình build vì đây là option ở thời điểm biên dịch.
 
-#### Example In-Browser Config {#example-in-browser-config}
+#### Ví Dụ Cấu Hình Trực Tiếp Trong Trình Duyệt {#example-in-browser-config}
 
 ```js
-// Only works if using in-browser compilation.
-// If using build tools, see config examples below.
+// Chỉ hoạt động khi dùng in-browser compilation.
+// Nếu dùng build tool, xem các ví dụ cấu hình bên dưới.
 app.config.compilerOptions.isCustomElement = (tag) => tag.includes('-')
 ```
 
-#### Example Vite Config {#example-vite-config}
+#### Ví Dụ Cấu Hình Vite {#example-vite-config}
 
 ```js [vite.config.js]
 import vue from '@vitejs/plugin-vue'
@@ -32,7 +32,7 @@ export default {
     vue({
       template: {
         compilerOptions: {
-          // treat all tags with a dash as custom elements
+          // xem mọi thẻ có dấu gạch ngang là custom element
           isCustomElement: (tag) => tag.includes('-')
         }
       }
@@ -41,7 +41,7 @@ export default {
 }
 ```
 
-#### Example Vue CLI Config {#example-vue-cli-config}
+#### Ví Dụ Cấu Hình Vue CLI {#example-vue-cli-config}
 
 ```js [vue.config.js]
 module.exports = {
@@ -52,7 +52,7 @@ module.exports = {
       .tap((options) => ({
         ...options,
         compilerOptions: {
-          // treat any tag that starts with ion- as custom elements
+          // xem mọi thẻ bắt đầu bằng ion- là custom element
           isCustomElement: (tag) => tag.startsWith('ion-')
         }
       }))
@@ -60,26 +60,26 @@ module.exports = {
 }
 ```
 
-### Passing DOM Properties {#passing-dom-properties}
+### Truyền DOM Property {#passing-dom-properties}
 
-Since DOM attributes can only be strings, we need to pass complex data to custom elements as DOM properties. When setting props on a custom element, Vue 3 automatically checks DOM-property presence using the `in` operator and will prefer setting the value as a DOM property if the key is present. This means that, in most cases, you won't need to think about this if the custom element follows the [recommended best practices](https://web.dev/custom-elements-best-practices/).
+Vì attribute của DOM chỉ có thể là chuỗi, ta cần truyền dữ liệu phức tạp vào custom element dưới dạng DOM property. Khi gán prop cho custom element, Vue 3 sẽ tự động kiểm tra sự hiện diện của DOM property bằng toán tử `in`, và nếu key tồn tại, Vue sẽ ưu tiên gán giá trị như một DOM property. Điều này có nghĩa là trong phần lớn trường hợp, bạn không cần bận tâm đến chuyện này nếu custom element tuân theo [best practice được khuyến nghị](https://web.dev/custom-elements-best-practices/).
 
-However, there could be rare cases where the data must be passed as a DOM property, but the custom element does not properly define/reflect the property (causing the `in` check to fail). In this case, you can force a `v-bind` binding to be set as a DOM property using the `.prop` modifier:
+Tuy nhiên, vẫn có những trường hợp hiếm gặp khi dữ liệu bắt buộc phải được truyền dưới dạng DOM property, nhưng custom element lại không định nghĩa / phản chiếu property đó đúng cách, khiến phép kiểm tra `in` thất bại. Khi đó, bạn có thể ép `v-bind` gán theo dạng DOM property bằng modifier `.prop`:
 
 ```vue-html
 <my-element :user.prop="{ name: 'jack' }"></my-element>
 
-<!-- shorthand equivalent -->
+<!-- cú pháp rút gọn tương đương -->
 <my-element .user="{ name: 'jack' }"></my-element>
 ```
 
-## Building Custom Elements with Vue {#building-custom-elements-with-vue}
+## Xây Custom Elements Bằng Vue {#building-custom-elements-with-vue}
 
-The primary benefit of custom elements is that they can be used with any framework, or even without a framework. This makes them ideal for distributing components where the end consumer may not be using the same frontend stack, or when you want to insulate the end application from the implementation details of the components it uses.
+Lợi ích lớn nhất của custom element là nó có thể được dùng với bất kỳ framework nào, thậm chí không cần framework. Điều này khiến custom element rất phù hợp để phát hành component khi phía sử dụng cuối có thể không cùng frontend stack với bạn, hoặc khi bạn muốn tách ứng dụng tiêu thụ khỏi chi tiết cài đặt của component.
 
 ### defineCustomElement {#definecustomelement}
 
-Vue supports creating custom elements using exactly the same Vue component APIs via the [`defineCustomElement`](/api/custom-elements#definecustomelement) method. The method accepts the same argument as [`defineComponent`](/api/general#definecomponent), but instead returns a custom element constructor that extends `HTMLElement`:
+Vue hỗ trợ tạo custom element bằng chính cùng bộ API component Vue quen thuộc thông qua phương thức [`defineCustomElement`](/api/custom-elements#definecustomelement). Phương thức này nhận đối số giống [`defineComponent`](/api/general#definecomponent), nhưng thay vì trả về định nghĩa component, nó trả về constructor của custom element kế thừa từ `HTMLElement`:
 
 ```vue-html
 <my-vue-element></my-vue-element>
@@ -89,48 +89,48 @@ Vue supports creating custom elements using exactly the same Vue component APIs 
 import { defineCustomElement } from 'vue'
 
 const MyVueElement = defineCustomElement({
-  // normal Vue component options here
+  // option component Vue thông thường
   props: {},
   emits: {},
   template: `...`,
 
-  // defineCustomElement only: CSS to be injected into shadow root
+  // chỉ dành cho defineCustomElement: CSS được chèn vào shadow root
   styles: [`/* inlined css */`]
 })
 
-// Register the custom element.
-// After registration, all `<my-vue-element>` tags
-// on the page will be upgraded.
+// Đăng ký custom element.
+// Sau khi đăng ký, mọi thẻ <my-vue-element>
+// trên trang sẽ được nâng cấp.
 customElements.define('my-vue-element', MyVueElement)
 
-// You can also programmatically instantiate the element:
-// (can only be done after registration)
+// Bạn cũng có thể khởi tạo phần tử bằng mã:
+// (chỉ làm được sau khi đã đăng ký)
 document.body.appendChild(
   new MyVueElement({
-    // initial props (optional)
+    // prop ban đầu (tùy chọn)
   })
 )
 ```
 
-#### Lifecycle {#lifecycle}
+#### Vòng Đời {#lifecycle}
 
-- A Vue custom element will mount an internal Vue component instance inside its shadow root when the element's [`connectedCallback`](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks) is called for the first time.
+- Một custom element của Vue sẽ mount một instance component Vue nội bộ bên trong shadow root của nó khi [`connectedCallback`](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks) của phần tử được gọi lần đầu.
 
-- When the element's `disconnectedCallback` is invoked, Vue will check whether the element is detached from the document after a microtask tick.
+- Khi `disconnectedCallback` của phần tử được gọi, Vue sẽ kiểm tra sau một microtask xem phần tử có còn nằm trong document hay không.
 
-  - If the element is still in the document, it's a move and the component instance will be preserved;
+  - Nếu phần tử vẫn còn trong document thì đây là thao tác di chuyển, và instance component sẽ được giữ nguyên.
 
-  - If the element is detached from the document, it's a removal and the component instance will be unmounted.
+  - Nếu phần tử đã tách khỏi document thì đây là thao tác xóa, và instance component sẽ bị unmount.
 
 #### Props {#props}
 
-- All props declared using the `props` option will be defined on the custom element as properties. Vue will automatically handle the reflection between attributes / properties where appropriate.
+- Mọi prop được khai báo bằng option `props` sẽ được định nghĩa trên custom element như property. Vue cũng sẽ tự xử lý việc phản chiếu giữa attribute / property ở những nơi phù hợp.
 
-  - Attributes are always reflected to corresponding properties.
+  - Attribute luôn được phản chiếu sang property tương ứng.
 
-  - Properties with primitive values (`string`, `boolean` or `number`) are reflected as attributes.
+  - Property có giá trị nguyên thủy (`string`, `boolean` hoặc `number`) sẽ được phản chiếu thành attribute.
 
-- Vue also automatically casts props declared with `Boolean` or `Number` types into the desired type when they are set as attributes (which are always strings). For example, given the following props declaration:
+- Vue cũng tự động ép kiểu cho prop khai báo với kiểu `Boolean` hoặc `Number` khi chúng được gán dưới dạng attribute, vốn luôn là chuỗi. Ví dụ với khai báo prop sau:
 
   ```js
   props: {
@@ -139,25 +139,25 @@ document.body.appendChild(
   }
   ```
 
-  And the custom element usage:
+  Và cách dùng custom element như sau:
 
   ```vue-html
   <my-element selected index="1"></my-element>
   ```
 
-  In the component, `selected` will be cast to `true` (boolean) and `index` will be cast to `1` (number).
+  Bên trong component, `selected` sẽ được ép thành `true` (boolean) và `index` sẽ được ép thành `1` (number).
 
-#### Events {#events}
+#### Sự Kiện {#events}
 
-Events emitted via `this.$emit` or setup `emit` are dispatched as native [CustomEvents](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events#adding_custom_data_%E2%80%93_customevent) on the custom element. Additional event arguments (payload) will be exposed as an array on the CustomEvent object as its `detail` property.
+Sự kiện được emit qua `this.$emit` hoặc `emit` trong `setup` sẽ được dispatch như [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events#adding_custom_data_%E2%80%93_customevent) gốc trên custom element. Các đối số sự kiện bổ sung (payload) sẽ được lộ ra dưới dạng một mảng trong property `detail` của object CustomEvent.
 
 #### Slots {#slots}
 
-Inside the component, slots can be rendered using the `<slot/>` element as usual. However, when consuming the resulting element, it only accepts [native slots syntax](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots):
+Bên trong component, slot vẫn có thể được render bằng phần tử `<slot/>` như bình thường. Tuy nhiên, khi dùng phần tử kết quả ở phía tiêu thụ, nó chỉ chấp nhận [cú pháp slot gốc](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots):
 
-- [Scoped slots](/guide/components/slots#scoped-slots) are not supported.
+- [Scoped slot](/guide/components/slots#scoped-slots) không được hỗ trợ.
 
-- When passing named slots, use the `slot` attribute instead of the `v-slot` directive:
+- Khi truyền named slot, hãy dùng attribute `slot` thay vì directive `v-slot`:
 
   ```vue-html
   <my-element>
@@ -167,11 +167,11 @@ Inside the component, slots can be rendered using the `<slot/>` element as usual
 
 #### Provide / Inject {#provide-inject}
 
-The [Provide / Inject API](/guide/components/provide-inject#provide-inject) and its [Composition API equivalent](/api/composition-api-dependency-injection#provide) also work between Vue-defined custom elements. However, note that this works **only between custom elements**. i.e. a Vue-defined custom element won't be able to inject properties provided by a non-custom-element Vue component.
+[Provide / Inject API](/guide/components/provide-inject#provide-inject) và [phiên bản tương đương trong Composition API](/api/composition-api-dependency-injection#provide) cũng hoạt động giữa các custom element được định nghĩa bằng Vue. Tuy nhiên, cần lưu ý rằng điều này **chỉ hoạt động giữa các custom element với nhau**. Nói cách khác, một custom element định nghĩa bằng Vue sẽ không thể inject property do một component Vue không phải custom element cung cấp.
 
-#### App Level Config <sup class="vt-badge" data-text="3.5+" /> {#app-level-config}
+#### Cấu Hình Ở Cấp Ứng Dụng <sup class="vt-badge" data-text="3.5+" /> {#app-level-config}
 
-You can configure the app instance of a Vue custom element using the `configureApp` option:
+Bạn có thể cấu hình app instance của custom element Vue bằng option `configureApp`:
 
 ```js
 defineCustomElement(MyComponent, {
@@ -183,13 +183,13 @@ defineCustomElement(MyComponent, {
 })
 ```
 
-### SFC as Custom Element {#sfc-as-custom-element}
+### Dùng SFC Làm Custom Element {#sfc-as-custom-element}
 
-`defineCustomElement` also works with Vue Single-File Components (SFCs). However, with the default tooling setup, the `<style>` inside the SFCs will still be extracted and merged into a single CSS file during production build. When using an SFC as a custom element, it is often desirable to inject the `<style>` tags into the custom element's shadow root instead.
+`defineCustomElement` cũng hoạt động với Vue Single-File Component (SFC). Tuy nhiên, với thiết lập công cụ mặc định, phần `<style>` trong SFC vẫn sẽ bị tách ra và gộp vào một file CSS duy nhất trong build production. Khi dùng SFC như một custom element, ta thường muốn chèn các thẻ `<style>` vào shadow root của custom element thay vào đó.
 
-The official SFC toolings support importing SFCs in "custom element mode" (requires `@vitejs/plugin-vue@^1.4.0` or `vue-loader@^16.5.0`). An SFC loaded in custom element mode inlines its `<style>` tags as strings of CSS and exposes them under the component's `styles` option. This will be picked up by `defineCustomElement` and injected into the element's shadow root when instantiated.
+Bộ công cụ SFC chính thức hỗ trợ import SFC ở "custom element mode" (yêu cầu `@vitejs/plugin-vue@^1.4.0` hoặc `vue-loader@^16.5.0`). Một SFC được nạp ở chế độ custom element sẽ inline các thẻ `<style>` thành chuỗi CSS và lộ chúng qua option `styles` của component. `defineCustomElement` sẽ nhận được các chuỗi này và chèn chúng vào shadow root của phần tử khi phần tử được khởi tạo.
 
-To opt-in to this mode, simply end your component file name with `.ce.vue`:
+Để bật chế độ này, chỉ cần kết thúc tên file component bằng `.ce.vue`:
 
 ```js
 import { defineCustomElement } from 'vue'
@@ -197,28 +197,27 @@ import Example from './Example.ce.vue'
 
 console.log(Example.styles) // ["/* inlined css */"]
 
-// convert into custom element constructor
+// chuyển thành constructor custom element
 const ExampleElement = defineCustomElement(Example)
 
-// register
+// đăng ký
 customElements.define('my-example', ExampleElement)
 ```
 
-If you wish to customize what files should be imported in custom element mode (for example, treating _all_ SFCs as custom elements), you can pass the `customElement` option to the respective build plugins:
+Nếu bạn muốn tùy biến file nào sẽ được import ở custom element mode, chẳng hạn xem _mọi_ SFC đều là custom element, bạn có thể truyền option `customElement` cho plugin build tương ứng:
 
 - [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#using-vue-sfcs-as-custom-elements)
 - [vue-loader](https://github.com/vuejs/vue-loader/tree/next#v16-only-options)
 
-### Tips for a Vue Custom Elements Library {#tips-for-a-vue-custom-elements-library}
+### Mẹo Khi Làm Thư Viện Vue Custom Elements {#tips-for-a-vue-custom-elements-library}
 
-When building custom elements with Vue, the elements will rely on Vue's runtime. There is a ~16kb baseline size cost depending on how many features are being used. This means it is not ideal to use Vue if you are shipping a single custom element - you may want to use vanilla JavaScript, [petite-vue](https://github.com/vuejs/petite-vue), or frameworks that specialize in small runtime size. However, the base size is more than justifiable if you are shipping a collection of custom elements with complex logic, as Vue will allow each component to be authored with much less code. The more elements you are shipping together, the better the trade-off.
+Khi xây custom element bằng Vue, các phần tử đó sẽ phụ thuộc vào runtime của Vue. Chi phí kích thước nền tảng vào khoảng ~16kb, tùy vào số lượng tính năng bạn dùng. Điều này có nghĩa là nếu bạn chỉ phát hành một custom element đơn lẻ thì Vue có thể không phải lựa chọn lý tưởng. Khi đó bạn có thể cân nhắc JavaScript thuần, [petite-vue](https://github.com/vuejs/petite-vue), hoặc những framework tối ưu cho runtime nhỏ. Tuy nhiên, nếu bạn phát hành cả một bộ custom element với logic phức tạp, kích thước nền đó hoàn toàn xứng đáng vì Vue giúp mỗi component được viết với ít mã hơn nhiều. Bạn phát hành càng nhiều phần tử cùng nhau thì sự đánh đổi này càng có lợi.
 
-If the custom elements will be used in an application that is also using Vue, you can choose to externalize Vue from the built bundle so that the elements will be using the same copy of Vue from the host application.
+Nếu các custom element sẽ được dùng trong một ứng dụng cũng đang dùng Vue, bạn có thể externalize Vue khỏi bundle build để các phần tử dùng chung cùng một bản Vue của ứng dụng host.
 
-It is recommended to export the individual element constructors to give your users the flexibility to import them on-demand and register them with desired tag names. You can also export a convenience function to automatically register all elements. Here's an example entry point of a Vue custom element library:
+Bạn nên export riêng từng constructor của element để người dùng có thể import theo nhu cầu và đăng ký chúng với tên thẻ mong muốn. Bạn cũng có thể export một hàm tiện ích để tự động đăng ký toàn bộ element. Đây là ví dụ về entry point của một thư viện Vue custom elements:
 
 ```js [elements.js]
-
 import { defineCustomElement } from 'vue'
 import Foo from './MyFoo.ce.vue'
 import Bar from './MyBar.ce.vue'
@@ -226,7 +225,7 @@ import Bar from './MyBar.ce.vue'
 const MyFoo = defineCustomElement(Foo)
 const MyBar = defineCustomElement(Bar)
 
-// export individual elements
+// export từng element riêng lẻ
 export { MyFoo, MyBar }
 
 export function register() {
@@ -235,7 +234,7 @@ export function register() {
 }
 ```
 
-A consumer can use the elements in a Vue file:
+Phía sử dụng có thể dùng các element trong một file Vue:
 
 ```vue
 <script setup>
@@ -250,7 +249,7 @@ register()
 </template>
 ```
 
-Or in any other framework such as one with JSX, and with custom names:
+Hoặc trong framework khác, ví dụ framework dùng JSX, với tên tùy ý:
 
 ```jsx
 import { MyFoo, MyBar } from 'path/to/elements.js'
@@ -267,108 +266,106 @@ export function MyComponent() {
 }
 ```
 
-### Vue-based Web Components and TypeScript {#web-components-and-typescript}
+### Web Components Dùng Vue Và TypeScript {#web-components-and-typescript}
 
-When writing Vue SFC templates, you may want to [type check](/guide/scaling-up/tooling.html#typescript) your Vue components, including those that are defined as custom elements.
+Khi viết template cho Vue SFC, bạn có thể muốn [kiểm tra kiểu](/guide/scaling-up/tooling.html#typescript) cho component Vue của mình, bao gồm cả những component được định nghĩa như custom element.
 
-Custom elements are registered globally in browsers using their built-in APIs, and by default they won't have type inference when used in Vue templates. To provide type support for Vue components registered as custom elements, we can register global component typings by augmenting the [`GlobalComponents` interface](https://github.com/vuejs/language-tools/wiki/Global-Component-Types) for type checking in Vue templates (JSX users can augment the [JSX.IntrinsicElements](https://www.typescriptlang.org/docs/handbook/jsx.html#intrinsic-elements) type instead, which is not shown here).
+Custom element được đăng ký toàn cục trong trình duyệt thông qua API tích hợp sẵn, và mặc định khi dùng trong template Vue chúng sẽ không có type inference. Để hỗ trợ kiểu cho component Vue đã đăng ký dưới dạng custom element, ta có thể đăng ký kiểu component toàn cục bằng cách mở rộng [`GlobalComponents` interface](https://github.com/vuejs/language-tools/wiki/Global-Component-Types) để kiểm tra kiểu trong template Vue (người dùng JSX có thể mở rộng kiểu [JSX.IntrinsicElements](https://www.typescriptlang.org/docs/handbook/jsx.html#intrinsic-elements), nhưng phần đó không trình bày ở đây).
 
-Here is how to define the type for a custom element made with Vue:
+Đây là cách định nghĩa kiểu cho một custom element tạo bằng Vue:
 
 ```typescript
 import { defineCustomElement } from 'vue'
 
-// Import the Vue component.
+// Import component Vue.
 import SomeComponent from './src/components/SomeComponent.ce.vue'
 
-// Turn the Vue component into a Custom Element class.
+// Chuyển component Vue thành class Custom Element.
 export const SomeElement = defineCustomElement(SomeComponent)
 
-// Remember to register the element class with the browser.
+// Đừng quên đăng ký class element với trình duyệt.
 customElements.define('some-element', SomeElement)
 
-// Add the new element type to Vue's GlobalComponents type.
+// Thêm kiểu element mới vào GlobalComponents của Vue.
 declare module 'vue' {
   interface GlobalComponents {
-    // Be sure to pass in the Vue component type here 
-    // (SomeComponent, *not* SomeElement).
-    // Custom Elements require a hyphen in their name, 
-    // so use the hyphenated element name here.
+    // Hãy chắc chắn truyền kiểu component Vue ở đây
+    // (SomeComponent, *không phải* SomeElement).
+    // Custom Element bắt buộc phải có dấu gạch ngang trong tên,
+    // nên hãy dùng tên phần tử dạng gạch ngang ở đây.
     'some-element': typeof SomeComponent
   }
 }
 ```
 
-## Non-Vue Web Components and TypeScript {#non-vue-web-components-and-typescript}
+## Web Components Không Dùng Vue Và TypeScript {#non-vue-web-components-and-typescript}
 
-Here is the recommended way to enable type checking in SFC templates of Custom Elements that are not built with Vue.
+Đây là cách được khuyến nghị để bật kiểm tra kiểu trong template SFC cho Custom Element không được xây bằng Vue.
 
-:::tip Note
-This approach is one possible way to do it, but it may vary depending on the framework being used to create the custom elements.
+:::tip Lưu ý
+Cách này là một trong những hướng làm khả thi, nhưng có thể khác đi tùy framework được dùng để tạo custom element.
 :::
 
-Suppose we have a custom element with some JS properties and events defined, and it is shipped in a library called `some-lib`:
+Giả sử ta có một custom element với một số property và event JavaScript được định nghĩa sẵn, và nó được phát hành trong thư viện tên `some-lib`:
 
 ```ts [some-lib/src/SomeElement.ts]
-// Define a class with typed JS properties.
+// Định nghĩa một class với JS property có kiểu.
 export class SomeElement extends HTMLElement {
   foo: number = 123
   bar: string = 'blah'
 
   lorem: boolean = false
 
-  // This method should not be exposed to template types.
+  // Phương thức này không nên được lộ ra cho kiểu trong template.
   someMethod() {
     /* ... */
   }
 
-  // ... implementation details omitted ...
-  // ... assume the element dispatches events named "apple-fell" ...
+  // ... lược bỏ chi tiết cài đặt ...
+  // ... giả sử phần tử này phát sự kiện tên "apple-fell" ...
 }
 
 customElements.define('some-element', SomeElement)
 
-// This is a list of properties of SomeElement that will be selected for type
-// checking in framework templates (f.e. Vue SFC templates). Any other
-// properties will not be exposed.
+// Đây là danh sách các property của SomeElement sẽ được chọn để kiểm tra kiểu
+// trong template của framework (ví dụ template Vue SFC). Mọi property khác
+// sẽ không được lộ ra.
 export type SomeElementAttributes = 'foo' | 'bar'
 
-// Define the event types that SomeElement dispatches.
+// Định nghĩa kiểu của các sự kiện mà SomeElement phát ra.
 export type SomeElementEvents = {
   'apple-fell': AppleFellEvent
 }
 
 export class AppleFellEvent extends Event {
-  /* ... details omitted ... */
+  /* ... lược bỏ chi tiết ... */
 }
 ```
 
-The implementation details have been omitted, but the important part is that we have type definitions for two things: prop types and event types.
+Chi tiết cài đặt đã được lược bỏ, nhưng điểm quan trọng là ta có định nghĩa kiểu cho hai thứ: kiểu prop và kiểu event.
 
-Let's create a type helper for easily registering custom element type definitions in Vue:
+Hãy tạo một helper type để dễ đăng ký định nghĩa kiểu custom element trong Vue:
 
 ```ts [some-lib/src/DefineCustomElement.ts]
-// We can re-use this type helper per each element we need to define.
+// Ta có thể dùng lại helper type này cho từng element cần định nghĩa.
 type DefineCustomElement<
   ElementType extends HTMLElement,
   Events extends EventMap = {},
   SelectedAttributes extends keyof ElementType = keyof ElementType
 > = new () => ElementType & {
-  // Use $props to define the properties exposed to template type checking. Vue
-  // specifically reads prop definitions from the `$props` type. Note that we
-  // combine the element's props with the global HTML props and Vue's special
-  // props.
-  /** @deprecated Do not use the $props property on a Custom Element ref, 
-    this is for template prop types only. */
+  // Dùng $props để định nghĩa những property được lộ ra cho kiểm tra kiểu trong
+  // template. Vue đọc định nghĩa prop từ kiểu `$props`. Lưu ý rằng ta kết hợp
+  // prop của element với prop HTML toàn cục và các prop đặc biệt của Vue.
+  /** @deprecated Đừng dùng property $props trên ref của Custom Element,
+    đây chỉ dùng cho kiểu prop trong template. */
   $props: HTMLAttributes &
     Partial<Pick<ElementType, SelectedAttributes>> &
     PublicProps
 
-  // Use $emit to specifically define event types. Vue specifically reads event
-  // types from the `$emit` type. Note that `$emit` expects a particular format
-  // that we map `Events` to.
-  /** @deprecated Do not use the $emit property on a Custom Element ref, 
-    this is for template prop types only. */
+  // Dùng $emit để định nghĩa rõ kiểu event. Vue đọc kiểu event từ `$emit`.
+  // Lưu ý `$emit` cần một định dạng nhất định, nên ta ánh xạ `Events` về dạng đó.
+  /** @deprecated Đừng dùng property $emit trên ref của Custom Element,
+    đây chỉ dùng cho kiểu prop trong template. */
   $emit: VueEmit<Events>
 }
 
@@ -376,17 +373,17 @@ type EventMap = {
   [event: string]: Event
 }
 
-// This maps an EventMap to the format that Vue's $emit type expects.
+// Ánh xạ EventMap sang định dạng mà kiểu $emit của Vue mong đợi.
 type VueEmit<T extends EventMap> = EmitFn<{
   [K in keyof T]: (event: T[K]) => void
 }>
 ```
 
-:::tip Note
-We marked `$props` and `$emit` as deprecated so that when we get a `ref` to a custom element we will not be tempted to use these properties, as these properties are for type checking purposes only when it comes to custom elements. These properties do not actually exist on the custom element instances.
+:::tip Lưu ý
+Ta đánh dấu `$props` và `$emit` là deprecated để khi lấy `ref` tới custom element, ta sẽ không bị cám dỗ dùng các property này. Chúng chỉ phục vụ cho mục đích kiểm tra kiểu với custom element trong template, và không thực sự tồn tại trên instance của custom element.
 :::
 
-Using the type helper we can now select the JS properties that should be exposed for type checking in Vue templates:
+Dùng helper type trên, giờ ta có thể chọn các JS property cần lộ ra cho việc kiểm tra kiểu trong template Vue:
 
 ```ts [some-lib/src/SomeElement.vue.ts]
 import {
@@ -397,7 +394,7 @@ import {
 import type { Component } from 'vue'
 import type { DefineCustomElement } from './DefineCustomElement'
 
-// Add the new element type to Vue's GlobalComponents type.
+// Thêm kiểu element mới vào GlobalComponents của Vue.
 declare module 'vue' {
   interface GlobalComponents {
     'some-element': DefineCustomElement<
@@ -409,16 +406,16 @@ declare module 'vue' {
 }
 ```
 
-Suppose that `some-lib` builds its source TypeScript files into a `dist/` folder. A user of `some-lib` can then import `SomeElement` and use it in a Vue SFC like so:
+Giả sử `some-lib` build mã nguồn TypeScript của nó vào thư mục `dist/`. Người dùng của `some-lib` khi đó có thể import `SomeElement` và dùng nó trong Vue SFC như sau:
 
 ```vue [SomeElementImpl.vue]
 <script setup lang="ts">
-// This will create and register the element with the browser.
+// Thao tác này sẽ tạo và đăng ký element với trình duyệt.
 import 'some-lib/dist/SomeElement.js'
 
-// A user that is using TypeScript and Vue should additionally import the
-// Vue-specific type definition (users of other frameworks may import other
-// framework-specific type definitions).
+// Người dùng dùng TypeScript và Vue nên import thêm file định nghĩa kiểu
+// dành riêng cho Vue (người dùng framework khác có thể import file định nghĩa
+// kiểu dành riêng cho framework của họ).
 import type {} from 'some-lib/dist/SomeElement.vue.js'
 
 import { useTemplateRef, onMounted } from 'vue'
@@ -433,37 +430,37 @@ onMounted(() => {
     el.value!.someMethod()
   )
 
-  // Do not use these props, they are `undefined`
-  // IDE will show them crossed out
+  // Đừng dùng các property này, chúng là `undefined`
+  // IDE sẽ hiển thị chúng bằng kiểu gạch ngang
   el.$props
   el.$emit
 })
 </script>
 
 <template>
-  <!-- Now we can use the element, with type checking: -->
+  <!-- Giờ ta có thể dùng element với kiểm tra kiểu: -->
   <some-element
     ref="el"
     :foo="456"
     :blah="'hello'"
     @apple-fell="
       (event) => {
-        // The type of `event` is inferred here to be `AppleFellEvent`
+        // Kiểu của `event` ở đây sẽ được suy ra là `AppleFellEvent`
       }
     "
   ></some-element>
 </template>
 ```
 
-If an element does not have type definitions, the types of the properties and events can be defined in a more manual fashion:
+Nếu một element không có định nghĩa kiểu sẵn, kiểu của property và event có thể được định nghĩa thủ công hơn:
 
 ```vue [SomeElementImpl.vue]
 <script setup lang="ts">
-// Suppose that `some-lib` is plain JS without type definitions, and TypeScript
-// cannot infer the types:
+// Giả sử `some-lib` là JS thuần không có định nghĩa kiểu, và TypeScript
+// không thể suy ra kiểu:
 import { SomeElement } from 'some-lib'
 
-// We'll use the same type helper as before.
+// Ta sẽ dùng lại helper type như ở trên.
 import { DefineCustomElement } from './DefineCustomElement'
 
 type SomeElementProps = { foo?: number; bar?: string }
@@ -472,7 +469,7 @@ interface AppleFellEvent extends Event {
   /* ... */
 }
 
-// Add the new element type to Vue's GlobalComponents type.
+// Thêm kiểu element mới vào GlobalComponents của Vue.
 declare module 'vue' {
   interface GlobalComponents {
     'some-element': DefineCustomElement<
@@ -482,38 +479,38 @@ declare module 'vue' {
   }
 }
 
-// ... same as before, use a reference to the element ...
+// ... giống như trên, dùng ref tới element ...
 </script>
 
 <template>
-  <!-- ... same as before, use the element in the template ... -->
+  <!-- ... giống như trên, dùng element trong template ... -->
 </template>
 ```
 
-Custom Element authors should not automatically export framework-specific custom element type definitions from their libraries, for example they should not export them from an `index.ts` file that also exports the rest of the library, otherwise users will have unexpected module augmentation errors. Users should import the framework-specific type definition file that they need.
+Tác giả custom element không nên tự động export các định nghĩa kiểu custom element dành riêng cho framework từ thư viện của họ, ví dụ không nên export chúng từ `index.ts` cùng với phần còn lại của thư viện, vì người dùng sẽ gặp lỗi module augmentation ngoài ý muốn. Thay vào đó, người dùng nên tự import file định nghĩa kiểu dành cho framework mà họ cần.
 
-## Web Components vs. Vue Components {#web-components-vs-vue-components}
+## Web Components So Với Vue Components {#web-components-vs-vue-components}
 
-Some developers believe that framework-proprietary component models should be avoided, and that exclusively using Custom Elements makes an application "future-proof". Here we will try to explain why we believe that this is an overly simplistic take on the problem.
+Một số developer cho rằng nên tránh các mô hình component mang tính riêng của framework, và rằng chỉ dùng Custom Elements mới làm ứng dụng "future-proof". Ở đây, chúng tôi muốn giải thích vì sao chúng tôi cho rằng đó là một cách nhìn quá đơn giản về vấn đề.
 
-There is indeed a certain level of feature overlap between Custom Elements and Vue Components: they both allow us to define reusable components with data passing, event emitting, and lifecycle management. However, Web Components APIs are relatively low-level and bare-bones. To build an actual application, we need quite a few additional capabilities which the platform does not cover:
+Đúng là giữa Custom Elements và Vue Components có một mức độ chồng lặp tính năng nhất định: cả hai đều cho phép định nghĩa component tái sử dụng với khả năng truyền dữ liệu, emit sự kiện và quản lý vòng đời. Tuy nhiên, API Web Components khá thấp tầng và tối giản. Để xây được một ứng dụng thực tế, ta còn cần thêm khá nhiều khả năng mà bản thân nền tảng không cung cấp:
 
-- A declarative and efficient templating system;
+- Một hệ thống template khai báo và hiệu quả.
 
-- A reactive state management system that facilitates cross-component logic extraction and reuse;
+- Một hệ thống quản lý state phản ứng giúp tách và tái sử dụng logic xuyên component.
 
-- A performant way to render the components on the server and hydrate them on the client (SSR), which is important for SEO and [Web Vitals metrics such as LCP](https://web.dev/vitals/). Native custom elements SSR typically involves simulating the DOM in Node.js and then serializing the mutated DOM, while Vue SSR compiles into string concatenation whenever possible, which is much more efficient.
+- Một cách hiệu quả để render component ở phía server và hydrate ở phía client (SSR), điều rất quan trọng cho SEO và [các chỉ số Web Vitals như LCP](https://web.dev/vitals/). SSR với custom element gốc thường phải mô phỏng DOM trong Node.js rồi serialize DOM đã thay đổi, trong khi Vue SSR có thể biên dịch thành nối chuỗi ở nơi phù hợp, nên hiệu quả hơn nhiều.
 
-Vue's component model is designed with these needs in mind as a coherent system.
+Mô hình component của Vue được thiết kế như một hệ thống nhất quán để đáp ứng chính những nhu cầu đó.
 
-With a competent engineering team, you could probably build the equivalent on top of native Custom Elements - but this also means you are taking on the long-term maintenance burden of an in-house framework, while losing out on the ecosystem and community benefits of a mature framework like Vue.
+Với một đội ngũ kỹ thuật đủ mạnh, bạn có lẽ vẫn có thể tự xây ra thứ tương đương trên nền Custom Elements gốc. Nhưng điều đó cũng đồng nghĩa với việc bạn đang tự gánh trách nhiệm bảo trì dài hạn cho một framework nội bộ, đồng thời bỏ lỡ lợi ích của hệ sinh thái và cộng đồng mà một framework trưởng thành như Vue mang lại.
 
-There are also frameworks built using Custom Elements as the basis of their component model, but they all inevitably have to introduce their proprietary solutions to the problems listed above. Using these frameworks entails buying into their technical decisions on how to solve these problems - which, despite what may be advertised, doesn't automatically insulate you from potential future churns.
+Cũng có những framework xây trên nền Custom Elements làm mô hình component cốt lõi, nhưng rốt cuộc chúng vẫn phải đưa vào các giải pháp riêng cho những vấn đề vừa nêu. Dùng các framework đó nghĩa là bạn vẫn phải chấp nhận các quyết định kỹ thuật của chúng về cách giải các bài toán này. Nói cách khác, bất chấp quảng bá, việc đó không tự động giúp bạn tránh khỏi biến động trong tương lai.
 
-There are also some areas where we find custom elements to be limiting:
+Ngoài ra, cũng có vài khía cạnh mà theo chúng tôi custom element còn khá hạn chế:
 
-- Eager slot evaluation hinders component composition. Vue's [scoped slots](/guide/components/slots#scoped-slots) are a powerful mechanism for component composition, which can't be supported by custom elements due to native slots' eager nature. Eager slots also mean the receiving component cannot control when or whether to render a piece of slot content.
+- Việc đánh giá slot một cách eager cản trở khả năng kết hợp component. [Scoped slot](/guide/components/slots#scoped-slots) của Vue là cơ chế rất mạnh để phối hợp component, nhưng custom element không hỗ trợ được do slot gốc vốn eager. Slot eager cũng có nghĩa là component nhận không thể kiểm soát khi nào hoặc liệu một mẩu nội dung slot có được render hay không.
 
-- Shipping custom elements with shadow DOM scoped CSS today requires embedding the CSS inside JavaScript so that they can be injected into shadow roots at runtime. They also result in duplicated styles in markup in SSR scenarios. There are [platform features](https://github.com/whatwg/html/pull/4898/) being worked on in this area - but as of now they are not yet universally supported, and there are still production performance / SSR concerns to be addressed. In the meanwhile, Vue SFCs provide [CSS scoping mechanisms](/api/sfc-css-features) that support extracting the styles into plain CSS files.
+- Việc phát hành custom element với CSS phạm vi theo shadow DOM hiện nay đòi hỏi phải nhúng CSS vào JavaScript để chèn vào shadow root lúc chạy. Trong kịch bản SSR, nó cũng làm lặp style trong markup. Nền tảng đang phát triển [một số tính năng](https://github.com/whatwg/html/pull/4898/) cho lĩnh vực này, nhưng hiện tại chúng vẫn chưa được hỗ trợ rộng rãi, và vẫn còn những vấn đề về hiệu năng production / SSR cần xử lý. Trong lúc chờ đợi, Vue SFC đã có [cơ chế phạm vi CSS](/api/sfc-css-features) hỗ trợ tách style thành file CSS thuần.
 
-Vue will always stay up to date with the latest standards in the web platform, and we will happily leverage whatever the platform provides if it makes our job easier. However, our goal is to provide solutions that work well and work today. That means we have to incorporate new platform features with a critical mindset - and that involves filling the gaps where the standards fall short while that is still the case.
+Vue sẽ luôn theo sát các tiêu chuẩn mới nhất của nền tảng web, và chúng tôi sẵn sàng tận dụng bất cứ thứ gì nền tảng cung cấp nếu nó giúp công việc trở nên dễ hơn. Tuy nhiên, mục tiêu của chúng tôi là cung cấp giải pháp hoạt động tốt ngay bây giờ. Điều đó có nghĩa là ta phải tiếp cận các tính năng nền tảng mới với tư duy phản biện, đồng thời lấp các khoảng trống khi tiêu chuẩn vẫn chưa đủ.

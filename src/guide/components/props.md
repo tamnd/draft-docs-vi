@@ -1,18 +1,18 @@
 # Props {#props}
 
-> This page assumes you've already read the [Components Basics](/guide/essentials/component-basics). Read that first if you are new to components.
+> Trang này giả định rằng bạn đã đọc [Kiến thức cơ bản về Component](/guide/essentials/component-basics). Nếu chưa quen với component, hãy đọc trang đó trước.
 
 <div class="options-api">
-  <VueSchoolLink href="https://vueschool.io/lessons/vue-3-reusable-components-with-props" title="Free Vue.js Props Lesson"/>
+  <VueSchoolLink href="https://vueschool.io/lessons/vue-3-reusable-components-with-props" title="Bài học miễn phí về props trong Vue.js"/>
 </div>
 
-## Props Declaration {#props-declaration}
+## Khai Báo Props {#props-declaration}
 
-Vue components require explicit props declaration so that Vue knows what external props passed to the component should be treated as fallthrough attributes (which will be discussed in [its dedicated section](/guide/components/attrs)).
+Component Vue yêu cầu props phải được khai báo tường minh để Vue biết những prop bên ngoài nào được truyền vào component cần được xem là thuộc tính kế thừa (sẽ được bàn trong [phần riêng](/guide/components/attrs)).
 
 <div class="composition-api">
 
-In SFCs using `<script setup>`, props can be declared using the `defineProps()` macro:
+Trong SFC dùng `<script setup>`, props có thể được khai báo bằng macro `defineProps()`:
 
 ```vue
 <script setup>
@@ -22,31 +22,31 @@ console.log(props.foo)
 </script>
 ```
 
-In non-`<script setup>` components, props are declared using the [`props`](/api/options-state#props) option:
+Trong component không dùng `<script setup>`, props được khai báo bằng option [`props`](/api/options-state#props):
 
 ```js
 export default {
   props: ['foo'],
   setup(props) {
-    // setup() receives props as the first argument.
+    // setup() nhận props làm đối số đầu tiên.
     console.log(props.foo)
   }
 }
 ```
 
-Notice the argument passed to `defineProps()` is the same as the value provided to the `props` options: the same props options API is shared between the two declaration styles.
+Hãy chú ý rằng đối số truyền vào `defineProps()` giống hệt giá trị đưa vào option `props`: cùng một API option props được dùng chung cho cả hai kiểu khai báo.
 
 </div>
 
 <div class="options-api">
 
-Props are declared using the [`props`](/api/options-state#props) option:
+Props được khai báo bằng option [`props`](/api/options-state#props):
 
 ```js
 export default {
   props: ['foo'],
   created() {
-    // props are exposed on `this`
+    // props được lộ ra trên `this`
     console.log(this.foo)
   }
 }
@@ -54,7 +54,7 @@ export default {
 
 </div>
 
-In addition to declaring props using an array of strings, we can also use the object syntax:
+Ngoài việc khai báo props bằng một mảng chuỗi, ta cũng có thể dùng cú pháp object:
 
 <div class="options-api">
 
@@ -71,7 +71,7 @@ export default {
 <div class="composition-api">
 
 ```js
-// in <script setup>
+// trong <script setup>
 defineProps({
   title: String,
   likes: Number
@@ -79,7 +79,7 @@ defineProps({
 ```
 
 ```js
-// in non-<script setup>
+// trong component không dùng <script setup>
 export default {
   props: {
     title: String,
@@ -90,19 +90,19 @@ export default {
 
 </div>
 
-For each property in the object declaration syntax, the key is the name of the prop, while the value should be the constructor function of the expected type.
+Với mỗi property trong cú pháp khai báo bằng object, key là tên của prop còn value phải là hàm constructor của kiểu dữ liệu mong đợi.
 
-This not only documents your component, but will also warn other developers using your component in the browser console if they pass the wrong type. We will discuss more details about [prop validation](#prop-validation) further down this page.
+Điều này không chỉ giúp tài liệu hóa component của bạn, mà còn cảnh báo cho các developer khác đang dùng component này trong console của trình duyệt nếu họ truyền sai kiểu. Chi tiết hơn về [kiểm tra tính hợp lệ của prop](#prop-validation) sẽ được nói ở phần dưới.
 
 <div class="options-api">
 
-See also: [Typing Component Props](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
+Xem thêm: [Typing Component Props](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
 
 </div>
 
 <div class="composition-api">
 
-If you are using TypeScript with `<script setup>`, it's also possible to declare props using pure type annotations:
+Nếu bạn dùng TypeScript với `<script setup>`, bạn cũng có thể khai báo props bằng chú thích kiểu thuần túy:
 
 ```vue
 <script setup lang="ts">
@@ -113,50 +113,50 @@ defineProps<{
 </script>
 ```
 
-More details: [Typing Component Props](/guide/typescript/composition-api#typing-component-props) <sup class="vt-badge ts" />
+Chi tiết hơn: [Typing Component Props](/guide/typescript/composition-api#typing-component-props) <sup class="vt-badge ts" />
 
 </div>
 
 <div class="composition-api">
 
-## Reactive Props Destructure <sup class="vt-badge" data-text="3.5+" /> \*\* {#reactive-props-destructure}
+## Destructure Props Có Tính Phản Ứng <sup class="vt-badge" data-text="3.5+" /> \*\* {#reactive-props-destructure}
 
-Vue's reactivity system tracks state usage based on property access. E.g. when you access `props.foo` in a computed getter or a watcher, the `foo` prop gets tracked as a dependency.
+Hệ phản ứng của Vue theo dõi việc sử dụng state dựa trên truy cập property. Ví dụ, khi bạn truy cập `props.foo` trong getter của computed hoặc trong watcher, prop `foo` sẽ được theo dõi như một dependency.
 
-So, given the following code:
+Vì vậy, với đoạn mã sau:
 
 ```js
 const { foo } = defineProps(['foo'])
 
 watchEffect(() => {
-  // runs only once before 3.5
-  // re-runs when the "foo" prop changes in 3.5+
+  // chỉ chạy một lần trước 3.5
+  // chạy lại khi prop "foo" thay đổi ở 3.5+
   console.log(foo)
 })
 ```
 
-In version 3.4 and below, `foo` is an actual constant and will never change. In version 3.5 and above, Vue's compiler automatically prepends `props.` when code in the same `<script setup>` block accesses variables destructured from `defineProps`. Therefore the code above becomes equivalent to the following:
+Ở phiên bản 3.4 trở xuống, `foo` là một hằng thực sự và sẽ không bao giờ thay đổi. Từ 3.5 trở lên, trình biên dịch của Vue sẽ tự động thêm tiền tố `props.` khi mã trong cùng block `<script setup>` truy cập biến được destructure từ `defineProps`. Vì vậy, đoạn mã trên tương đương với:
 
 ```js {5}
 const props = defineProps(['foo'])
 
 watchEffect(() => {
-  // `foo` transformed to `props.foo` by the compiler
+  // `foo` được trình biên dịch chuyển thành `props.foo`
   console.log(props.foo)
 })
 ```
 
-In addition, you can use JavaScript's native default value syntax to declare default values for the props. This is particularly useful when using the type-based props declaration:
+Ngoài ra, bạn có thể dùng cú pháp giá trị mặc định gốc của JavaScript để khai báo giá trị mặc định cho prop. Điều này đặc biệt hữu ích khi dùng cách khai báo props dựa trên kiểu:
 
 ```ts
 const { foo = 'hello' } = defineProps<{ foo?: string }>()
 ```
 
-If you prefer to have more visual distinction between destructured props and normal variables in your IDE, Vue's VSCode extension provides a setting to enable inlay-hints for destructured props.
+Nếu muốn có sự phân biệt rõ ràng hơn giữa prop đã destructure và biến thường trong IDE, extension VSCode của Vue có một tùy chọn để bật inlay-hints cho prop đã destructure.
 
-### Passing Destructured Props into Functions {#passing-destructured-props-into-functions}
+### Truyền Prop Đã Destructure Vào Hàm {#passing-destructured-props-into-functions}
 
-When we pass a destructured prop into a function, e.g.:
+Khi ta truyền một prop đã destructure vào một hàm, ví dụ:
 
 ```js
 const { foo } = defineProps(['foo'])
@@ -164,29 +164,29 @@ const { foo } = defineProps(['foo'])
 watch(foo, /* ... */)
 ```
 
-This will not work as expected because it is equivalent to `watch(props.foo, ...)` - we are passing a value instead of a reactive data source to `watch`. In fact, Vue's compiler will catch such cases and throw a warning.
+Điều này sẽ không hoạt động như mong đợi vì nó tương đương với `watch(props.foo, ...)` tức là ta đang truyền giá trị chứ không phải một nguồn dữ liệu phản ứng vào `watch`. Trên thực tế, trình biên dịch của Vue sẽ bắt các trường hợp như vậy và đưa ra cảnh báo.
 
-Similar to how we can watch a normal prop with `watch(() => props.foo, ...)`, we can watch a destructured prop also by wrapping it in a getter:
+Tương tự như cách ta có thể watch một prop bình thường bằng `watch(() => props.foo, ...)`, ta cũng có thể watch một prop đã destructure bằng cách bọc nó trong getter:
 
 ```js
 watch(() => foo, /* ... */)
 ```
 
-In addition, this is the recommended approach when we need to pass a destructured prop into an external function while retaining reactivity:
+Ngoài ra, đây cũng là cách làm được khuyến nghị khi cần truyền một prop đã destructure vào hàm bên ngoài mà vẫn giữ được tính phản ứng:
 
 ```js
 useComposable(() => foo)
 ```
 
-The external function can call the getter (or normalize it with [toValue](/api/reactivity-utilities.html#tovalue)) when it needs to track changes of the provided prop, e.g. in a computed or watcher getter.
+Hàm bên ngoài có thể gọi getter đó (hoặc chuẩn hóa nó bằng [toValue](/api/reactivity-utilities.html#tovalue)) khi cần theo dõi sự thay đổi của prop được truyền vào, ví dụ trong getter của computed hoặc watcher.
 
 </div>
 
-## Prop Passing Details {#prop-passing-details}
+## Chi Tiết Khi Truyền Prop {#prop-passing-details}
 
-### Prop Name Casing {#prop-name-casing}
+### Kiểu Chữ Của Tên Prop {#prop-name-casing}
 
-We declare long prop names using camelCase because this avoids having to use quotes when using them as property keys, and allows us to reference them directly in template expressions because they are valid JavaScript identifiers:
+Ta khai báo tên prop dài dưới dạng camelCase vì làm như vậy sẽ tránh phải đặt chúng trong dấu nháy khi dùng làm key của object, đồng thời cho phép tham chiếu trực tiếp trong biểu thức template vì chúng là định danh JavaScript hợp lệ:
 
 <div class="composition-api">
 
@@ -213,77 +213,77 @@ export default {
 <span>{{ greetingMessage }}</span>
 ```
 
-Technically, you can also use camelCase when passing props to a child component (except in [in-DOM templates](/guide/essentials/component-basics#in-dom-template-parsing-caveats)). However, the convention is using kebab-case in all cases to align with HTML attributes:
+Về mặt kỹ thuật, bạn cũng có thể dùng camelCase khi truyền prop xuống component con (ngoại trừ trong [template viết trực tiếp trong DOM](/guide/essentials/component-basics#in-dom-template-parsing-caveats)). Tuy nhiên, quy ước chung là dùng kebab-case trong mọi trường hợp để nhất quán với thuộc tính HTML:
 
 ```vue-html
 <MyComponent greeting-message="hello" />
 ```
 
-We use [PascalCase for component tags](/guide/components/registration#component-name-casing) when possible because it improves template readability by differentiating Vue components from native elements. However, there isn't as much practical benefit in using camelCase when passing props, so we choose to follow each language's conventions.
+Ta dùng [PascalCase cho thẻ component](/guide/components/registration#component-name-casing) khi có thể vì nó giúp template dễ đọc hơn bằng cách phân biệt component Vue với phần tử gốc. Tuy nhiên, dùng camelCase khi truyền prop không mang lại lợi ích thực tế tương đương, nên ta chọn đi theo quy ước của từng ngôn ngữ.
 
-### Static vs. Dynamic Props {#static-vs-dynamic-props}
+### Prop Tĩnh Và Prop Động {#static-vs-dynamic-props}
 
-So far, you've seen props passed as static values, like in:
+Cho đến lúc này, bạn đã thấy prop được truyền vào dưới dạng giá trị tĩnh, ví dụ:
 
 ```vue-html
 <BlogPost title="My journey with Vue" />
 ```
 
-You've also seen props assigned dynamically with `v-bind` or its `:` shortcut, such as in:
+Bạn cũng đã thấy prop được gán động bằng `v-bind` hoặc cú pháp rút gọn `:`, ví dụ:
 
 ```vue-html
-<!-- Dynamically assign the value of a variable -->
+<!-- Gán động giá trị của một biến -->
 <BlogPost :title="post.title" />
 
-<!-- Dynamically assign the value of a complex expression -->
+<!-- Gán động giá trị của một biểu thức phức tạp -->
 <BlogPost :title="post.title + ' by ' + post.author.name" />
 ```
 
-### Passing Different Value Types {#passing-different-value-types}
+### Truyền Nhiều Kiểu Giá Trị Khác Nhau {#passing-different-value-types}
 
-In the two examples above, we happen to pass string values, but _any_ type of value can be passed to a prop.
+Trong hai ví dụ trên, ta tình cờ truyền giá trị chuỗi, nhưng prop có thể nhận _bất kỳ_ kiểu giá trị nào.
 
 #### Number {#number}
 
 ```vue-html
-<!-- Even though `42` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.       -->
+<!-- Dù `42` là tĩnh, ta vẫn cần v-bind để nói với Vue rằng -->
+<!-- đây là một biểu thức JavaScript chứ không phải chuỗi.    -->
 <BlogPost :likes="42" />
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- Gán động giá trị của một biến. -->
 <BlogPost :likes="post.likes" />
 ```
 
 #### Boolean {#boolean}
 
 ```vue-html
-<!-- Including the prop with no value will imply `true`. -->
+<!-- Chỉ cần xuất hiện prop mà không có giá trị sẽ ngầm hiểu là `true`. -->
 <BlogPost is-published />
 
-<!-- Even though `false` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.          -->
+<!-- Dù `false` là tĩnh, ta vẫn cần v-bind để nói với Vue rằng -->
+<!-- đây là một biểu thức JavaScript chứ không phải chuỗi.      -->
 <BlogPost :is-published="false" />
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- Gán động giá trị của một biến. -->
 <BlogPost :is-published="post.isPublished" />
 ```
 
 #### Array {#array}
 
 ```vue-html
-<!-- Even though the array is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.            -->
+<!-- Dù mảng là tĩnh, ta vẫn cần v-bind để nói với Vue rằng -->
+<!-- đây là một biểu thức JavaScript chứ không phải chuỗi.  -->
 <BlogPost :comment-ids="[234, 266, 273]" />
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- Gán động giá trị của một biến. -->
 <BlogPost :comment-ids="post.commentIds" />
 ```
 
 #### Object {#object}
 
 ```vue-html
-<!-- Even though the object is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.             -->
+<!-- Dù object là tĩnh, ta vẫn cần v-bind để nói với Vue rằng -->
+<!-- đây là một biểu thức JavaScript chứ không phải chuỗi.    -->
 <BlogPost
   :author="{
     name: 'Veronica',
@@ -291,13 +291,13 @@ In the two examples above, we happen to pass string values, but _any_ type of va
   }"
  />
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- Gán động giá trị của một biến. -->
 <BlogPost :author="post.author" />
 ```
 
-### Binding Multiple Properties Using an Object {#binding-multiple-properties-using-an-object}
+### Bind Nhiều Property Bằng Một Object {#binding-multiple-properties-using-an-object}
 
-If you want to pass all the properties of an object as props, you can use [`v-bind` without an argument](/guide/essentials/template-syntax#dynamically-binding-multiple-attributes) (`v-bind` instead of `:prop-name`). For example, given a `post` object:
+Nếu muốn truyền toàn bộ property của một object làm props, bạn có thể dùng [`v-bind` không có đối số](/guide/essentials/template-syntax#dynamically-binding-multiple-attributes) (`v-bind` thay vì `:prop-name`). Ví dụ, với một object `post`:
 
 <div class="options-api">
 
@@ -326,30 +326,30 @@ const post = {
 
 </div>
 
-The following template:
+Template sau:
 
 ```vue-html
 <BlogPost v-bind="post" />
 ```
 
-Will be equivalent to:
+Sẽ tương đương với:
 
 ```vue-html
 <BlogPost :id="post.id" :title="post.title" />
 ```
 
-## One-Way Data Flow {#one-way-data-flow}
+## Luồng Dữ Liệu Một Chiều {#one-way-data-flow}
 
-All props form a **one-way-down binding** between the child property and the parent one: when the parent property updates, it will flow down to the child, but not the other way around. This prevents child components from accidentally mutating the parent's state, which can make your app's data flow harder to understand.
+Mọi prop đều tạo thành một **liên kết một chiều đi xuống** giữa property ở component con và property ở component cha: khi property ở component cha cập nhật, nó sẽ truyền xuống component con, nhưng không đi theo chiều ngược lại. Điều này ngăn component con vô tình thay đổi state của component cha, vốn có thể khiến luồng dữ liệu của ứng dụng khó hiểu hơn.
 
-In addition, every time the parent component is updated, all props in the child component will be refreshed with the latest value. This means you should **not** attempt to mutate a prop inside a child component. If you do, Vue will warn you in the console:
+Ngoài ra, mỗi lần component cha cập nhật, tất cả prop trong component con cũng sẽ được làm mới bằng giá trị mới nhất. Điều này có nghĩa là bạn **không nên** cố thay đổi prop bên trong component con. Nếu làm vậy, Vue sẽ cảnh báo trong console:
 
 <div class="composition-api">
 
 ```js
 const props = defineProps(['foo'])
 
-// ❌ warning, props are readonly!
+// ❌ cảnh báo, props là readonly!
 props.foo = 'bar'
 ```
 
@@ -360,7 +360,7 @@ props.foo = 'bar'
 export default {
   props: ['foo'],
   created() {
-    // ❌ warning, props are readonly!
+    // ❌ cảnh báo, props là readonly!
     this.foo = 'bar'
   }
 }
@@ -368,17 +368,17 @@ export default {
 
 </div>
 
-There are usually two cases where it's tempting to mutate a prop:
+Thông thường, có hai trường hợp dễ khiến ta muốn thay đổi prop:
 
-1. **The prop is used to pass in an initial value; the child component wants to use it as a local data property afterwards.** In this case, it's best to define a local data property that uses the prop as its initial value:
+1. **Prop được dùng để truyền một giá trị ban đầu; sau đó component con muốn dùng nó như một property dữ liệu cục bộ.** Trong trường hợp này, tốt nhất hãy định nghĩa một property dữ liệu cục bộ dùng prop làm giá trị khởi tạo:
 
    <div class="composition-api">
 
    ```js
    const props = defineProps(['initialCounter'])
 
-   // counter only uses props.initialCounter as the initial value;
-   // it is disconnected from future prop updates.
+   // counter chỉ dùng props.initialCounter làm giá trị ban đầu;
+   // nó sẽ tách khỏi các lần cập nhật prop về sau.
    const counter = ref(props.initialCounter)
    ```
 
@@ -390,8 +390,8 @@ There are usually two cases where it's tempting to mutate a prop:
      props: ['initialCounter'],
      data() {
        return {
-         // counter only uses this.initialCounter as the initial value;
-         // it is disconnected from future prop updates.
+         // counter chỉ dùng this.initialCounter làm giá trị ban đầu;
+         // nó sẽ tách khỏi các lần cập nhật prop về sau.
          counter: this.initialCounter
        }
      }
@@ -400,14 +400,14 @@ There are usually two cases where it's tempting to mutate a prop:
 
    </div>
 
-2. **The prop is passed in as a raw value that needs to be transformed.** In this case, it's best to define a computed property using the prop's value:
+2. **Prop được truyền vào như một giá trị thô cần được biến đổi.** Trong trường hợp này, tốt nhất nên định nghĩa một computed dùng giá trị của prop:
 
    <div class="composition-api">
 
    ```js
    const props = defineProps(['size'])
 
-   // computed property that auto-updates when the prop changes
+   // thuộc tính computed sẽ tự cập nhật khi prop thay đổi
    const normalizedSize = computed(() => props.size.trim().toLowerCase())
    ```
 
@@ -418,7 +418,7 @@ There are usually two cases where it's tempting to mutate a prop:
    export default {
      props: ['size'],
      computed: {
-       // computed property that auto-updates when the prop changes
+       // thuộc tính computed sẽ tự cập nhật khi prop thay đổi
        normalizedSize() {
          return this.size.trim().toLowerCase()
        }
@@ -428,65 +428,65 @@ There are usually two cases where it's tempting to mutate a prop:
 
    </div>
 
-### Mutating Object / Array Props {#mutating-object-array-props}
+### Thay Đổi Prop Kiểu Object / Array {#mutating-object-array-props}
 
-When objects and arrays are passed as props, while the child component cannot mutate the prop binding, it **will** be able to mutate the object or array's nested properties. This is because in JavaScript objects and arrays are passed by reference, and it is unreasonably expensive for Vue to prevent such mutations.
+Khi object và array được truyền làm prop, dù component con không thể thay đổi bản thân liên kết của prop, nó **vẫn có thể** thay đổi các property lồng bên trong object hoặc array đó. Lý do là vì trong JavaScript, object và array được truyền bằng tham chiếu, và Vue sẽ phải trả một chi phí quá lớn nếu cố ngăn chặn hoàn toàn các thay đổi kiểu này.
 
-The main drawback of such mutations is that it allows the child component to affect parent state in a way that isn't obvious to the parent component, potentially making it more difficult to reason about the data flow in the future. As a best practice, you should avoid such mutations unless the parent and child are tightly coupled by design. In most cases, the child should [emit an event](/guide/components/events) to let the parent perform the mutation.
+Nhược điểm chính của kiểu thay đổi đó là nó cho phép component con ảnh hưởng tới state của component cha theo một cách không rõ ràng với component cha, khiến việc suy luận về luồng dữ liệu sau này có thể khó hơn. Best practice là nên tránh những thay đổi như vậy trừ khi component cha và component con vốn đã được thiết kế để gắn chặt với nhau. Trong đa số trường hợp, component con nên [phát ra một sự kiện](/guide/components/events) để component cha tự thực hiện thay đổi.
 
-## Prop Validation {#prop-validation}
+## Kiểm Tra Tính Hợp Lệ Của Prop {#prop-validation}
 
-Components can specify requirements for their props, such as the types you've already seen. If a requirement is not met, Vue will warn you in the browser's JavaScript console. This is especially useful when developing a component that is intended to be used by others.
+Component có thể chỉ định yêu cầu cho prop, chẳng hạn như kiểu dữ liệu như bạn đã thấy ở trên. Nếu không đáp ứng yêu cầu, Vue sẽ cảnh báo trong console JavaScript của trình duyệt. Điều này đặc biệt hữu ích khi bạn phát triển một component để người khác dùng.
 
-To specify prop validations, you can provide an object with validation requirements to the <span class="composition-api">`defineProps()` macro</span><span class="options-api">`props` option</span>, instead of an array of strings. For example:
+Để chỉ định validation cho prop, thay vì truyền một mảng chuỗi, bạn có thể truyền vào <span class="composition-api">macro `defineProps()`</span><span class="options-api">option `props`</span> một object chứa các yêu cầu validation. Ví dụ:
 
 <div class="composition-api">
 
 ```js
 defineProps({
-  // Basic type check
-  //  (`null` and `undefined` values will allow any type)
+  // Kiểm tra kiểu cơ bản
+  // (`null` và `undefined` sẽ cho phép mọi kiểu)
   propA: Number,
-  // Multiple possible types
+  // Nhiều kiểu có thể chấp nhận
   propB: [String, Number],
-  // Required string
+  // Chuỗi bắt buộc
   propC: {
     type: String,
     required: true
   },
-  // Required but nullable string
+  // Chuỗi bắt buộc nhưng có thể null
   propD: {
     type: [String, null],
     required: true
   },
-  // Number with a default value
+  // Number có giá trị mặc định
   propE: {
     type: Number,
     default: 100
   },
-  // Object with a default value
+  // Object có giá trị mặc định
   propF: {
     type: Object,
-    // Object or array defaults must be returned from
-    // a factory function. The function receives the raw
-    // props received by the component as the argument.
+    // Giá trị mặc định cho object hoặc array phải được trả về từ
+    // một factory function. Hàm này nhận raw props
+    // mà component nhận được làm đối số.
     default(rawProps) {
       return { message: 'hello' }
     }
   },
-  // Custom validator function
-  // full props passed as 2nd argument in 3.4+
+  // Hàm validator tùy chỉnh
+  // full props được truyền làm đối số thứ 2 từ 3.4+
   propG: {
     validator(value, props) {
-      // The value must match one of these strings
+      // Giá trị phải khớp với một trong các chuỗi này
       return ['success', 'warning', 'danger'].includes(value)
     }
   },
-  // Function with a default value
+  // Function có giá trị mặc định
   propH: {
     type: Function,
-    // Unlike object or array default, this is not a factory
-    // function - this is a function to serve as a default value
+    // Khác với default của object hoặc array, đây không phải factory
+    // function, mà là hàm đóng vai trò giá trị mặc định
     default() {
       return 'Default function'
     }
@@ -495,7 +495,7 @@ defineProps({
 ```
 
 :::tip
-Code inside the `defineProps()` argument **cannot access other variables declared in `<script setup>`**, because the entire expression is moved to an outer function scope when compiled.
+Mã bên trong đối số của `defineProps()` **không thể truy cập các biến khác được khai báo trong `<script setup>`**, vì toàn bộ biểu thức này sẽ được chuyển ra scope của một hàm bên ngoài khi biên dịch.
 :::
 
 </div>
@@ -504,49 +504,49 @@ Code inside the `defineProps()` argument **cannot access other variables declare
 ```js
 export default {
   props: {
-    // Basic type check
-    //  (`null` and `undefined` values will allow any type)
+    // Kiểm tra kiểu cơ bản
+    // (`null` và `undefined` sẽ cho phép mọi kiểu)
     propA: Number,
-    // Multiple possible types
+    // Nhiều kiểu có thể chấp nhận
     propB: [String, Number],
-    // Required string
+    // Chuỗi bắt buộc
     propC: {
       type: String,
       required: true
     },
-    // Required but nullable string
+    // Chuỗi bắt buộc nhưng có thể null
     propD: {
       type: [String, null],
       required: true
     },
-    // Number with a default value
+    // Number có giá trị mặc định
     propE: {
       type: Number,
       default: 100
     },
-    // Object with a default value
+    // Object có giá trị mặc định
     propF: {
       type: Object,
-      // Object or array defaults must be returned from
-      // a factory function. The function receives the raw
-      // props received by the component as the argument.
+      // Giá trị mặc định cho object hoặc array phải được trả về từ
+      // một factory function. Hàm này nhận raw props
+      // mà component nhận được làm đối số.
       default(rawProps) {
         return { message: 'hello' }
       }
     },
-    // Custom validator function
-    // full props passed as 2nd argument in 3.4+
+    // Hàm validator tùy chỉnh
+    // full props được truyền làm đối số thứ 2 từ 3.4+
     propG: {
       validator(value, props) {
-        // The value must match one of these strings
+        // Giá trị phải khớp với một trong các chuỗi này
         return ['success', 'warning', 'danger'].includes(value)
       }
     },
-    // Function with a default value
+    // Function có giá trị mặc định
     propH: {
       type: Function,
-      // Unlike object or array default, this is not a factory
-      // function - this is a function to serve as a default value
+      // Khác với default của object hoặc array, đây không phải factory
+      // function, mà là hàm đóng vai trò giá trị mặc định
       default() {
         return 'Default function'
       }
@@ -557,34 +557,34 @@ export default {
 
 </div>
 
-Additional details:
+Chi tiết bổ sung:
 
-- All props are optional by default, unless `required: true` is specified.
+- Mặc định mọi prop đều là tùy chọn, trừ khi có `required: true`.
 
-- An absent optional prop other than `Boolean` will have `undefined` value.
+- Prop tùy chọn nhưng vắng mặt, nếu không phải `Boolean`, sẽ có giá trị `undefined`.
 
-- The `Boolean` absent props will be cast to `false`. You can change this by setting a `default` for it — i.e.: `default: undefined` to behave as a non-Boolean prop.
+- Prop `Boolean` vắng mặt sẽ bị ép thành `false`. Bạn có thể thay đổi hành vi này bằng cách đặt `default` cho nó, ví dụ `default: undefined` để nó hoạt động giống prop không phải Boolean.
 
-- If a `default` value is specified, it will be used if the resolved prop value is `undefined` - this includes both when the prop is absent, or an explicit `undefined` value is passed.
+- Nếu có chỉ định giá trị `default`, nó sẽ được dùng khi giá trị prop sau khi resolve là `undefined`, bao gồm cả khi prop vắng mặt hoặc khi ta truyền tường minh giá trị `undefined`.
 
-When prop validation fails, Vue will produce a console warning (if using the development build).
+Khi validation prop thất bại, Vue sẽ phát ra cảnh báo trong console (nếu dùng bản build cho môi trường phát triển).
 
 <div class="composition-api">
 
-If using [Type-based props declarations](/api/sfc-script-setup#type-only-props-emit-declarations) <sup class="vt-badge ts" />, Vue will try its best to compile the type annotations into equivalent runtime prop declarations. For example, `defineProps<{ msg: string }>` will be compiled into `{ msg: { type: String, required: true }}`.
+Nếu dùng [cách khai báo props dựa trên kiểu](/api/sfc-script-setup#type-only-props-emit-declarations) <sup class="vt-badge ts" />, Vue sẽ cố gắng biên dịch chú thích kiểu thành khai báo prop runtime tương đương. Ví dụ, `defineProps<{ msg: string }>` sẽ được biên dịch thành `{ msg: { type: String, required: true }}`.
 
 </div>
 <div class="options-api">
 
-::: tip Note
-Note that props are validated **before** a component instance is created, so instance properties (e.g. `data`, `computed`, etc.) will not be available inside `default` or `validator` functions.
+::: tip Lưu ý
+Hãy nhớ rằng props được validate **trước khi** instance component được tạo ra, vì vậy các property của instance (ví dụ `data`, `computed`, v.v.) sẽ không khả dụng bên trong hàm `default` hay `validator`.
 :::
 
 </div>
 
-### Runtime Type Checks {#runtime-type-checks}
+### Kiểm Tra Kiểu Lúc Chạy {#runtime-type-checks}
 
-The `type` can be one of the following native constructors:
+`type` có thể là một trong những constructor gốc sau:
 
 - `String`
 - `Number`
@@ -596,7 +596,7 @@ The `type` can be one of the following native constructors:
 - `Symbol`
 - `Error`
 
-In addition, `type` can also be a custom class or constructor function and the assertion will be made with an `instanceof` check. For example, given the following class:
+Ngoài ra, `type` cũng có thể là một class tùy chỉnh hoặc một hàm constructor tùy chỉnh, và phép kiểm tra sẽ được thực hiện bằng `instanceof`. Ví dụ, với class sau:
 
 ```js
 class Person {
@@ -607,7 +607,7 @@ class Person {
 }
 ```
 
-You could use it as a prop's type:
+Bạn có thể dùng nó làm kiểu cho prop:
 
 <div class="composition-api">
 
@@ -630,11 +630,11 @@ export default {
 
 </div>
 
-Vue will use `instanceof Person` to validate whether the value of the `author` prop is indeed an instance of the `Person` class.
+Vue sẽ dùng `instanceof Person` để kiểm tra xem giá trị của prop `author` có thực sự là một instance của class `Person` hay không.
 
-### Nullable Type {#nullable-type}
+### Kiểu Có Thể Null {#nullable-type}
 
-If the type is required but nullable, you can use the array syntax that includes `null`:
+Nếu kiểu là bắt buộc nhưng có thể null, bạn có thể dùng cú pháp mảng có chứa `null`:
 
 <div class="composition-api">
 
@@ -663,11 +663,11 @@ export default {
 
 </div>
 
-Note that if `type` is just `null` without using the array syntax, it will allow any type.
+Lưu ý rằng nếu `type` chỉ đơn thuần là `null` mà không dùng cú pháp mảng, nó sẽ chấp nhận mọi kiểu.
 
-## Boolean Casting {#boolean-casting}
+## Ép Kiểu Boolean {#boolean-casting}
 
-Props with `Boolean` type have special casting rules to mimic the behavior of native boolean attributes. Given a `<MyComponent>` with the following declaration:
+Prop có kiểu `Boolean` có quy tắc ép kiểu đặc biệt để bắt chước hành vi của thuộc tính boolean trong HTML gốc. Với `<MyComponent>` có khai báo như sau:
 
 <div class="composition-api">
 
@@ -690,37 +690,37 @@ export default {
 
 </div>
 
-The component can be used like this:
+Component này có thể được dùng như sau:
 
 ```vue-html
-<!-- equivalent of passing :disabled="true" -->
+<!-- tương đương với truyền :disabled="true" -->
 <MyComponent disabled />
 
-<!-- equivalent of passing :disabled="false" -->
+<!-- tương đương với truyền :disabled="false" -->
 <MyComponent />
 ```
 
-When a prop is declared to allow multiple types, the casting rules for `Boolean` will also be applied. However, there is an edge when both `String` and `Boolean` are allowed - the Boolean casting rule only applies if Boolean appears before String:
+Khi một prop được khai báo cho phép nhiều kiểu, quy tắc ép kiểu của `Boolean` cũng sẽ được áp dụng. Tuy nhiên có một trường hợp cần chú ý là khi vừa cho phép `String` vừa cho phép `Boolean`: quy tắc ép kiểu của Boolean chỉ áp dụng nếu `Boolean` đứng trước `String`:
 
 <div class="composition-api">
 
 ```js
-// disabled will be casted to true
+// disabled sẽ bị ép thành true
 defineProps({
   disabled: [Boolean, Number]
 })
 
-// disabled will be casted to true
+// disabled sẽ bị ép thành true
 defineProps({
   disabled: [Boolean, String]
 })
 
-// disabled will be casted to true
+// disabled sẽ bị ép thành true
 defineProps({
   disabled: [Number, Boolean]
 })
 
-// disabled will be parsed as an empty string (disabled="")
+// disabled sẽ được phân tích thành chuỗi rỗng (disabled="")
 defineProps({
   disabled: [String, Boolean]
 })
@@ -730,28 +730,28 @@ defineProps({
 <div class="options-api">
 
 ```js
-// disabled will be casted to true
+// disabled sẽ bị ép thành true
 export default {
   props: {
     disabled: [Boolean, Number]
   }
 }
 
-// disabled will be casted to true
+// disabled sẽ bị ép thành true
 export default {
   props: {
     disabled: [Boolean, String]
   }
 }
 
-// disabled will be casted to true
+// disabled sẽ bị ép thành true
 export default {
   props: {
     disabled: [Number, Boolean]
   }
 }
 
-// disabled will be parsed as an empty string (disabled="")
+// disabled sẽ được phân tích thành chuỗi rỗng (disabled="")
 export default {
   props: {
     disabled: [String, Boolean]
