@@ -31,6 +31,7 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | declarative rendering | kết xuất khai báo | |
 | reactivity | tính phản ứng | |
 | reactive state | state phản ứng | |
+| reactive dependency | dependency phản ứng | |
 | lifecycle hooks | hook vòng đời | |
 | directive | directive | |
 | custom directives | directive tùy chỉnh | |
@@ -39,6 +40,11 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | slots | slot | |
 | dynamic component | component động | |
 | watchers | watcher | |
+| computed property | thuộc tính computed | |
+| computed ref | computed ref | |
+| getter | getter | |
+| setter | setter | |
+| cache | cache | |
 | fallthrough attributes | thuộc tính kế thừa | |
 | Single-File Component | Single-File Component | Giữ nguyên tên chuẩn, có thể viết tắt SFC |
 | Composition API | Composition API | |
