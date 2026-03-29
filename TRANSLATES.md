@@ -56,7 +56,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/extras/rendering-mechanism.md`
 - [x] `src/guide/extras/ways-of-using-vue.md`
 - [ ] `src/guide/extras/web-components.md`
-- [ ] `src/guide/reusability/composables.md`
+- [x] `src/guide/reusability/composables.md`
 
 ## Ưu tiên sprint đầu
 
@@ -135,7 +135,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `src/guide/extras/web-components.md`
 - [x] `src/guide/introduction.md`
 - [x] `src/guide/quick-start.md`
-- [ ] `src/guide/reusability/composables.md`
+- [x] `src/guide/reusability/composables.md`
 - [x] `src/guide/reusability/custom-directives.md`
 - [x] `src/guide/reusability/plugins.md`
 - [x] `src/guide/scaling-up/routing.md`
