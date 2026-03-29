@@ -35,6 +35,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/quick-start.md`
 - [x] `src/guide/essentials/application.md`
 - [x] `src/guide/essentials/template-syntax.md`
+- [x] `src/guide/essentials/class-and-style.md`
 
 ## Repo meta
 
@@ -70,7 +71,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `src/guide/components/slots.md`
 - [ ] `src/guide/components/v-model.md`
 - [x] `src/guide/essentials/application.md`
-- [ ] `src/guide/essentials/class-and-style.md`
+- [x] `src/guide/essentials/class-and-style.md`
 - [ ] `src/guide/essentials/component-basics.md`
 - [ ] `src/guide/essentials/computed.md`
 - [ ] `src/guide/essentials/conditional.md`

@@ -54,12 +54,15 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | mustache syntax | cú pháp Mustache | |
 | raw HTML | HTML thô | |
 | attribute binding | ràng buộc thuộc tính | |
+| class binding | ràng buộc class | |
+| inline style | inline style | |
 | shorthand | cú pháp rút gọn | |
 | boolean attribute | thuộc tính boolean | |
 | JavaScript expression | biểu thức JavaScript | |
 | argument | đối số | |
 | dynamic argument | đối số động | |
 | modifier | modifier | |
+| vendor prefix | tiền tố của nhà cung cấp | Có thể viết ngắn là "tiền tố" khi ngữ cảnh rõ |
 | truthy | truthy | Giữ nguyên khi giải thích cùng liên kết MDN |
 | falsy | falsy | Giữ nguyên khi giải thích cùng liên kết MDN |
 | web components | Web Components | Giữ nguyên tên chuẩn |
