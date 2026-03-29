@@ -43,6 +43,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/essentials/forms.md`
 - [x] `src/guide/essentials/lifecycle.md`
 - [x] `src/guide/essentials/list.md`
+- [x] `src/guide/essentials/reactivity-fundamentals.md`
 
 ## Repo meta
 
@@ -86,7 +87,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/essentials/forms.md`
 - [x] `src/guide/essentials/lifecycle.md`
 - [x] `src/guide/essentials/list.md`
-- [ ] `src/guide/essentials/reactivity-fundamentals.md`
+- [x] `src/guide/essentials/reactivity-fundamentals.md`
 - [ ] `src/guide/essentials/template-refs.md`
 - [x] `src/guide/essentials/template-syntax.md`
 - [ ] `src/guide/essentials/watchers.md`

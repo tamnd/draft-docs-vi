@@ -32,8 +32,14 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | conditional rendering | kết xuất có điều kiện | |
 | list rendering | kết xuất danh sách | |
 | reactivity | tính phản ứng | |
+| reactivity fundamentals | nền tảng về tính phản ứng | |
 | reactive state | state phản ứng | |
 | reactive dependency | dependency phản ứng | |
+| deep reactivity | tính phản ứng sâu | |
+| reactive proxy | proxy phản ứng | |
+| next tick | next tick | |
+| shallow ref | shallow ref | |
+| shallow reactive | shallow reactive | |
 | lifecycle hooks | hook vòng đời | |
 | directive | directive | |
 | custom directives | directive tùy chỉnh | |
@@ -50,6 +56,7 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | computed ref | computed ref | |
 | getter | getter | |
 | setter | setter | |
+| ref unwrapping | mở bọc ref | |
 | cache | cache | |
 | event listener | event listener | |
 | key modifier | key modifier | |
