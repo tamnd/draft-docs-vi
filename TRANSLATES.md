@@ -52,7 +52,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/extras/composition-api-faq.md`
 - [x] `src/guide/extras/reactivity-in-depth.md`
 - [x] `src/guide/extras/reactivity-transform.md`
-- [ ] `src/guide/extras/render-function.md`
+- [x] `src/guide/extras/render-function.md`
 - [x] `src/guide/extras/rendering-mechanism.md`
 - [x] `src/guide/extras/ways-of-using-vue.md`
 - [x] `src/guide/extras/web-components.md`
@@ -129,7 +129,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/extras/composition-api-faq.md`
 - [x] `src/guide/extras/reactivity-in-depth.md`
 - [x] `src/guide/extras/reactivity-transform.md`
-- [ ] `src/guide/extras/render-function.md`
+- [x] `src/guide/extras/render-function.md`
 - [x] `src/guide/extras/rendering-mechanism.md`
 - [x] `src/guide/extras/ways-of-using-vue.md`
 - [x] `src/guide/extras/web-components.md`
