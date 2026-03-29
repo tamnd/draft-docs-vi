@@ -22,6 +22,7 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | component | component | Giữ nguyên, không đổi thành "thành phần" trong phần lớn ngữ cảnh |
 | root component | component gốc | |
 | nested components | component lồng nhau | |
+| component tree | cây component | |
 | reusable | có thể tái sử dụng | |
 | configuration | cấu hình | |
 | container | phần tử chứa | Khi nói về DOM mount target |
@@ -33,7 +34,10 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | lifecycle hooks | hook vòng đời | |
 | directive | directive | |
 | custom directives | directive tùy chỉnh | |
+| prop / props | prop / props | Giữ nguyên tên gọi quen thuộc trong hệ sinh thái Vue |
+| custom event | custom event | |
 | slots | slot | |
+| dynamic component | component động | |
 | watchers | watcher | |
 | fallthrough attributes | thuộc tính kế thừa | |
 | Single-File Component | Single-File Component | Giữ nguyên tên chuẩn, có thể viết tắt SFC |
@@ -62,6 +66,8 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | argument | đối số | |
 | dynamic argument | đối số động | |
 | modifier | modifier | |
+| PascalCase | PascalCase | Giữ nguyên tên kiểu đặt tên |
+| kebab-case | kebab-case | Giữ nguyên tên kiểu đặt tên |
 | vendor prefix | tiền tố của nhà cung cấp | Có thể viết ngắn là "tiền tố" khi ngữ cảnh rõ |
 | truthy | truthy | Giữ nguyên khi giải thích cùng liên kết MDN |
 | falsy | falsy | Giữ nguyên khi giải thích cùng liên kết MDN |
