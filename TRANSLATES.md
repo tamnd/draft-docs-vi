@@ -28,7 +28,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 ## Checklist 30 trang tiếp theo
 
 - [x] `.vitepress/config.ts`
-- [ ] `src/translations/index.md`
+- [x] `src/translations/index.md`
 - [ ] `src/glossary/index.md`
 - [ ] `src/error-reference/index.md`
 - [ ] `src/examples/index.md`
@@ -88,7 +88,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 ## Landing and shared pages
 
 - [x] `src/index.md`
-- [ ] `src/translations/index.md`
+- [x] `src/translations/index.md`
 - [ ] `src/glossary/index.md`
 - [ ] `src/error-reference/index.md`
 - [ ] `src/examples/index.md`
