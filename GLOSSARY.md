@@ -55,6 +55,8 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | inline handler | inline handler | |
 | method handler | method handler | |
 | slots | slot | |
+| slot outlet | vị trí hiển thị slot | |
+| slot content | nội dung slot | |
 | dynamic component | component động | |
 | watchers | watcher | |
 | computed property | thuộc tính computed | |
@@ -170,6 +172,7 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | truthy | truthy | Giữ nguyên khi giải thích cùng liên kết MDN |
 | falsy | falsy | Giữ nguyên khi giải thích cùng liên kết MDN |
 | web components | Web Components | Giữ nguyên tên chuẩn |
+| Renderless Component | Renderless Component | Giữ nguyên tên gọi phổ biến |
 | import maps | Import Maps | |
 | global build | bản build global | |
 | ES modules build | bản build ES modules | |
