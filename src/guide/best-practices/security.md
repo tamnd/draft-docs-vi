@@ -1,4 +1,4 @@
-# Security {#security}
+# Bảo mật {#security}
 
 ## Báo cáo lỗ hổng bảo mật {#reporting-vulnerabilities}
 
