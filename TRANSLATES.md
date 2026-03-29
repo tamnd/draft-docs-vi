@@ -25,11 +25,44 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - Text ngoài nội dung markdown cũng cần dịch, đặc biệt là `.vitepress/config.ts`.
 - Ảnh có chữ cần xử lý riêng; tạo file ảnh mới thay vì ghi đè asset gốc nếu cần biến thể tiếng Việt.
 
+## Checklist 30 trang tiếp theo
+
+- [x] `.vitepress/config.ts`
+- [ ] `src/translations/index.md`
+- [ ] `src/glossary/index.md`
+- [ ] `src/error-reference/index.md`
+- [ ] `src/examples/index.md`
+- [ ] `src/guide/best-practices/performance.md`
+- [x] `src/guide/best-practices/production-deployment.md`
+- [ ] `src/guide/best-practices/security.md`
+- [ ] `src/guide/built-ins/keep-alive.md`
+- [ ] `src/guide/built-ins/suspense.md`
+- [ ] `src/guide/built-ins/teleport.md`
+- [ ] `src/guide/built-ins/transition-group.md`
+- [ ] `src/guide/built-ins/transition.md`
+- [ ] `src/guide/components/async.md`
+- [ ] `src/guide/components/attrs.md`
+- [ ] `src/guide/components/events.md`
+- [ ] `src/guide/components/props.md`
+- [ ] `src/guide/components/provide-inject.md`
+- [ ] `src/guide/components/registration.md`
+- [ ] `src/guide/components/slots.md`
+- [ ] `src/guide/components/v-model.md`
+- [ ] `src/guide/extras/animation.md`
+- [ ] `src/guide/extras/composition-api-faq.md`
+- [ ] `src/guide/extras/reactivity-in-depth.md`
+- [ ] `src/guide/extras/reactivity-transform.md`
+- [ ] `src/guide/extras/render-function.md`
+- [ ] `src/guide/extras/rendering-mechanism.md`
+- [ ] `src/guide/extras/ways-of-using-vue.md`
+- [ ] `src/guide/extras/web-components.md`
+- [ ] `src/guide/reusability/composables.md`
+
 ## Ưu tiên sprint đầu
 
 - [x] `README.md`
 - [x] `TRANSLATES.md`
-- [ ] `.vitepress/config.ts`
+- [x] `.vitepress/config.ts`
 - [x] `src/index.md`
 - [x] `src/guide/introduction.md`
 - [x] `src/guide/quick-start.md`
@@ -50,7 +83,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 - [x] `README.md`
 - [x] `TRANSLATES.md`
-- [ ] `.vitepress/config.ts`
+- [x] `.vitepress/config.ts`
 
 ## Landing and shared pages
 

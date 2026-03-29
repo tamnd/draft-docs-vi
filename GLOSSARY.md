@@ -67,6 +67,7 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | function ref | function ref | |
 | cache | cache | |
 | event listener | event listener | |
+| best practices | thực hành tốt nhất | Khi dùng cho tên nhóm nội dung / điều hướng |
 | key modifier | key modifier | |
 | mouse button modifier | modifier cho nút chuột | |
 | prevent default | chặn hành vi mặc định | |
@@ -80,6 +81,13 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | guide | hướng dẫn | |
 | tutorial | hướng dẫn tương tác | Dùng cho phần tutorial chính |
 | accessibility | khả năng tiếp cận | Có thể ghi thêm a11y khi cần |
+| getting started | bắt đầu | Khi dùng cho tên nhóm nội dung / điều hướng |
+| essentials | cốt lõi | Khi dùng cho tên nhóm nội dung / điều hướng |
+| components in-depth | chuyên sâu về component | Khi dùng cho tên nhóm nội dung / điều hướng |
+| reusability | tái sử dụng | Khi dùng cho tên nhóm nội dung / điều hướng |
+| built-in components | component dựng sẵn | Khi dùng cho tên nhóm nội dung / điều hướng |
+| scaling up | mở rộng ứng dụng | Khi dùng cho tên nhóm nội dung / điều hướng |
+| extra topics | chủ đề mở rộng | Khi dùng cho tên nhóm nội dung / điều hướng |
 | skip link | liên kết bỏ qua nội dung lặp | |
 | landmark | landmark | Giữ nguyên tên gọi ARIA quen thuộc |
 | assistive technology | công nghệ hỗ trợ | |
@@ -91,8 +99,13 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | error reference | tra cứu lỗi | Khi dùng cho mục điều hướng |
 | state management | quản lý state | |
 | server-side rendering | kết xuất phía máy chủ | Có thể viết tắt SSR |
+| dependency injection | tiêm phụ thuộc | |
 | production deployment | triển khai production | |
+| production build | bản build production | |
+| runtime error | lỗi lúc chạy | |
+| error handler | trình xử lý lỗi | Tùy ngữ cảnh có thể giữ nguyên tên API |
 | tooling | công cụ phát triển | Tùy ngữ cảnh có thể rút gọn thành "công cụ" |
+| style guide | hướng dẫn phong cách | Khi dùng cho mục điều hướng |
 | performance | hiệu năng | |
 | page load performance | hiệu năng tải trang | |
 | update performance | hiệu năng cập nhật | |
