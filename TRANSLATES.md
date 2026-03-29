@@ -182,22 +182,22 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 ## Tutorial
 
-- [ ] `src/tutorial/index.md`
-- [ ] `src/tutorial/src/step-1/description.md`
-- [ ] `src/tutorial/src/step-10/description.md`
-- [ ] `src/tutorial/src/step-11/description.md`
-- [ ] `src/tutorial/src/step-12/description.md`
-- [ ] `src/tutorial/src/step-13/description.md`
-- [ ] `src/tutorial/src/step-14/description.md`
-- [ ] `src/tutorial/src/step-15/description.md`
-- [ ] `src/tutorial/src/step-2/description.md`
-- [ ] `src/tutorial/src/step-3/description.md`
-- [ ] `src/tutorial/src/step-4/description.md`
-- [ ] `src/tutorial/src/step-5/description.md`
-- [ ] `src/tutorial/src/step-6/description.md`
-- [ ] `src/tutorial/src/step-7/description.md`
-- [ ] `src/tutorial/src/step-8/description.md`
-- [ ] `src/tutorial/src/step-9/description.md`
+- [x] `src/tutorial/index.md`
+- [x] `src/tutorial/src/step-1/description.md`
+- [x] `src/tutorial/src/step-10/description.md`
+- [x] `src/tutorial/src/step-11/description.md`
+- [x] `src/tutorial/src/step-12/description.md`
+- [x] `src/tutorial/src/step-13/description.md`
+- [x] `src/tutorial/src/step-14/description.md`
+- [x] `src/tutorial/src/step-15/description.md`
+- [x] `src/tutorial/src/step-2/description.md`
+- [x] `src/tutorial/src/step-3/description.md`
+- [x] `src/tutorial/src/step-4/description.md`
+- [x] `src/tutorial/src/step-5/description.md`
+- [x] `src/tutorial/src/step-6/description.md`
+- [x] `src/tutorial/src/step-7/description.md`
+- [x] `src/tutorial/src/step-8/description.md`
+- [x] `src/tutorial/src/step-9/description.md`
 
 ## About
 

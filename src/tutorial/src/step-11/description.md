@@ -1,8 +1,8 @@
-# Components {#components}
+# Component {#components}
 
-So far, we've only been working with a single component. Real Vue applications are typically created with nested components.
+Cho đến nay, chúng ta chỉ làm việc với một component duy nhất. Ứng dụng Vue thực thường được tạo với các component lồng nhau.
 
-A parent component can render another component in its template as a child component. To use a child component, we need to first import it:
+Một component cha có thể render một component khác trong template của nó như component con. Để dùng component con, chúng ta cần import nó trước:
 
 <div class="composition-api">
 <div class="sfc">
@@ -27,14 +27,14 @@ export default {
 }
 ```
 
-We also need to register the component using the `components` option. Here we are using the object property shorthand to register the `ChildComp` component under the `ChildComp` key.
+Chúng ta cũng cần đăng ký component bằng tùy chọn `components`. Ở đây chúng ta dùng cú pháp viết tắt object property để đăng ký component `ChildComp` dưới key `ChildComp`.
 
 </div>
 </div>
 
 <div class="sfc">
 
-Then, we can use the component in the template as:
+Sau đó, chúng ta có thể dùng component trong template như:
 
 ```vue-html
 <ChildComp />
@@ -54,9 +54,9 @@ createApp({
 })
 ```
 
-We also need to register the component using the `components` option. Here we are using the object property shorthand to register the `ChildComp` component under the `ChildComp` key.
+Chúng ta cũng cần đăng ký component bằng tùy chọn `components`. Ở đây chúng ta dùng cú pháp viết tắt object property để đăng ký component `ChildComp` dưới key `ChildComp`.
 
-Because we are writing the template in the DOM, it will be subject to browser's parsing rules, which is case-insensitive for tag names. Therefore, we need to use the kebab-cased name to reference the child component:
+Vì chúng ta đang viết template trong DOM, nó sẽ phụ thuộc vào quy tắc phân tích của trình duyệt, không phân biệt hoa thường cho tên tag. Do đó, chúng ta cần dùng tên kebab-case để tham chiếu component con:
 
 ```vue-html
 <child-comp></child-comp>
@@ -65,4 +65,4 @@ Because we are writing the template in the DOM, it will be subject to browser's 
 </div>
 
 
-Now try it yourself - import the child component and render it in the template.
+Bây giờ hãy thử tự mình làm - import component con và render nó trong template.
