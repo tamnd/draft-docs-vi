@@ -57,6 +57,9 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | getter | getter | |
 | setter | setter | |
 | ref unwrapping | mở bọc ref | |
+| public interface | giao diện công khai | |
+| expose | expose | Giữ nguyên vì là tên option / macro liên quan API |
+| function ref | function ref | |
 | cache | cache | |
 | event listener | event listener | |
 | key modifier | key modifier | |
@@ -79,6 +82,7 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | production deployment | triển khai production | |
 | tooling | công cụ phát triển | Tùy ngữ cảnh có thể rút gọn thành "công cụ" |
 | template syntax | cú pháp template | |
+| template ref | template ref | Giữ nguyên cách gọi quen thuộc trong Vue |
 | template | template | Tạm giữ nguyên trong ngữ cảnh Vue |
 | text interpolation | nội suy văn bản | |
 | mustache syntax | cú pháp Mustache | |
