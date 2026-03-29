@@ -1,14 +1,14 @@
-# Utility Types {#utility-types}
+# Utility Type {#utility-types}
 
 :::info
-This page only lists a few commonly used utility types that may need explanation for their usage. For a full list of exported types, consult the [source code](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/index.ts#L131).
+Trang này chỉ liệt kê một số utility type thường dùng có thể cần giải thích về cách sử dụng. Để xem danh sách đầy đủ các type được xuất, xem [mã nguồn](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/index.ts#L131).
 :::
 
 ## PropType\<T> {#proptype-t}
 
-Used to annotate a prop with more advanced types when using runtime props declarations.
+Dùng để chú thích một prop với kiểu nâng cao hơn khi dùng khai báo props runtime.
 
-- **Example**
+- **Ví dụ**
 
   ```ts
   import type { PropType } from 'vue'
@@ -22,7 +22,7 @@ Used to annotate a prop with more advanced types when using runtime props declar
   export default {
     props: {
       book: {
-        // provide more specific type to `Object`
+        // cung cấp kiểu cụ thể hơn cho `Object`
         type: Object as PropType<Book>,
         required: true
       }
@@ -30,27 +30,27 @@ Used to annotate a prop with more advanced types when using runtime props declar
   }
   ```
 
-- **See also** [Guide - Typing Component Props](/guide/typescript/options-api#typing-component-props)
+- **Xem thêm** [Hướng dẫn - Typing Props của Component](/guide/typescript/options-api#typing-component-props)
 
 ## MaybeRef\<T> {#mayberef}
 
-- Only supported in 3.3+
+- Chỉ hỗ trợ trong 3.3+
 
-Alias for `T | Ref<T>`. Useful for annotating arguments of [Composables](/guide/reusability/composables.html).
+Bí danh cho `T | Ref<T>`. Hữu ích để chú thích các đối số của [Composable](/guide/reusability/composables.html).
 
 ## MaybeRefOrGetter\<T> {#maybereforgetter}
 
-- Only supported in 3.3+
+- Chỉ hỗ trợ trong 3.3+
 
-Alias for `T | Ref<T> | (() => T)`. Useful for annotating arguments of [Composables](/guide/reusability/composables.html).
+Bí danh cho `T | Ref<T> | (() => T)`. Hữu ích để chú thích các đối số của [Composable](/guide/reusability/composables.html).
 
 ## ExtractPropTypes\<T> {#extractproptypes}
 
-Extract prop types from a runtime props options object. The extracted types are internal facing - i.e. the resolved props received by the component. This means boolean props and props with default values are always defined, even if they are not required.
+Trích xuất kiểu props từ một options object props runtime. Các kiểu được trích xuất là hướng nội - tức là các props đã resolve mà component nhận. Điều này có nghĩa là boolean props và props với giá trị mặc định luôn được định nghĩa, ngay cả khi chúng không bắt buộc.
 
-To extract public facing props, i.e. props that the parent is allowed to pass, use [`ExtractPublicPropTypes`](#extractpublicproptypes).
+Để trích xuất props hướng công khai, tức là các props mà cha được phép truyền, dùng [`ExtractPublicPropTypes`](#extractpublicproptypes).
 
-- **Example**
+- **Ví dụ**
 
   ```ts
   const propsOptions = {
@@ -77,11 +77,11 @@ To extract public facing props, i.e. props that the parent is allowed to pass, u
 
 ## ExtractPublicPropTypes\<T> {#extractpublicproptypes}
 
-- Only supported in 3.3+
+- Chỉ hỗ trợ trong 3.3+
 
-Extract prop types from a runtime props options object. The extracted types are public facing - i.e. the props that the parent is allowed to pass.
+Trích xuất kiểu props từ một options object props runtime. Các kiểu được trích xuất là hướng công khai - tức là các props mà cha được phép truyền.
 
-- **Example**
+- **Ví dụ**
 
   ```ts
   const propsOptions = {
@@ -108,9 +108,9 @@ Extract prop types from a runtime props options object. The extracted types are 
 
 ## ComponentCustomProperties {#componentcustomproperties}
 
-Used to augment the component instance type to support custom global properties.
+Dùng để mở rộng kiểu component instance để hỗ trợ các global property tùy chỉnh.
 
-- **Example**
+- **Ví dụ**
 
   ```ts
   import axios from 'axios'
@@ -124,16 +124,16 @@ Used to augment the component instance type to support custom global properties.
   ```
 
   :::tip
-  Augmentations must be placed in a module `.ts` or `.d.ts` file. See [Type Augmentation Placement](/guide/typescript/options-api#augmenting-global-properties) for more details.
+  Các mở rộng phải được đặt trong file module `.ts` hoặc `.d.ts`. Xem [Vị trí Mở rộng Kiểu](/guide/typescript/options-api#augmenting-global-properties) để biết thêm chi tiết.
   :::
 
-- **See also** [Guide - Augmenting Global Properties](/guide/typescript/options-api#augmenting-global-properties)
+- **Xem thêm** [Hướng dẫn - Mở rộng Global Property](/guide/typescript/options-api#augmenting-global-properties)
 
 ## ComponentCustomOptions {#componentcustomoptions}
 
-Used to augment the component options type to support custom options.
+Dùng để mở rộng kiểu component option để hỗ trợ các tùy chọn tùy chỉnh.
 
-- **Example**
+- **Ví dụ**
 
   ```ts
   import { Route } from 'vue-router'
@@ -146,16 +146,16 @@ Used to augment the component options type to support custom options.
   ```
 
   :::tip
-  Augmentations must be placed in a module `.ts` or `.d.ts` file. See [Type Augmentation Placement](/guide/typescript/options-api#augmenting-global-properties) for more details.
+  Các mở rộng phải được đặt trong file module `.ts` hoặc `.d.ts`. Xem [Vị trí Mở rộng Kiểu](/guide/typescript/options-api#augmenting-global-properties) để biết thêm chi tiết.
   :::
 
-- **See also** [Guide - Augmenting Custom Options](/guide/typescript/options-api#augmenting-custom-options)
+- **Xem thêm** [Hướng dẫn - Mở rộng Tùy chọn Tùy chỉnh](/guide/typescript/options-api#augmenting-custom-options)
 
 ## ComponentCustomProps {#componentcustomprops}
 
-Used to augment allowed TSX props in order to use non-declared props on TSX elements.
+Dùng để mở rộng các TSX prop được phép để dùng các prop không được khai báo trên các TSX element.
 
-- **Example**
+- **Ví dụ**
 
   ```ts
   declare module 'vue' {
@@ -168,21 +168,21 @@ Used to augment allowed TSX props in order to use non-declared props on TSX elem
   ```
 
   ```tsx
-  // now works even if hello is not a declared prop
+  // bây giờ hoạt động ngay cả khi hello không phải là prop được khai báo
   <MyComponent hello="world" />
   ```
 
   :::tip
-  Augmentations must be placed in a module `.ts` or `.d.ts` file. See [Type Augmentation Placement](/guide/typescript/options-api#augmenting-global-properties) for more details.
+  Các mở rộng phải được đặt trong file module `.ts` hoặc `.d.ts`. Xem [Vị trí Mở rộng Kiểu](/guide/typescript/options-api#augmenting-global-properties) để biết thêm chi tiết.
   :::
 
 ## CSSProperties {#cssproperties}
 
-Used to augment allowed values in style property bindings.
+Dùng để mở rộng các giá trị được phép trong các binding thuộc tính style.
 
-- **Example**
+- **Ví dụ**
 
-  Allow any custom CSS property
+  Cho phép bất kỳ CSS property tùy chỉnh nào
 
   ```ts
   declare module 'vue' {
@@ -201,11 +201,11 @@ Used to augment allowed values in style property bindings.
   ```
 
 :::tip
-Augmentations must be placed in a module `.ts` or `.d.ts` file. See [Type Augmentation Placement](/guide/typescript/options-api#augmenting-global-properties) for more details.
+Các mở rộng phải được đặt trong file module `.ts` hoặc `.d.ts`. Xem [Vị trí Mở rộng Kiểu](/guide/typescript/options-api#augmenting-global-properties) để biết thêm chi tiết.
 :::
 
-:::info See also
-SFC `<style>` tags support linking CSS values to dynamic component state using the `v-bind` CSS function. This allows for custom properties without type augmentation.
+:::info Xem thêm
+Tag `<style>` trong SFC hỗ trợ liên kết các giá trị CSS với dynamic component state bằng cách dùng hàm CSS `v-bind`. Điều này cho phép custom property mà không cần mở rộng kiểu.
 
-- [v-bind() in CSS](/api/sfc-css-features#v-bind-in-css)
+- [v-bind() trong CSS](/api/sfc-css-features#v-bind-in-css)
   :::

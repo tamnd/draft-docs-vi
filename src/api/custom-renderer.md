@@ -2,9 +2,9 @@
 
 ## createRenderer() {#createrenderer}
 
-Creates a custom renderer. By providing platform-specific node creation and manipulation APIs, you can leverage Vue's core runtime to target non-DOM environments.
+Tạo một custom renderer. Bằng cách cung cấp các API tạo và thao tác node đặc thù cho platform, bạn có thể tận dụng core runtime của Vue để nhắm đến các môi trường không phải DOM.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function createRenderer<HostNode, HostElement>(
@@ -53,7 +53,7 @@ Creates a custom renderer. By providing platform-specific node creation and mani
   }
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
   import { createRenderer } from '@vue/runtime-core'
@@ -66,12 +66,12 @@ Creates a custom renderer. By providing platform-specific node creation and mani
     // ...
   })
 
-  // `render` is the low-level API
-  // `createApp` returns an app instance
+  // `render` là low-level API
+  // `createApp` trả về một app instance
   export { render, createApp }
 
-  // re-export Vue core APIs
+  // re-export các Vue core API
   export * from '@vue/runtime-core'
   ```
 
-  Vue's own `@vue/runtime-dom` is [implemented using the same API](https://github.com/vuejs/core/blob/main/packages/runtime-dom/src/index.ts). For a simpler implementation, check out [`@vue/runtime-test`](https://github.com/vuejs/core/blob/main/packages/runtime-test/src/index.ts) which is a private package for Vue's own unit testing.
+  `@vue/runtime-dom` của chính Vue được [triển khai bằng cùng API](https://github.com/vuejs/core/blob/main/packages/runtime-dom/src/index.ts). Để xem triển khai đơn giản hơn, hãy xem [`@vue/runtime-test`](https://github.com/vuejs/core/blob/main/packages/runtime-test/src/index.ts) là package riêng tư dùng cho unit test của Vue.

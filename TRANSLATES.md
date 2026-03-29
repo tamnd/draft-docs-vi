@@ -46,8 +46,8 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/api/composition-api-helpers.md`
 - [x] `src/api/composition-api-lifecycle.md`
 - [x] `src/api/composition-api-setup.md`
-- [ ] `src/api/custom-elements.md`
-- [ ] `src/api/custom-renderer.md`
+- [x] `src/api/custom-elements.md`
+- [x] `src/api/custom-renderer.md`
 - [x] `src/api/general.md`
 - [x] `src/api/index.md`
 - [x] `src/api/options-composition.md`
@@ -161,8 +161,8 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/api/composition-api-helpers.md`
 - [x] `src/api/composition-api-lifecycle.md`
 - [x] `src/api/composition-api-setup.md`
-- [ ] `src/api/custom-elements.md`
-- [ ] `src/api/custom-renderer.md`
+- [x] `src/api/custom-elements.md`
+- [x] `src/api/custom-renderer.md`
 - [x] `src/api/general.md`
 - [x] `src/api/index.md`
 - [x] `src/api/options-composition.md`
@@ -174,11 +174,11 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/api/reactivity-core.md`
 - [x] `src/api/reactivity-utilities.md`
 - [x] `src/api/render-function.md`
-- [ ] `src/api/sfc-css-features.md`
+- [x] `src/api/sfc-css-features.md`
 - [x] `src/api/sfc-script-setup.md`
 - [x] `src/api/sfc-spec.md`
-- [ ] `src/api/ssr.md`
-- [ ] `src/api/utility-types.md`
+- [x] `src/api/ssr.md`
+- [x] `src/api/utility-types.md`
 
 ## Tutorial
 

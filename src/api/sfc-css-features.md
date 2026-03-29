@@ -1,8 +1,8 @@
-# SFC CSS Features {#sfc-css-features}
+# Tính năng CSS trong SFC {#sfc-css-features}
 
 ## Scoped CSS {#scoped-css}
 
-When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements of the current component only. This is similar to the style encapsulation found in Shadow DOM. It comes with some caveats, but doesn't require any polyfills. It is achieved by using PostCSS to transform the following:
+Khi tag `<style>` có thuộc tính `scoped`, CSS của nó chỉ áp dụng cho các element của component hiện tại. Điều này tương tự như đóng gói style trong Shadow DOM. Nó đi kèm với một số lưu ý, nhưng không yêu cầu bất kỳ polyfill nào. Điều này được thực hiện bằng cách dùng PostCSS để chuyển đổi như sau:
 
 ```vue
 <style scoped>
@@ -16,7 +16,7 @@ When a `<style>` tag has the `scoped` attribute, its CSS will apply to elements 
 </template>
 ```
 
-Into the following:
+Thành như sau:
 
 ```vue
 <style>
@@ -30,13 +30,13 @@ Into the following:
 </template>
 ```
 
-### Child Component Root Elements {#child-component-root-elements}
+### Element Gốc của Component Con {#child-component-root-elements}
 
-With `scoped`, the parent component's styles will not leak into child components. However, a child component's root node will be affected by both the parent's scoped CSS and the child's scoped CSS. This is by design so that the parent can style the child root element for layout purposes.
+Với `scoped`, các style của component cha sẽ không rò rỉ vào các component con. Tuy nhiên, node gốc của component con sẽ bị ảnh hưởng bởi cả scoped CSS của cha lẫn scoped CSS của con. Đây là thiết kế có chủ ý để cha có thể style element gốc của con cho mục đích bố cục.
 
-### Deep Selectors {#deep-selectors}
+### Deep Selector {#deep-selectors}
 
-If you want a selector in `scoped` styles to be "deep", i.e. affecting child components, you can use the `:deep()` pseudo-class:
+Nếu bạn muốn một selector trong style `scoped` là "deep", tức là ảnh hưởng đến component con, bạn có thể dùng pseudo-class `:deep()`:
 
 ```vue
 <style scoped>
@@ -46,7 +46,7 @@ If you want a selector in `scoped` styles to be "deep", i.e. affecting child com
 </style>
 ```
 
-The above will be compiled into:
+Phần trên sẽ được biên dịch thành:
 
 ```css
 .a[data-v-f3f3eg9] .b {
@@ -55,12 +55,12 @@ The above will be compiled into:
 ```
 
 :::tip
-DOM content created with `v-html` are not affected by scoped styles, but you can still style them using deep selectors.
+Nội dung DOM được tạo bằng `v-html` không bị ảnh hưởng bởi scoped style, nhưng bạn vẫn có thể style chúng bằng deep selector.
 :::
 
-### Slotted Selectors {#slotted-selectors}
+### Slotted Selector {#slotted-selectors}
 
-By default, scoped styles do not affect contents rendered by `<slot/>`, as they are considered to be owned by the parent component passing them in. To explicitly target slot content, use the `:slotted` pseudo-class:
+Mặc định, scoped style không ảnh hưởng đến nội dung được render bởi `<slot/>`, vì chúng được coi là thuộc về component cha đang truyền chúng vào. Để nhắm mục tiêu rõ ràng nội dung slot, dùng pseudo-class `:slotted`:
 
 ```vue
 <style scoped>
@@ -70,9 +70,9 @@ By default, scoped styles do not affect contents rendered by `<slot/>`, as they 
 </style>
 ```
 
-### Global Selectors {#global-selectors}
+### Global Selector {#global-selectors}
 
-If you want just one rule to apply globally, you can use the `:global` pseudo-class rather than creating another `<style>` (see below):
+Nếu bạn chỉ muốn một rule áp dụng toàn cục, bạn có thể dùng pseudo-class `:global` thay vì tạo thêm `<style>` khác (xem bên dưới):
 
 ```vue
 <style scoped>
@@ -82,33 +82,33 @@ If you want just one rule to apply globally, you can use the `:global` pseudo-cl
 </style>
 ```
 
-### Mixing Local and Global Styles {#mixing-local-and-global-styles}
+### Pha trộn Style Cục bộ và Toàn cục {#mixing-local-and-global-styles}
 
-You can also include both scoped and non-scoped styles in the same component:
+Bạn cũng có thể bao gồm cả style scoped và non-scoped trong cùng một component:
 
 ```vue
 <style>
-/* global styles */
+/* style toàn cục */
 </style>
 
 <style scoped>
-/* local styles */
+/* style cục bộ */
 </style>
 ```
 
-### Scoped Style Tips {#scoped-style-tips}
+### Lưu ý về Scoped Style {#scoped-style-tips}
 
-- **Scoped styles do not eliminate the need for classes**. Due to the way browsers render various CSS selectors, `p { color: red }` will be many times slower when scoped (i.e. when combined with an attribute selector). If you use classes or ids instead, such as in `.example { color: red }`, then you virtually eliminate that performance hit.
+- **Scoped style không loại bỏ nhu cầu dùng class**. Do cách trình duyệt render các CSS selector khác nhau, `p { color: red }` sẽ chậm hơn nhiều lần khi scoped (tức là khi kết hợp với attribute selector). Nếu bạn dùng class hoặc id thay thế, ví dụ `.example { color: red }`, thì bạn thực tế loại bỏ được vấn đề hiệu suất đó.
 
-- **Be careful with descendant selectors in recursive components!** For a CSS rule with the selector `.a .b`, if the element that matches `.a` contains a recursive child component, then all `.b` in that child component will be matched by the rule.
+- **Cẩn thận với descendant selector trong recursive component!** Đối với CSS rule với selector `.a .b`, nếu element khớp với `.a` chứa một recursive child component, thì tất cả `.b` trong child component đó sẽ khớp với rule đó.
 
-## CSS Modules {#css-modules}
+## CSS Module {#css-modules}
 
-A `<style module>` tag is compiled as [CSS Modules](https://github.com/css-modules/css-modules) and exposes the resulting CSS classes to the component as an object under the key of `$style`:
+Tag `<style module>` được biên dịch như [CSS Module](https://github.com/css-modules/css-modules) và expose các CSS class kết quả cho component như một object dưới key `$style`:
 
 ```vue
 <template>
-  <p :class="$style.red">This should be red</p>
+  <p :class="$style.red">Phần này nên màu đỏ</p>
 </template>
 
 <style module>
@@ -118,13 +118,13 @@ A `<style module>` tag is compiled as [CSS Modules](https://github.com/css-modul
 </style>
 ```
 
-The resulting classes are hashed to avoid collision, achieving the same effect of scoping the CSS to the current component only.
+Các class kết quả được hash để tránh xung đột, đạt được cùng hiệu ứng scoping CSS chỉ cho component hiện tại.
 
-Refer to the [CSS Modules spec](https://github.com/css-modules/css-modules) for more details such as [global exceptions](https://github.com/css-modules/css-modules/blob/master/docs/composition.md#exceptions) and [composition](https://github.com/css-modules/css-modules/blob/master/docs/composition.md#composition).
+Tham khảo [đặc tả CSS Module](https://github.com/css-modules/css-modules) để biết thêm chi tiết như [global exception](https://github.com/css-modules/css-modules/blob/master/docs/composition.md#exceptions) và [composition](https://github.com/css-modules/css-modules/blob/master/docs/composition.md#composition).
 
-### Custom Inject Name {#custom-inject-name}
+### Tên Inject Tùy chỉnh {#custom-inject-name}
 
-You can customize the property key of the injected classes object by giving the `module` attribute a value:
+Bạn có thể tùy chỉnh property key của object class được inject bằng cách cho thuộc tính `module` một giá trị:
 
 ```vue
 <template>
@@ -138,22 +138,22 @@ You can customize the property key of the injected classes object by giving the 
 </style>
 ```
 
-### Usage with Composition API {#usage-with-composition-api}
+### Dùng với Composition API {#usage-with-composition-api}
 
-The injected classes can be accessed in `setup()` and `<script setup>` via the `useCssModule` API. For `<style module>` blocks with custom injection names, `useCssModule` accepts the matching `module` attribute value as the first argument:
+Các class được inject có thể truy cập trong `setup()` và `<script setup>` qua API `useCssModule`. Đối với các khối `<style module>` với tên inject tùy chỉnh, `useCssModule` chấp nhận giá trị thuộc tính `module` khớp làm đối số đầu tiên:
 
 ```js
 import { useCssModule } from 'vue'
 
-// inside setup() scope...
-// default, returns classes for <style module>
+// bên trong scope setup()...
+// mặc định, trả về các class cho <style module>
 useCssModule()
 
-// named, returns classes for <style module="classes">
+// có tên, trả về các class cho <style module="classes">
 useCssModule('classes')
 ```
 
-- **Example**
+- **Ví dụ**
 
 ```vue
 <script setup lang="ts">
@@ -173,9 +173,9 @@ const classes = useCssModule()
 </style>
 ```
 
-## `v-bind()` in CSS {#v-bind-in-css}
+## `v-bind()` trong CSS {#v-bind-in-css}
 
-SFC `<style>` tags support linking CSS values to dynamic component state using the `v-bind` CSS function:
+Tag `<style>` trong SFC hỗ trợ liên kết các giá trị CSS với dynamic component state bằng cách dùng hàm CSS `v-bind`:
 
 ```vue
 <template>
@@ -199,7 +199,7 @@ export default {
 </style>
 ```
 
-The syntax works with [`<script setup>`](./sfc-script-setup), and supports JavaScript expressions (must be wrapped in quotes):
+Cú pháp này hoạt động với [`<script setup>`](./sfc-script-setup), và hỗ trợ biểu thức JavaScript (phải được bọc trong dấu ngoặc kép):
 
 ```vue
 <script setup>
@@ -220,4 +220,4 @@ p {
 </style>
 ```
 
-The actual value will be compiled into a hashed CSS custom property, so the CSS is still static. The custom property will be applied to the component's root element via inline styles and reactively updated if the source value changes.
+Giá trị thực sự sẽ được biên dịch thành một CSS custom property được hash, vì vậy CSS vẫn là static. Custom property sẽ được áp dụng vào element gốc của component qua inline style và được cập nhật reactive nếu giá trị nguồn thay đổi.

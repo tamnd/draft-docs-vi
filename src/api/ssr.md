@@ -1,10 +1,10 @@
-# Server-Side Rendering API {#server-side-rendering-api}
+# API Kết xuất Phía Máy chủ {#server-side-rendering-api}
 
 ## renderToString() {#rendertostring}
 
-- **Exported from `vue/server-renderer`**
+- **Xuất từ `vue/server-renderer`**
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function renderToString(
@@ -13,7 +13,7 @@
   ): Promise<string>
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
   import { createSSRApp } from 'vue'
@@ -32,7 +32,7 @@
 
   ### SSR Context {#ssr-context}
 
-  You can pass an optional context object, which can be used to record additional data during the render, for example [accessing content of Teleports](/guide/scaling-up/ssr#teleports):
+  Bạn có thể truyền một object context tùy chọn, có thể dùng để ghi lại dữ liệu bổ sung trong quá trình render, ví dụ [truy cập nội dung của Teleport](/guide/scaling-up/ssr#teleports):
 
   ```js
   const ctx = {}
@@ -41,17 +41,17 @@
   console.log(ctx.teleports) // { '#teleported': 'teleported content' }
   ```
 
-  Most other SSR APIs on this page also optionally accept a context object. The context object can be accessed in component code via the [useSSRContext](#usessrcontext) helper.
+  Hầu hết các SSR API khác trên trang này cũng tùy chọn nhận một context object. Context object có thể được truy cập trong code component qua helper [useSSRContext](#usessrcontext).
 
-- **See also** [Guide - Server-Side Rendering](/guide/scaling-up/ssr)
+- **Xem thêm** [Hướng dẫn - Kết xuất Phía Máy chủ](/guide/scaling-up/ssr)
 
 ## renderToNodeStream() {#rendertonodestream}
 
-Renders input as a [Node.js Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
+Render input dưới dạng [Node.js Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable).
 
-- **Exported from `vue/server-renderer`**
+- **Xuất từ `vue/server-renderer`**
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function renderToNodeStream(
@@ -60,24 +60,24 @@ Renders input as a [Node.js Readable stream](https://nodejs.org/api/stream.html#
   ): Readable
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
-  // inside a Node.js http handler
+  // bên trong Node.js http handler
   renderToNodeStream(app).pipe(res)
   ```
 
-  :::tip Note
-  This method is not supported in the ESM build of `vue/server-renderer`, which is decoupled from Node.js environments. Use [`pipeToNodeWritable`](#pipetonodewritable) instead.
+  :::tip Lưu ý
+  Method này không được hỗ trợ trong bản build ESM của `vue/server-renderer`, tách rời khỏi môi trường Node.js. Dùng [`pipeToNodeWritable`](#pipetonodewritable) thay thế.
   :::
 
 ## pipeToNodeWritable() {#pipetonodewritable}
 
-Render and pipe to an existing [Node.js Writable stream](https://nodejs.org/api/stream.html#stream_writable_streams) instance.
+Render và pipe đến một instance [Node.js Writable stream](https://nodejs.org/api/stream.html#stream_writable_streams) hiện có.
 
-- **Exported from `vue/server-renderer`**
+- **Xuất từ `vue/server-renderer`**
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function pipeToNodeWritable(
@@ -87,20 +87,20 @@ Render and pipe to an existing [Node.js Writable stream](https://nodejs.org/api/
   ): void
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
-  // inside a Node.js http handler
+  // bên trong Node.js http handler
   pipeToNodeWritable(app, {}, res)
   ```
 
 ## renderToWebStream() {#rendertowebstream}
 
-Renders input as a [Web ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API).
+Render input dưới dạng [Web ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API).
 
-- **Exported from `vue/server-renderer`**
+- **Xuất từ `vue/server-renderer`**
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function renderToWebStream(
@@ -109,24 +109,24 @@ Renders input as a [Web ReadableStream](https://developer.mozilla.org/en-US/docs
   ): ReadableStream
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
-  // inside an environment with ReadableStream support
+  // bên trong môi trường có hỗ trợ ReadableStream
   return new Response(renderToWebStream(app))
   ```
 
-  :::tip Note
-  In environments that do not expose `ReadableStream` constructor in the global scope, [`pipeToWebWritable()`](#pipetowebwritable) should be used instead.
+  :::tip Lưu ý
+  Trong các môi trường không expose constructor `ReadableStream` trong global scope, nên dùng [`pipeToWebWritable()`](#pipetowebwritable) thay thế.
   :::
 
 ## pipeToWebWritable() {#pipetowebwritable}
 
-Render and pipe to an existing [Web WritableStream](https://developer.mozilla.org/en-US/docs/Web/API/WritableStream) instance.
+Render và pipe đến một instance [Web WritableStream](https://developer.mozilla.org/en-US/docs/Web/API/WritableStream) hiện có.
 
-- **Exported from `vue/server-renderer`**
+- **Xuất từ `vue/server-renderer`**
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function pipeToWebWritable(
@@ -136,13 +136,13 @@ Render and pipe to an existing [Web WritableStream](https://developer.mozilla.or
   ): void
   ```
 
-- **Example**
+- **Ví dụ**
 
-  This is typically used in combination with [`TransformStream`](https://developer.mozilla.org/en-US/docs/Web/API/TransformStream):
+  Thường được dùng kết hợp với [`TransformStream`](https://developer.mozilla.org/en-US/docs/Web/API/TransformStream):
 
   ```js
-  // TransformStream is available in environments such as CloudFlare workers.
-  // in Node.js, TransformStream needs to be explicitly imported from 'stream/web'
+  // TransformStream có sẵn trong các môi trường như CloudFlare workers.
+  // trong Node.js, TransformStream cần được import rõ ràng từ 'stream/web'
   const { readable, writable } = new TransformStream()
   pipeToWebWritable(app, {}, writable)
 
@@ -151,11 +151,11 @@ Render and pipe to an existing [Web WritableStream](https://developer.mozilla.or
 
 ## renderToSimpleStream() {#rendertosimplestream}
 
-Renders input in streaming mode using a simple readable interface.
+Render input ở chế độ streaming bằng cách dùng interface readable đơn giản.
 
-- **Exported from `vue/server-renderer`**
+- **Xuất từ `vue/server-renderer`**
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function renderToSimpleStream(
@@ -170,7 +170,7 @@ Renders input in streaming mode using a simple readable interface.
   }
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
   let res = ''
@@ -181,14 +181,14 @@ Renders input in streaming mode using a simple readable interface.
     {
       push(chunk) {
         if (chunk === null) {
-          // done
+          // xong
           console(`render complete: ${res}`)
         } else {
           res += chunk
         }
       },
       destroy(err) {
-        // error encountered
+        // gặp lỗi
       }
     }
   )
@@ -196,47 +196,47 @@ Renders input in streaming mode using a simple readable interface.
 
 ## useSSRContext() {#usessrcontext}
 
-A runtime API used to retrieve the context object passed to `renderToString()` or other server render APIs.
+Một runtime API dùng để lấy context object được truyền vào `renderToString()` hoặc các server render API khác.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function useSSRContext<T = Record<string, any>>(): T | undefined
   ```
 
-- **Example**
+- **Ví dụ**
 
-  The retrieved context can be used to attach information that is needed for rendering the final HTML (e.g. head metadata).
+  Context được lấy có thể dùng để đính kèm thông tin cần thiết để render HTML cuối cùng (ví dụ: head metadata).
 
   ```vue
   <script setup>
   import { useSSRContext } from 'vue'
 
-  // make sure to only call it during SSR
+  // đảm bảo chỉ gọi trong SSR
   // https://vite.dev/guide/ssr.html#conditional-logic
   if (import.meta.env.SSR) {
     const ctx = useSSRContext()
-    // ...attach properties to the context
+    // ...đính kèm thuộc tính vào context
   }
   </script>
   ```
 
 ## data-allow-mismatch <sup class="vt-badge" data-text="3.5+" /> {#data-allow-mismatch}
 
-A special attribute that can be used to suppress [hydration mismatch](/guide/scaling-up/ssr#hydration-mismatch) warnings.
+Thuộc tính đặc biệt có thể dùng để bỏ qua cảnh báo [hydration mismatch](/guide/scaling-up/ssr#hydration-mismatch).
 
-- **Example**
+- **Ví dụ**
 
   ```html
   <div data-allow-mismatch="text">{{ data.toLocaleString() }}</div>
   ```
 
-  The value can limit the allowed mismatch to a specific type. Allowed values are:
+  Giá trị có thể giới hạn mismatch được phép theo loại cụ thể. Các giá trị được phép là:
 
   - `text`
-  - `children` (only allows mismatch for direct children)
+  - `children` (chỉ cho phép mismatch cho direct children)
   - `class`
   - `style`
   - `attribute`
 
-  If no value is provided, all types of mismatches will be allowed.
+  Nếu không cung cấp giá trị, tất cả loại mismatch sẽ được cho phép.
