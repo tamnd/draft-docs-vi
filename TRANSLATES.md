@@ -39,7 +39,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/built-ins/suspense.md`
 - [x] `src/guide/built-ins/teleport.md`
 - [x] `src/guide/built-ins/transition-group.md`
-- [ ] `src/guide/built-ins/transition.md`
+- [x] `src/guide/built-ins/transition.md`
 - [x] `src/guide/components/async.md`
 - [x] `src/guide/components/attrs.md`
 - [x] `src/guide/components/events.md`
@@ -103,7 +103,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/built-ins/suspense.md`
 - [x] `src/guide/built-ins/teleport.md`
 - [x] `src/guide/built-ins/transition-group.md`
-- [ ] `src/guide/built-ins/transition.md`
+- [x] `src/guide/built-ins/transition.md`
 - [x] `src/guide/components/async.md`
 - [x] `src/guide/components/attrs.md`
 - [x] `src/guide/components/events.md`
