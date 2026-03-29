@@ -91,6 +91,10 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | active / inactive | active / không active | |
 | activated / deactivated | activated / deactivated | Giữ nguyên tên hook / trạng thái trong ngữ cảnh API |
 | LRU cache | LRU cache | |
+| async dependency | dependency async | |
+| pending / resolved | pending / resolved | Giữ nguyên tên trạng thái trong ngữ cảnh Suspense |
+| fallback slot | fallback slot | |
+| timeout | timeout | |
 | scaling up | mở rộng ứng dụng | Khi dùng cho tên nhóm nội dung / điều hướng |
 | extra topics | chủ đề mở rộng | Khi dùng cho tên nhóm nội dung / điều hướng |
 | skip link | liên kết bỏ qua nội dung lặp | |
