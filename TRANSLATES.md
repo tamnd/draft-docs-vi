@@ -173,10 +173,10 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/api/reactivity-advanced.md`
 - [x] `src/api/reactivity-core.md`
 - [x] `src/api/reactivity-utilities.md`
-- [ ] `src/api/render-function.md`
+- [x] `src/api/render-function.md`
 - [ ] `src/api/sfc-css-features.md`
-- [ ] `src/api/sfc-script-setup.md`
-- [ ] `src/api/sfc-spec.md`
+- [x] `src/api/sfc-script-setup.md`
+- [x] `src/api/sfc-spec.md`
 - [ ] `src/api/ssr.md`
 - [ ] `src/api/utility-types.md`
 
