@@ -116,6 +116,14 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | error reference | tra cứu lỗi | Khi dùng cho mục điều hướng |
 | state management | quản lý state | |
 | server-side rendering | kết xuất phía máy chủ | Có thể viết tắt SSR |
+| Static Site Generation (SSG) | tạo site tĩnh | Có thể viết tắt SSG |
+| hydration mismatch | sai lệch hydration | |
+| singleton | singleton | |
+| prop drilling | prop drilling | Giữ nguyên cách gọi phổ biến |
+| time-to-content | time-to-content | |
+| universal code | mã dùng chung | Dùng cho mã chạy ở cả server và client |
+| linting | linting | |
+| formatting | định dạng mã | |
 | routing | routing | Giữ nguyên cách gọi phổ biến |
 | router | router | |
 | dependency injection | tiêm phụ thuộc | |
