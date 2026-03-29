@@ -95,6 +95,10 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | pending / resolved | pending / resolved | Giữ nguyên tên trạng thái trong ngữ cảnh Suspense |
 | fallback slot | fallback slot | |
 | timeout | timeout | |
+| teleport | teleport | Giữ nguyên tên tính năng / component |
+| overlay | lớp phủ | |
+| inline | inline | |
+| append | nối thêm vào sau | |
 | scaling up | mở rộng ứng dụng | Khi dùng cho tên nhóm nội dung / điều hướng |
 | extra topics | chủ đề mở rộng | Khi dùng cho tên nhóm nội dung / điều hướng |
 | skip link | liên kết bỏ qua nội dung lặp | |

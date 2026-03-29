@@ -37,7 +37,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/best-practices/security.md`
 - [x] `src/guide/built-ins/keep-alive.md`
 - [x] `src/guide/built-ins/suspense.md`
-- [ ] `src/guide/built-ins/teleport.md`
+- [x] `src/guide/built-ins/teleport.md`
 - [ ] `src/guide/built-ins/transition-group.md`
 - [ ] `src/guide/built-ins/transition.md`
 - [ ] `src/guide/components/async.md`
@@ -101,7 +101,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/best-practices/security.md`
 - [x] `src/guide/built-ins/keep-alive.md`
 - [x] `src/guide/built-ins/suspense.md`
-- [ ] `src/guide/built-ins/teleport.md`
+- [x] `src/guide/built-ins/teleport.md`
 - [ ] `src/guide/built-ins/transition-group.md`
 - [ ] `src/guide/built-ins/transition.md`
 - [ ] `src/guide/components/async.md`
