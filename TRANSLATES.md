@@ -49,8 +49,8 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `src/api/custom-elements.md`
 - [ ] `src/api/custom-renderer.md`
 - [x] `src/api/general.md`
-- [ ] `src/api/index.md`
-- [ ] `src/api/options-composition.md`
+- [x] `src/api/index.md`
+- [x] `src/api/options-composition.md`
 - [ ] `src/api/options-lifecycle.md`
 - [ ] `src/api/options-misc.md`
 - [ ] `src/api/options-rendering.md`
@@ -164,8 +164,8 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `src/api/custom-elements.md`
 - [ ] `src/api/custom-renderer.md`
 - [x] `src/api/general.md`
-- [ ] `src/api/index.md`
-- [ ] `src/api/options-composition.md`
+- [x] `src/api/index.md`
+- [x] `src/api/options-composition.md`
 - [ ] `src/api/options-lifecycle.md`
 - [ ] `src/api/options-misc.md`
 - [ ] `src/api/options-rendering.md`

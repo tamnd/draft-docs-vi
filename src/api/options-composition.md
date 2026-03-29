@@ -2,9 +2,9 @@
 
 ## provide {#provide}
 
-Provide values that can be injected by descendant components.
+Cung cấp các giá trị có thể được inject bởi các component con.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -12,15 +12,15 @@ Provide values that can be injected by descendant components.
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  `provide` and [`inject`](#inject) are used together to allow an ancestor component to serve as a dependency injector for all its descendants, regardless of how deep the component hierarchy is, as long as they are in the same parent chain.
+  `provide` và [`inject`](#inject) được dùng cùng nhau để cho phép component tổ tiên đóng vai trò là dependency injector cho tất cả component con của nó, bất kể cây component sâu đến đâu, miễn là chúng cùng một chuỗi cha.
 
-  The `provide` option should be either an object or a function that returns an object. This object contains the properties that are available for injection into its descendants. You can use Symbols as keys in this object.
+  Tùy chọn `provide` phải là một object hoặc hàm trả về object. Object này chứa các thuộc tính có sẵn để inject vào các component con. Bạn có thể dùng Symbol làm key trong object này.
 
-- **Example**
+- **Ví dụ**
 
-  Basic usage:
+  Sử dụng cơ bản:
 
   ```js
   const s = Symbol()
@@ -33,7 +33,7 @@ Provide values that can be injected by descendant components.
   }
   ```
 
-  Using a function to provide per-component state:
+  Dùng hàm để cung cấp state theo từng component:
 
   ```js
   export default {
@@ -50,15 +50,15 @@ Provide values that can be injected by descendant components.
   }
   ```
 
-  Note in the above example, the provided `msg` will NOT be reactive. See [Working with Reactivity](/guide/components/provide-inject#working-with-reactivity) for more details.
+  Lưu ý trong ví dụ trên, `msg` được cung cấp sẽ KHÔNG có tính phản ứng. Xem [Làm việc với Tính phản ứng](/guide/components/provide-inject#working-with-reactivity) để biết thêm chi tiết.
 
-- **See also** [Provide / Inject](/guide/components/provide-inject)
+- **Xem thêm** [Provide / Inject](/guide/components/provide-inject)
 
 ## inject {#inject}
 
-Declare properties to inject into the current component by locating them from ancestor providers.
+Khai báo các thuộc tính để inject vào component hiện tại bằng cách tìm chúng từ các provider tổ tiên.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -75,24 +75,24 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  The `inject` option should be either:
+  Tùy chọn `inject` phải là:
 
-  - An array of strings, or
-  - An object where the keys are the local binding name and the value is either:
-    - The key (string or Symbol) to search for in available injections, or
-    - An object where:
-      - The `from` property is the key (string or Symbol) to search for in available injections, and
-      - The `default` property is used as fallback value. Similar to props default values, a factory function is needed for object types to avoid value sharing between multiple component instances.
+  - Một mảng chuỗi, hoặc
+  - Một object trong đó key là tên binding cục bộ và giá trị là:
+    - Key (chuỗi hoặc Symbol) để tìm trong các injection có sẵn, hoặc
+    - Một object trong đó:
+      - Thuộc tính `from` là key (chuỗi hoặc Symbol) để tìm trong các injection có sẵn, và
+      - Thuộc tính `default` được dùng làm giá trị dự phòng. Tương tự giá trị mặc định của props, cần hàm factory cho các kiểu object để tránh chia sẻ giá trị giữa nhiều instance component.
 
-  An injected property will be `undefined` if neither a matching property nor a default value was provided.
+  Thuộc tính được inject sẽ là `undefined` nếu không có thuộc tính khớp hay giá trị mặc định nào được cung cấp.
 
-  Note that injected bindings are NOT reactive. This is intentional. However, if the injected value is a reactive object, properties on that object do remain reactive. See [Working with Reactivity](/guide/components/provide-inject#working-with-reactivity) for more details.
+  Lưu ý các binding được inject KHÔNG có tính phản ứng. Đây là chủ ý. Tuy nhiên, nếu giá trị được inject là object phản ứng, các thuộc tính trên object đó vẫn có tính phản ứng. Xem [Làm việc với Tính phản ứng](/guide/components/provide-inject#working-with-reactivity) để biết thêm chi tiết.
 
-- **Example**
+- **Ví dụ**
 
-  Basic usage:
+  Sử dụng cơ bản:
 
   ```js
   export default {
@@ -103,7 +103,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  Using an injected value as the default for a prop:
+  Dùng giá trị được inject làm mặc định cho một prop:
 
   ```js
   const Child = {
@@ -118,7 +118,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  Using an injected value as data entry:
+  Dùng giá trị được inject như một data entry:
 
   ```js
   const Child = {
@@ -131,7 +131,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  Injections can be optional with default value:
+  Injection có thể tùy chọn với giá trị mặc định:
 
   ```js
   const Child = {
@@ -141,7 +141,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  If it needs to be injected from a property with a different name, use `from` to denote the source property:
+  Nếu cần inject từ thuộc tính có tên khác, dùng `from` để chỉ định thuộc tính nguồn:
 
   ```js
   const Child = {
@@ -154,7 +154,7 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-  Similar to prop defaults, you need to use a factory function for non-primitive values:
+  Tương tự giá trị mặc định của props, bạn cần dùng hàm factory cho các giá trị không nguyên thủy:
 
   ```js
   const Child = {
@@ -167,13 +167,13 @@ Declare properties to inject into the current component by locating them from an
   }
   ```
 
-- **See also** [Provide / Inject](/guide/components/provide-inject)
+- **Xem thêm** [Provide / Inject](/guide/components/provide-inject)
 
 ## mixins {#mixins}
 
-An array of option objects to be mixed into the current component.
+Một mảng các options object được hợp nhất vào component hiện tại.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -181,17 +181,17 @@ An array of option objects to be mixed into the current component.
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  The `mixins` option accepts an array of mixin objects. These mixin objects can contain instance options like normal instance objects, and they will be merged against the eventual options using the certain option merging logic. For example, if your mixin contains a `created` hook and the component itself also has one, both functions will be called.
+  Tùy chọn `mixins` nhận một mảng mixin object. Các mixin object này có thể chứa các instance option giống như các instance object thông thường, và chúng sẽ được hợp nhất với các options cuối cùng bằng logic hợp nhất option nhất định. Ví dụ, nếu mixin có hook `created` và bản thân component cũng có một hook, cả hai hàm đều sẽ được gọi.
 
-  Mixin hooks are called in the order they are provided, and called before the component's own hooks.
+  Các hook mixin được gọi theo thứ tự chúng được cung cấp, và được gọi trước hook riêng của component.
 
-  :::warning No Longer Recommended
-  In Vue 2, mixins were the primary mechanism for creating reusable chunks of component logic. While mixins continue to be supported in Vue 3, [Composable functions using Composition API](/guide/reusability/composables) is now the preferred approach for code reuse between components.
+  :::warning Không Còn Khuyến nghị
+  Trong Vue 2, mixin là cơ chế chính để tạo ra các phần logic component có thể tái sử dụng. Trong khi mixin vẫn được hỗ trợ trong Vue 3, [hàm Composable dùng Composition API](/guide/reusability/composables) hiện là cách được ưu tiên để tái sử dụng code giữa các component.
   :::
 
-- **Example**
+- **Ví dụ**
 
   ```js
   const mixin = {
@@ -213,9 +213,9 @@ An array of option objects to be mixed into the current component.
 
 ## extends {#extends}
 
-A "base class" component to extend from.
+Một component "lớp cơ sở" để kế thừa.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -223,17 +223,17 @@ A "base class" component to extend from.
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  Allows one component to extend another, inheriting its component options.
+  Cho phép một component kế thừa từ một component khác, thừa hưởng các component option của nó.
 
-  From an implementation perspective, `extends` is almost identical to `mixins`. The component specified by `extends` will be treated as though it were the first mixin.
+  Từ góc độ triển khai, `extends` gần giống hệt `mixins`. Component được chỉ định bởi `extends` sẽ được coi như là mixin đầu tiên.
 
-  However, `extends` and `mixins` express different intents. The `mixins` option is primarily used to compose chunks of functionality, whereas `extends` is primarily concerned with inheritance.
+  Tuy nhiên, `extends` và `mixins` biểu đạt ý định khác nhau. Tùy chọn `mixins` chủ yếu được dùng để soạn các phần chức năng, trong khi `extends` chủ yếu liên quan đến kế thừa.
 
-  As with `mixins`, any options (except for `setup()`) will be merged using the relevant merge strategy.
+  Như với `mixins`, mọi option (ngoại trừ `setup()`) sẽ được hợp nhất bằng chiến lược hợp nhất liên quan.
 
-- **Example**
+- **Ví dụ**
 
   ```js
   const CompA = { ... }
@@ -244,12 +244,12 @@ A "base class" component to extend from.
   }
   ```
 
-  :::warning Not Recommended for Composition API
-  `extends` is designed for Options API and does not handle the merging of the `setup()` hook.
+  :::warning Không Khuyến nghị cho Composition API
+  `extends` được thiết kế cho Options API và không xử lý việc hợp nhất hook `setup()`.
 
-  In Composition API, the preferred mental model for logic reuse is "compose" over "inheritance". If you have logic from a component that needs to be reused in another one, consider extracting the relevant logic into a [Composable](/guide/reusability/composables#composables).
+  Trong Composition API, mô hình tư duy ưu tiên để tái sử dụng logic là "compose" thay vì "kế thừa". Nếu bạn có logic từ một component cần được tái sử dụng ở component khác, hãy xem xét trích xuất logic liên quan vào một [Composable](/guide/reusability/composables#composables).
 
-  If you still intend to "extend" a component using Composition API, you can call the base component's `setup()` in the extending component's `setup()`:
+  Nếu bạn vẫn muốn "kế thừa" một component dùng Composition API, bạn có thể gọi `setup()` của component cơ sở trong `setup()` của component kế thừa:
 
   ```js
   import Base from './Base.js'
@@ -258,7 +258,7 @@ A "base class" component to extend from.
     setup(props, ctx) {
       return {
         ...Base.setup(props, ctx),
-        // local bindings
+        // binding cục bộ
       }
     }
   }
