@@ -1,117 +1,117 @@
-# Built-in Directives {#built-in-directives}
+# Directive Dựng sẵn {#built-in-directives}
 
 ## v-text {#v-text}
 
-Update the element's text content.
+Cập nhật nội dung text của element.
 
-- **Expects:** `string`
+- **Nhận:** `string`
 
-- **Details**
+- **Chi tiết**
 
-  `v-text` works by setting the element's [textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) property, so it will overwrite any existing content inside the element. If you need to update only part of the `textContent`, you should use [mustache interpolations](/guide/essentials/template-syntax#text-interpolation) instead (ie. <span v-pre>`<span>Keep this but update a {{dynamicPortion}}</span>`</span>).
+  `v-text` hoạt động bằng cách thiết lập thuộc tính [textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) của element, vì vậy nó sẽ ghi đè lên mọi nội dung hiện có bên trong element. Nếu bạn chỉ cần cập nhật một phần `textContent`, hãy dùng [nội suy Mustache](/guide/essentials/template-syntax#text-interpolation) thay thế (tức là <span v-pre>`<span>Giữ phần này nhưng cập nhật {{phầnĐộng}}</span>`</span>).
 
-- **Example**
+- **Ví dụ**
 
   ```vue-html
   <span v-text="msg"></span>
-  <!-- same as -->
+  <!-- tương đương với -->
   <span>{{msg}}</span>
   ```
 
-- **See also** [Template Syntax - Text Interpolation](/guide/essentials/template-syntax#text-interpolation)
+- **Xem thêm** [Cú pháp Template - Nội suy Văn bản](/guide/essentials/template-syntax#text-interpolation)
 
 ## v-html {#v-html}
 
-Update the element's [innerHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML).
+Cập nhật [innerHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) của element.
 
-- **Expects:** `string`
+- **Nhận:** `string`
 
-- **Details**
+- **Chi tiết**
 
-  Contents of `v-html` are inserted as plain HTML - Vue template syntax will not be processed. If you find yourself trying to compose templates using `v-html`, try to rethink the solution by using components instead.
+  Nội dung của `v-html` được chèn vào dưới dạng HTML thuần - cú pháp template Vue sẽ không được xử lý. Nếu bạn đang cố gắng soạn template bằng `v-html`, hãy suy nghĩ lại và dùng component thay thế.
 
-  ::: warning Security Note
-  Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Only use `v-html` on trusted content and **never** on user-provided content.
+  ::: warning Lưu ý Bảo mật
+  Render HTML tùy ý trên trang web của bạn có thể rất nguy hiểm vì nó có thể dễ dàng dẫn đến [tấn công XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Chỉ dùng `v-html` với nội dung đáng tin cậy và **không bao giờ** với nội dung do người dùng cung cấp.
   :::
 
-  In [Single-File Components](/guide/scaling-up/sfc), `scoped` styles will not apply to content inside `v-html`, because that HTML is not processed by Vue's template compiler. If you want to target `v-html` content with scoped CSS, you can instead use [CSS modules](./sfc-css-features#css-modules) or an additional, global `<style>` element with a manual scoping strategy such as BEM.
+  Trong [Single-File Component](/guide/scaling-up/sfc), style có `scoped` sẽ không áp dụng cho nội dung bên trong `v-html`, vì HTML đó không được xử lý bởi trình biên dịch template của Vue. Nếu bạn muốn nhắm mục tiêu nội dung `v-html` bằng CSS có phạm vi, bạn có thể dùng [CSS modules](./sfc-css-features#css-modules) hoặc thêm một element `<style>` toàn cục với chiến lược phạm vi thủ công như BEM.
 
-- **Example**
+- **Ví dụ**
 
   ```vue-html
   <div v-html="html"></div>
   ```
 
-- **See also** [Template Syntax - Raw HTML](/guide/essentials/template-syntax#raw-html)
+- **Xem thêm** [Cú pháp Template - HTML Thô](/guide/essentials/template-syntax#raw-html)
 
 ## v-show {#v-show}
 
-Toggle the element's visibility based on the truthy-ness of the expression value.
+Chuyển trạng thái hiển thị của element dựa trên tính truthy của giá trị biểu thức.
 
-- **Expects:** `any`
+- **Nhận:** `any`
 
-- **Details**
+- **Chi tiết**
 
-  `v-show` works by setting the `display` CSS property via inline styles, and will try to respect the initial `display` value when the element is visible. It also triggers transitions when its condition changes.
+  `v-show` hoạt động bằng cách thiết lập thuộc tính CSS `display` qua inline style, và sẽ cố giữ lại giá trị `display` ban đầu khi element hiển thị. Nó cũng kích hoạt transition khi điều kiện thay đổi.
 
-- **See also** [Conditional Rendering - v-show](/guide/essentials/conditional#v-show)
+- **Xem thêm** [Kết xuất Có Điều kiện - v-show](/guide/essentials/conditional#v-show)
 
 ## v-if {#v-if}
 
-Conditionally render an element or a template fragment based on the truthy-ness of the expression value.
+Render có điều kiện một element hoặc fragment template dựa trên tính truthy của giá trị biểu thức.
 
-- **Expects:** `any`
+- **Nhận:** `any`
 
-- **Details**
+- **Chi tiết**
 
-  When a `v-if` element is toggled, the element and its contained directives / components are destroyed and re-constructed. If the initial condition is falsy, then the inner content won't be rendered at all.
+  Khi một element `v-if` được chuyển trạng thái, element và các directive/component bên trong nó bị hủy và tái tạo. Nếu điều kiện ban đầu là falsy, nội dung bên trong sẽ không được render.
 
-  Can be used on `<template>` to denote a conditional block containing only text or multiple elements.
+  Có thể dùng trên `<template>` để biểu thị một khối có điều kiện chỉ chứa text hoặc nhiều element.
 
-  This directive triggers transitions when its condition changes.
+  Directive này kích hoạt transition khi điều kiện thay đổi.
 
-  When used together, `v-if` has a higher priority than `v-for`. We don't recommend using these two directives together on one element — see the [list rendering guide](/guide/essentials/list#v-for-with-v-if) for details.
+  Khi dùng cùng nhau, `v-if` có độ ưu tiên cao hơn `v-for`. Chúng tôi không khuyến nghị dùng hai directive này cùng nhau trên một element - xem [hướng dẫn kết xuất danh sách](/guide/essentials/list#v-for-with-v-if) để biết chi tiết.
 
-- **See also** [Conditional Rendering - v-if](/guide/essentials/conditional#v-if)
+- **Xem thêm** [Kết xuất Có Điều kiện - v-if](/guide/essentials/conditional#v-if)
 
 ## v-else {#v-else}
 
-Denote the "else block" for `v-if` or a `v-if` / `v-else-if` chain.
+Biểu thị "khối else" cho `v-if` hoặc chuỗi `v-if` / `v-else-if`.
 
-- **Does not expect expression**
+- **Không nhận biểu thức**
 
-- **Details**
+- **Chi tiết**
 
-  - Restriction: previous sibling element must have `v-if` or `v-else-if`.
+  - Ràng buộc: element anh em liền trước phải có `v-if` hoặc `v-else-if`.
 
-  - Can be used on `<template>` to denote a conditional block containing only text or multiple elements.
+  - Có thể dùng trên `<template>` để biểu thị một khối có điều kiện chỉ chứa text hoặc nhiều element.
 
-- **Example**
+- **Ví dụ**
 
   ```vue-html
   <div v-if="Math.random() > 0.5">
-    Now you see me
+    Bây giờ bạn thấy tôi
   </div>
   <div v-else>
-    Now you don't
+    Bây giờ bạn không thấy
   </div>
   ```
 
-- **See also** [Conditional Rendering - v-else](/guide/essentials/conditional#v-else)
+- **Xem thêm** [Kết xuất Có Điều kiện - v-else](/guide/essentials/conditional#v-else)
 
 ## v-else-if {#v-else-if}
 
-Denote the "else if block" for `v-if`. Can be chained.
+Biểu thị "khối else if" cho `v-if`. Có thể nối chuỗi.
 
-- **Expects:** `any`
+- **Nhận:** `any`
 
-- **Details**
+- **Chi tiết**
 
-  - Restriction: previous sibling element must have `v-if` or `v-else-if`.
+  - Ràng buộc: element anh em liền trước phải có `v-if` hoặc `v-else-if`.
 
-  - Can be used on `<template>` to denote a conditional block containing only text or multiple elements.
+  - Có thể dùng trên `<template>` để biểu thị một khối có điều kiện chỉ chứa text hoặc nhiều element.
 
-- **Example**
+- **Ví dụ**
 
   ```vue-html
   <div v-if="type === 'A'">
@@ -124,21 +124,21 @@ Denote the "else if block" for `v-if`. Can be chained.
     C
   </div>
   <div v-else>
-    Not A/B/C
+    Không phải A/B/C
   </div>
   ```
 
-- **See also** [Conditional Rendering - v-else-if](/guide/essentials/conditional#v-else-if)
+- **Xem thêm** [Kết xuất Có Điều kiện - v-else-if](/guide/essentials/conditional#v-else-if)
 
 ## v-for {#v-for}
 
-Render the element or template block multiple times based on the source data.
+Render element hoặc khối template nhiều lần dựa trên dữ liệu nguồn.
 
-- **Expects:** `Array | Object | number | string | Iterable`
+- **Nhận:** `Array | Object | number | string | Iterable`
 
-- **Details**
+- **Chi tiết**
 
-  The directive's value must use the special syntax `alias in expression` to provide an alias for the current element being iterated on:
+  Giá trị của directive phải dùng cú pháp đặc biệt `alias in expression` để cung cấp alias cho phần tử đang được lặp:
 
   ```vue-html
   <div v-for="item in items">
@@ -146,7 +146,7 @@ Render the element or template block multiple times based on the source data.
   </div>
   ```
 
-  Alternatively, you can also specify an alias for the index (or the key if used on an Object):
+  Ngoài ra, bạn cũng có thể chỉ định alias cho index (hoặc key nếu dùng với Object):
 
   ```vue-html
   <div v-for="(item, index) in items"></div>
@@ -154,7 +154,7 @@ Render the element or template block multiple times based on the source data.
   <div v-for="(value, name, index) in object"></div>
   ```
 
-  The default behavior of `v-for` will try to patch the elements in-place without moving them. To force it to reorder elements, you should provide an ordering hint with the `key` special attribute:
+  Hành vi mặc định của `v-for` sẽ cố vá các element tại chỗ mà không di chuyển chúng. Để buộc nó sắp xếp lại các element, bạn nên cung cấp gợi ý sắp xếp bằng thuộc tính đặc biệt `key`:
 
   ```vue-html
   <div v-for="item in items" :key="item.id">
@@ -162,85 +162,85 @@ Render the element or template block multiple times based on the source data.
   </div>
   ```
 
-  `v-for` can also work on values that implement the [Iterable Protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol), including native `Map` and `Set`.
+  `v-for` cũng có thể hoạt động với các giá trị triển khai [Iterable Protocol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol), bao gồm `Map` và `Set` native.
 
-- **See also**
-  - [List Rendering](/guide/essentials/list)
+- **Xem thêm**
+  - [Kết xuất Danh sách](/guide/essentials/list)
 
 ## v-on {#v-on}
 
-Attach an event listener to the element.
+Gắn event listener vào element.
 
-- **Shorthand:** `@`
+- **Cú pháp rút gọn:** `@`
 
-- **Expects:** `Function | Inline Statement | Object (without argument)`
+- **Nhận:** `Function | Inline Statement | Object (không có đối số)`
 
-- **Argument:** `event` (optional if using Object syntax)
+- **Đối số:** `event` (tùy chọn khi dùng cú pháp Object)
 
-- **Modifiers**
+- **Modifier**
 
-  - `.stop` - call `event.stopPropagation()`.
-  - `.prevent` - call `event.preventDefault()`.
-  - `.capture` - add event listener in capture mode.
-  - `.self` - only trigger handler if event was dispatched from this element.
-  - `.{keyAlias}` - only trigger handler on certain keys.
-  - `.once` - trigger handler at most once.
-  - `.left` - only trigger handler for left button mouse events.
-  - `.right` - only trigger handler for right button mouse events.
-  - `.middle` - only trigger handler for middle button mouse events.
-  - `.passive` - attaches a DOM event with `{ passive: true }`.
+  - `.stop` - gọi `event.stopPropagation()`.
+  - `.prevent` - gọi `event.preventDefault()`.
+  - `.capture` - thêm event listener ở chế độ capture.
+  - `.self` - chỉ kích hoạt handler nếu sự kiện được phát ra từ chính element này.
+  - `.{keyAlias}` - chỉ kích hoạt handler với các phím nhất định.
+  - `.once` - kích hoạt handler tối đa một lần.
+  - `.left` - chỉ kích hoạt handler cho sự kiện nút chuột trái.
+  - `.right` - chỉ kích hoạt handler cho sự kiện nút chuột phải.
+  - `.middle` - chỉ kích hoạt handler cho sự kiện nút chuột giữa.
+  - `.passive` - gắn DOM event với `{ passive: true }`.
 
-- **Details**
+- **Chi tiết**
 
-  The event type is denoted by the argument. The expression can be a method name, an inline statement, or omitted if there are modifiers present.
+  Loại sự kiện được biểu thị bằng đối số. Biểu thức có thể là tên phương thức, inline statement, hoặc bỏ qua nếu có modifier.
 
-  When used on a normal element, it listens to [**native DOM events**](https://developer.mozilla.org/en-US/docs/Web/Events) only. When used on a custom element component, it listens to **custom events** emitted on that child component.
+  Khi dùng trên element thông thường, nó lắng nghe chỉ [**sự kiện DOM native**](https://developer.mozilla.org/en-US/docs/Web/Events). Khi dùng trên component element tùy chỉnh, nó lắng nghe **custom event** được emit từ component con đó.
 
-  When listening to native DOM events, the method receives the native event as the only argument. If using inline statement, the statement has access to the special `$event` property: `v-on:click="handle('ok', $event)"`.
+  Khi lắng nghe sự kiện DOM native, phương thức nhận sự kiện native là đối số duy nhất. Nếu dùng inline statement, statement có thể truy cập thuộc tính đặc biệt `$event`: `v-on:click="handle('ok', $event)"`.
 
-  `v-on` also supports binding to an object of event / listener pairs without an argument. Note when using the object syntax, it does not support any modifiers.
+  `v-on` cũng hỗ trợ ràng buộc đến một object các cặp event/listener mà không có đối số. Lưu ý khi dùng cú pháp object, nó không hỗ trợ modifier.
 
-- **Example**
+- **Ví dụ**
 
   ```vue-html
   <!-- method handler -->
   <button v-on:click="doThis"></button>
 
-  <!-- dynamic event -->
+  <!-- sự kiện động -->
   <button v-on:[event]="doThis"></button>
 
   <!-- inline statement -->
   <button v-on:click="doThat('hello', $event)"></button>
 
-  <!-- shorthand -->
+  <!-- cú pháp rút gọn -->
   <button @click="doThis"></button>
 
-  <!-- shorthand dynamic event -->
+  <!-- cú pháp rút gọn sự kiện động -->
   <button @[event]="doThis"></button>
 
-  <!-- stop propagation -->
+  <!-- chặn nổi bọt -->
   <button @click.stop="doThis"></button>
 
-  <!-- prevent default -->
+  <!-- chặn hành vi mặc định -->
   <button @click.prevent="doThis"></button>
 
-  <!-- prevent default without expression -->
+  <!-- chặn hành vi mặc định không có biểu thức -->
   <form @submit.prevent></form>
 
-  <!-- chain modifiers -->
+  <!-- nối chuỗi modifier -->
   <button @click.stop.prevent="doThis"></button>
 
-  <!-- key modifier using keyAlias -->
+  <!-- key modifier dùng keyAlias -->
   <input @keyup.enter="onEnter" />
 
-  <!-- the click event will be triggered at most once -->
+  <!-- sự kiện click sẽ được kích hoạt tối đa một lần -->
   <button v-on:click.once="doThis"></button>
 
-  <!-- object syntax -->
+  <!-- cú pháp object -->
   <button v-on="{ mousedown: doThis, mouseup: doThat }"></button>
   ```
 
-  Listening to custom events on a child component (the handler is called when "my-event" is emitted on the child):
+  Lắng nghe custom event trên component con (handler được gọi khi "my-event" được emit từ con):
 
   ```vue-html
   <MyComponent @my-event="handleThis" />
@@ -249,160 +249,160 @@ Attach an event listener to the element.
   <MyComponent @my-event="handleThis(123, $event)" />
   ```
 
-- **See also**
-  - [Event Handling](/guide/essentials/event-handling)
-  - [Components - Custom Events](/guide/essentials/component-basics#listening-to-events)
+- **Xem thêm**
+  - [Xử lý Sự kiện](/guide/essentials/event-handling)
+  - [Component - Custom Event](/guide/essentials/component-basics#listening-to-events)
 
 ## v-bind {#v-bind}
 
-Dynamically bind one or more attributes, or a component prop to an expression.
+Ràng buộc động một hoặc nhiều thuộc tính, hoặc một prop component với một biểu thức.
 
-- **Shorthand:**
-  - `:` or `.` (when using `.prop` modifier)
-  - Omitting value (when attribute and bound value has the same name, requires 3.4+)
+- **Cú pháp rút gọn:**
+  - `:` hoặc `.` (khi dùng modifier `.prop`)
+  - Bỏ qua giá trị (khi tên thuộc tính và giá trị ràng buộc trùng nhau, yêu cầu 3.4+)
 
-- **Expects:** `any (with argument) | Object (without argument)`
+- **Nhận:** `any (có đối số) | Object (không có đối số)`
 
-- **Argument:** `attrOrProp (optional)`
+- **Đối số:** `attrOrProp (tùy chọn)`
 
-- **Modifiers**
+- **Modifier**
 
-  - `.camel` - transform the kebab-case attribute name into camelCase.
-  - `.prop` - force a binding to be set as a DOM property (3.2+).
-  - `.attr` - force a binding to be set as a DOM attribute (3.2+).
+  - `.camel` - chuyển đổi tên thuộc tính kebab-case thành camelCase.
+  - `.prop` - buộc ràng buộc được đặt làm DOM property (3.2+).
+  - `.attr` - buộc ràng buộc được đặt làm DOM attribute (3.2+).
 
-- **Usage**
+- **Cách dùng**
 
-  When used to bind the `class` or `style` attribute, `v-bind` supports additional value types such as Array or Objects. See linked guide section below for more details.
+  Khi dùng để ràng buộc thuộc tính `class` hoặc `style`, `v-bind` hỗ trợ thêm các kiểu giá trị như Array hoặc Object. Xem phần hướng dẫn được liên kết bên dưới để biết thêm chi tiết.
 
-  When setting a binding on an element, Vue by default checks whether the element has the key defined as a property using an `in` operator check. If the property is defined, Vue will set the value as a DOM property instead of an attribute. This should work in most cases, but you can override this behavior by explicitly using `.prop` or `.attr` modifiers. This is sometimes necessary, especially when [working with custom elements](/guide/extras/web-components#passing-dom-properties).
+  Khi thiết lập ràng buộc trên một element, Vue mặc định kiểm tra xem element có key được định nghĩa là property bằng kiểm tra toán tử `in` không. Nếu property được định nghĩa, Vue sẽ đặt giá trị đó là DOM property thay vì attribute. Điều này hoạt động trong hầu hết trường hợp, nhưng bạn có thể ghi đè hành vi này bằng cách dùng rõ ràng modifier `.prop` hoặc `.attr`. Điều này đôi khi cần thiết, đặc biệt khi [làm việc với custom element](/guide/extras/web-components#passing-dom-properties).
 
-  When used for component prop binding, the prop must be properly declared in the child component.
+  Khi dùng cho ràng buộc prop component, prop phải được khai báo đúng trong component con.
 
-  When used without an argument, can be used to bind an object containing attribute name-value pairs.
+  Khi dùng không có đối số, có thể dùng để ràng buộc một object chứa các cặp tên-giá trị thuộc tính.
 
-- **Example**
+- **Ví dụ**
 
   ```vue-html
-  <!-- bind an attribute -->
+  <!-- ràng buộc một thuộc tính -->
   <img v-bind:src="imageSrc" />
 
-  <!-- dynamic attribute name -->
+  <!-- tên thuộc tính động -->
   <button v-bind:[key]="value"></button>
 
-  <!-- shorthand -->
+  <!-- cú pháp rút gọn -->
   <img :src="imageSrc" />
 
-  <!-- same-name shorthand (3.4+), expands to :src="src" -->
+  <!-- cú pháp rút gọn tên trùng nhau (3.4+), mở rộng thành :src="src" -->
   <img :src />
 
-  <!-- shorthand dynamic attribute name -->
+  <!-- cú pháp rút gọn tên thuộc tính động -->
   <button :[key]="value"></button>
 
-  <!-- with inline string concatenation -->
+  <!-- kết hợp nối chuỗi inline -->
   <img :src="'/path/to/images/' + fileName" />
 
-  <!-- class binding -->
+  <!-- ràng buộc class -->
   <div :class="{ red: isRed }"></div>
   <div :class="[classA, classB]"></div>
   <div :class="[classA, { classB: isB, classC: isC }]"></div>
 
-  <!-- style binding -->
+  <!-- ràng buộc style -->
   <div :style="{ fontSize: size + 'px' }"></div>
   <div :style="[styleObjectA, styleObjectB]"></div>
 
-  <!-- binding an object of attributes -->
+  <!-- ràng buộc một object các thuộc tính -->
   <div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
 
-  <!-- prop binding. "prop" must be declared in the child component. -->
+  <!-- ràng buộc prop. "prop" phải được khai báo trong component con. -->
   <MyComponent :prop="someThing" />
 
-  <!-- pass down parent props in common with a child component -->
+  <!-- truyền xuống các prop của cha chung với component con -->
   <MyComponent v-bind="$props" />
 
   <!-- XLink -->
   <svg><a :xlink:special="foo"></a></svg>
   ```
 
-  The `.prop` modifier also has a dedicated shorthand, `.`:
+  Modifier `.prop` cũng có cú pháp rút gọn riêng là `.`:
 
   ```vue-html
   <div :someProperty.prop="someObject"></div>
 
-  <!-- equivalent to -->
+  <!-- tương đương với -->
   <div .someProperty="someObject"></div>
   ```
 
-  The `.camel` modifier allows camelizing a `v-bind` attribute name when using in-DOM templates, e.g. the SVG `viewBox` attribute:
+  Modifier `.camel` cho phép camelCase hóa tên thuộc tính `v-bind` khi dùng trong template in-DOM, ví dụ thuộc tính `viewBox` của SVG:
 
   ```vue-html
   <svg :view-box.camel="viewBox"></svg>
   ```
 
-  `.camel` is not needed if you are using string templates, or pre-compiling the template with a build step.
+  `.camel` không cần thiết nếu bạn dùng string template, hoặc pre-compile template với bước build.
 
-- **See also**
-  - [Class and Style Bindings](/guide/essentials/class-and-style)
-  - [Components - Prop Passing Details](/guide/components/props#prop-passing-details)
+- **Xem thêm**
+  - [Ràng buộc Class và Style](/guide/essentials/class-and-style)
+  - [Component - Chi tiết Truyền Prop](/guide/components/props#prop-passing-details)
 
 ## v-model {#v-model}
 
-Create a two-way binding on a form input element or a component.
+Tạo ràng buộc hai chiều trên form input element hoặc component.
 
-- **Expects:** varies based on value of form inputs element or output of components
+- **Nhận:** thay đổi tùy theo giá trị của form input element hoặc output của component
 
-- **Limited to:**
+- **Giới hạn với:**
 
   - `<input>`
   - `<select>`
   - `<textarea>`
-  - components
+  - component
 
-- **Modifiers**
+- **Modifier**
 
-  - [`.lazy`](/guide/essentials/forms#lazy) - listen to `change` events instead of `input`
-  - [`.number`](/guide/essentials/forms#number) - cast valid input string to numbers
+  - [`.lazy`](/guide/essentials/forms#lazy) - lắng nghe sự kiện `change` thay vì `input`
+  - [`.number`](/guide/essentials/forms#number) - chuyển chuỗi input hợp lệ thành số
   - [`.trim`](/guide/essentials/forms#trim) - trim input
 
-- **See also**
+- **Xem thêm**
 
-  - [Form Input Bindings](/guide/essentials/forms)
-  - [Component Events - Usage with `v-model`](/guide/components/v-model)
+  - [Ràng buộc Input Form](/guide/essentials/forms)
+  - [Sự kiện Component - Dùng với `v-model`](/guide/components/v-model)
 
 ## v-slot {#v-slot}
 
-Denote named slots or scoped slots that expect to receive props.
+Biểu thị slot có tên hoặc scoped slot dự kiến nhận props.
 
-- **Shorthand:** `#`
+- **Cú pháp rút gọn:** `#`
 
-- **Expects:** JavaScript expression that is valid in a function argument position, including support for destructuring. Optional - only needed if expecting props to be passed to the slot.
+- **Nhận:** biểu thức JavaScript hợp lệ ở vị trí đối số hàm, bao gồm hỗ trợ destructuring. Tùy chọn - chỉ cần thiết nếu dự kiến props được truyền vào slot.
 
-- **Argument:** slot name (optional, defaults to `default`)
+- **Đối số:** tên slot (tùy chọn, mặc định là `default`)
 
-- **Limited to:**
+- **Giới hạn với:**
 
   - `<template>`
-  - [components](/guide/components/slots#scoped-slots) (for a lone default slot with props)
+  - [component](/guide/components/slots#scoped-slots) (cho một default slot đơn có props)
 
-- **Example**
+- **Ví dụ**
 
   ```vue-html
-  <!-- Named slots -->
+  <!-- Slot có tên -->
   <BaseLayout>
     <template v-slot:header>
-      Header content
+      Nội dung Header
     </template>
 
     <template v-slot:default>
-      Default slot content
+      Nội dung slot mặc định
     </template>
 
     <template v-slot:footer>
-      Footer content
+      Nội dung Footer
     </template>
   </BaseLayout>
 
-  <!-- Named slot that receives props -->
+  <!-- Slot có tên nhận props -->
   <InfiniteScroll>
     <template v-slot:item="slotProps">
       <div class="item">
@@ -411,72 +411,72 @@ Denote named slots or scoped slots that expect to receive props.
     </template>
   </InfiniteScroll>
 
-  <!-- Default slot that receive props, with destructuring -->
+  <!-- Default slot nhận props, với destructuring -->
   <Mouse v-slot="{ x, y }">
-    Mouse position: {{ x }}, {{ y }}
+    Vị trí chuột: {{ x }}, {{ y }}
   </Mouse>
   ```
 
-- **See also**
-  - [Components - Slots](/guide/components/slots)
+- **Xem thêm**
+  - [Component - Slot](/guide/components/slots)
 
 ## v-pre {#v-pre}
 
-Skip compilation for this element and all its children.
+Bỏ qua biên dịch cho element này và tất cả các con của nó.
 
-- **Does not expect expression**
+- **Không nhận biểu thức**
 
-- **Details**
+- **Chi tiết**
 
-  Inside the element with `v-pre`, all Vue template syntax will be preserved and rendered as-is. The most common use case of this is displaying raw mustache tags.
+  Bên trong element có `v-pre`, tất cả cú pháp template Vue sẽ được giữ nguyên và render như vậy. Trường hợp sử dụng phổ biến nhất là hiển thị thẻ Mustache thô.
 
-- **Example**
+- **Ví dụ**
 
   ```vue-html
-  <span v-pre>{{ this will not be compiled }}</span>
+  <span v-pre>{{ phần này sẽ không được biên dịch }}</span>
   ```
 
 ## v-once {#v-once}
 
-Render the element and component once only, and skip future updates.
+Render element và component chỉ một lần, và bỏ qua các cập nhật sau này.
 
-- **Does not expect expression**
+- **Không nhận biểu thức**
 
-- **Details**
+- **Chi tiết**
 
-  On subsequent re-renders, the element/component and all its children will be treated as static content and skipped. This can be used to optimize update performance.
+  Ở các lần render lại tiếp theo, element/component và tất cả các con của nó sẽ được coi là nội dung tĩnh và bị bỏ qua. Điều này có thể dùng để tối ưu hiệu năng cập nhật.
 
   ```vue-html
-  <!-- single element -->
-  <span v-once>This will never change: {{msg}}</span>
-  <!-- the element have children -->
+  <!-- element đơn -->
+  <span v-once>Điều này sẽ không bao giờ thay đổi: {{msg}}</span>
+  <!-- element có con -->
   <div v-once>
     <h1>Comment</h1>
     <p>{{msg}}</p>
   </div>
   <!-- component -->
   <MyComponent v-once :comment="msg"></MyComponent>
-  <!-- `v-for` directive -->
+  <!-- directive `v-for` -->
   <ul>
     <li v-for="i in list" v-once>{{i}}</li>
   </ul>
   ```
 
-  Since 3.2, you can also memoize part of the template with invalidation conditions using [`v-memo`](#v-memo).
+  Từ 3.2, bạn cũng có thể ghi nhớ một phần template với điều kiện hủy bộ nhớ cache bằng [`v-memo`](#v-memo).
 
-- **See also**
-  - [Data Binding Syntax - interpolations](/guide/essentials/template-syntax#text-interpolation)
+- **Xem thêm**
+  - [Cú pháp Data Binding - nội suy](/guide/essentials/template-syntax#text-interpolation)
   - [v-memo](#v-memo)
 
 ## v-memo {#v-memo}
 
-- Only supported in 3.2+
+- Chỉ hỗ trợ từ 3.2+
 
-- **Expects:** `any[]`
+- **Nhận:** `any[]`
 
-- **Details**
+- **Chi tiết**
 
-  Memoize a sub-tree of the template. Can be used on both elements and components. The directive expects a fixed-length array of dependency values to compare for the memoization. If every value in the array was the same as last render, then updates for the entire sub-tree will be skipped. For example:
+  Ghi nhớ một sub-tree của template. Có thể dùng trên cả element và component. Directive yêu cầu một mảng giá trị dependency có độ dài cố định để so sánh cho việc ghi nhớ. Nếu mọi giá trị trong mảng giống như lần render trước, tất cả cập nhật cho toàn bộ sub-tree sẽ bị bỏ qua. Ví dụ:
 
   ```vue-html
   <div v-memo="[valueA, valueB]">
@@ -484,47 +484,47 @@ Render the element and component once only, and skip future updates.
   </div>
   ```
 
-  When the component re-renders, if both `valueA` and `valueB` remain the same, all updates for this `<div>` and its children will be skipped. In fact, even the Virtual DOM VNode creation will also be skipped since the memoized copy of the sub-tree can be reused.
+  Khi component re-render, nếu cả `valueA` và `valueB` vẫn giống nhau, tất cả cập nhật cho `<div>` này và các con của nó sẽ bị bỏ qua. Thực tế, ngay cả việc tạo VNode Virtual DOM cũng sẽ bị bỏ qua vì bản sao đã được ghi nhớ của sub-tree có thể được tái sử dụng.
 
-  It is important to specify the memoization array correctly, otherwise we may skip updates that should indeed be applied. `v-memo` with an empty dependency array (`v-memo="[]"`) would be functionally equivalent to `v-once`.
+  Điều quan trọng là phải chỉ định mảng ghi nhớ đúng, nếu không chúng ta có thể bỏ qua các cập nhật thực sự cần được áp dụng. `v-memo` với mảng dependency rỗng (`v-memo="[]"`) sẽ tương đương về mặt chức năng với `v-once`.
 
-  **Usage with `v-for`**
+  **Dùng với `v-for`**
 
-  `v-memo` is provided solely for micro optimizations in performance-critical scenarios and should be rarely needed. The most common case where this may prove helpful is when rendering large `v-for` lists (where `length > 1000`):
+  `v-memo` được cung cấp chỉ cho các tối ưu hóa vi mô trong các tình huống quan trọng về hiệu năng và hiếm khi cần thiết. Trường hợp phổ biến nhất có ích là khi render các danh sách `v-for` lớn (nơi `length > 1000`):
 
   ```vue-html
   <div v-for="item in list" :key="item.id" v-memo="[item.id === selected]">
     <p>ID: {{ item.id }} - selected: {{ item.id === selected }}</p>
-    <p>...more child nodes</p>
+    <p>...thêm node con</p>
   </div>
   ```
 
-  When the component's `selected` state changes, a large amount of VNodes will be created even though most of the items remained exactly the same. The `v-memo` usage here is essentially saying "only update this item if it went from non-selected to selected, or the other way around". This allows every unaffected item to reuse its previous VNode and skip diffing entirely. Note we don't need to include `item.id` in the memo dependency array here since Vue automatically infers it from the item's `:key`.
+  Khi trạng thái `selected` của component thay đổi, một lượng lớn VNode sẽ được tạo ra ngay cả khi hầu hết các mục vẫn hoàn toàn giống nhau. Cách dùng `v-memo` ở đây về cơ bản là nói "chỉ cập nhật mục này nếu nó chuyển từ không được chọn sang được chọn, hoặc ngược lại". Điều này cho phép mọi mục không bị ảnh hưởng tái sử dụng VNode trước đó và bỏ qua hoàn toàn việc so sánh. Lưu ý chúng ta không cần đưa `item.id` vào mảng dependency ghi nhớ ở đây vì Vue tự suy luận nó từ `:key` của mục.
 
   :::warning
-  When using `v-memo` with `v-for`, make sure they are used on the same element. **`v-memo` does not work inside `v-for`.**
+  Khi dùng `v-memo` với `v-for`, hãy đảm bảo chúng được dùng trên cùng một element. **`v-memo` không hoạt động bên trong `v-for`.**
   :::
 
-  `v-memo` can also be used on components to manually prevent unwanted updates in certain edge cases where the child component update check has been de-optimized. But again, it is the developer's responsibility to specify correct dependency arrays to avoid skipping necessary updates.
+  `v-memo` cũng có thể được dùng trên component để ngăn thủ công các cập nhật không mong muốn trong một số trường hợp đặc biệt khi việc kiểm tra cập nhật của component con đã bị giảm tối ưu. Nhưng một lần nữa, trách nhiệm của developer là phải chỉ định mảng dependency đúng để tránh bỏ qua các cập nhật cần thiết.
 
-- **See also**
+- **Xem thêm**
   - [v-once](#v-once)
 
 ## v-cloak {#v-cloak}
 
-Used to hide un-compiled template until it is ready.
+Dùng để ẩn template chưa được biên dịch cho đến khi sẵn sàng.
 
-- **Does not expect expression**
+- **Không nhận biểu thức**
 
-- **Details**
+- **Chi tiết**
 
-  **This directive is only needed in no-build-step setups.**
+  **Directive này chỉ cần thiết trong các cài đặt không có bước build.**
 
-  When using in-DOM templates, there can be a "flash of un-compiled templates": the user may see raw mustache tags until the mounted component replaces them with rendered content.
+  Khi dùng template in-DOM, có thể xảy ra hiện tượng "flash template chưa biên dịch": người dùng có thể thấy thẻ Mustache thô cho đến khi component được mount thay thế chúng bằng nội dung đã render.
 
-  `v-cloak` will remain on the element until the associated component instance is mounted. Combined with CSS rules such as `[v-cloak] { display: none }`, it can be used to hide the raw templates until the component is ready.
+  `v-cloak` sẽ tồn tại trên element cho đến khi instance component liên quan được mount. Kết hợp với các quy tắc CSS như `[v-cloak] { display: none }`, nó có thể dùng để ẩn các template thô cho đến khi component sẵn sàng.
 
-- **Example**
+- **Ví dụ**
 
   ```css
   [v-cloak] {
@@ -538,4 +538,4 @@ Used to hide un-compiled template until it is ready.
   </div>
   ```
 
-  The `<div>` will not be visible until the compilation is done.
+  `<div>` sẽ không hiển thị cho đến khi quá trình biên dịch hoàn tất.
