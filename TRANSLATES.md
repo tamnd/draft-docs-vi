@@ -29,7 +29,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 - [x] `src/guide/scaling-up/sfc.md`
 - [ ] `src/guide/scaling-up/ssr.md`
-- [ ] `src/guide/scaling-up/state-management.md`
+- [x] `src/guide/scaling-up/state-management.md`
 - [ ] `src/guide/scaling-up/testing.md`
 - [ ] `src/guide/scaling-up/tooling.md`
 - [ ] `src/guide/typescript/composition-api.md`
@@ -141,7 +141,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/scaling-up/routing.md`
 - [x] `src/guide/scaling-up/sfc.md`
 - [ ] `src/guide/scaling-up/ssr.md`
-- [ ] `src/guide/scaling-up/state-management.md`
+- [x] `src/guide/scaling-up/state-management.md`
 - [ ] `src/guide/scaling-up/testing.md`
 - [ ] `src/guide/scaling-up/tooling.md`
 - [ ] `src/guide/typescript/composition-api.md`
