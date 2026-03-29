@@ -33,7 +33,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/scaling-up/testing.md`
 - [x] `src/guide/scaling-up/tooling.md`
 - [x] `src/guide/typescript/composition-api.md`
-- [ ] `src/guide/typescript/options-api.md`
+- [x] `src/guide/typescript/options-api.md`
 - [ ] `src/guide/typescript/overview.md`
 - [ ] `src/api/application.md`
 - [ ] `src/api/built-in-components.md`
@@ -145,7 +145,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/scaling-up/testing.md`
 - [x] `src/guide/scaling-up/tooling.md`
 - [x] `src/guide/typescript/composition-api.md`
-- [ ] `src/guide/typescript/options-api.md`
+- [x] `src/guide/typescript/options-api.md`
 - [ ] `src/guide/typescript/overview.md`
 
 ## API
