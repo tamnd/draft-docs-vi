@@ -32,13 +32,13 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/glossary/index.md`
 - [x] `src/error-reference/index.md`
 - [x] `src/examples/index.md`
-- [ ] `src/guide/best-practices/performance.md`
+- [x] `src/guide/best-practices/performance.md`
 - [x] `src/guide/best-practices/production-deployment.md`
 - [x] `src/guide/best-practices/security.md`
 - [x] `src/guide/built-ins/keep-alive.md`
 - [x] `src/guide/built-ins/suspense.md`
 - [x] `src/guide/built-ins/teleport.md`
-- [ ] `src/guide/built-ins/transition-group.md`
+- [x] `src/guide/built-ins/transition-group.md`
 - [ ] `src/guide/built-ins/transition.md`
 - [x] `src/guide/components/async.md`
 - [ ] `src/guide/components/attrs.md`
@@ -102,7 +102,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/built-ins/keep-alive.md`
 - [x] `src/guide/built-ins/suspense.md`
 - [x] `src/guide/built-ins/teleport.md`
-- [ ] `src/guide/built-ins/transition-group.md`
+- [x] `src/guide/built-ins/transition-group.md`
 - [ ] `src/guide/built-ins/transition.md`
 - [x] `src/guide/components/async.md`
 - [ ] `src/guide/components/attrs.md`
