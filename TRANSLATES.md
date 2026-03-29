@@ -45,7 +45,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/api/composition-api-dependency-injection.md`
 - [x] `src/api/composition-api-helpers.md`
 - [x] `src/api/composition-api-lifecycle.md`
-- [ ] `src/api/composition-api-setup.md`
+- [x] `src/api/composition-api-setup.md`
 - [ ] `src/api/custom-elements.md`
 - [ ] `src/api/custom-renderer.md`
 - [ ] `src/api/general.md`
@@ -160,7 +160,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/api/composition-api-dependency-injection.md`
 - [x] `src/api/composition-api-helpers.md`
 - [x] `src/api/composition-api-lifecycle.md`
-- [ ] `src/api/composition-api-setup.md`
+- [x] `src/api/composition-api-setup.md`
 - [ ] `src/api/custom-elements.md`
 - [ ] `src/api/custom-renderer.md`
 - [ ] `src/api/general.md`
