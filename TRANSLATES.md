@@ -21,27 +21,9 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - Giữ nguyên marker của Vue docs, ví dụ `### <script setup> ** {#script-setup}`.
 - Ưu tiên văn phong kỹ thuật rõ ràng, ngắn, dễ đọc.
 - Tên API, directive, component, package, và code sample giữ nguyên tiếng Anh.
-- Thuật ngữ khó thống nhất phải được cập nhật lại trong file này trước khi dùng rộng rãi.
+- Thuật ngữ cần được thống nhất trong [GLOSSARY.md](./GLOSSARY.md) trước khi dùng rộng rãi.
 - Text ngoài nội dung markdown cũng cần dịch, đặc biệt là `.vitepress/config.ts`.
 - Ảnh có chữ cần xử lý riêng; tạo file ảnh mới thay vì ghi đè asset gốc nếu cần biến thể tiếng Việt.
-
-## Thuật ngữ thống nhất ban đầu
-
-- Progressive JavaScript Framework -> Framework JavaScript Tiến Bộ
-- Guide -> Hướng dẫn
-- Essentials -> Kiến thức cốt lõi
-- Components -> Thành phần
-- Composables -> Composable
-- Reactivity -> Tính phản ứng
-- Rendering -> Kết xuất
-- Lifecycle Hooks -> Hook vòng đời
-- Fallthrough Attributes -> Thuộc tính kế thừa
-- Slots -> Slot
-- Watchers -> Watcher
-- Built-in Components -> Thành phần dựng sẵn
-- Custom Directives -> Directive tùy chỉnh
-- Single-File Components -> Single-File Component
-- Server-Side Rendering -> Kết xuất phía máy chủ
 
 ## Ưu tiên sprint đầu
 
