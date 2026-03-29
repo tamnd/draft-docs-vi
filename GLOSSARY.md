@@ -30,6 +30,7 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | render | render | Dùng "render" khi nói về thao tác, "kết xuất" khi giải thích khái niệm |
 | declarative rendering | kết xuất khai báo | |
 | conditional rendering | kết xuất có điều kiện | |
+| list rendering | kết xuất danh sách | |
 | reactivity | tính phản ứng | |
 | reactive state | state phản ứng | |
 | reactive dependency | dependency phản ứng | |
@@ -79,6 +80,7 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | form input bindings | ràng buộc input của form | |
 | value binding | ràng buộc giá trị | |
 | source of truth | nguồn dữ liệu chuẩn | |
+| alias | bí danh | |
 | Input Method Editor (IME) | IME | Giữ viết tắt quen thuộc |
 | class binding | ràng buộc class | |
 | inline style | inline style | |
@@ -89,9 +91,11 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | dynamic argument | đối số động | |
 | modifier | modifier | |
 | v-model | v-model | |
+| v-for | v-for | |
 | checkbox | checkbox | |
 | radio input | radio input | |
 | select options | option của select | |
+| in-place patch | vá tại chỗ | |
 | PascalCase | PascalCase | Giữ nguyên tên kiểu đặt tên |
 | kebab-case | kebab-case | Giữ nguyên tên kiểu đặt tên |
 | vendor prefix | tiền tố của nhà cung cấp | Có thể viết ngắn là "tiền tố" khi ngữ cảnh rõ |
