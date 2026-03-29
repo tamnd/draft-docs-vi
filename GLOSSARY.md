@@ -38,6 +38,10 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | custom directives | directive tùy chỉnh | |
 | prop / props | prop / props | Giữ nguyên tên gọi quen thuộc trong hệ sinh thái Vue |
 | custom event | custom event | |
+| event handling | xử lý sự kiện | |
+| event handler | event handler | |
+| inline handler | inline handler | |
+| method handler | method handler | |
 | slots | slot | |
 | dynamic component | component động | |
 | watchers | watcher | |
@@ -46,6 +50,11 @@ Tài liệu này dùng để thống nhất cách dịch thuật ngữ trong rep
 | getter | getter | |
 | setter | setter | |
 | cache | cache | |
+| event listener | event listener | |
+| key modifier | key modifier | |
+| mouse button modifier | modifier cho nút chuột | |
+| prevent default | chặn hành vi mặc định | |
+| stop propagation | chặn nổi bọt | |
 | toggle | chuyển trạng thái | Tùy ngữ cảnh có thể dùng "bật/tắt" |
 | lazy | lazy | Giữ nguyên khi nói về chiến lược render/tính toán |
 | fallthrough attributes | thuộc tính kế thừa | |
