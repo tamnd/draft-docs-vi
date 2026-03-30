@@ -2,19 +2,19 @@
 
 ## h() {#h}
 
-Tạo các virtual DOM node (vnode).
+Creates virtual DOM nodes (vnodes).
 
-- **Kiểu**
+- **Type**
 
   ```ts
-  // signature đầy đủ
+  // full signature
   function h(
     type: string | Component,
     props?: object | null,
     children?: Children | Slot | Slots
   ): VNode
 
-  // bỏ qua props
+  // omitting props
   function h(type: string | Component, children?: Children | Slot): VNode
 
   type Children = string | number | boolean | VNode | null | Children[]
@@ -24,68 +24,68 @@ Tạo các virtual DOM node (vnode).
   type Slots = { [name: string]: Slot }
   ```
 
-  > Kiểu được đơn giản hóa để dễ đọc.
+  > Types are simplified for readability.
 
-- **Chi tiết**
+- **Details**
 
-  Đối số đầu tiên có thể là chuỗi (cho native element) hoặc định nghĩa Vue component. Đối số thứ hai là props được truyền vào, và đối số thứ ba là children.
+  The first argument can either be a string (for native elements) or a Vue component definition. The second argument is the props to be passed, and the third argument is the children.
 
-  Khi tạo component vnode, children phải được truyền dưới dạng hàm slot. Một hàm slot đơn có thể được truyền nếu component chỉ cần default slot. Ngược lại, các slot phải được truyền dưới dạng object của các hàm slot.
+  When creating a component vnode, the children must be passed as slot functions. A single slot function can be passed if the component expects only the default slot. Otherwise, the slots must be passed as an object of slot functions.
 
-  Để tiện lợi, đối số props có thể được bỏ qua khi children không phải là object slots.
+  For convenience, the props argument can be omitted when the children is not a slots object.
 
-- **Ví dụ**
+- **Example**
 
-  Tạo native element:
+  Creating native elements:
 
   ```js
   import { h } from 'vue'
 
-  // tất cả đối số trừ type là tùy chọn
+  // all arguments except the type are optional
   h('div')
   h('div', { id: 'foo' })
 
-  // cả attribute và property đều có thể dùng trong props
-  // Vue tự động chọn cách đúng để gán
+  // both attributes and properties can be used in props
+  // Vue automatically picks the right way to assign it
   h('div', { class: 'bar', innerHTML: 'hello' })
 
-  // class và style hỗ trợ cùng object / array
-  // giống như trong template
+  // class and style have the same object / array
+  // value support like in templates
   h('div', { class: [foo, { bar }], style: { color: 'red' } })
 
-  // event listener nên được truyền là onXxx
+  // event listeners should be passed as onXxx
   h('div', { onClick: () => {} })
 
-  // children có thể là chuỗi
+  // children can be a string
   h('div', { id: 'foo' }, 'hello')
 
-  // props có thể bỏ qua khi không có props
+  // props can be omitted when there are no props
   h('div', 'hello')
   h('div', [h('span', 'hello')])
 
-  // mảng children có thể chứa cả vnode và chuỗi
+  // children array can contain mixed vnodes and strings
   h('div', ['hello', h('span', 'hello')])
   ```
 
-  Tạo component:
+  Creating components:
 
   ```js
   import Foo from './Foo.vue'
 
-  // truyền props
+  // passing props
   h(Foo, {
-    // tương đương some-prop="hello"
+    // equivalent of some-prop="hello"
     someProp: 'hello',
-    // tương đương @update="() => {}"
+    // equivalent of @update="() => {}"
     onUpdate: () => {}
   })
 
-  // truyền default slot đơn
+  // passing single default slot
   h(Foo, () => 'default slot')
 
-  // truyền named slot
-  // lưu ý `null` là bắt buộc để tránh
-  // object slots bị coi là props
+  // passing named slots
+  // notice the `null` is required to avoid
+  // slots object being treated as props
   h(MyComponent, null, {
     default: () => 'default slot',
     foo: () => h('div', 'foo'),
@@ -93,29 +93,29 @@ Tạo các virtual DOM node (vnode).
   })
   ```
 
-- **Xem thêm** [Hướng dẫn - Render Function - Tạo VNode](/guide/extras/render-function#creating-vnodes)
+- **See also** [Guide - Render Functions - Creating VNodes](/guide/extras/render-function#creating-vnodes)
 
 ## mergeProps() {#mergeprops}
 
-Hợp nhất nhiều props object với xử lý đặc biệt cho một số props nhất định.
+Merge multiple props objects with special handling for certain props.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   function mergeProps(...args: object[]): object
   ```
 
-- **Chi tiết**
+- **Details**
 
-  `mergeProps()` hỗ trợ hợp nhất nhiều props object với xử lý đặc biệt cho các props sau:
+  `mergeProps()` supports merging multiple props objects with special handling for the following props:
 
   - `class`
   - `style`
-  - `onXxx` event listener - nhiều listener cùng tên sẽ được hợp nhất thành một mảng.
+  - `onXxx` event listeners - multiple listeners with the same name will be merged into an array.
 
-  Nếu bạn không cần hành vi hợp nhất và muốn ghi đè đơn giản, có thể dùng native object spread thay thế.
+  If you do not need the merge behavior and want simple overwrites, native object spread can be used instead.
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { mergeProps } from 'vue'
@@ -141,23 +141,23 @@ Hợp nhất nhiều props object với xử lý đặc biệt cho một số pr
 
 ## cloneVNode() {#clonevnode}
 
-Nhân bản một vnode.
+Clones a vnode.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   function cloneVNode(vnode: VNode, extraProps?: object): VNode
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Trả về một vnode được nhân bản, tùy chọn với extra props để hợp nhất với bản gốc.
+  Returns a cloned vnode, optionally with extra props to merge with the original.
 
-  Vnode nên được coi là bất biến sau khi tạo, và bạn không nên thay đổi props của vnode hiện có. Thay vào đó, nhân bản nó với props khác / bổ sung.
+  Vnodes should be considered immutable once created, and you should not mutate the props of an existing vnode. Instead, clone it with different / extra props.
 
-  Vnode có các thuộc tính nội bộ đặc biệt, vì vậy nhân bản chúng không đơn giản như object spread. `cloneVNode()` xử lý hầu hết logic nội bộ.
+  Vnodes have special internal properties, so cloning them is not as simple as an object spread. `cloneVNode()` handles most of the internal logic.
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { h, cloneVNode } from 'vue'
@@ -168,9 +168,9 @@ Nhân bản một vnode.
 
 ## isVNode() {#isvnode}
 
-Kiểm tra xem một giá trị có phải là vnode hay không.
+Checks if a value is a vnode.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   function isVNode(value: unknown): boolean
@@ -178,23 +178,23 @@ Kiểm tra xem một giá trị có phải là vnode hay không.
 
 ## resolveComponent() {#resolvecomponent}
 
-Để giải quyết thủ công một component đã đăng ký theo tên.
+For manually resolving a registered component by name.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   function resolveComponent(name: string): Component | string
   ```
 
-- **Chi tiết**
+- **Details**
 
-  **Lưu ý: bạn không cần cái này nếu có thể import trực tiếp component.**
+  **Note: you do not need this if you can import the component directly.**
 
-  `resolveComponent()` phải được gọi bên trong<span class="composition-api"> `setup()` hoặc</span> render function để giải quyết từ context component đúng.
+  `resolveComponent()` must be called inside<span class="composition-api"> either `setup()` or</span> the render function in order to resolve from the correct component context.
 
-  Nếu không tìm thấy component, một runtime warning sẽ được phát ra và chuỗi tên được trả về.
+  If the component is not found, a runtime warning will be emitted, and the name string is returned.
 
-- **Ví dụ**
+- **Example**
 
   <div class="composition-api">
 
@@ -228,33 +228,33 @@ Kiểm tra xem một giá trị có phải là vnode hay không.
 
   </div>
 
-- **Xem thêm** [Hướng dẫn - Render Function - Component](/guide/extras/render-function#components)
+- **See also** [Guide - Render Functions - Components](/guide/extras/render-function#components)
 
 ## resolveDirective() {#resolvedirective}
 
-Để giải quyết thủ công một directive đã đăng ký theo tên.
+For manually resolving a registered directive by name.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   function resolveDirective(name: string): Directive | undefined
   ```
 
-- **Chi tiết**
+- **Details**
 
-  **Lưu ý: bạn không cần cái này nếu có thể import trực tiếp directive.**
+  **Note: you do not need this if you can import the directive directly.**
 
-  `resolveDirective()` phải được gọi bên trong<span class="composition-api"> `setup()` hoặc</span> render function để giải quyết từ context component đúng.
+  `resolveDirective()` must be called inside<span class="composition-api"> either `setup()` or</span> the render function in order to resolve from the correct component context.
 
-  Nếu không tìm thấy directive, một runtime warning sẽ được phát ra và hàm trả về `undefined`.
+  If the directive is not found, a runtime warning will be emitted, and the function returns `undefined`.
 
-- **Xem thêm** [Hướng dẫn - Render Function - Directive Tùy chỉnh](/guide/extras/render-function#custom-directives)
+- **See also** [Guide - Render Functions - Custom Directives](/guide/extras/render-function#custom-directives)
 
 ## withDirectives() {#withdirectives}
 
-Để thêm custom directive vào vnode.
+For adding custom directives to vnodes.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   function withDirectives(
@@ -271,16 +271,16 @@ Kiểm tra xem một giá trị có phải là vnode hay không.
   >
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Bọc một vnode hiện có với các custom directive. Đối số thứ hai là mảng các custom directive. Mỗi custom directive cũng được biểu diễn dưới dạng mảng theo hình thức `[Directive, value, argument, modifiers]`. Các phần tử cuối của mảng có thể được bỏ qua nếu không cần.
+  Wraps an existing vnode with custom directives. The second argument is an array of custom directives. Each custom directive is also represented as an array in the form of `[Directive, value, argument, modifiers]`. Tailing elements of the array can be omitted if not needed.
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { h, withDirectives } from 'vue'
 
-  // một custom directive
+  // a custom directive
   const pin = {
     mounted() {
       /* ... */
@@ -296,29 +296,29 @@ Kiểm tra xem một giá trị có phải là vnode hay không.
   ])
   ```
 
-- **Xem thêm** [Hướng dẫn - Render Function - Directive Tùy chỉnh](/guide/extras/render-function#custom-directives)
+- **See also** [Guide - Render Functions - Custom Directives](/guide/extras/render-function#custom-directives)
 
 ## withModifiers() {#withmodifiers}
 
-Để thêm các [`v-on` modifier](/guide/essentials/event-handling#event-modifiers) có sẵn vào hàm event handler.
+For adding built-in [`v-on` modifiers](/guide/essentials/event-handling#event-modifiers) to an event handler function.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   function withModifiers(fn: Function, modifiers: ModifierGuardsKeys[]): Function
   ```
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { h, withModifiers } from 'vue'
 
   const vnode = h('button', {
-    // tương đương v-on:click.stop.prevent
+    // equivalent of v-on:click.stop.prevent
     onClick: withModifiers(() => {
       // ...
     }, ['stop', 'prevent'])
   })
   ```
 
-- **Xem thêm** [Hướng dẫn - Render Function - Event Modifier](/guide/extras/render-function#event-modifiers)
+- **See also** [Guide - Render Functions - Event Modifiers](/guide/extras/render-function#event-modifiers)

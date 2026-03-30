@@ -1,6 +1,6 @@
-# Newsletter Cộng đồng {#community-newsletters}
+# Community Newsletters {#community-newsletters}
 
-Có nhiều newsletter / blog chuyên về Vue từ cộng đồng cung cấp tin tức và sự kiện mới nhất trong hệ sinh thái Vue. Dưới đây là danh sách các newsletter đang hoạt động mà chúng tôi đã tổng hợp (không đầy đủ):
+There are many great newsletters / Vue-dedicated blogs from the community bringing you latest news and happenings in the Vue ecosystem. Here is a non-exhaustive list of active ones that we have come across:
 
 - [Vue.js Feed](https://vuejsfeed.com/)
 - [Michael Thiessen](https://michaelnthiessen.com/newsletter)
@@ -8,4 +8,4 @@ Có nhiều newsletter / blog chuyên về Vue từ cộng đồng cung cấp ti
 - [Weekly Vue News](https://weekly-vue.news/)
 - [Vue.js Developers Newsletter](https://vuejsdevelopers.com/newsletter/)
 
-Nếu bạn biết một newsletter hay chưa được liệt kê, vui lòng gửi pull request qua liên kết bên dưới!
+If you know a great one that isn't already included, please submit a pull request using the link below!

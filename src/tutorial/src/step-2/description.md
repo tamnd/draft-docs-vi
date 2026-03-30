@@ -1,16 +1,16 @@
-# Kết xuất khai báo {#declarative-rendering}
+# Declarative Rendering {#declarative-rendering}
 
 <div class="sfc">
 
-Những gì bạn thấy trong trình soạn thảo là một Vue Single-File Component (SFC). SFC là một khối code độc lập, có thể tái sử dụng đóng gói HTML, CSS và JavaScript thuộc về nhau, được viết trong file `.vue`.
+What you see in the editor is a Vue Single-File Component (SFC). An SFC is a reusable self-contained block of code that encapsulates HTML, CSS and JavaScript that belong together, written inside a `.vue` file.
 
 </div>
 
-Tính năng cốt lõi của Vue là **kết xuất khai báo**: dùng cú pháp template mở rộng HTML, chúng ta có thể mô tả HTML trông như thế nào dựa trên JavaScript state. Khi state thay đổi, HTML tự động cập nhật.
+The core feature of Vue is **declarative rendering**: using a template syntax that extends HTML, we can describe how the HTML should look based on JavaScript state. When the state changes, the HTML updates automatically.
 
 <div class="composition-api">
 
-State có thể kích hoạt cập nhật khi thay đổi được coi là **reactive**. Chúng ta có thể khai báo reactive state bằng API `reactive()` của Vue. Các object được tạo từ `reactive()` là JavaScript [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) hoạt động giống như object thông thường:
+State that can trigger updates when changed is considered **reactive**. We can declare reactive state using Vue's `reactive()` API. Objects created from `reactive()` are JavaScript [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) that work just like normal objects:
 
 ```js
 import { reactive } from 'vue'
@@ -23,7 +23,7 @@ console.log(counter.count) // 0
 counter.count++
 ```
 
-`reactive()` chỉ hoạt động trên object (bao gồm mảng và các kiểu tích hợp như `Map` và `Set`). `ref()`, mặt khác, có thể nhận bất kỳ kiểu giá trị nào và tạo một object expose giá trị bên trong dưới thuộc tính `.value`:
+`reactive()` only works on objects (including arrays and built-in types like `Map` and `Set`). `ref()`, on the other hand, can take any value type and create an object that exposes the inner value under a `.value` property:
 
 ```js
 import { ref } from 'vue'
@@ -34,17 +34,17 @@ console.log(message.value) // "Hello World!"
 message.value = 'Changed'
 ```
 
-Chi tiết về `reactive()` và `ref()` được thảo luận trong <a target="_blank" href="/guide/essentials/reactivity-fundamentals.html">Hướng dẫn - Nền tảng về Tính phản ứng</a>.
+Details on `reactive()` and `ref()` are discussed in <a target="_blank" href="/guide/essentials/reactivity-fundamentals.html">Guide - Reactivity Fundamentals</a>.
 
 <div class="sfc">
 
-Reactive state được khai báo trong khối `<script setup>` của component có thể dùng trực tiếp trong template. Đây là cách chúng ta render text động dựa trên giá trị của object `counter` và ref `message`, bằng cú pháp mustache:
+Reactive state declared in the component's `<script setup>` block can be used directly in the template. This is how we can render dynamic text based on the value of the `counter` object and `message` ref, using mustaches syntax:
 
 </div>
 
 <div class="html">
 
-Object được truyền vào `createApp()` là một Vue component. State của component nên được khai báo bên trong hàm `setup()` của nó, và được trả về bằng một object:
+The object being passed to `createApp()` is a Vue component. A component's state should be declared inside its `setup()` function, and returned using an object:
 
 ```js{2,5}
 setup() {
@@ -57,7 +57,7 @@ setup() {
 }
 ```
 
-Các thuộc tính trong object được trả về sẽ có sẵn trong template. Đây là cách chúng ta render text động dựa trên giá trị của `message`, bằng cú pháp mustache:
+Properties in the returned object will be made available in the template. This is how we can render dynamic text based on the value of `message`, using mustaches syntax:
 
 </div>
 
@@ -66,15 +66,15 @@ Các thuộc tính trong object được trả về sẽ có sẵn trong templat
 <p>Count is: {{ counter.count }}</p>
 ```
 
-Chú ý cách chúng ta không cần dùng `.value` khi truy cập ref `message` trong template: nó được tự động unwrap để sử dụng ngắn gọn hơn.
+Notice how we did not need to use `.value` when accessing the `message` ref in templates: it is automatically unwrapped for more succinct usage.
 
 </div>
 
 <div class="options-api">
 
-State có thể kích hoạt cập nhật khi thay đổi được coi là **reactive**. Trong Vue, reactive state được lưu trong component. <span class="html">Trong code ví dụ, object được truyền vào `createApp()` là một component.</span>
+State that can trigger updates when changed are considered **reactive**. In Vue, reactive state is held in components. <span class="html">In the example code, the object being passed to `createApp()` is a component.</span>
 
-Chúng ta có thể khai báo reactive state bằng tùy chọn component `data`, đây phải là hàm trả về một object:
+We can declare reactive state using the `data` component option, which should be a function that returns an object:
 
 <div class="sfc">
 
@@ -103,7 +103,7 @@ createApp({
 
 </div>
 
-Thuộc tính `message` sẽ có sẵn trong template. Đây là cách chúng ta render text động dựa trên giá trị của `message`, bằng cú pháp mustache:
+The `message` property will be made available in the template. This is how we can render dynamic text based on the value of `message`, using mustaches syntax:
 
 ```vue-html
 <h1>{{ message }}</h1>
@@ -111,7 +111,7 @@ Thuộc tính `message` sẽ có sẵn trong template. Đây là cách chúng ta
 
 </div>
 
-Nội dung bên trong mustache không chỉ giới hạn ở identifier hay path - chúng ta có thể dùng bất kỳ biểu thức JavaScript hợp lệ nào:
+The content inside the mustaches is not limited to just identifiers or paths - we can use any valid JavaScript expression:
 
 ```vue-html
 <h1>{{ message.split('').reverse().join('') }}</h1>
@@ -119,12 +119,12 @@ Nội dung bên trong mustache không chỉ giới hạn ở identifier hay path
 
 <div class="composition-api">
 
-Bây giờ, hãy thử tự tạo một số reactive state và dùng nó để render nội dung text động cho `<h1>` trong template.
+Now, try to create some reactive state yourself, and use it to render dynamic text content for the `<h1>` in the template.
 
 </div>
 
 <div class="options-api">
 
-Bây giờ, hãy thử tự tạo một data property và dùng nó làm nội dung text cho `<h1>` trong template.
+Now, try to create a data property yourself, and use it as the text content for the `<h1>` in the template.
 
 </div>

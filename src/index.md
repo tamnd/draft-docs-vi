@@ -1,6 +1,6 @@
 ---
 page: true
-title: Vue.js - Framework JavaScript Tiến Bộ
+title: Vue.js - The Progressive JavaScript Framework
 ---
 
 <script setup>

@@ -1,11 +1,11 @@
-# Kết xuất có điều kiện {#conditional-rendering}
+# Conditional Rendering {#conditional-rendering}
 
 <div class="options-api">
-  <VueSchoolLink href="https://vueschool.io/lessons/conditional-rendering-in-vue-3" title="Bài học miễn phí về kết xuất có điều kiện trong Vue.js"/>
+  <VueSchoolLink href="https://vueschool.io/lessons/conditional-rendering-in-vue-3" title="Free Vue.js Conditional Rendering Lesson"/>
 </div>
 
 <div class="composition-api">
-  <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-conditionals-in-vue" title="Bài học miễn phí về kết xuất có điều kiện trong Vue.js"/>
+  <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-conditionals-in-vue" title="Free Vue.js Conditional Rendering Lesson"/>
 </div>
 
 <script setup>
@@ -15,45 +15,45 @@ const awesome = ref(true)
 
 ## `v-if` {#v-if}
 
-Directive `v-if` được dùng để kết xuất một khối theo điều kiện. Khối đó chỉ được kết xuất khi biểu thức của directive trả về giá trị truthy.
+The directive `v-if` is used to conditionally render a block. The block will only be rendered if the directive's expression returns a truthy value.
 
 ```vue-html
-<h1 v-if="awesome">Vue thật tuyệt!</h1>
+<h1 v-if="awesome">Vue is awesome!</h1>
 ```
 
 ## `v-else` {#v-else}
 
-Bạn có thể dùng directive `v-else` để chỉ định "khối else" cho `v-if`:
+You can use the `v-else` directive to indicate an "else block" for `v-if`:
 
 ```vue-html
-<button @click="awesome = !awesome">Chuyển trạng thái</button>
+<button @click="awesome = !awesome">Toggle</button>
 
-<h1 v-if="awesome">Vue thật tuyệt!</h1>
-<h1 v-else>Ôi không 😢</h1>
+<h1 v-if="awesome">Vue is awesome!</h1>
+<h1 v-else>Oh no 😢</h1>
 ```
 
 <div class="demo">
-  <button @click="awesome = !awesome">Chuyển trạng thái</button>
-  <h1 v-if="awesome">Vue thật tuyệt!</h1>
-  <h1 v-else>Ôi không 😢</h1>
+  <button @click="awesome = !awesome">Toggle</button>
+  <h1 v-if="awesome">Vue is awesome!</h1>
+  <h1 v-else>Oh no 😢</h1>
 </div>
 
 <div class="composition-api">
 
-[Thử trên Playground](https://play.vuejs.org/#eNpFjkEOgjAQRa8ydIMulLA1hegJ3LnqBskAjdA27RQXhHu4M/GEHsEiKLv5mfdf/sBOxux7j+zAuCutNAQOyZtcKNkZbQkGsFjBCJXVHcQBjYUSqtTKERR3dLpDyCZmQ9bjViiezKKgCIGwM21BGBIAv3oireBYtrK8ZYKtgmg5BctJ13WLPJnhr0YQb1Lod7JaS4G8eATpfjMinjTphC8wtg7zcwNKw/v5eC1fnvwnsfEDwaha7w==)
+[Try it in the Playground](https://play.vuejs.org/#eNpFjkEOgjAQRa8ydIMulLA1hegJ3LnqBskAjdA27RQXhHu4M/GEHsEiKLv5mfdf/sBOxux7j+zAuCutNAQOyZtcKNkZbQkGsFjBCJXVHcQBjYUSqtTKERR3dLpDyCZmQ9bjViiezKKgCIGwM21BGBIAv3oireBYtrK8ZYKtgmg5BctJ13WLPJnhr0YQb1Lod7JaS4G8eATpfjMinjTphC8wtg7zcwNKw/v5eC1fnvwnsfEDwaha7w==)
 
 </div>
 <div class="options-api">
 
-[Thử trên Playground](https://play.vuejs.org/#eNpFjj0OwjAMha9iMsEAFWuVVnACNqYsoXV/RJpEqVOQqt6DDYkTcgRSWoplWX7y56fXs6O1u84jixlvM1dbSoXGuzWOIMdCekXQCw2QS5LrzbQLckje6VEJglDyhq1pMAZyHidkGG9hhObRYh0EYWOVJAwKgF88kdFwyFSdXRPBZidIYDWvgqVkylIhjyb4ayOIV3votnXxfwrk2SPU7S/PikfVfsRnGFWL6akCbeD9fLzmK4+WSGz4AA5dYQY=)
+[Try it in the Playground](https://play.vuejs.org/#eNpFjj0OwjAMha9iMsEAFWuVVnACNqYsoXV/RJpEqVOQqt6DDYkTcgRSWoplWX7y56fXs6O1u84jixlvM1dbSoXGuzWOIMdCekXQCw2QS5LrzbQLckje6VEJglDyhq1pMAZyHidkGG9hhObRYh0EYWOVJAwKgF88kdFwyFSdXRPBZidIYDWvgqVkylIhjyb4ayOIV3votnXxfwrk2SPU7S/PikfVfsRnGFWL6akCbeD9fLzmK4+WSGz4AA5dYQY=)
 
 </div>
 
-Phần tử `v-else` phải đứng ngay sau một phần tử `v-if` hoặc `v-else-if`, nếu không nó sẽ không được nhận ra.
+A `v-else` element must immediately follow a `v-if` or a `v-else-if` element - otherwise it will not be recognized.
 
 ## `v-else-if` {#v-else-if}
 
-Đúng như tên gọi, `v-else-if` đóng vai trò là "khối else if" cho `v-if`. Bạn cũng có thể nối nhiều `v-else-if` với nhau:
+The `v-else-if`, as the name suggests, serves as an "else if block" for `v-if`. It can also be chained multiple times:
 
 ```vue-html
 <div v-if="type === 'A'">
@@ -66,52 +66,52 @@ Phần tử `v-else` phải đứng ngay sau một phần tử `v-if` hoặc `v-
   C
 </div>
 <div v-else>
-  Không phải A/B/C
+  Not A/B/C
 </div>
 ```
 
-Tương tự `v-else`, phần tử `v-else-if` phải đứng ngay sau một phần tử `v-if` hoặc `v-else-if`.
+Similar to `v-else`, a `v-else-if` element must immediately follow a `v-if` or a `v-else-if` element.
 
-## `v-if` trên `<template>` {#v-if-on-template}
+## `v-if` on `<template>` {#v-if-on-template}
 
-Vì `v-if` là một directive, nó phải được gắn vào một phần tử duy nhất. Nhưng nếu ta muốn chuyển trạng thái cho nhiều phần tử thì sao? Trong trường hợp đó, ta có thể dùng `v-if` trên phần tử `<template>`, đóng vai trò như một wrapper vô hình. Kết quả render cuối cùng sẽ không chứa phần tử `<template>`.
+Because `v-if` is a directive, it has to be attached to a single element. But what if we want to toggle more than one element? In this case we can use `v-if` on a `<template>` element, which serves as an invisible wrapper. The final rendered result will not include the `<template>` element.
 
 ```vue-html
 <template v-if="ok">
-  <h1>Tiêu đề</h1>
-  <p>Đoạn 1</p>
-  <p>Đoạn 2</p>
+  <h1>Title</h1>
+  <p>Paragraph 1</p>
+  <p>Paragraph 2</p>
 </template>
 ```
 
-`v-else` và `v-else-if` cũng có thể dùng trên `<template>`.
+`v-else` and `v-else-if` can also be used on `<template>`.
 
 ## `v-show` {#v-show}
 
-Một cách khác để hiển thị phần tử theo điều kiện là dùng directive `v-show`. Cách dùng nhìn chung khá giống nhau:
+Another option for conditionally displaying an element is the `v-show` directive. The usage is largely the same:
 
 ```vue-html
-<h1 v-show="ok">Xin chào!</h1>
+<h1 v-show="ok">Hello!</h1>
 ```
 
-Điểm khác biệt là phần tử có `v-show` sẽ luôn được render và vẫn nằm trong DOM; `v-show` chỉ thay đổi thuộc tính CSS `display` của phần tử đó.
+The difference is that an element with `v-show` will always be rendered and remain in the DOM; `v-show` only toggles the `display` CSS property of the element.
 
-`v-show` không hỗ trợ phần tử `<template>`, và cũng không hoạt động với `v-else`.
+`v-show` doesn't support the `<template>` element, nor does it work with `v-else`.
 
 ## `v-if` vs. `v-show` {#v-if-vs-v-show}
 
-`v-if` là kết xuất có điều kiện thực sự — nó đảm bảo các event listener và component con bên trong khối điều kiện sẽ được hủy và tạo lại đúng cách trong quá trình chuyển trạng thái.
+`v-if` is "real" conditional rendering because it ensures that event listeners and child components inside the conditional block are properly destroyed and re-created during toggles.
 
-`v-if` cũng **lazy**: nếu điều kiện là false ở lần render đầu tiên, nó không làm gì cả — khối điều kiện chỉ được render khi điều kiện trở thành true lần đầu.
+`v-if` is also **lazy**: if the condition is false on initial render, it will not do anything - the conditional block won't be rendered until the condition becomes true for the first time.
 
-Trong khi đó, `v-show` đơn giản hơn nhiều: phần tử luôn được render bất kể điều kiện ban đầu là gì, và việc ẩn/hiện được xử lý thuần bằng CSS.
+In comparison, `v-show` is much simpler - the element is always rendered regardless of initial condition, with CSS-based toggling.
 
-Nhìn chung, `v-if` tốn kém hơn mỗi khi chuyển trạng thái, còn `v-show` tốn kém hơn ở lần render đầu tiên. Vì vậy, hãy ưu tiên `v-show` nếu bạn cần bật/tắt thứ gì đó rất thường xuyên, và ưu tiên `v-if` nếu điều kiện hiếm khi thay đổi lúc chạy.
+Generally speaking, `v-if` has higher toggle costs while `v-show` has higher initial render costs. So prefer `v-show` if you need to toggle something very often, and prefer `v-if` if the condition is unlikely to change at runtime.
 
-## `v-if` cùng `v-for` {#v-if-with-v-for}
+## `v-if` with `v-for` {#v-if-with-v-for}
 
-Khi `v-if` và `v-for` cùng được dùng trên một phần tử, `v-if` sẽ được đánh giá trước. Xem [hướng dẫn về kết xuất danh sách](list#v-for-with-v-if) để biết chi tiết.
+When `v-if` and `v-for` are both used on the same element, `v-if` will be evaluated first. See the [list rendering guide](list#v-for-with-v-if) for details.
 
-::: warning Lưu ý
-Bạn **không nên** dùng `v-if` và `v-for` trên cùng một phần tử vì thứ tự ưu tiên ngầm. Hãy xem [hướng dẫn về kết xuất danh sách](list#v-for-with-v-if) để biết chi tiết.
+::: warning Note
+It's **not** recommended to use `v-if` and `v-for` on the same element due to implicit precedence. Refer to [list rendering guide](list#v-for-with-v-if) for details.
 :::

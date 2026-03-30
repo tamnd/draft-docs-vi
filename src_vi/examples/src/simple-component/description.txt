@@ -1,0 +1,2 @@
+Ở đây chúng ta trình bày component đơn giản nhất: nhận một prop và render nó.
+Tìm hiểu thêm về component trong hướng dẫn!

@@ -25,41 +25,41 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 }
 </style>
 
-# Kiểm Thử {#testing}
+# Testing {#testing}
 
-## Vì Sao Nên Kiểm Thử? {#why-test}
+## Why Test? {#why-test}
 
-Kiểm thử tự động giúp bạn và cả nhóm xây dựng ứng dụng Vue phức tạp nhanh hơn và tự tin hơn bằng cách ngăn hồi quy, đồng thời khuyến khích bạn tách ứng dụng thành những hàm, module, class và component có thể kiểm thử được. Ứng dụng Vue cũng như mọi ứng dụng khác — có thể hỏng theo nhiều cách, và điều quan trọng là bạn phải phát hiện cũng như sửa được những vấn đề đó trước khi phát hành.
+Automated tests help you and your team build complex Vue applications quickly and confidently by preventing regressions and encouraging you to break apart your application into testable functions, modules, classes, and components. As with any application, your new Vue app can break in many ways, and it's important that you can catch these issues and fix them before releasing.
 
-Trong hướng dẫn này, chúng ta sẽ đi qua các thuật ngữ cơ bản và đưa ra khuyến nghị về công cụ nên chọn cho ứng dụng Vue 3.
+In this guide, we'll cover basic terminology and provide our recommendations on which tools to choose for your Vue 3 application.
 
-Có một mục dành riêng về composable trong Vue. Xem [Kiểm Thử Composable](#testing-composables) bên dưới để biết thêm chi tiết.
+There is one Vue-specific section covering composables. See [Testing Composables](#testing-composables) below for more details.
 
-## Khi Nào Nên Kiểm Thử {#when-to-test}
+## When to Test {#when-to-test}
 
-Hãy bắt đầu kiểm thử càng sớm càng tốt. Chúng tôi khuyến nghị bạn viết test ngay khi có thể. Càng để muộn, ứng dụng sẽ càng có nhiều dependency và việc bắt đầu sẽ càng khó hơn.
+Start testing early! We recommend you begin writing tests as soon as you can. The longer you wait to add tests to your application, the more dependencies your application will have, and the harder it will be to start.
 
-## Các Loại Kiểm Thử {#testing-types}
+## Testing Types {#testing-types}
 
-Khi thiết kế chiến lược kiểm thử cho ứng dụng Vue, bạn nên tận dụng các loại kiểm thử sau:
+When designing your Vue application's testing strategy, you should leverage the following testing types:
 
-- **Đơn vị**: Kiểm tra xem đầu vào của một hàm, class hoặc composable cụ thể có tạo ra đầu ra hoặc side effect như mong đợi hay không.
-- **Component**: Kiểm tra xem component có mount được, render được, có thể tương tác được và hoạt động đúng như mong đợi hay không. Những bài kiểm thử này import nhiều mã hơn unit test, phức tạp hơn và cần nhiều thời gian chạy hơn.
-- **End-to-end**: Kiểm tra các tính năng trải dài qua nhiều trang và thực hiện request mạng thật với ứng dụng Vue đã được build cho production. Những bài kiểm thử này thường cần dựng cơ sở dữ liệu hoặc backend khác.
+- **Unit**: Checks that inputs to a given function, class, or composable are producing the expected output or side effects.
+- **Component**: Checks that your component mounts, renders, can be interacted with, and behaves as expected. These tests import more code than unit tests, are more complex, and require more time to execute.
+- **End-to-end**: Checks features that span multiple pages and makes real network requests against your production-built Vue application. These tests often involve standing up a database or other backend.
 
-Mỗi loại kiểm thử đều có vai trò trong chiến lược kiểm thử của ứng dụng, và mỗi loại sẽ bảo vệ bạn trước những kiểu sự cố khác nhau.
+Each testing type plays a role in your application's testing strategy, and each will protect you against different types of issues.
 
-## Tổng Quan {#overview}
+## Overview {#overview}
 
-Chúng ta sẽ lần lượt nói ngắn gọn từng loại là gì, có thể triển khai ra sao cho ứng dụng Vue, và đưa ra một số khuyến nghị chung.
+We will briefly discuss what each of these are, how they can be implemented for Vue applications, and provide some general recommendations.
 
-## Kiểm Thử Đơn Vị {#unit-testing}
+## Unit Testing {#unit-testing}
 
-Unit test được viết để xác minh rằng những đơn vị mã nhỏ, tách biệt đang hoạt động đúng như mong đợi. Một unit test thường bao phủ một hàm, class, composable hoặc module duy nhất. Unit test tập trung vào tính đúng đắn về mặt logic và chỉ quan tâm đến một phần nhỏ trong toàn bộ chức năng của ứng dụng. Chúng có thể mock phần lớn môi trường của ứng dụng (ví dụ: state ban đầu, class phức tạp, module bên thứ ba và request mạng).
+Unit tests are written to verify that small, isolated units of code are working as expected. A unit test usually covers a single function, class, composable, or module. Unit tests focus on logical correctness and only concern themselves with a small portion of the application's overall functionality. They may mock large parts of your application's environment (e.g. initial state, complex classes, 3rd party modules, and network requests).
 
-Nói chung, unit test sẽ bắt được các vấn đề trong business logic và tính đúng đắn về mặt logic của một hàm.
+In general, unit tests will catch issues with a function's business logic and logical correctness.
 
-Lấy ví dụ hàm `increment` sau:
+Take for example this `increment` function:
 
 ```js [helpers.js]
 export function increment(current, max = 10) {
@@ -70,9 +70,9 @@ export function increment(current, max = 10) {
 }
 ```
 
-Hàm này rất khép kín, nên ta có thể dễ dàng gọi nó và kiểm tra giá trị trả về — đây là ứng viên lý tưởng để viết unit test.
+Because it's very self-contained, it'll be easy to invoke the increment function and assert that it returns what it's supposed to, so we'll write a Unit Test.
 
-Nếu bất kỳ assertion nào dưới đây thất bại, ta sẽ biết rõ vấn đề nằm ngay trong hàm `increment`.
+If any of these assertions fail, it's clear that the issue is contained within the `increment` function.
 
 ```js{3-15} [helpers.spec.js]
 import { increment } from './helpers'
@@ -92,60 +92,60 @@ describe('increment', () => {
 })
 ```
 
-Như đã đề cập trước đó, unit test thường được áp dụng cho business logic, component, class, module hoặc hàm có tính tự chứa, không liên quan đến render UI, request mạng hoặc các mối quan tâm về môi trường khác.
+As mentioned previously, unit testing is typically applied to self-contained business logic, components, classes, modules, or functions that do not involve UI rendering, network requests, or other environmental concerns.
 
-Thông thường đây là các module JavaScript / TypeScript thuần, không gắn trực tiếp với Vue. Nhìn chung, viết unit test cho business logic trong ứng dụng Vue không khác biệt đáng kể so với ứng dụng dùng framework khác.
+These are typically plain JavaScript / TypeScript modules unrelated to Vue. In general, writing unit tests for business logic in Vue applications does not differ significantly from applications using other frameworks.
 
-Có hai trường hợp mà bạn **nên** unit test những tính năng đặc thù của Vue:
+There are two instances where you DO unit test Vue-specific features:
 
-1. Composable
-2. Component
+1. Composables
+2. Components
 
-### Composable {#composables}
+### Composables {#composables}
 
-Một nhóm hàm đặc thù của ứng dụng Vue là [Composable](/guide/reusability/composables), và chúng có thể cần cách xử lý riêng khi kiểm thử.
-Xem [Kiểm Thử Composable](#testing-composables) bên dưới để biết thêm chi tiết.
+One category of functions specific to Vue applications is [Composables](/guide/reusability/composables), which may require special handling during tests.
+See [Testing Composables](#testing-composables) below for more details.
 
-### Unit Test Cho Component {#unit-testing-components}
+### Unit Testing Components {#unit-testing-components}
 
-Component có thể được kiểm thử theo hai cách:
+A component can be tested in two ways:
 
-1. Hộp trắng: Kiểm thử đơn vị
+1. Whitebox: Unit Testing
 
-   Những bài kiểm thử kiểu "hộp trắng" biết rõ chi tiết triển khai và dependency của component. Chúng tập trung vào việc **cô lập** component đang được kiểm thử. Những bài kiểm thử này thường sẽ mock một phần hoặc toàn bộ component con, đồng thời thiết lập state và dependency của plugin (ví dụ: Pinia).
+   Tests that are "Whitebox tests" are aware of the implementation details and dependencies of a component. They are focused on **isolating** the component under test. These tests will usually involve mocking some, if not all of your component's children, as well as setting up plugin state and dependencies (e.g. Pinia).
 
-2. Hộp đen: Kiểm thử component
+2. Blackbox: Component Testing
 
-   Những bài kiểm thử kiểu "hộp đen" không biết về chi tiết triển khai của component. Chúng mock ở mức tối thiểu để kiểm tra khả năng tích hợp giữa component và toàn bộ hệ thống. Chúng thường render toàn bộ component con và được xem gần với "integration test" hơn. Xem [khuyến nghị về Kiểm Thử Component](#component-testing) bên dưới.
+   Tests that are "Blackbox tests" are unaware of the implementation details of a component. These tests mock as little as possible to test the integration of your component and the entire system. They usually render all child components and are considered more of an "integration test". See the [Component Testing recommendations](#component-testing) below.
 
-### Khuyến Nghị {#recommendation}
+### Recommendation {#recommendation}
 
 - [Vitest](https://vitest.dev/)
 
-  Vì thiết lập chính thức do `create-vue` tạo ra dựa trên [Vite](https://vite.dev/), chúng tôi khuyến nghị dùng framework kiểm thử đơn vị có thể tận dụng trực tiếp cùng cấu hình và pipeline biến đổi của Vite. [Vitest](https://vitest.dev/) là framework kiểm thử đơn vị được thiết kế riêng cho mục đích này, do các thành viên của đội Vue / Vite tạo ra và duy trì. Nó tích hợp với dự án dựa trên Vite với rất ít công sức và có tốc độ cực nhanh.
+  Since the official setup created by `create-vue` is based on [Vite](https://vite.dev/), we recommend using a unit testing framework that can leverage the same configuration and transform pipeline directly from Vite. [Vitest](https://vitest.dev/) is a unit testing framework designed specifically for this purpose, created and maintained by Vue / Vite team members. It integrates with Vite-based projects with minimal effort, and is blazing fast.
 
-### Các Lựa Chọn Khác {#other-options}
+### Other Options {#other-options}
 
-- [Jest](https://jestjs.io/) là một framework kiểm thử đơn vị phổ biến. Tuy nhiên, chúng tôi chỉ khuyến nghị Jest nếu bạn đã có sẵn test suite bằng Jest cần được chuyển sang dự án dựa trên Vite, vì Vitest cho khả năng tích hợp mượt hơn và hiệu năng tốt hơn.
+- [Jest](https://jestjs.io/) is a popular unit testing framework. However, we only recommend Jest if you have an existing Jest test suite that needs to be migrated over to a Vite-based project, as Vitest offers a more seamless integration and better performance.
 
-## Kiểm Thử Component {#component-testing}
+## Component Testing {#component-testing}
 
-Trong ứng dụng Vue, component là khối xây dựng chính của UI. Vì vậy, component là đơn vị cô lập tự nhiên khi cần xác thực hành vi của ứng dụng. Xét về độ hạt, kiểm thử component nằm ở khoảng giữa unit test và integration test. Phần lớn ứng dụng Vue của bạn nên được bao phủ bởi kiểm thử component, và chúng tôi khuyến nghị mỗi component Vue nên có file spec riêng.
+In Vue applications, components are the main building blocks of the UI. Components are therefore the natural unit of isolation when it comes to validating your application's behavior. From a granularity perspective, component testing sits somewhere above unit testing and can be considered a form of integration testing. Much of your Vue Application should be covered by a component test and we recommend that each Vue component has its own spec file.
 
-Kiểm thử component nên phát hiện được các vấn đề liên quan tới props, events, slots mà component cung cấp, styles, classes, hook vòng đời và nhiều thứ khác.
+Component tests should catch issues relating to your component's props, events, slots that it provides, styles, classes, lifecycle hooks, and more.
 
-Kiểm thử component không nên mock component con, mà thay vào đó nên kiểm tra sự tương tác giữa component của bạn với các component con bằng cách tương tác với chúng như người dùng thật. Ví dụ, một bài kiểm thử component nên click vào phần tử như người dùng thật thay vì tương tác với component bằng lập trình.
+Component tests should not mock child components, but instead test the interactions between your component and its children by interacting with the components as a user would. For example, a component test should click on an element like a user would instead of programmatically interacting with the component.
 
-Kiểm thử component nên tập trung vào giao diện công khai của component thay vì chi tiết triển khai bên trong. Với phần lớn component, giao diện công khai chỉ giới hạn ở: event được emit, props và slots. Khi kiểm thử, hãy nhớ **kiểm tra component làm gì, chứ không phải nó làm bằng cách nào**.
+Component tests should focus on the component's public interfaces rather than internal implementation details. For most components, the public interface is limited to: events emitted, props, and slots. When testing, remember to **test what a component does, not how it does it**.
 
-**NÊN**
+**DO**
 
-- Với logic **hiển thị**: khẳng định đầu ra render đúng dựa trên props và slots đầu vào.
-- Với logic **hành vi**: khẳng định cập nhật render hoặc event emit đúng để phản hồi lại sự kiện nhập từ người dùng.
+- For **Visual** logic: assert correct render output based on inputted props and slots.
+- For **Behavioral** logic: assert correct render updates or emitted events in response to user input events.
 
-  Trong ví dụ dưới đây, ta minh họa một component Stepper có phần tử DOM gắn nhãn "increment" và có thể được click. Ta truyền một prop tên là `max`, prop này ngăn Stepper tăng quá `2`, nên nếu click nút 3 lần thì UI vẫn chỉ nên hiển thị `2`.
+  In the below example, we demonstrate a Stepper component that has a DOM element labeled "increment" and can be clicked. We pass a prop called `max` that prevents the Stepper from being incremented past `2`, so if we click the button 3 times, the UI should still say `2`.
 
-  Ta không biết gì về chi tiết triển khai của Stepper, chỉ biết rằng "đầu vào" là prop `max` và "đầu ra" là trạng thái của DOM như người dùng sẽ nhìn thấy.
+  We know nothing about the implementation of Stepper, only that the "input" is the `max` prop and the "output" is the state of the DOM as the user will see it.
 
 ::: code-group
 
@@ -192,11 +192,11 @@ const { getByText } = render(Stepper, {
   }
 })
 
-getByText('0') // Assertion ngầm rằng "0" nằm trong component
+getByText('0') // Implicit assertion that "0" is within the component
 
 const button = getByRole('button', { name: /increment/i })
 
-// Phát ra sự kiện click cho nút tăng.
+// Dispatch a click event to our increment button.
 await fireEvent.click(button)
 
 getByText('1')
@@ -206,109 +206,109 @@ await fireEvent.click(button)
 
 :::
 
-**KHÔNG NÊN**
+**DON'T**
 
-- Đừng khẳng định state riêng tư của instance component hoặc kiểm thử các phương thức riêng tư của component. Kiểm thử chi tiết triển khai sẽ làm test trở nên mong manh, vì chúng dễ hỏng và cần cập nhật hơn mỗi khi phần cài đặt thay đổi.
+- Don't assert the private state of a component instance or test the private methods of a component. Testing implementation details makes the tests brittle, as they are more likely to break and require updates when the implementation changes.
 
-  Công việc cuối cùng của component là render đúng đầu ra DOM, nên những bài kiểm thử tập trung vào đầu ra DOM sẽ đem lại cùng mức độ đảm bảo về tính đúng đắn (thậm chí còn tốt hơn), đồng thời bền vững và chống chịu thay đổi tốt hơn.
+  The component's ultimate job is rendering the correct DOM output, so tests focusing on the DOM output provide the same level of correctness assurance (if not more) while being more robust and resilient to change.
 
-  Đừng chỉ dựa hoàn toàn vào snapshot test. Việc khẳng định chuỗi HTML không mô tả được tính đúng đắn. Hãy viết test có chủ đích rõ ràng.
+  Don't rely exclusively on snapshot tests. Asserting HTML strings does not describe correctness. Write tests with intentionality.
 
-  Nếu một phương thức cần được kiểm thử kỹ, hãy cân nhắc tách nó thành một hàm utility độc lập và viết unit test riêng cho nó. Nếu không thể tách sạch sẽ, bạn có thể kiểm thử nó như một phần của component test, integration test hoặc end-to-end test có bao phủ logic đó.
+  If a method needs to be tested thoroughly, consider extracting it into a standalone utility function and write a dedicated unit test for it. If it cannot be extracted cleanly, it may be tested as a part of a component, integration, or end-to-end test that covers it.
 
-### Khuyến Nghị {#recommendation-1}
+### Recommendation {#recommendation-1}
 
-- [Vitest](https://vitest.dev/) dành cho component hoặc composable render không cần giao diện trình duyệt đầy đủ (ví dụ: hàm [`useFavicon`](https://vueuse.org/core/useFavicon/#usefavicon) trong VueUse). Component và DOM có thể được kiểm thử bằng [`@vue/test-utils`](https://github.com/vuejs/test-utils).
+- [Vitest](https://vitest.dev/) for components or composables that render headlessly (e.g. the [`useFavicon`](https://vueuse.org/core/useFavicon/#usefavicon) function in VueUse). Components and DOM can be tested using [`@vue/test-utils`](https://github.com/vuejs/test-utils).
 
-- [Cypress Component Testing](https://on.cypress.io/component) dành cho component mà hành vi kỳ vọng phụ thuộc vào việc render style đúng hoặc kích hoạt sự kiện DOM gốc. Nó có thể được dùng cùng Testing Library thông qua [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro).
+- [Cypress Component Testing](https://on.cypress.io/component) for components whose expected behavior depends on properly rendering styles or triggering native DOM events. It can be used with Testing Library via [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro).
 
-Khác biệt chính giữa Vitest và các runner chạy trong trình duyệt là tốc độ và ngữ cảnh thực thi. Nói ngắn gọn, các runner chạy trong trình duyệt như Cypress có thể bắt được những vấn đề mà runner chạy trong Node như Vitest không bắt được (ví dụ: vấn đề style, sự kiện DOM gốc thật, cookies, local storage và lỗi mạng), nhưng các runner chạy trong trình duyệt lại _chậm hơn Vitest nhiều bậc_ vì chúng phải mở trình duyệt, biên dịch stylesheet và làm thêm nhiều việc khác. Cypress là một runner chạy trong trình duyệt có hỗ trợ kiểm thử component. Hãy đọc [trang so sánh của Vitest](https://vitest.dev/guide/comparisons.html#cypress) để xem thông tin mới nhất khi so sánh Vitest và Cypress.
+The main differences between Vitest and browser-based runners are speed and execution context. In short, browser-based runners, like Cypress, can catch issues that node-based runners, like Vitest, cannot (e.g. style issues, real native DOM events, cookies, local storage, and network failures), but browser-based runners are _orders of magnitude slower than Vitest_ because they do open a browser, compile your stylesheets, and more. Cypress is a browser-based runner that supports component testing. Please read [Vitest's comparison page](https://vitest.dev/guide/comparisons.html#cypress) for the latest information comparing Vitest and Cypress.
 
-### Thư Viện Mount {#mounting-libraries}
+### Mounting Libraries {#mounting-libraries}
 
-Kiểm thử component thường bao gồm việc mount component cần kiểm thử một cách độc lập, kích hoạt các sự kiện nhập mô phỏng từ người dùng, rồi khẳng định đầu ra DOM được render. Có những thư viện utility chuyên dụng giúp các tác vụ này trở nên đơn giản hơn.
+Component testing often involves mounting the component being tested in isolation, triggering simulated user input events, and asserting on the rendered DOM output. There are dedicated utility libraries that make these tasks simpler.
 
-- [`@vue/test-utils`](https://github.com/vuejs/test-utils) là thư viện kiểm thử component ở mức thấp chính thức, được viết để cung cấp cho người dùng quyền truy cập vào các API đặc thù của Vue. Đây cũng là thư viện ở tầng thấp hơn mà `@testing-library/vue` xây dựng dựa trên.
+- [`@vue/test-utils`](https://github.com/vuejs/test-utils) is the official low-level component testing library that was written to provide users access to Vue specific APIs. It's also the lower-level library `@testing-library/vue` is built on top of.
 
-- [`@testing-library/vue`](https://github.com/testing-library/vue-testing-library) là thư viện kiểm thử Vue tập trung vào việc kiểm thử component mà không phụ thuộc vào chi tiết triển khai. Nguyên tắc dẫn dắt của nó là: test càng giống cách phần mềm được sử dụng ngoài thực tế, nó càng đem lại nhiều sự tự tin.
+- [`@testing-library/vue`](https://github.com/testing-library/vue-testing-library) is a Vue testing library focused on testing components without relying on implementation details. Its guiding principle is that the more tests resemble the way software is used, the more confidence they can provide.
 
-Chúng tôi khuyến nghị dùng `@vue/test-utils` để kiểm thử component trong ứng dụng. `@testing-library/vue` có vấn đề khi kiểm thử component bất đồng bộ với Suspense, nên cần được dùng một cách thận trọng.
+We recommend using `@vue/test-utils` for testing components in applications. `@testing-library/vue` has issues with testing asynchronous component with Suspense, so it should be used with caution.
 
-### Các Lựa Chọn Khác {#other-options-1}
+### Other Options {#other-options-1}
 
-- [Nightwatch](https://nightwatchjs.org/) là runner kiểm thử E2E có hỗ trợ Vue Component Testing. ([Dự án ví dụ](https://github.com/nightwatchjs-community/todo-vue))
+- [Nightwatch](https://nightwatchjs.org/) is an E2E test runner with Vue Component Testing support. ([Example Project](https://github.com/nightwatchjs-community/todo-vue))
 
-- [WebdriverIO](https://webdriver.io/docs/component-testing/vue) dành cho kiểm thử component đa trình duyệt dựa trên tương tác người dùng gốc được chuẩn hóa bằng tự động hóa. Nó cũng có thể dùng cùng Testing Library.
+- [WebdriverIO](https://webdriver.io/docs/component-testing/vue) for cross-browser component testing that relies on native user interaction based on standardized automation. It can also be used with Testing Library.
 
-## Kiểm Thử E2E {#e2e-testing}
+## E2E Testing {#e2e-testing}
 
-Unit test và component test giúp lập trình viên tự tin hơn, nhưng vẫn có giới hạn trong khả năng bao phủ toàn diện ứng dụng khi triển khai lên production. Đó là lúc kiểm thử end-to-end (E2E) phát huy: nó bao phủ điều quan trọng nhất — điều gì xảy ra khi người dùng thực sự dùng ứng dụng của bạn.
+While unit tests provide developers with some degree of confidence, unit and component tests are limited in their abilities to provide holistic coverage of an application when deployed to production. As a result, end-to-end (E2E) tests provide coverage on what is arguably the most important aspect of an application: what happens when users actually use your applications.
 
-Kiểm thử end-to-end tập trung vào hành vi của ứng dụng qua nhiều trang, có thực hiện request mạng với ứng dụng Vue đã được build cho production. Chúng thường bao gồm việc dựng một cơ sở dữ liệu hoặc backend khác, và thậm chí có thể được chạy trên môi trường staging thật.
+End-to-end tests focus on multi-page application behavior that makes network requests against your production-built Vue application. They often involve standing up a database or other backend and may even be run against a live staging environment.
 
-Kiểm thử end-to-end thường phát hiện các vấn đề ở router, thư viện quản lý state, component cấp cao nhất (ví dụ: App hoặc Layout), asset công khai hoặc bất kỳ logic xử lý request nào. Như đã nói ở trên, chúng bắt được các vấn đề nghiêm trọng mà unit test hoặc component test có thể không thể phát hiện.
+End-to-end tests will often catch issues with your router, state management library, top-level components (e.g. an App or Layout), public assets, or any request handling. As stated above, they catch critical issues that may be impossible to catch with unit tests or component tests.
 
-Kiểm thử end-to-end không import mã nào từ ứng dụng Vue của bạn, mà hoàn toàn dựa vào việc kiểm thử ứng dụng bằng cách điều hướng qua các trang thật trong trình duyệt thật.
+End-to-end tests do not import any of your Vue application's code but instead rely completely on testing your application by navigating through entire pages in a real browser.
 
-Kiểm thử end-to-end xác thực nhiều tầng trong ứng dụng của bạn. Chúng có thể nhắm vào ứng dụng được build cục bộ hoặc thậm chí một môi trường staging thật. Việc kiểm thử trên môi trường staging không chỉ bao gồm mã frontend và static server của bạn mà còn cả các dịch vụ backend và hạ tầng đi kèm.
+End-to-end tests validate many of the layers in your application. They can either target your locally built application or even a live Staging environment. Testing against your Staging environment not only includes your frontend code and static server but all associated backend services and infrastructure.
 
-> Test của bạn càng giống với cách phần mềm được sử dụng ngoài thực tế, chúng càng mang lại nhiều sự tự tin. - [Kent C. Dodds](https://x.com/kentcdodds/status/977018512689455106) - Tác giả của Testing Library
+> The more your tests resemble how your software is used, the more confidence they can give you. - [Kent C. Dodds](https://x.com/kentcdodds/status/977018512689455106) - Author of the Testing Library
 
-Bằng cách kiểm thử tác động của hành động người dùng lên ứng dụng, test E2E thường là chìa khóa để nâng mức độ tự tin xem ứng dụng có đang hoạt động đúng hay không.
+By testing how user actions impact your application, E2E tests are often the key to higher confidence in whether an application is functioning properly or not.
 
-### Chọn Giải Pháp Kiểm Thử E2E {#choosing-an-e2e-testing-solution}
+### Choosing an E2E Testing Solution {#choosing-an-e2e-testing-solution}
 
-Kiểm thử end-to-end (E2E) trên web từng mang tiếng xấu vì test hay bị flaky và làm chậm quá trình phát triển. Nhưng các công cụ E2E hiện đại đã tiến một bước dài: test đáng tin cậy hơn, tương tác và hữu ích hơn nhiều. Khi chọn framework kiểm thử E2E, dưới đây là một số điểm bạn nên lưu ý.
+While end-to-end (E2E) testing on the web has gained a negative reputation for unreliable (flaky) tests and slowing down development processes, modern E2E tools have made strides forward to create more reliable, interactive, and useful tests. When choosing an E2E testing framework, the following sections provide some guidance on things to keep in mind when choosing a testing framework for your application.
 
-#### Kiểm Thử Đa Trình Duyệt {#cross-browser-testing}
+#### Cross-browser testing {#cross-browser-testing}
 
-Một trong những lợi ích lớn nhất của kiểm thử E2E là khả năng kiểm thử ứng dụng trên nhiều trình duyệt. Tuy nhiên, kiểm thử đa trình duyệt 100% nghe có vẻ hấp dẫn nhưng lại có lợi ích giảm dần so với tài nguyên đầu tư, vì cần thêm thời gian và năng lực máy để chạy ổn định. Hãy cân nhắc kỹ đánh đổi này khi quyết định mức độ kiểm thử đa trình duyệt mà ứng dụng thật sự cần.
+One of the primary benefits that end-to-end (E2E) testing is known for is its ability to test your application across multiple browsers. While it may seem desirable to have 100% cross-browser coverage, it is important to note that cross browser testing has diminishing returns on a team's resources due to the additional time and machine power required to run them consistently. As a result, it is important to be mindful of this trade-off when choosing the amount of cross-browser testing your application needs.
 
-#### Vòng Phản Hồi Nhanh Hơn {#faster-feedback-loops}
+#### Faster feedback loops {#faster-feedback-loops}
 
-Một trong những vấn đề lớn của kiểm thử E2E là chạy toàn bộ suite tốn rất nhiều thời gian, nên thường chỉ được thực hiện trong pipeline CI/CD. Các framework E2E hiện đại đã góp phần giải quyết điều này bằng tính năng chạy song song, giúp pipeline CI/CD chạy nhanh hơn nhiều. Ngoài ra, khi phát triển cục bộ, khả năng chỉ chạy một test cho đúng trang đang làm — kết hợp hot reload cho test — cải thiện đáng kể năng suất của lập trình viên.
+One of the primary problems with end-to-end (E2E) tests and development is that running the entire suite takes a long time. Typically, this is only done in continuous integration and deployment (CI/CD) pipelines. Modern E2E testing frameworks have helped to solve this by adding features like parallelization, which allows for CI/CD pipelines to often run magnitudes faster than before. In addition, when developing locally, the ability to selectively run a single test for the page you are working on while also providing hot reloading of tests can help boost a developer's workflow and productivity.
 
-#### Trải Nghiệm Debug Hạng Nhất {#first-class-debugging-experience}
+#### First-class debugging experience {#first-class-debugging-experience}
 
-Trước đây, lập trình viên thường phải rà log trong terminal để xác định test hỏng ở đâu. Ngày nay, các framework E2E hiện đại cho phép tận dụng trực tiếp các công cụ quen thuộc như browser developer tools.
+While developers have traditionally relied on scanning logs in a terminal window to help determine what went wrong in a test, modern end-to-end (E2E) test frameworks allow developers to leverage tools they are already familiar with, e.g. browser developer tools.
 
-#### Khả Năng Quan Sát Ở Chế Độ Headless {#visibility-in-headless-mode}
+#### Visibility in headless mode {#visibility-in-headless-mode}
 
-Khi kiểm thử E2E chạy trong pipeline CI/CD, chúng thường chạy trong trình duyệt headless — tức là không mở trình duyệt hiển thị ra màn hình. Các framework E2E hiện đại hỗ trợ xem ảnh chụp màn hình và/hoặc video của ứng dụng trong quá trình kiểm thử, giúp bạn dễ tìm hiểu nguyên nhân lỗi. Trước đây việc duy trì các tích hợp như vậy khá phiền phức.
+When end-to-end (E2E) tests are run in continuous integration/deployment pipelines, they are often run in headless browsers (i.e., no visible browser is opened for the user to watch). A critical feature of modern E2E testing frameworks is the ability to see snapshots and/or videos of the application during testing, providing some insight into why errors are happening. Historically, it was tedious to maintain these integrations.
 
-### Khuyến Nghị {#recommendation-2}
+### Recommendation {#recommendation-2}
 
-- [Playwright](https://playwright.dev/) là một giải pháp kiểm thử E2E rất tốt, hỗ trợ Chromium, WebKit và Firefox. Bạn có thể kiểm thử trên Windows, Linux và macOS, ở máy cục bộ hoặc trên CI, chạy có giao diện hoặc headless với khả năng giả lập thiết bị di động gốc cho Google Chrome trên Android và Mobile Safari. Nó có giao diện giàu thông tin, khả năng debug xuất sắc, assertion tích hợp sẵn, chạy song song, traces và được thiết kế để giảm thiểu test flaky. Playwright có hỗ trợ [Component Testing](https://playwright.dev/docs/test-components), nhưng vẫn đang ở mức thử nghiệm. Playwright là mã nguồn mở và được Microsoft duy trì.
+- [Playwright](https://playwright.dev/) is a great E2E testing solution that supports Chromium, WebKit, and Firefox. Test on Windows, Linux, and macOS, locally or on CI, headless or headed with native mobile emulation of Google Chrome for Android and Mobile Safari. It has an informative UI, excellent debuggability, built-in assertions, parallelization, traces and is designed to eliminate flaky tests. Support for [Component Testing](https://playwright.dev/docs/test-components) is available, but marked experimental. Playwright is open source and maintained by Microsoft.
 
-- [Cypress](https://www.cypress.io/) có giao diện đồ họa giàu thông tin, khả năng debug xuất sắc, assertion tích hợp sẵn, stubs, khả năng chống flaky và snapshots. Như đã đề cập ở trên, nó cung cấp hỗ trợ ổn định cho [Component Testing](https://docs.cypress.io/guides/component-testing/introduction). Cypress hỗ trợ các trình duyệt dựa trên Chromium, Firefox và Electron. Hỗ trợ WebKit có sẵn nhưng vẫn ở mức thử nghiệm. Cypress dùng giấy phép MIT, nhưng một số tính năng như chạy song song yêu cầu đăng ký Cypress Cloud.
+- [Cypress](https://www.cypress.io/) has an informative graphical interface, excellent debuggability, built-in assertions, stubs, flake-resistance, and snapshots. As mentioned above, it provides stable support for [Component Testing](https://docs.cypress.io/guides/component-testing/introduction). Cypress supports Chromium-based browsers, Firefox, and Electron. WebKit support is available, but marked experimental. Cypress is MIT-licensed, but some features like parallelization require a subscription to Cypress Cloud.
 
 <div class="lambdatest">
   <a href="https://lambdatest.com" target="_blank">
     <img src="/images/lambdatest.svg">
     <div>
-      <div class="testing-partner">Nhà tài trợ cho phần kiểm thử</div>
-      <div>Lambdatest là nền tảng đám mây để chạy kiểm thử E2E, khả năng tiếp cận và hồi quy thị giác trên mọi trình duyệt phổ biến cùng thiết bị thật, với khả năng sinh test có AI hỗ trợ.</div>
+      <div class="testing-partner">Testing Sponsor</div>
+      <div>Lambdatest is a cloud platform for running E2E, accessibility, and visual regression tests across all major browsers and real devices, with AI assisted test generation!</div>
     </div>
   </a>
 </div>
 
-### Các Lựa Chọn Khác {#other-options-2}
+### Other Options {#other-options-2}
 
-- [Nightwatch](https://nightwatchjs.org/) là một giải pháp kiểm thử E2E dựa trên [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver). Nhờ đó, nó có phạm vi hỗ trợ trình duyệt rộng nhất, bao gồm cả kiểm thử di động gốc. Các giải pháp dựa trên Selenium sẽ chậm hơn Playwright hoặc Cypress.
+- [Nightwatch](https://nightwatchjs.org/) is an E2E testing solution based on [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver). This gives it the widest browser support range, including native mobile testing. Selenium-based solutions will be slower than Playwright or Cypress.
 
-- [WebdriverIO](https://webdriver.io/) là framework tự động hóa kiểm thử cho web và mobile, dựa trên giao thức WebDriver.
+- [WebdriverIO](https://webdriver.io/) is a test automation framework for web and mobile testing based on the WebDriver protocol.
 
-## Công Thức Mẫu {#recipes}
+## Recipes {#recipes}
 
-### Thêm Vitest Vào Dự Án {#adding-vitest-to-a-project}
+### Adding Vitest to a Project {#adding-vitest-to-a-project}
 
-Trong một dự án Vue dựa trên Vite, hãy chạy:
+In a Vite-based Vue project, run:
 
 ```sh
 > npm install -D vitest happy-dom @testing-library/vue
 ```
 
-Tiếp theo, cập nhật cấu hình Vite để thêm khối tùy chọn `test`:
+Next, update the Vite configuration to add the `test` option block:
 
 ```js{5-11} [vite.config.js]
 import { defineConfig } from 'vite'
@@ -316,17 +316,17 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   // ...
   test: {
-    // bật các global test API theo kiểu jest
+    // enable jest-like global test APIs
     globals: true,
-    // mô phỏng DOM bằng happy-dom
-    // (cần cài happy-dom như một peer dependency)
+    // simulate DOM with happy-dom
+    // (requires installing happy-dom as a peer dependency)
     environment: 'happy-dom'
   }
 })
 ```
 
 :::tip
-Nếu bạn dùng TypeScript, hãy thêm `vitest/globals` vào trường `types` trong `tsconfig.json`.
+If you use TypeScript, add `vitest/globals` to the `types` field in your `tsconfig.json`.
 
 ```json [tsconfig.json]
 {
@@ -338,7 +338,7 @@ Nếu bạn dùng TypeScript, hãy thêm `vitest/globals` vào trường `types`
 
 :::
 
-Sau đó, tạo một file có hậu tố `*.test.js` trong dự án. Bạn có thể đặt toàn bộ file test trong một thư mục test ở gốc dự án hoặc đặt trong các thư mục test nằm cạnh file nguồn. Vitest sẽ tự động tìm chúng dựa trên quy ước đặt tên này.
+Then, create a file ending in `*.test.js` in your project. You can place all test files in a test directory in the project root or in test directories next to your source files. Vitest will automatically search for them using the naming convention.
 
 ```js [MyComponent.test.js]
 import { render } from '@testing-library/vue'
@@ -351,12 +351,12 @@ test('it should work', () => {
     }
   })
 
-  // khẳng định đầu ra
+  // assert output
   getByText('...')
 })
 ```
 
-Cuối cùng, cập nhật `package.json` để thêm script test rồi chạy nó:
+Finally, update `package.json` to add the test script and run it:
 
 ```json{4} [package.json]
 {
@@ -371,18 +371,18 @@ Cuối cùng, cập nhật `package.json` để thêm script test rồi chạy n
 > npm test
 ```
 
-### Kiểm Thử Composable {#testing-composables}
+### Testing Composables {#testing-composables}
 
-> Phần này giả định rằng bạn đã đọc mục [Composable](/guide/reusability/composables).
+> This section assumes you have read the [Composables](/guide/reusability/composables) section.
 
-Khi nói tới việc kiểm thử composable, ta có thể chia chúng thành hai nhóm: composable không phụ thuộc vào instance component chủ, và composable có phụ thuộc.
+When it comes to testing composables, we can divide them into two categories: composables that do not rely on a host component instance, and composables that do.
 
-Một composable phụ thuộc vào instance component chủ khi nó dùng các API sau:
+A composable depends on a host component instance when it uses the following APIs:
 
-- Hook vòng đời
+- Lifecycle hooks
 - Provide / Inject
 
-Nếu composable chỉ dùng Reactivity API, bạn có thể kiểm thử nó bằng cách gọi trực tiếp và khẳng định state / methods mà nó trả về:
+If a composable only uses Reactivity APIs, then it can be tested by directly invoking it and asserting its returned state/methods:
 
 ```js [counter.js]
 import { ref } from 'vue'
@@ -410,7 +410,7 @@ test('useCounter', () => {
 })
 ```
 
-Một composable phụ thuộc vào hook vòng đời hoặc Provide / Inject cần được bọc trong một component chủ để có thể kiểm thử. Ta có thể tạo một helper như sau:
+A composable that relies on lifecycle hooks or Provide / Inject needs to be wrapped in a host component to be tested. We can create a helper like the following:
 
 ```js [test-utils.js]
 import { createApp } from 'vue'
@@ -420,13 +420,13 @@ export function withSetup(composable) {
   const app = createApp({
     setup() {
       result = composable()
-      // chặn cảnh báo thiếu template
+      // suppress missing template warning
       return () => {}
     }
   })
   app.mount(document.createElement('div'))
-  // trả về kết quả và instance ứng dụng
-  // để kiểm thử provide/unmount
+  // return the result and the app instance
+  // for testing provide/unmount
   return [result, app]
 }
 ```
@@ -437,16 +437,16 @@ import { useFoo } from './foo'
 
 test('useFoo', () => {
   const [result, app] = withSetup(() => useFoo(123))
-  // mock provide để kiểm thử injection
+  // mock provide for testing injections
   app.provide(...)
-  // chạy các assertion
+  // run assertions
   expect(result.foo.value).toBe(1)
-  // kích hoạt hook onUnmounted nếu cần
+  // trigger onUnmounted hook if needed
   app.unmount()
 })
 ```
 
-Với composable phức tạp hơn, đôi khi sẽ dễ hơn nếu kiểm thử nó bằng cách viết test cho component bao ngoài, dùng kỹ thuật [Kiểm Thử Component](#component-testing).
+For more complex composables, it could also be easier to test it by writing tests against the wrapper component using [Component Testing](#component-testing) techniques.
 
 <!--
 TODO more testing recipes can be added in the future e.g.

@@ -1,12 +1,12 @@
-# Element Đặc biệt Dựng sẵn {#built-in-special-elements}
+# Built-in Special Elements {#built-in-special-elements}
 
-:::info Không phải Component
-`<component>`, `<slot>` và `<template>` là các tính năng giống component và là một phần của cú pháp template. Chúng không phải component thực sự và được biên dịch bỏ đi trong quá trình biên dịch template. Vì vậy, theo quy ước chúng được viết bằng chữ thường trong template.
+:::info Not Components
+`<component>`, `<slot>` and `<template>` are component-like features and part of the template syntax. They are not true components and are compiled away during template compilation. As such, they are conventionally written with lowercase in templates.
 :::
 
 ## `<component>` {#component}
 
-Một "meta component" để render các component hoặc element động.
+A "meta component" for rendering dynamic components or elements.
 
 - **Props**
 
@@ -16,17 +16,17 @@ Một "meta component" để render các component hoặc element động.
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Component thực sự được render được xác định bởi prop `is`.
+  The actual component to render is determined by the `is` prop.
 
-  - Khi `is` là string, nó có thể là tên thẻ HTML hoặc tên đã đăng ký của một component.
+  - When `is` is a string, it could be either an HTML tag name or a component's registered name.
 
-  - Ngoài ra, `is` cũng có thể được ràng buộc trực tiếp với định nghĩa của một component.
+  - Alternatively, `is` can also be directly bound to the definition of a component.
 
-- **Ví dụ**
+- **Example**
 
-  Render component theo tên đã đăng ký (Options API):
+  Rendering components by registered name (Options API):
 
   ```vue
   <script>
@@ -48,7 +48,7 @@ Một "meta component" để render các component hoặc element động.
   </template>
   ```
 
-  Render component theo định nghĩa (Composition API với `<script setup>`):
+  Rendering components by definition (Composition API with `<script setup>`):
 
   ```vue
   <script setup>
@@ -61,13 +61,13 @@ Một "meta component" để render các component hoặc element động.
   </template>
   ```
 
-  Render các element HTML:
+  Rendering HTML elements:
 
   ```vue-html
   <component :is="href ? 'a' : 'span'"></component>
   ```
 
-  Tất cả [component dựng sẵn](./built-in-components) đều có thể truyền vào `is`, nhưng bạn phải đăng ký chúng nếu muốn truyền theo tên. Ví dụ:
+  The [built-in components](./built-in-components) can all be passed to `is`, but you must register them if you want to pass them by name. For example:
 
   ```vue
   <script>
@@ -88,9 +88,9 @@ Một "meta component" để render các component hoặc element động.
   </template>
   ```
 
-  Không cần đăng ký nếu bạn truyền chính component đó vào `is` thay vì tên của nó, ví dụ trong `<script setup>`.
+  Registration is not required if you pass the component itself to `is` rather than its name, e.g. in `<script setup>`.
 
-  Nếu `v-model` được dùng trên thẻ `<component>`, trình biên dịch template sẽ mở rộng nó thành prop `modelValue` và event listener `update:modelValue`, giống như với bất kỳ component nào khác. Tuy nhiên, điều này sẽ không tương thích với các element HTML native, như `<input>` hoặc `<select>`. Kết quả là, dùng `v-model` với một element native được tạo động sẽ không hoạt động:
+  If `v-model` is used on a `<component>` tag, the template compiler will expand it to a `modelValue` prop and `update:modelValue` event listener, much like it would for any other component. However, this won't be compatible with native HTML elements, such as `<input>` or `<select>`. As a result, using `v-model` with a dynamically created native element won't work:
 
   ```vue
   <script setup>
@@ -101,64 +101,64 @@ Một "meta component" để render các component hoặc element động.
   </script>
 
   <template>
-    <!-- Điều này sẽ không hoạt động vì 'input' là element HTML native -->
+    <!-- This won't work as 'input' is a native HTML element -->
     <component :is="tag" v-model="username" />
   </template>
   ```
 
-  Trong thực tế, trường hợp đặc biệt này không phổ biến vì các trường form native thường được bọc trong component trong ứng dụng thực tế. Nếu bạn thực sự cần dùng element native trực tiếp thì bạn có thể tách `v-model` thành thuộc tính và sự kiện thủ công.
+  In practice, this edge case isn't common as native form fields are typically wrapped in components in real applications. If you do need to use a native element directly then you can split the `v-model` into an attribute and event manually.
 
-- **Xem thêm** [Component Động](/guide/essentials/component-basics#dynamic-components)
+- **See also** [Dynamic Components](/guide/essentials/component-basics#dynamic-components)
 
 ## `<slot>` {#slot}
 
-Biểu thị vị trí hiển thị nội dung slot trong template.
+Denotes slot content outlets in templates.
 
 - **Props**
 
   ```ts
   interface SlotProps {
     /**
-     * Bất kỳ prop nào truyền vào <slot> sẽ được chuyển thành đối số
-     * cho scoped slot
+     * Any props passed to <slot> to passed as arguments
+     * for scoped slots
      */
     [key: string]: any
     /**
-     * Dành riêng để chỉ định tên slot.
+     * Reserved for specifying slot name.
      */
     name?: string
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Element `<slot>` có thể dùng thuộc tính `name` để chỉ định tên slot. Khi không có `name`, nó sẽ render default slot. Các thuộc tính bổ sung truyền vào slot element sẽ được chuyển thành slot props cho scoped slot được định nghĩa trong cha.
+  The `<slot>` element can use the `name` attribute to specify a slot name. When no `name` is specified, it will render the default slot. Additional attributes passed to the slot element will be passed as slot props to the scoped slot defined in the parent.
 
-  Bản thân element sẽ được thay thế bởi nội dung slot khớp với nó.
+  The element itself will be replaced by its matched slot content.
 
-  Các element `<slot>` trong Vue template được biên dịch thành JavaScript, vì vậy không nên nhầm lẫn chúng với [element `<slot>` native](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot).
+  `<slot>` elements in Vue templates are compiled into JavaScript, so they are not to be confused with [native `<slot>` elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot).
 
-- **Xem thêm** [Component - Slot](/guide/components/slots)
+- **See also** [Component - Slots](/guide/components/slots)
 
 ## `<template>` {#template}
 
-Thẻ `<template>` được dùng làm placeholder khi ta muốn dùng directive dựng sẵn mà không render một element trong DOM.
+The `<template>` tag is used as a placeholder when we want to use a built-in directive without rendering an element in the DOM.
 
-- **Chi tiết**
+- **Details**
 
-  Xử lý đặc biệt cho `<template>` chỉ được kích hoạt nếu nó được dùng với một trong các directive sau:
+  The special handling for `<template>` is only triggered if it is used with one of these directives:
 
-  - `v-if`, `v-else-if`, hoặc `v-else`
+  - `v-if`, `v-else-if`, or `v-else`
   - `v-for`
   - `v-slot`
 
-  Nếu không có directive nào trong số đó, nó sẽ được render như một [element `<template>` native](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) thay thế.
+  If none of those directives are present then it will be rendered as a [native `<template>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) instead.
 
-  Một `<template>` có `v-for` cũng có thể có [thuộc tính `key`](/api/built-in-special-attributes#key). Tất cả các thuộc tính và directive khác sẽ bị bỏ qua vì chúng không có ý nghĩa nếu không có element tương ứng.
+  A `<template>` with a `v-for` can also have a [`key` attribute](/api/built-in-special-attributes#key). All other attributes and directives will be discarded, as they aren't meaningful without a corresponding element.
 
-  Single-file component dùng [thẻ `<template>` cấp cao nhất](/api/sfc-spec#language-blocks) để bọc toàn bộ template. Cách dùng đó tách biệt với cách dùng `<template>` được mô tả ở trên. Thẻ cấp cao nhất đó không phải là một phần của template và không hỗ trợ cú pháp template, chẳng hạn như directive.
+  Single-file components use a [top-level `<template>` tag](/api/sfc-spec#language-blocks) to wrap the entire template. That usage is separate from the use of `<template>` described above. That top-level tag is not part of the template itself and doesn't support template syntax, such as directives.
 
-- **Xem thêm**
-  - [Hướng dẫn - `v-if` trên `<template>`](/guide/essentials/conditional#v-if-on-template)
-  - [Hướng dẫn - `v-for` trên `<template>`](/guide/essentials/list#v-for-on-template)
-  - [Hướng dẫn - Slot có tên](/guide/components/slots#named-slots)
+- **See also**
+  - [Guide - `v-if` on `<template>`](/guide/essentials/conditional#v-if-on-template)
+  - [Guide - `v-for` on `<template>`](/guide/essentials/list#v-for-on-template)
+  - [Guide - Named slots](/guide/components/slots#named-slots)

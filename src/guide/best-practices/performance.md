@@ -4,93 +4,97 @@ outline: deep
 
 # Performance {#performance}
 
-## Tổng quan {#overview}
+## Overview {#overview}
 
-Vue được thiết kế để có hiệu năng tốt trong hầu hết các trường hợp phổ biến mà không cần tối ưu thủ công quá nhiều. Tuy vậy, vẫn luôn có những tình huống khó hơn đòi hỏi phải tinh chỉnh thêm. Trong phần này, ta sẽ bàn về những điểm cần chú ý khi nói tới hiệu năng trong ứng dụng Vue.
+Vue is designed to be performant for most common use cases without much need for manual optimizations. However, there are always challenging scenarios where extra fine-tuning is needed. In this section, we will discuss what you should pay attention to when it comes to performance in a Vue application.
 
-Trước hết, hãy nói về hai mặt chính của hiệu năng web:
+First, let's discuss the two major aspects of web performance:
 
-- **Hiệu năng tải trang**: ứng dụng hiển thị nội dung và trở nên tương tác được nhanh đến đâu ở lần truy cập đầu tiên. Phần này thường được đo bằng các chỉ số web vital như [Largest Contentful Paint (LCP)](https://web.dev/lcp/) và [Interaction to Next Paint](https://web.dev/articles/inp).
-- **Hiệu năng cập nhật**: ứng dụng phản hồi với thao tác người dùng nhanh đến đâu. Ví dụ, danh sách cập nhật nhanh ra sao khi người dùng gõ vào ô tìm kiếm, hoặc trang chuyển nhanh tới mức nào khi người dùng bấm vào một liên kết điều hướng trong một Single-Page Application (SPA).
+- **Page Load Performance**: how fast the application shows content and becomes interactive on the initial visit. This is usually measured using web vital metrics like [Largest Contentful Paint (LCP)](https://web.dev/lcp/) and [Interaction to Next Paint](https://web.dev/articles/inp).
 
-Lý tưởng nhất là tối ưu được cả hai, nhưng mỗi kiểu kiến trúc frontend lại ảnh hưởng khác nhau đến từng mặt. Ngoài ra, loại ứng dụng bạn đang xây cũng ảnh hưởng lớn đến việc nên ưu tiên tối ưu cái gì. Bước đầu tiên để có hiệu năng tốt là chọn đúng kiến trúc cho loại ứng dụng của bạn:
+- **Update Performance**: how fast the application updates in response to user input. For example, how fast a list updates when the user types in a search box, or how fast the page switches when the user clicks a navigation link in a Single-Page Application (SPA).
 
-- Xem [Ways of Using Vue](/guide/extras/ways-of-using-vue) để hiểu những cách khác nhau mà bạn có thể tận dụng Vue.
-- Jason Miller bàn về các loại ứng dụng web và cách triển khai / phân phối phù hợp nhất của chúng trong bài [Application Holotypes](https://jasonformat.com/application-holotypes/).
+While it would be ideal to maximize both, different frontend architectures tend to affect how easy it is to attain desired performance in these aspects. In addition, the type of application you are building greatly influences what you should prioritize in terms of performance. Therefore, the first step of ensuring optimal performance is picking the right architecture for the type of application you are building:
 
-## Công cụ đo hiệu năng {#profiling-options}
+- Consult [Ways of Using Vue](/guide/extras/ways-of-using-vue) to see how you can leverage Vue in different ways.
 
-Để cải thiện hiệu năng, trước hết ta cần biết cách đo nó. Có khá nhiều công cụ tốt có thể giúp việc này:
+- Jason Miller discusses the types of web applications and their respective ideal implementation / delivery in [Application Holotypes](https://jasonformat.com/application-holotypes/).
 
-Để đo hiệu năng tải trang của bản production:
+## Profiling Options {#profiling-options}
+
+To improve performance, we need to first know how to measure it. There are a number of great tools that can help in this regard:
+
+For profiling load performance of production deployments:
 
 - [PageSpeed Insights](https://pagespeed.web.dev/)
 - [WebPageTest](https://www.webpagetest.org/)
 
-Để đo hiệu năng trong lúc phát triển cục bộ:
+For profiling performance during local development:
 
 - [Chrome DevTools Performance Panel](https://developer.chrome.com/docs/devtools/evaluate-performance/)
-  - [`app.config.performance`](/api/application#app-config-performance) bật các marker hiệu năng riêng của Vue trong timeline hiệu năng của Chrome DevTools.
-- [Vue DevTools Extension](/guide/scaling-up/tooling#browser-devtools) cũng có tính năng đo hiệu năng.
+  - [`app.config.performance`](/api/application#app-config-performance) enables Vue-specific performance markers in Chrome DevTools' performance timeline.
+- [Vue DevTools Extension](/guide/scaling-up/tooling#browser-devtools) also provides a performance profiling feature.
 
-## Tối ưu hiệu năng tải trang {#page-load-optimizations}
+## Page Load Optimizations {#page-load-optimizations}
 
-Có nhiều khía cạnh không phụ thuộc framework để tối ưu hiệu năng tải trang. Hãy xem [hướng dẫn này trên web.dev](https://web.dev/fast/) để có cái nhìn tổng quát. Ở đây, ta sẽ chủ yếu tập trung vào những kỹ thuật riêng cho Vue.
+There are many framework-agnostic aspects for optimizing page load performance - check out [this web.dev guide](https://web.dev/fast/) for a comprehensive round up. Here, we will primarily focus on techniques that are specific to Vue.
 
-### Chọn đúng kiến trúc {#choosing-the-right-architecture}
+### Choosing the Right Architecture {#choosing-the-right-architecture}
 
-Nếu trường hợp sử dụng của bạn nhạy với hiệu năng tải trang, hãy tránh đóng gói toàn bộ dưới dạng SPA chạy hoàn toàn phía client. Bạn nên để server gửi thẳng HTML có chứa nội dung mà người dùng cần xem. Việc render hoàn toàn phía client thường có thời gian hiển thị nội dung đầu tiên chậm hơn. Điều này có thể được cải thiện bằng [Server-Side Rendering (SSR)](/guide/extras/ways-of-using-vue#fullstack-ssr) hoặc [Static Site Generation (SSG)](/guide/extras/ways-of-using-vue#jamstack-ssg). Hãy xem [SSR Guide](/guide/scaling-up/ssr) để tìm hiểu cách làm SSR với Vue. Nếu ứng dụng của bạn không đòi hỏi tương tác phong phú, bạn cũng có thể dùng một backend truyền thống để render HTML và chỉ tăng cường thêm tương tác bằng Vue ở phía client.
+If your use case is sensitive to page load performance, avoid shipping it as a pure client-side SPA. You want your server to be directly sending HTML containing the content the users want to see. Pure client-side rendering suffers from slow time-to-content. This can be mitigated with [Server-Side Rendering (SSR)](/guide/extras/ways-of-using-vue#fullstack-ssr) or [Static Site Generation (SSG)](/guide/extras/ways-of-using-vue#jamstack-ssg). Check out the [SSR Guide](/guide/scaling-up/ssr) to learn about performing SSR with Vue. If your app doesn't have rich interactivity requirements, you can also use a traditional backend server to render the HTML and enhance it with Vue on the client.
 
-Nếu phần chính của ứng dụng bắt buộc phải là SPA, nhưng bạn có thêm các trang marketing như landing page, trang giới thiệu, blog, thì hãy tách chúng ra riêng. Lý tưởng nhất là các trang marketing nên được triển khai dưới dạng HTML tĩnh với lượng JavaScript tối thiểu bằng cách dùng SSG.
+If your main application has to be an SPA, but has marketing pages (landing, about, blog), ship them separately! Your marketing pages should ideally be deployed as static HTML with minimal JS, by using SSG.
 
-### Kích thước bundle và tree-shaking {#bundle-size-and-tree-shaking}
+### Bundle Size and Tree-shaking {#bundle-size-and-tree-shaking}
 
-Một trong những cách hiệu quả nhất để cải thiện hiệu năng tải trang là gửi đi bundle JavaScript nhỏ hơn. Dưới đây là một vài cách để giảm kích thước bundle khi dùng Vue:
+One of the most effective ways to improve page load performance is shipping smaller JavaScript bundles. Here are a few ways to reduce bundle size when using Vue:
 
-- Dùng bước build nếu có thể.
+- Use a build step if possible.
 
-  - Nhiều API của Vue có thể [tree-shakable](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking) nếu được bundle bằng build tool hiện đại. Ví dụ, nếu bạn không dùng component `<Transition>` có sẵn, nó sẽ không bị đưa vào bundle production cuối cùng. Tree-shaking cũng có thể loại bỏ các module không dùng trong source code của bạn.
-  - Khi dùng bước build, template sẽ được biên dịch trước nên ta không cần gửi Vue compiler lên trình duyệt. Cách này tiết kiệm **14kb** JavaScript sau minify + gzip và tránh được chi phí compile lúc chạy.
+  - Many of Vue's APIs are ["tree-shakable"](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking) if bundled via a modern build tool. For example, if you don't use the built-in `<Transition>` component, it won't be included in the final production bundle. Tree-shaking can also remove other unused modules in your source code.
 
-- Cẩn thận với kích thước khi thêm dependency mới. Trong ứng dụng thực tế, bundle phình to thường là vì đưa vào dependency nặng mà không để ý.
+  - When using a build step, templates are pre-compiled so we don't need to ship the Vue compiler to the browser. This saves **14kb** min+gzipped JavaScript and avoids the runtime compilation cost.
 
-  - Nếu có dùng bước build, hãy ưu tiên dependency có định dạng ES module và thân thiện với tree-shaking. Ví dụ, ưu tiên `lodash-es` thay vì `lodash`.
-  - Kiểm tra kích thước của dependency và cân nhắc xem chức năng mà nó mang lại có đáng hay không. Ngay cả khi dependency hỗ trợ tree-shaking, mức tăng kích thước thực tế vẫn phụ thuộc vào những API bạn thật sự import từ nó. Những công cụ như [bundlejs.com](https://bundlejs.com/) có thể giúp kiểm tra nhanh, nhưng đo trực tiếp với thiết lập build thật của bạn vẫn luôn chính xác nhất.
+- Be cautious of size when introducing new dependencies! In real-world applications, bloated bundles are most often a result of introducing heavy dependencies without realizing it.
 
-- Nếu bạn dùng Vue chủ yếu để progressive enhancement và muốn tránh bước build, hãy cân nhắc [petite-vue](https://github.com/vuejs/petite-vue) (chỉ **6kb**).
+  - If using a build step, prefer dependencies that offer ES module formats and are tree-shaking friendly. For example, prefer `lodash-es` over `lodash`.
 
-### Code splitting {#code-splitting}
+  - Check a dependency's size and evaluate whether it is worth the functionality it provides. Note if the dependency is tree-shaking friendly, the actual size increase will depend on the APIs you actually import from it. Tools like [bundlejs.com](https://bundlejs.com/) can be used for quick checks, but measuring with your actual build setup will always be the most accurate.
 
-Code splitting là kỹ thuật để build tool tách bundle của ứng dụng thành nhiều chunk nhỏ hơn, từ đó có thể tải theo nhu cầu hoặc tải song song. Nếu tách tốt, những tính năng cần ngay khi vào trang sẽ được tải trước, còn các chunk bổ sung chỉ được lazy load khi thật sự cần, nhờ vậy cải thiện hiệu năng.
+- If you are using Vue primarily for progressive enhancement and prefer to avoid a build step, consider using [petite-vue](https://github.com/vuejs/petite-vue) (only **6kb**) instead.
 
-Các bundler như Rollup, vốn là nền tảng của Vite, hoặc webpack có thể tự động tạo split chunk bằng cách nhận diện cú pháp dynamic import của ESM:
+### Code Splitting {#code-splitting}
+
+Code splitting is where a build tool splits the application bundle into multiple smaller chunks, which can then be loaded on demand or in parallel. With proper code splitting, features required at page load can be downloaded immediately, with additional chunks being lazy loaded only when needed, thus improving performance.
+
+Bundlers like Rollup (which Vite is based upon) or webpack can automatically create split chunks by detecting the ESM dynamic import syntax:
 
 ```js
-// lazy.js và các dependency của nó sẽ được tách thành chunk riêng
-// và chỉ được tải khi `loadLazy()` được gọi.
+// lazy.js and its dependencies will be split into a separate chunk
+// and only loaded when `loadLazy()` is called.
 function loadLazy() {
   return import('./lazy.js')
 }
 ```
 
-Lazy loading phù hợp nhất với những tính năng không cần ngay sau lần tải trang đầu tiên. Trong ứng dụng Vue, ta có thể kết hợp kỹ thuật này với tính năng [Async Component](/guide/components/async) của Vue để tạo chunk riêng cho từng cây component:
+Lazy loading is best used on features that are not immediately needed after initial page load. In Vue applications, this can be used in combination with Vue's [Async Component](/guide/components/async) feature to create split chunks for component trees:
 
 ```js
 import { defineAsyncComponent } from 'vue'
 
-// một chunk riêng sẽ được tạo cho Foo.vue và các dependency của nó.
-// nó chỉ được tải khi cần, khi async component này
-// được render trên trang.
+// a separate chunk is created for Foo.vue and its dependencies.
+// it is only fetched on demand when the async component is
+// rendered on the page.
 const Foo = defineAsyncComponent(() => import('./Foo.vue'))
 ```
 
-Với ứng dụng dùng Vue Router, rất nên dùng lazy loading cho component của route. Vue Router hỗ trợ sẵn việc này, tách biệt với `defineAsyncComponent`. Xem [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html) để biết thêm chi tiết.
+For applications using Vue Router, it is strongly recommended to use lazy loading for route components. Vue Router has explicit support for lazy loading, separate from `defineAsyncComponent`. See [Lazy Loading Routes](https://router.vuejs.org/guide/advanced/lazy-loading.html) for more details.
 
-## Tối ưu hiệu năng cập nhật {#update-optimizations}
+## Update Optimizations {#update-optimizations}
 
-### Độ ổn định của props {#props-stability}
+### Props Stability {#props-stability}
 
-Trong Vue, một component con chỉ cập nhật khi ít nhất một prop mà nó nhận được thay đổi. Hãy xem ví dụ sau:
+In Vue, a child component only updates when at least one of its received props has changed. Consider the following example:
 
 ```vue-html
 <ListItem
@@ -99,9 +103,9 @@ Trong Vue, một component con chỉ cập nhật khi ít nhất một prop mà 
   :active-id="activeId" />
 ```
 
-Bên trong component `<ListItem>`, nó dùng `id` và `activeId` để xác định xem có phải item hiện đang active hay không. Cách này chạy được, nhưng vấn đề là mỗi khi `activeId` thay đổi, **mọi** `<ListItem>` trong danh sách đều phải cập nhật.
+Inside the `<ListItem>` component, it uses its `id` and `activeId` props to determine whether it is the currently active item. While this works, the problem is that whenever `activeId` changes, **every** `<ListItem>` in the list has to update!
 
-Lý tưởng nhất là chỉ những item có trạng thái active thay đổi mới cần cập nhật. Ta có thể làm vậy bằng cách chuyển phần tính toán trạng thái active lên component cha, rồi để `<ListItem>` nhận trực tiếp một prop `active`:
+Ideally, only the items whose active status changed should update. We can achieve that by moving the active status computation into the parent, and make `<ListItem>` directly accept an `active` prop instead:
 
 ```vue-html
 <ListItem
@@ -110,19 +114,19 @@ Lý tưởng nhất là chỉ những item có trạng thái active thay đổi 
   :active="item.id === activeId" />
 ```
 
-Giờ đây, với đa số component, prop `active` sẽ không đổi khi `activeId` thay đổi, nên chúng không còn cần cập nhật nữa. Nói chung, ý tưởng là giữ cho các prop truyền xuống component con ổn định nhất có thể.
+Now, for most components the `active` prop will remain the same when `activeId` changes, so they no longer need to update. In general, the idea is keeping the props passed to child components as stable as possible.
 
 ### `v-once` {#v-once}
 
-`v-once` là một directive có sẵn, dùng để render nội dung phụ thuộc vào dữ liệu lúc chạy nhưng sau đó không bao giờ cần cập nhật nữa. Toàn bộ cây con mà nó được gắn vào sẽ bị bỏ qua trong mọi lần cập nhật về sau. Xem [API reference](/api/built-in-directives#v-once) để biết thêm chi tiết.
+`v-once` is a built-in directive that can be used to render content that relies on runtime data but never needs to update. The entire sub-tree it is used on will be skipped for all future updates. Consult its [API reference](/api/built-in-directives#v-once) for more details.
 
 ### `v-memo` {#v-memo}
 
-`v-memo` là một directive có sẵn, dùng để bỏ qua có điều kiện việc cập nhật những cây con lớn hoặc các danh sách `v-for`. Xem [API reference](/api/built-in-directives#v-memo) để biết thêm chi tiết.
+`v-memo` is a built-in directive that can be used to conditionally skip the update of large sub-trees or `v-for` lists. Consult its [API reference](/api/built-in-directives#v-memo) for more details.
 
-### Độ ổn định của computed {#computed-stability}
+### Computed Stability {#computed-stability}
 
-Từ Vue 3.4 trở lên, một thuộc tính computed chỉ kích hoạt effect khi giá trị tính ra của nó đã thay đổi so với lần trước. Ví dụ, computed `isEven` dưới đây chỉ kích hoạt effect nếu giá trị trả về đổi từ `true` sang `false`, hoặc ngược lại:
+In Vue 3.4 and above, a computed property will only trigger effects when its computed value has changed from the previous one. For example, the following `isEven` computed only triggers effects if the returned value has changed from `true` to `false`, or vice-versa:
 
 ```js
 const count = ref(0)
@@ -130,12 +134,12 @@ const isEven = computed(() => count.value % 2 === 0)
 
 watchEffect(() => console.log(isEven.value)) // true
 
-// sẽ không log thêm vì giá trị computed vẫn là `true`
+// will not trigger new logs because the computed value stays `true`
 count.value = 2
 count.value = 4
 ```
 
-Điều này giúp giảm các lần kích hoạt effect không cần thiết. Tuy vậy, nó sẽ không hiệu quả nếu computed tạo ra một object mới ở mỗi lần tính:
+This reduces unnecessary effect triggers, but unfortunately doesn't work if the computed creates a new object on each compute:
 
 ```js
 const computedObj = computed(() => {
@@ -145,9 +149,9 @@ const computedObj = computed(() => {
 })
 ```
 
-Vì một object mới được tạo ra mỗi lần, nên về mặt kỹ thuật giá trị mới luôn khác giá trị cũ. Ngay cả khi property `isEven` vẫn không đổi, Vue cũng không thể biết điều đó nếu không thực hiện so sánh sâu giữa giá trị cũ và giá trị mới. Việc so sánh như vậy có thể tốn kém và thường không đáng.
+Because a new object is created each time, the new value is technically always different from the old value. Even if the `isEven` property remains the same, Vue won't be able to know unless it performs a deep comparison of the old value and the new value. Such comparison could be expensive and likely not worth it.
 
-Thay vào đó, ta có thể tối ưu bằng cách tự so sánh giá trị mới với giá trị cũ, rồi chỉ trả lại giá trị cũ nếu biết chắc là không có gì đổi:
+Instead, we can optimize this by manually comparing the new value with the old value, and conditionally returning the old value if we know nothing has changed:
 
 ```js
 const computedObj = computed((oldValue) => {
@@ -161,45 +165,45 @@ const computedObj = computed((oldValue) => {
 })
 ```
 
-[Thử trên Playground](https://play.vuejs.org/#eNqVVMtu2zAQ/JUFgSZK4UpuczMkow/40AJ9IC3aQ9mDIlG2EokUyKVt1PC/d0lKtoEminMQQC1nZ4c7S+7Yu66L11awGUtNoesOwQi03ZzLuu2URtiBFtUECtV2FkU5gU2OxWpRVaJA2EOlVQuXxHDJJZeFkgYJayVC5hKj6dUxLnzSjZXmV40rZfFrh3Vb/82xVrLH//5DCQNNKPkweNiNVFP+zBsrIJvDjksgGrRahjVAbRZrIWdBVLz2yBfwBrIsg6mD7LncPyryfIVnywupUmz68HOEEqqCI+XFBQzrOKR79MDdx66GCn1jhpQDZx8f0oZ+nBgdRVcH/aMuBt1xZ80qGvGvh/X6nlXwnGpPl6qsLLxTtitzFFTNl0oSN/79AKOCHHQuS5pw4XorbXsr9ImHZN7nHFdx1SilI78MeOJ7Ca+nbvgd+GgomQOv6CNjSQqXaRJuHd03+kHRdg3JoT+A3a7XsfcmpbcWkQS/LZq6uM84C8o5m4fFuOg0CemeOXXX2w2E6ylsgj2gTgeYio/f1l5UEqj+Z3yC7lGuNDlpApswNNTrql7Gd0ZJeqW8TZw5t+tGaMdDXnA2G4acs7xp1OaTj6G2YjLEi5Uo7h+I35mti3H2TQsj9Jp6etjDXC8Fhu3F9y9iS+vDZqtK2xB6ZPNGGNVYpzHA3ltZkuwTnFf70b+1tVz+MIstCmmGQzmh/p56PGf00H4YOfpR7nV8PTxubP8P2GAP9Q==)
+[Try it in the playground](https://play.vuejs.org/#eNqVVMtu2zAQ/JUFgSZK4UpuczMkow/40AJ9IC3aQ9mDIlG2EokUyKVt1PC/d0lKtoEminMQQC1nZ4c7S+7Yu66L11awGUtNoesOwQi03ZzLuu2URtiBFtUECtV2FkU5gU2OxWpRVaJA2EOlVQuXxHDJJZeFkgYJayVC5hKj6dUxLnzSjZXmV40rZfFrh3Vb/82xVrLH//5DCQNNKPkweNiNVFP+zBsrIJvDjksgGrRahjVAbRZrIWdBVLz2yBfwBrIsg6mD7LncPyryfIVnywupUmz68HOEEqqCI+XFBQzrOKR79MDdx66GCn1jhpQDZx8f0oZ+nBgdRVcH/aMuBt1xZ80qGvGvh/X6nlXwnGpPl6qsLLxTtitzFFTNl0oSN/79AKOCHHQuS5pw4XorbXsr9ImHZN7nHFdx1SilI78MeOJ7Ca+nbvgd+GgomQOv6CNjSQqXaRJuHd03+kHRdg3JoT+A3a7XsfcmpbcWkQS/LZq6uM84C8o5m4fFuOg0CemeOXXX2w2E6ylsgj2gTgeYio/f1l5UEqj+Z3yC7lGuNDlpApswNNTrql7Gd0ZJeqW8TZw5t+tGaMdDXnA2G4acs7xp1OaTj6G2YjLEi5Uo7h+I35mti3H2TQsj9Jp6etjDXC8Fhu3F9y9iS+vDZqtK2xB6ZPNGGNVYpzHA3ltZkuwTnFf70b+1tVz+MIstCmmGQzmh/p56PGf00H4YOfpR7nV8PTxubP8P2GAP9Q==)
 
-Lưu ý là bạn luôn nên thực hiện đầy đủ phép tính trước khi so sánh và trả lại giá trị cũ, để cùng một tập dependency vẫn được thu thập ở mỗi lần chạy.
+Note that you should always perform the full computation before comparing and returning the old value, so that the same dependencies can be collected on every run.
 
-## Tối ưu tổng quát {#general-optimizations}
+## General Optimizations {#general-optimizations}
 
-> Các mẹo dưới đây ảnh hưởng tới cả hiệu năng tải trang lẫn hiệu năng cập nhật.
+> The following tips affect both page load and update performance.
 
-### Virtualize danh sách lớn {#virtualize-large-lists}
+### Virtualize Large Lists {#virtualize-large-lists}
 
-Một trong những vấn đề hiệu năng phổ biến nhất trong mọi ứng dụng frontend là render danh sách lớn. Dù framework có nhanh đến đâu, việc render một danh sách với hàng nghìn item **vẫn** chậm vì trình duyệt phải xử lý quá nhiều DOM node.
+One of the most common performance issues in all frontend applications is rendering large lists. No matter how performant a framework is, rendering a list with thousands of items **will** be slow due to the sheer number of DOM nodes that the browser needs to handle.
 
-Tuy vậy, ta không nhất thiết phải render toàn bộ số node đó ngay từ đầu. Trong phần lớn trường hợp, kích thước màn hình của người dùng chỉ hiển thị được một phần nhỏ trong danh sách lớn. Ta có thể cải thiện hiệu năng rất nhiều bằng **list virtualization**, tức là chỉ render những item hiện đang nằm trong hoặc gần viewport.
+However, we don't necessarily have to render all these nodes upfront. In most cases, the user's screen size can display only a small subset of our large list. We can greatly improve the performance with **list virtualization**, the technique of only rendering the items that are currently in or close to the viewport in a large list.
 
-Việc tự cài list virtualization không hề đơn giản. May là đã có các thư viện cộng đồng mà bạn có thể dùng ngay:
+Implementing list virtualization isn't easy, luckily there are existing community libraries that you can directly use:
 
 - [vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller)
 - [vue-virtual-scroll-grid](https://github.com/rocwang/vue-virtual-scroll-grid)
 - [vueuc/VVirtualList](https://github.com/07akioni/vueuc)
 
-### Giảm overhead của tính phản ứng với cấu trúc lớn nhưng bất biến {#reduce-reactivity-overhead-for-large-immutable-structures}
+### Reduce Reactivity Overhead for Large Immutable Structures {#reduce-reactivity-overhead-for-large-immutable-structures}
 
-Hệ thống tính phản ứng của Vue mặc định là sâu. Điều này giúp việc quản lý state tự nhiên hơn, nhưng cũng tạo ra một mức overhead nhất định khi dữ liệu quá lớn, vì mỗi lần truy cập property đều đi qua proxy trap để theo dõi dependency. Điều này thường thấy rõ khi làm việc với những mảng lớn chứa các object lồng nhau sâu, nơi chỉ một lần render cũng có thể đọc hơn 100.000 property. Tuy nhiên, nó chỉ ảnh hưởng đến những trường hợp khá đặc thù.
+Vue's reactivity system is deep by default. While this makes state management intuitive, it does create a certain level of overhead when the data size is large, because every property access triggers proxy traps that perform dependency tracking. This typically becomes noticeable when dealing with large arrays of deeply nested objects, where a single render needs to access 100,000+ properties, so it should only affect very specific use cases.
 
-Vue có cung cấp một lối thoát để bỏ qua tính phản ứng sâu, bằng cách dùng [`shallowRef()`](/api/reactivity-advanced#shallowref) và [`shallowReactive()`](/api/reactivity-advanced#shallowreactive). Các API shallow tạo ra state chỉ phản ứng ở cấp gốc, còn mọi object lồng bên trong sẽ được giữ nguyên. Nhờ đó, việc truy cập property lồng bên trong sẽ nhanh hơn, đổi lại là giờ đây ta phải xem toàn bộ object lồng bên trong là bất biến, và chỉ có thể kích hoạt cập nhật bằng cách thay thế state ở gốc:
+Vue does provide an escape hatch to opt-out of deep reactivity by using [`shallowRef()`](/api/reactivity-advanced#shallowref) and [`shallowReactive()`](/api/reactivity-advanced#shallowreactive). Shallow APIs create state that is reactive only at the root level, and exposes all nested objects untouched. This keeps nested property access fast, with the trade-off being that we must now treat all nested objects as immutable, and updates can only be triggered by replacing the root state:
 
 ```js
 const shallowArray = shallowRef([
-  /* danh sách lớn gồm các object lồng nhau sâu */
+  /* big list of deep objects */
 ])
 
-// cách này sẽ không kích hoạt cập nhật...
+// this won't trigger updates...
 shallowArray.value.push(newObject)
-// còn cách này thì có:
+// this does:
 shallowArray.value = [...shallowArray.value, newObject]
 
-// cách này cũng sẽ không kích hoạt cập nhật...
+// this won't trigger updates...
 shallowArray.value[0].foo = 1
-// còn cách này thì có:
+// this does:
 shallowArray.value = [
   {
     ...shallowArray.value[0],
@@ -209,8 +213,8 @@ shallowArray.value = [
 ]
 ```
 
-### Tránh trừu tượng hóa component không cần thiết {#avoid-unnecessary-component-abstractions}
+### Avoid Unnecessary Component Abstractions {#avoid-unnecessary-component-abstractions}
 
-Đôi khi ta tạo ra [renderless component](/guide/components/slots#renderless-components) hoặc higher-order component, tức component render ra component khác cùng với prop bổ sung, để có mức trừu tượng hoặc tổ chức code tốt hơn. Điều này không sai, nhưng cần nhớ rằng instance của component tốn chi phí hơn nhiều so với DOM node thông thường. Nếu tạo quá nhiều component chỉ vì mô hình trừu tượng hóa, bạn sẽ phải trả giá về hiệu năng.
+Sometimes we may create [renderless components](/guide/components/slots#renderless-components) or higher-order components (i.e. components that render other components with extra props) for better abstraction or code organization. While there is nothing wrong with this, do keep in mind that component instances are much more expensive than plain DOM nodes, and creating too many of them due to abstraction patterns will incur performance costs.
 
-Lưu ý là nếu chỉ giảm đi một vài instance thì thường sẽ không có khác biệt đáng kể, nên không cần quá lo nếu component đó chỉ render vài lần trong ứng dụng. Tình huống đáng để cân nhắc tối ưu này vẫn là trong các danh sách lớn. Hãy tưởng tượng một danh sách 100 item mà mỗi item component lại chứa rất nhiều component con. Chỉ cần bỏ đi một lớp trừu tượng component không cần thiết ở đây cũng có thể giảm đi hàng trăm component instance.
+Note that reducing only a few instances won't have noticeable effect, so don't sweat it if the component is rendered only a few times in the app. The best scenario to consider this optimization is again in large lists. Imagine a list of 100 items where each item component contains many child components. Removing one unnecessary component abstraction here could result in a reduction of hundreds of component instances.

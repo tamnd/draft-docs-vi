@@ -1,6 +1,6 @@
-# Watcher {#watchers}
+# Watchers {#watchers}
 
-Đôi khi chúng ta có thể cần thực hiện "side effect" một cách reactive - ví dụ: in một số vào console khi nó thay đổi. Chúng ta có thể đạt điều này với watcher:
+Sometimes we may need to perform "side effects" reactively - for example, logging a number to the console when it changes. We can achieve this with watchers:
 
 <div class="composition-api">
 
@@ -10,12 +10,12 @@ import { ref, watch } from 'vue'
 const count = ref(0)
 
 watch(count, (newCount) => {
-  // đúng, console.log() là một side effect
+  // yes, console.log() is a side effect
   console.log(`new count is: ${newCount}`)
 })
 ```
 
-`watch()` có thể trực tiếp theo dõi một ref, và callback được kích hoạt bất cứ khi nào giá trị của `count` thay đổi. `watch()` cũng có thể theo dõi các loại nguồn dữ liệu khác - chi tiết thêm được đề cập trong <a target="_blank" href="/guide/essentials/watchers.html">Hướng dẫn - Watcher</a>.
+`watch()` can directly watch a ref, and the callback gets fired whenever `count`'s value changes. `watch()` can also watch other types of data sources - more details are covered in <a target="_blank" href="/guide/essentials/watchers.html">Guide - Watchers</a>.
 
 </div>
 <div class="options-api">
@@ -29,15 +29,15 @@ export default {
   },
   watch: {
     count(newCount) {
-      // đúng, console.log() là một side effect
+      // yes, console.log() is a side effect
       console.log(`new count is: ${newCount}`)
     }
   }
 }
 ```
 
-Ở đây, chúng ta dùng tùy chọn `watch` để theo dõi các thay đổi của thuộc tính `count`. Callback watch được gọi khi `count` thay đổi, và nhận giá trị mới làm đối số. Chi tiết thêm được đề cập trong <a target="_blank" href="/guide/essentials/watchers.html">Hướng dẫn - Watcher</a>.
+Here, we are using the `watch` option to watch changes to the `count` property. The watch callback is called when `count` changes, and receives the new value as the argument. More details are covered in <a target="_blank" href="/guide/essentials/watchers.html">Guide - Watchers</a>.
 
 </div>
 
-Một ví dụ thực tế hơn là lấy dữ liệu mới khi một ID thay đổi, thay vì chỉ log ra console. Code hiện tại lấy dữ liệu todo từ một mock API khi component mount. Ngoài ra còn có một nút để tăng ID của todo cần lấy. Hãy thử triển khai một watcher để lấy todo mới mỗi khi nút được nhấn.
+A more practical example than logging to the console would be fetching new data when an ID changes. The code we have is fetching todos data from a mock API on component mount. There is also a button that increments the todo ID that should be fetched. Try to implement a watcher that fetches a new todo when the button is clicked.

@@ -1,19 +1,19 @@
-# Ràng buộc thuộc tính {#attribute-bindings}
+# Attribute Bindings {#attribute-bindings}
 
-Trong Vue, mustache chỉ dùng cho nội suy text. Để bind một thuộc tính vào giá trị động, chúng ta dùng directive `v-bind`:
+In Vue, mustaches are only used for text interpolation. To bind an attribute to a dynamic value, we use the `v-bind` directive:
 
 ```vue-html
 <div v-bind:id="dynamicId"></div>
 ```
 
-Một **directive** là thuộc tính đặc biệt bắt đầu bằng tiền tố `v-`. Chúng là một phần của cú pháp template Vue. Tương tự nội suy text, giá trị directive là biểu thức JavaScript có quyền truy cập state của component. Chi tiết đầy đủ về `v-bind` và cú pháp directive được thảo luận trong <a target="_blank" href="/guide/essentials/template-syntax.html">Hướng dẫn - Cú pháp Template</a>.
+A **directive** is a special attribute that starts with the `v-` prefix. They are part of Vue's template syntax. Similar to text interpolations, directive values are JavaScript expressions that have access to the component's state. The full details of `v-bind` and directive syntax are discussed in <a target="_blank" href="/guide/essentials/template-syntax.html">Guide - Template Syntax</a>.
 
-Phần sau dấu hai chấm (`:id`) là "đối số" của directive. Ở đây, thuộc tính `id` của element sẽ được đồng bộ với thuộc tính `dynamicId` từ state của component.
+The part after the colon (`:id`) is the "argument" of the directive. Here, the element's `id` attribute will be synced with the `dynamicId` property from the component's state.
 
-Vì `v-bind` được dùng rất thường xuyên, nó có cú pháp viết tắt riêng:
+Because `v-bind` is used so frequently, it has a dedicated shorthand syntax:
 
 ```vue-html
 <div :id="dynamicId"></div>
 ```
 
-Bây giờ, hãy thử thêm binding `class` động vào `<h1>`, dùng <span class="options-api">data property</span><span class="composition-api">ref</span> `titleClass` làm giá trị của nó. Nếu được bind đúng, text sẽ chuyển sang màu đỏ.
+Now, try to add a dynamic `class` binding to the `<h1>`, using the `titleClass` <span class="options-api">data property</span><span class="composition-api">ref</span> as its value. If it's bound correctly, the text should turn red.

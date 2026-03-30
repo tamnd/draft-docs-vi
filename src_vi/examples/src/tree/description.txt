@@ -1,0 +1,2 @@
+Một component cây lồng nhau tự render đệ quy.
+Bạn có thể double click vào một mục để biến nó thành folder.

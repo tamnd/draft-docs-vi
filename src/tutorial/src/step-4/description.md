@@ -1,12 +1,12 @@
 # Event Listeners {#event-listeners}
 
-Chúng ta có thể lắng nghe sự kiện DOM bằng directive `v-on`:
+We can listen to DOM events using the `v-on` directive:
 
 ```vue-html
 <button v-on:click="increment">{{ count }}</button>
 ```
 
-Do được dùng thường xuyên, `v-on` cũng có cú pháp viết tắt:
+Due to its frequent use, `v-on` also has a shorthand syntax:
 
 ```vue-html
 <button @click="increment">{{ count }}</button>
@@ -14,7 +14,7 @@ Do được dùng thường xuyên, `v-on` cũng có cú pháp viết tắt:
 
 <div class="options-api">
 
-Ở đây, `increment` tham chiếu một hàm được khai báo bằng tùy chọn `methods`:
+Here, `increment` references a function declared using the `methods` option:
 
 <div class="sfc">
 
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     increment() {
-      // cập nhật state component
+      // update component state
       this.count++
     }
   }
@@ -46,7 +46,7 @@ createApp({
   },
   methods: {
     increment() {
-      // cập nhật state component
+      // update component state
       this.count++
     }
   }
@@ -55,7 +55,7 @@ createApp({
 
 </div>
 
-Bên trong method, chúng ta có thể truy cập component instance bằng `this`. Component instance expose các data property được khai báo bởi `data`. Chúng ta có thể cập nhật state component bằng cách thay đổi các thuộc tính này.
+Inside a method, we can access the component instance using `this`. The component instance exposes the data properties declared by `data`. We can update the component state by mutating these properties.
 
 </div>
 
@@ -63,7 +63,7 @@ Bên trong method, chúng ta có thể truy cập component instance bằng `thi
 
 <div class="sfc">
 
-Ở đây, `increment` tham chiếu một hàm được khai báo trong `<script setup>`:
+Here, `increment` is referencing a function declared in `<script setup>`:
 
 ```vue{6-9}
 <script setup>
@@ -72,7 +72,7 @@ import { ref } from 'vue'
 const count = ref(0)
 
 function increment() {
-  // cập nhật state component
+  // update component state
   count.value++
 }
 </script>
@@ -82,14 +82,14 @@ function increment() {
 
 <div class="html">
 
-Ở đây, `increment` tham chiếu một method trong object được trả về từ `setup()`:
+Here, `increment` is referencing a method in the object returned from `setup()`:
 
 ```js{$}
 setup() {
   const count = ref(0)
 
   function increment(e) {
-    // cập nhật state component
+    // update component state
     count.value++
   }
 
@@ -102,10 +102,10 @@ setup() {
 
 </div>
 
-Bên trong hàm, chúng ta có thể cập nhật state component bằng cách thay đổi ref.
+Inside the function, we can update the component state by mutating refs.
 
 </div>
 
-Event handler cũng có thể dùng biểu thức inline, và có thể đơn giản hóa các tác vụ phổ biến bằng modifier. Các chi tiết này được đề cập trong <a target="_blank" href="/guide/essentials/event-handling.html">Hướng dẫn - Xử lý Sự kiện</a>.
+Event handlers can also use inline expressions, and can simplify common tasks with modifiers. These details are covered in <a target="_blank" href="/guide/essentials/event-handling.html">Guide - Event Handling</a>.
 
-Bây giờ, hãy thử tự triển khai <span class="options-api">method</span><span class="composition-api">hàm</span> `increment` và bind nó vào nút bằng `v-on`.
+Now, try to implement the `increment` <span class="options-api">method</span><span class="composition-api">function</span> yourself and bind it to the button using `v-on`.

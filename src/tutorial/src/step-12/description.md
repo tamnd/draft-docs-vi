@@ -1,6 +1,6 @@
 # Props {#props}
 
-Một component con có thể nhận đầu vào từ cha qua **props**. Đầu tiên, nó cần khai báo các props mà nó chấp nhận:
+A child component can accept input from the parent via **props**. First, it needs to declare the props it accepts:
 
 <div class="composition-api">
 <div class="sfc">
@@ -13,25 +13,25 @@ const props = defineProps({
 </script>
 ```
 
-Lưu ý `defineProps()` là compile-time macro và không cần được import. Sau khi khai báo, prop `msg` có thể dùng trong template của component con. Nó cũng có thể được truy cập trong JavaScript qua object được trả về của `defineProps()`.
+Note `defineProps()` is a compile-time macro and doesn't need to be imported. Once declared, the `msg` prop can be used in the child component's template. It can also be accessed in JavaScript via the returned object of `defineProps()`.
 
 </div>
 
 <div class="html">
 
 ```js
-// trong component con
+// in child component
 export default {
   props: {
     msg: String
   },
   setup(props) {
-    // truy cập props.msg
+    // access props.msg
   }
 }
 ```
 
-Sau khi khai báo, prop `msg` được expose trên `this` và có thể dùng trong template của component con. Các props nhận được được truyền vào `setup()` làm đối số đầu tiên.
+Once declared, the `msg` prop is exposed on `this` and can be used in the child component's template. The received props are passed to `setup()` as the first argument.
 
 </div>
 
@@ -40,7 +40,7 @@ Sau khi khai báo, prop `msg` được expose trên `this` và có thể dùng t
 <div class="options-api">
 
 ```js
-// trong component con
+// in child component
 export default {
   props: {
     msg: String
@@ -48,11 +48,11 @@ export default {
 }
 ```
 
-Sau khi khai báo, prop `msg` được expose trên `this` và có thể dùng trong template của component con.
+Once declared, the `msg` prop is exposed on `this` and can be used in the child component's template.
 
 </div>
 
-Cha có thể truyền prop cho con giống như thuộc tính. Để truyền giá trị động, chúng ta cũng có thể dùng cú pháp `v-bind`:
+The parent can pass the prop to the child just like attributes. To pass a dynamic value, we can also use the `v-bind` syntax:
 
 <div class="sfc">
 
@@ -69,4 +69,4 @@ Cha có thể truyền prop cho con giống như thuộc tính. Để truyền g
 
 </div>
 
-Bây giờ hãy thử tự mình làm trong trình soạn thảo.
+Now try it yourself in the editor.

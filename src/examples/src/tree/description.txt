@@ -1,2 +1,2 @@
-Một component cây lồng nhau tự render đệ quy.
-Bạn có thể double click vào một mục để biến nó thành folder.
+A nested tree component that recursively renders itself.
+You can double click on an item to turn it into a folder.

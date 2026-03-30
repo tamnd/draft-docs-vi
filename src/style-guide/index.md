@@ -2,44 +2,44 @@
 outline: deep
 ---
 
-# Hướng dẫn Phong cách {#style-guide}
+# Style Guide {#style-guide}
 
-::: warning Lưu ý
-Hướng dẫn phong cách Vue.js này đã lỗi thời và cần được xem xét lại. Nếu bạn có câu hỏi hoặc gợi ý, vui lòng [mở issue](https://github.com/vuejs/docs/issues/new).
+::: warning Note
+This Vue.js Style Guide is outdated and needs to be reviewed. If you have any questions or suggestions, please [open an issue](https://github.com/vuejs/docs/issues/new).
 :::
 
-Đây là hướng dẫn phong cách chính thức cho code đặc thù Vue. Nếu bạn dùng Vue trong dự án, đây là tài liệu tham khảo hữu ích để tránh lỗi, tranh luận không cần thiết và các anti-pattern. Tuy nhiên, chúng tôi không cho rằng bất kỳ hướng dẫn phong cách nào là lý tưởng cho mọi nhóm hay dự án, vì vậy hãy tự điều chỉnh có chủ ý dựa trên kinh nghiệm thực tế, tech stack hiện tại và giá trị cá nhân.
+This is the official style guide for Vue-specific code. If you use Vue in a project, it's a great reference to avoid errors, bikeshedding, and anti-patterns. However, we don't believe that any style guide is ideal for all teams or projects, so mindful deviations are encouraged based on past experience, the surrounding tech stack, and personal values.
 
-Phần lớn, chúng tôi cũng tránh đề xuất về JavaScript hay HTML nói chung. Chúng tôi không quan tâm bạn có dùng dấu chấm phẩy hay trailing comma hay không. Chúng tôi cũng không quan tâm HTML của bạn dùng nháy đơn hay nháy đôi cho giá trị thuộc tính. Tuy nhiên sẽ có một số ngoại lệ khi chúng tôi thấy một pattern cụ thể hữu ích trong ngữ cảnh Vue.
+For the most part, we also avoid suggestions about JavaScript or HTML in general. We don't mind whether you use semicolons or trailing commas. We don't mind whether your HTML uses single-quotes or double-quotes for attribute values. Some exceptions will exist however, where we've found that a particular pattern is helpful in the context of Vue.
 
-Cuối cùng, chúng tôi chia các quy tắc thành bốn danh mục:
+Finally, we've split rules into four categories:
 
-## Danh mục Quy tắc {#rule-categories}
+## Rule Categories {#rule-categories}
 
-### Ưu tiên A: Thiết yếu (Ngăn ngừa Lỗi) {#priority-a-essential-error-prevention}
+### Priority A: Essential (Error Prevention) {#priority-a-essential-error-prevention}
 
-Các quy tắc này giúp ngăn ngừa lỗi, vì vậy hãy học và tuân thủ chúng bằng mọi giá. Có thể có ngoại lệ, nhưng phải rất hiếm và chỉ được thực hiện bởi những người có kiến thức chuyên sâu về cả JavaScript và Vue.
+These rules help prevent errors, so learn and abide by them at all costs. Exceptions may exist, but should be very rare and only be made by those with expert knowledge of both JavaScript and Vue.
 
-- [Xem tất cả quy tắc ưu tiên A](./rules-essential)
+- [See all priority A rules](./rules-essential)
 
-### Ưu tiên B: Rất Khuyến nghị {#priority-b-strongly-recommended}
+### Priority B: Strongly Recommended {#priority-b-strongly-recommended}
 
-Các quy tắc này được phát hiện là cải thiện khả năng đọc và/hoặc trải nghiệm phát triển trong hầu hết các dự án. Code của bạn vẫn chạy nếu vi phạm chúng, nhưng vi phạm phải hiếm và có lý do chính đáng.
+These rules have been found to improve readability and/or developer experience in most projects. Your code will still run if you violate them, but violations should be rare and well-justified.
 
-- [Xem tất cả quy tắc ưu tiên B](./rules-strongly-recommended)
+- [See all priority B rules](./rules-strongly-recommended)
 
-### Ưu tiên C: Khuyến nghị {#priority-c-recommended}
+### Priority C: Recommended {#priority-c-recommended}
 
-Khi có nhiều lựa chọn tốt như nhau, có thể chọn tùy ý để đảm bảo nhất quán. Trong các quy tắc này, chúng tôi mô tả từng lựa chọn chấp nhận được và đề xuất mặc định. Điều đó có nghĩa là bạn hoàn toàn có thể chọn khác trong codebase của mình, miễn là nhất quán và có lý do chính đáng. Hãy thực sự có lý do! Khi thích nghi với tiêu chuẩn cộng đồng, bạn sẽ:
+Where multiple, equally good options exist, an arbitrary choice can be made to ensure consistency. In these rules, we describe each acceptable option and suggest a default choice. That means you can feel free to make a different choice in your own codebase, as long as you're consistent and have a good reason. Please do have a good reason though! By adapting to the community standard, you will:
 
-1. Rèn não để phân tích phần lớn code cộng đồng dễ dàng hơn
-2. Có thể sao chép dán hầu hết ví dụ code của cộng đồng mà không cần sửa đổi
-3. Thường thấy nhân viên mới đã quen với phong cách code bạn ưa thích, ít nhất liên quan đến Vue
+1. Train your brain to more easily parse most of the community code you encounter
+2. Be able to copy and paste most community code examples without modification
+3. Often find new hires are already accustomed to your preferred coding style, at least in regards to Vue
 
-- [Xem tất cả quy tắc ưu tiên C](./rules-recommended)
+- [See all priority C rules](./rules-recommended)
 
-### Ưu tiên D: Dùng Cẩn thận {#priority-d-use-with-caution}
+### Priority D: Use with Caution {#priority-d-use-with-caution}
 
-Một số tính năng của Vue tồn tại để hỗ trợ các trường hợp ngoại lệ hiếm gặp hoặc migration mượt mà hơn từ codebase cũ. Tuy nhiên khi lạm dụng, chúng có thể làm code khó bảo trì hơn hoặc thậm chí trở thành nguồn gốc của lỗi. Các quy tắc này làm nổi bật những tính năng tiềm ẩn rủi ro, mô tả khi nào và tại sao nên tránh chúng.
+Some features of Vue exist to accommodate rare edge cases or smoother migrations from a legacy code base. When overused however, they can make your code more difficult to maintain or even become a source of bugs. These rules shine a light on potentially risky features, describing when and why they should be avoided.
 
-- [Xem tất cả quy tắc ưu tiên D](./rules-use-with-caution)
+- [See all priority D rules](./rules-use-with-caution)

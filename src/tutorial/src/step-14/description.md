@@ -1,12 +1,12 @@
-# Slot {#slots}
+# Slots {#slots}
 
-Ngoài việc truyền dữ liệu qua props, component cha cũng có thể truyền các đoạn template xuống con qua **slot**:
+In addition to passing data via props, the parent component can also pass down template fragments to the child via **slots**:
 
 <div class="sfc">
 
 ```vue-html
 <ChildComp>
-  Đây là một số nội dung slot!
+  This is some slot content!
 </ChildComp>
 ```
 
@@ -15,18 +15,18 @@ Ngoài việc truyền dữ liệu qua props, component cha cũng có thể truy
 
 ```vue-html
 <child-comp>
-  Đây là một số nội dung slot!
+  This is some slot content!
 </child-comp>
 ```
 
 </div>
 
-Trong component con, nó có thể render nội dung slot từ cha bằng cách dùng element `<slot>` làm outlet:
+In the child component, it can render the slot content from the parent using the `<slot>` element as outlet:
 
 <div class="sfc">
 
 ```vue-html
-<!-- trong template con -->
+<!-- in child template -->
 <slot/>
 ```
 
@@ -34,16 +34,16 @@ Trong component con, nó có thể render nội dung slot từ cha bằng cách 
 <div class="html">
 
 ```vue-html
-<!-- trong template con -->
+<!-- in child template -->
 <slot></slot>
 ```
 
 </div>
 
-Nội dung bên trong outlet `<slot>` sẽ được coi là nội dung "dự phòng": nó sẽ được hiển thị nếu cha không truyền bất kỳ nội dung slot nào:
+Content inside the `<slot>` outlet will be treated as "fallback" content: it will be displayed if the parent did not pass down any slot content:
 
 ```vue-html
-<slot>Nội dung dự phòng</slot>
+<slot>Fallback content</slot>
 ```
 
-Hiện tại chúng ta không truyền bất kỳ nội dung slot nào cho `<ChildComp>`, vì vậy bạn sẽ thấy nội dung dự phòng. Hãy cung cấp một số nội dung slot cho con trong khi tận dụng state `msg` của cha.
+Currently we are not passing any slot content to `<ChildComp>`, so you should see the fallback content. Let's provide some slot content to the child while making use of the parent's `msg` state.

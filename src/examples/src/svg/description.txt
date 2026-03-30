@@ -1,1 +1,1 @@
-Một biểu đồ SVG
+An SVG graph

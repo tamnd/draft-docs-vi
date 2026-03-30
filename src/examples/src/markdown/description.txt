@@ -1,1 +1,1 @@
-Một trình chỉnh sửa markdown đơn giản.
+A simple markdown editor.

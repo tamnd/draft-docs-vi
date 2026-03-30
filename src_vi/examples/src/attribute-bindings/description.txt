@@ -1,0 +1,2 @@
+Ở đây chúng ta ràng buộc các thuộc tính / property của element vào state theo kiểu reactive.
+Cú pháp :title là viết tắt của v-bind:title.

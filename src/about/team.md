@@ -1,6 +1,6 @@
 ---
 page: true
-title: Gặp gỡ Nhóm
+title: Meet the Team
 ---
 
 <script setup>

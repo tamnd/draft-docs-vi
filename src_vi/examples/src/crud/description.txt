@@ -1,0 +1,2 @@
+Bài toán CRUD (tạo, đọc, cập nhật, xóa) trong chuỗi 7GUIs.
+https://eugenkiss.github.io/7guis/tasks/#crud

@@ -1,0 +1,1 @@
+Chúng ta có thể tạo ràng buộc hai chiều giữa state và input của form bằng directive v-model.

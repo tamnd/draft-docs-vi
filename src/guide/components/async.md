@@ -1,24 +1,24 @@
-# Async Component {#async-components}
+# Async Components {#async-components}
 
-## Cách Dùng Cơ Bản {#basic-usage}
+## Basic Usage {#basic-usage}
 
-Trong các ứng dụng lớn, đôi khi ta cần chia ứng dụng thành những phần nhỏ hơn và chỉ tải một component từ server khi thực sự cần. Để làm điều đó, Vue cung cấp hàm [`defineAsyncComponent`](/api/general#defineasynccomponent):
+In large applications, we may need to divide the app into smaller chunks and only load a component from the server when it's needed. To make that possible, Vue has a [`defineAsyncComponent`](/api/general#defineasynccomponent) function:
 
 ```js
 import { defineAsyncComponent } from 'vue'
 
 const AsyncComp = defineAsyncComponent(() => {
   return new Promise((resolve, reject) => {
-    // ...tải component từ server
-    resolve(/* component đã tải xong */)
+    // ...load component from server
+    resolve(/* loaded component */)
   })
 })
-// ... dùng `AsyncComp` như một component bình thường
+// ... use `AsyncComp` like a normal component
 ```
 
-Như bạn thấy, `defineAsyncComponent` nhận vào một loader function trả về Promise. Callback `resolve` của Promise nên được gọi khi bạn đã lấy được định nghĩa component từ server. Bạn cũng có thể gọi `reject(reason)` để báo rằng việc tải đã thất bại.
+As you can see, `defineAsyncComponent` accepts a loader function that returns a Promise. The Promise's `resolve` callback should be called when you have retrieved your component definition from the server. You can also call `reject(reason)` to indicate the load has failed.
 
-[Dynamic import của ES module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) cũng trả về Promise, vì vậy phần lớn thời gian ta sẽ dùng nó cùng với `defineAsyncComponent`. Các bundler như Vite và webpack cũng hỗ trợ cú pháp này, đồng thời dùng nó làm điểm tách bundle, nên ta có thể dùng nó để import Vue SFC:
+[ES module dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import) also returns a Promise, so most of the time we will use it in combination with `defineAsyncComponent`. Bundlers like Vite and webpack also support the syntax (and will use it as bundle split points), so we can use it to import Vue SFCs:
 
 ```js
 import { defineAsyncComponent } from 'vue'
@@ -28,9 +28,9 @@ const AsyncComp = defineAsyncComponent(() =>
 )
 ```
 
-`AsyncComp` tạo ra từ đây là một component bọc, chỉ gọi loader function khi nó thực sự được render trên trang. Ngoài ra, nó sẽ chuyển tiếp mọi prop và slot xuống component bên trong, nên bạn có thể dùng lớp bọc async này để thay thế component gốc một cách liền mạch trong khi vẫn đạt được lazy loading.
+The resulting `AsyncComp` is a wrapper component that only calls the loader function when it is actually rendered on the page. In addition, it will pass along any props and slots to the inner component, so you can use the async wrapper to seamlessly replace the original component while achieving lazy loading.
 
-Giống như component thông thường, async component cũng có thể được [đăng ký toàn cục](/guide/components/registration#global-registration) bằng `app.component()`:
+As with normal components, async components can be [registered globally](/guide/components/registration#global-registration) using `app.component()`:
 
 ```js
 app.component('MyComponent', defineAsyncComponent(() =>
@@ -40,7 +40,7 @@ app.component('MyComponent', defineAsyncComponent(() =>
 
 <div class="options-api">
 
-Bạn cũng có thể dùng `defineAsyncComponent` khi [đăng ký component cục bộ](/guide/components/registration#local-registration):
+You can also use `defineAsyncComponent` when [registering a component locally](/guide/components/registration#local-registration):
 
 ```vue
 <script>
@@ -64,7 +64,7 @@ export default {
 
 <div class="composition-api">
 
-Chúng cũng có thể được định nghĩa trực tiếp bên trong component cha:
+They can also be defined directly inside their parent component:
 
 ```vue
 <script setup>
@@ -82,58 +82,58 @@ const AdminPage = defineAsyncComponent(() =>
 
 </div>
 
-## Trạng Thái Loading Và Lỗi {#loading-and-error-states}
+## Loading and Error States {#loading-and-error-states}
 
-Các thao tác bất đồng bộ tất yếu sẽ có trạng thái loading và lỗi. `defineAsyncComponent()` hỗ trợ xử lý các trạng thái này thông qua các option nâng cao:
+Asynchronous operations inevitably involve loading and error states - `defineAsyncComponent()` supports handling these states via advanced options:
 
 ```js
 const AsyncComp = defineAsyncComponent({
-  // loader function
+  // the loader function
   loader: () => import('./Foo.vue'),
 
-  // component dùng trong lúc async component đang tải
+  // A component to use while the async component is loading
   loadingComponent: LoadingComponent,
-  // độ trễ trước khi hiện loading component. Mặc định: 200ms.
+  // Delay before showing the loading component. Default: 200ms.
   delay: 200,
 
-  // component dùng nếu việc tải thất bại
+  // A component to use if the load fails
   errorComponent: ErrorComponent,
-  // error component sẽ được hiển thị nếu có timeout
-  // và timeout đó bị vượt quá. Mặc định: Infinity.
+  // The error component will be displayed if a timeout is
+  // provided and exceeded. Default: Infinity.
   timeout: 3000
 })
 ```
 
-Nếu có khai báo loading component, nó sẽ được hiển thị trước trong lúc component bên trong đang được tải. Mặc định có độ trễ 200ms trước khi loading component xuất hiện. Lý do là trên mạng nhanh, trạng thái loading xuất hiện ngay có thể bị thay thế quá nhanh và trông như nhấp nháy.
+If a loading component is provided, it will be displayed first while the inner component is being loaded. There is a default 200ms delay before the loading component is shown - this is because on fast networks, an instant loading state may get replaced too fast and end up looking like a flicker.
 
-Nếu có khai báo error component, nó sẽ được hiển thị khi Promise mà loader function trả về bị reject. Bạn cũng có thể đặt timeout để hiển thị error component khi yêu cầu mất quá nhiều thời gian.
+If an error component is provided, it will be displayed when the Promise returned by the loader function is rejected. You can also specify a timeout to show the error component when the request is taking too long.
 
 ## Lazy Hydration <sup class="vt-badge" data-text="3.5+" /> {#lazy-hydration}
 
-> Phần này chỉ áp dụng nếu bạn đang dùng [Server-Side Rendering](/guide/scaling-up/ssr).
+> This section only applies if you are using [Server-Side Rendering](/guide/scaling-up/ssr).
 
-Trong Vue 3.5 trở lên, async component có thể kiểm soát thời điểm được hydrate bằng cách cung cấp một hydration strategy.
+In Vue 3.5+, async components can control when they are hydrated by providing a hydration strategy.
 
-- Vue cung cấp sẵn một số hydration strategy. Các strategy tích hợp sẵn này cần được import riêng lẻ để có thể tree-shake nếu không dùng đến.
+- Vue provides a number of built-in hydration strategies. These built-in strategies need to be individually imported so they can be tree-shaken if not used.
 
-- Thiết kế này cố ý ở mức thấp để giữ tính linh hoạt. Trong tương lai, cú pháp sugar ở cấp compiler có thể được xây dựng bên trên nó, trong core hoặc ở các giải pháp cấp cao hơn, chẳng hạn Nuxt.
+- The design is intentionally low-level for flexibility. Compiler syntax sugar can potentially be built on top of this in the future either in core or in higher level solutions (e.g. Nuxt).
 
-### Hydrate Khi Rảnh {#hydrate-on-idle}
+### Hydrate on Idle {#hydrate-on-idle}
 
-Hydrate thông qua `requestIdleCallback`:
+Hydrates via `requestIdleCallback`:
 
 ```js
 import { defineAsyncComponent, hydrateOnIdle } from 'vue'
 
 const AsyncComp = defineAsyncComponent({
   loader: () => import('./Comp.vue'),
-  hydrate: hydrateOnIdle(/* tùy chọn truyền timeout tối đa */)
+  hydrate: hydrateOnIdle(/* optionally pass a max timeout */)
 })
 ```
 
-### Hydrate Khi Hiển Thị {#hydrate-on-visible}
+### Hydrate on Visible {#hydrate-on-visible}
 
-Hydrate khi phần tử trở nên hiển thị thông qua `IntersectionObserver`.
+Hydrate when element(s) become visible via `IntersectionObserver`.
 
 ```js
 import { defineAsyncComponent, hydrateOnVisible } from 'vue'
@@ -144,15 +144,15 @@ const AsyncComp = defineAsyncComponent({
 })
 ```
 
-Bạn cũng có thể truyền vào một object options cho observer:
+Can optionally pass in an options object value for the observer:
 
 ```js
 hydrateOnVisible({ rootMargin: '100px' })
 ```
 
-### Hydrate Theo Media Query {#hydrate-on-media-query}
+### Hydrate on Media Query {#hydrate-on-media-query}
 
-Hydrate khi media query được chỉ định khớp.
+Hydrates when the specified media query matches.
 
 ```js
 import { defineAsyncComponent, hydrateOnMediaQuery } from 'vue'
@@ -163,9 +163,9 @@ const AsyncComp = defineAsyncComponent({
 })
 ```
 
-### Hydrate Khi Có Tương Tác {#hydrate-on-interaction}
+### Hydrate on Interaction {#hydrate-on-interaction}
 
-Hydrate khi các event được chỉ định xảy ra trên phần tử của component. Event đã kích hoạt hydration cũng sẽ được phát lại sau khi hydration hoàn tất.
+Hydrates when specified event(s) are triggered on the component element(s). The event that triggered the hydration will also be replayed once hydration is complete.
 
 ```js
 import { defineAsyncComponent, hydrateOnInteraction } from 'vue'
@@ -176,28 +176,28 @@ const AsyncComp = defineAsyncComponent({
 })
 ```
 
-Bạn cũng có thể truyền vào danh sách nhiều loại event:
+Can also be a list of multiple event types:
 
 ```js
 hydrateOnInteraction(['wheel', 'mouseover'])
 ```
 
-### Strategy Tùy Chỉnh {#custom-strategy}
+### Custom Strategy {#custom-strategy}
 
 ```ts
 import { defineAsyncComponent, type HydrationStrategy } from 'vue'
 
 const myStrategy: HydrationStrategy = (hydrate, forEachElement) => {
-  // forEachElement là hàm hỗ trợ duyệt qua mọi root element
-  // trong DOM chưa hydrate của component, vì root có thể là fragment
-  // thay vì một phần tử đơn lẻ
+  // forEachElement is a helper to iterate through all the root elements
+  // in the component's non-hydrated DOM, since the root can be a fragment
+  // instead of a single element
   forEachElement(el => {
     // ...
   })
-  // gọi `hydrate` khi đã sẵn sàng
+  // call `hydrate` when ready
   hydrate()
   return () => {
-    // trả về teardown function nếu cần
+    // return a teardown function if needed
   }
 }
 
@@ -207,6 +207,6 @@ const AsyncComp = defineAsyncComponent({
 })
 ```
 
-## Dùng Cùng Với Suspense {#using-with-suspense}
+## Using with Suspense {#using-with-suspense}
 
-Async component có thể được dùng cùng với component dựng sẵn `<Suspense>`. Cách `<Suspense>` tương tác với async component đã được mô tả trong [chương dành riêng cho `<Suspense>`](/guide/built-ins/suspense).
+Async components can be used with the `<Suspense>` built-in component. The interaction between `<Suspense>` and async components is documented in the [dedicated chapter for `<Suspense>`](/guide/built-ins/suspense).

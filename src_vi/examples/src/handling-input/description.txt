@@ -1,0 +1,1 @@
+Ví dụ này minh họa cách xử lý input của người dùng với directive v-on.

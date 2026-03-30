@@ -1,0 +1,1 @@
+Ví dụ tạo một grid component có thể tái sử dụng và dùng nó với dữ liệu bên ngoài.

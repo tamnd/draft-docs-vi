@@ -2,9 +2,9 @@
 
 ## template {#template}
 
-Một string template cho component.
+A string template for the component.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentOptions {
@@ -12,25 +12,25 @@ Một string template cho component.
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Template được cung cấp qua tùy chọn `template` sẽ được biên dịch on-the-fly lúc chạy. Nó chỉ được hỗ trợ khi dùng bản build Vue có bao gồm trình biên dịch template. Trình biên dịch template **KHÔNG** được bao gồm trong các bản build Vue có chữ `runtime` trong tên, ví dụ `vue.runtime.esm-bundler.js`. Xem [hướng dẫn dist file](https://github.com/vuejs/core/tree/main/packages/vue#which-dist-file-to-use) để biết thêm chi tiết về các bản build khác nhau.
+  A template provided via the `template` option will be compiled on-the-fly at runtime. It is only supported when using a build of Vue that includes the template compiler. The template compiler is **NOT** included in Vue builds that have the word `runtime` in their names, e.g. `vue.runtime.esm-bundler.js`. Consult the [dist file guide](https://github.com/vuejs/core/tree/main/packages/vue#which-dist-file-to-use) for more details about the different builds.
 
-  Nếu chuỗi bắt đầu bằng `#`, nó sẽ được dùng như `querySelector` và dùng `innerHTML` của element được chọn làm chuỗi template. Điều này cho phép template nguồn được soạn bằng các element `<template>` native.
+  If the string starts with `#` it will be used as a `querySelector` and use the selected element's `innerHTML` as the template string. This allows the source template to be authored using native `<template>` elements.
 
-  Nếu tùy chọn `render` cũng có trong cùng component, `template` sẽ bị bỏ qua.
+  If the `render` option is also present in the same component, `template` will be ignored.
 
-  Nếu component gốc của ứng dụng không có tùy chọn `template` hay `render`, Vue sẽ cố dùng `innerHTML` của element được mount làm template thay thế.
+  If the root component of your application doesn't have a `template` or `render` option specified, Vue will try to use the `innerHTML` of the mounted element as the template instead.
 
-  :::warning Lưu ý Bảo mật
-  Chỉ dùng các nguồn template mà bạn có thể tin tưởng. Đừng dùng nội dung do người dùng cung cấp làm template của bạn. Xem [Hướng dẫn Bảo mật](/guide/best-practices/security#rule-no-1-never-use-non-trusted-templates) để biết thêm chi tiết.
+  :::warning Security Note
+  Only use template sources that you can trust. Do not use user-provided content as your template. See [Security Guide](/guide/best-practices/security#rule-no-1-never-use-non-trusted-templates) for more details.
   :::
 
 ## render {#render}
 
-Hàm dùng để xây dựng cây virtual DOM của component theo kiểu lập trình.
+A function that programmatically returns the virtual DOM tree of the component.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentOptions {
@@ -51,48 +51,48 @@ Hàm dùng để xây dựng cây virtual DOM của component theo kiểu lập 
   type VNodeArrayChildren = (VNodeArrayChildren | VNodeChildAtom)[]
   ```
 
-- **Chi tiết**
+- **Details**
 
-  `render` là thay thế cho string template cho phép bạn tận dụng toàn bộ sức mạnh lập trình của JavaScript để khai báo output render của component.
+  `render` is an alternative to string templates that allows you to leverage the full programmatic power of JavaScript to declare the render output of the component.
 
-  Template được pre-compile, ví dụ trong Single-File Component, được biên dịch thành tùy chọn `render` lúc build. Nếu cả `render` và `template` đều có trong một component, `render` sẽ có độ ưu tiên cao hơn.
+  Pre-compiled templates, for example those in Single-File Components, are compiled into the `render` option at build time. If both `render` and `template` are present in a component, `render` will take higher priority.
 
-- **Xem thêm**
-  - [Cơ chế Render](/guide/extras/rendering-mechanism)
-  - [Render Function](/guide/extras/render-function)
+- **See also**
+  - [Rendering Mechanism](/guide/extras/rendering-mechanism)
+  - [Render Functions](/guide/extras/render-function)
 
 ## compilerOptions {#compileroptions}
 
-Cấu hình các tùy chọn runtime compiler cho template của component.
+Configure runtime compiler options for the component's template.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentOptions {
     compilerOptions?: {
       isCustomElement?: (tag: string) => boolean
-      whitespace?: 'condense' | 'preserve' // mặc định: 'condense'
-      delimiters?: [string, string] // mặc định: ['{{', '}}']
-      comments?: boolean // mặc định: false
+      whitespace?: 'condense' | 'preserve' // default: 'condense'
+      delimiters?: [string, string] // default: ['{{', '}}']
+      comments?: boolean // default: false
     }
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Tùy chọn cấu hình này chỉ có hiệu lực khi dùng bản build đầy đủ (tức là `vue.js` độc lập có thể biên dịch template trong trình duyệt). Nó hỗ trợ các tùy chọn giống như [app.config.compilerOptions](/api/application#app-config-compileroptions) ở cấp ứng dụng, và có độ ưu tiên cao hơn cho component hiện tại.
+  This config option is only respected when using the full build (i.e. the standalone `vue.js` that can compile templates in the browser). It supports the same options as the app-level [app.config.compilerOptions](/api/application#app-config-compileroptions), and has higher priority for the current component.
 
-- **Xem thêm** [app.config.compilerOptions](/api/application#app-config-compileroptions)
+- **See also** [app.config.compilerOptions](/api/application#app-config-compileroptions)
 
 ## slots<sup class="vt-badge ts"/> {#slots}
 
-- Chỉ hỗ trợ từ 3.3+
+- Only supported in 3.3+
 
-Một tùy chọn để hỗ trợ suy luận kiểu khi dùng slot theo kiểu lập trình trong render function.
+An option to assist with type inference when using slots programmatically in render functions.
 
-- **Chi tiết**
+- **Details**
 
-  Giá trị runtime của tùy chọn này không được dùng. Các kiểu thực sự nên được khai báo qua ép kiểu bằng helper kiểu `SlotsType`:
+  This option's runtime value is not used. The actual types should be declared via type casting using the `SlotsType` type helper:
 
   ```ts
   import { SlotsType } from 'vue'

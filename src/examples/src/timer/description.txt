@@ -1,2 +1,1 @@
-Bài toán Timer trong chuỗi 7GUIs.
 https://eugenkiss.github.io/7guis/tasks/#timer

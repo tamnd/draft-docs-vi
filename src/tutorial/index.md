@@ -1,6 +1,6 @@
 ---
 page: true
-title: Hướng dẫn
+title: Tutorial
 sidebar: false
 aside: false
 footer: false

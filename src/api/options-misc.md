@@ -2,9 +2,9 @@
 
 ## name {#name}
 
-Khai báo rõ ràng tên hiển thị cho component.
+Explicitly declare a display name for the component.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentOptions {
@@ -12,43 +12,43 @@ Khai báo rõ ràng tên hiển thị cho component.
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Tên của component được dùng cho:
+  The name of a component is used for the following:
 
-  - Tự tham chiếu đệ quy trong template riêng của component
-  - Hiển thị trong cây kiểm tra component của Vue DevTools
-  - Hiển thị trong trace cảnh báo component
+  - Recursive self-reference in the component's own template
+  - Display in Vue DevTools' component inspection tree
+  - Display in warning component traces
 
-  Khi dùng Single-File Component, component đã tự suy luận tên từ tên file. Ví dụ, file có tên `MyComponent.vue` sẽ có tên hiển thị được suy luận là "MyComponent".
+  When you use Single-File Components, the component already infers its own name from the filename. For example, a file named `MyComponent.vue` will have the inferred display name "MyComponent".
 
-  Trường hợp khác là khi component được đăng ký toàn cục bằng [`app.component`](/api/application#app-component), ID toàn cục được tự động đặt làm tên của nó.
+  Another case is that when a component is registered globally with [`app.component`](/api/application#app-component), the global ID is automatically set as its name.
 
-  Tùy chọn `name` cho phép bạn ghi đè tên được suy luận, hoặc cung cấp rõ ràng một tên khi không thể suy luận được tên (ví dụ: khi không dùng build tool, hoặc component non-SFC inline).
+  The `name` option allows you to override the inferred name, or to explicitly provide a name when no name can be inferred (e.g. when not using build tools, or an inlined non-SFC component).
 
-  Có một trường hợp `name` cần thiết rõ ràng: khi so khớp với các component có thể cache trong [`<KeepAlive>`](/guide/built-ins/keep-alive) qua các prop `include / exclude` của nó.
+  There is one case where `name` is explicitly necessary: when matching against cacheable components in [`<KeepAlive>`](/guide/built-ins/keep-alive) via its `include / exclude` props.
 
   :::tip
-  Từ phiên bản 3.2.34, một single-file component dùng `<script setup>` sẽ tự động suy luận tùy chọn `name` của nó dựa trên tên file, không cần khai báo tên thủ công ngay cả khi dùng với `<KeepAlive>`.
+  Since version 3.2.34, a single-file component using `<script setup>` will automatically infer its `name` option based on the filename, removing the need to manually declare the name even when used with `<KeepAlive>`.
   :::
 
 ## inheritAttrs {#inheritattrs}
 
-Kiểm soát việc hành vi fallthrough (thuộc tính kế thừa) mặc định của component có được bật hay không.
+Controls whether the default component attribute fallthrough behavior should be enabled.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentOptions {
-    inheritAttrs?: boolean // mặc định: true
+    inheritAttrs?: boolean // default: true
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Mặc định, các ràng buộc thuộc tính từ phạm vi cha không được nhận diện là props sẽ tự động "kế thừa xuống" (fallthrough). Điều này có nghĩa là khi ta có component có root đơn, các ràng buộc này sẽ được áp dụng vào element gốc của component con như các thuộc tính HTML thông thường. Khi viết component bọc một element mục tiêu hoặc component khác, đây có thể không phải hành vi mong muốn. Bằng cách đặt `inheritAttrs` thành `false`, hành vi mặc định này có thể bị tắt. Các thuộc tính có sẵn qua thuộc tính instance `$attrs` và có thể được ràng buộc rõ ràng vào element không phải root bằng `v-bind`.
+  By default, parent scope attribute bindings that are not recognized as props will "fallthrough". This means that when we have a single-root component, these bindings will be applied to the root element of the child component as normal HTML attributes. When authoring a component that wraps a target element or another component, this may not always be the desired behavior. By setting `inheritAttrs` to `false`, this default behavior can be disabled. The attributes are available via the `$attrs` instance property and can be explicitly bound to a non-root element using `v-bind`.
 
-- **Ví dụ**
+- **Example**
 
   <div class="options-api">
 
@@ -76,7 +76,7 @@ Kiểm soát việc hành vi fallthrough (thuộc tính kế thừa) mặc đị
   </div>
   <div class="composition-api">
 
-  Khi khai báo tùy chọn này trong component dùng `<script setup>`, bạn có thể dùng macro [`defineOptions`](/api/sfc-script-setup#defineoptions):
+  When declaring this option in a component that uses `<script setup>`, you can use the [`defineOptions`](/api/sfc-script-setup#defineoptions) macro:
 
   ```vue
   <script setup>
@@ -101,19 +101,19 @@ Kiểm soát việc hành vi fallthrough (thuộc tính kế thừa) mặc đị
 
   </div>
 
-- **Xem thêm**
+- **See also**
 
-  - [Thuộc tính Kế thừa](/guide/components/attrs)
+  - [Fallthrough Attributes](/guide/components/attrs)
   <div class="composition-api">
 
-  - [Dùng `inheritAttrs` trong `<script>` thông thường](/api/sfc-script-setup.html#usage-alongside-normal-script)
+  - [Using `inheritAttrs` in normal `<script>`](/api/sfc-script-setup.html#usage-alongside-normal-script)
   </div>
 
 ## components {#components}
 
-Một object đăng ký các component để có sẵn cho instance component.
+An object that registers components to be made available to the component instance.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentOptions {
@@ -121,7 +121,7 @@ Một object đăng ký các component để có sẵn cho instance component.
   }
   ```
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import Foo from './Foo.vue'
@@ -129,21 +129,21 @@ Một object đăng ký các component để có sẵn cho instance component.
 
   export default {
     components: {
-      // cú pháp rút gọn
+      // shorthand
       Foo,
-      // đăng ký với tên khác
+      // register under a different name
       RenamedBar: Bar
     }
   }
   ```
 
-- **Xem thêm** [Đăng ký Component](/guide/components/registration)
+- **See also** [Component Registration](/guide/components/registration)
 
 ## directives {#directives}
 
-Một object đăng ký các directive để có sẵn cho instance component.
+An object that registers directives to be made available to the component instance.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentOptions {
@@ -151,12 +151,12 @@ Một object đăng ký các directive để có sẵn cho instance component.
   }
   ```
 
-- **Ví dụ**
+- **Example**
 
   ```js
   export default {
     directives: {
-      // bật v-focus trong template
+      // enables v-focus in template
       focus: {
         mounted(el) {
           el.focus()
@@ -170,4 +170,4 @@ Một object đăng ký các directive để có sẵn cho instance component.
   <input v-focus>
   ```
 
-- **Xem thêm** [Directive Tùy chỉnh](/guide/reusability/custom-directives)
+- **See also** [Custom Directives](/guide/reusability/custom-directives)

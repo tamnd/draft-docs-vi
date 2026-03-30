@@ -1,2 +1,2 @@
-Ở đây chúng ta trình bày component đơn giản nhất: nhận một prop và render nó.
-Tìm hiểu thêm về component trong hướng dẫn!
+Here we show the simplest possible component which accepts a prop and renders it.
+Learn more about components in the guide!

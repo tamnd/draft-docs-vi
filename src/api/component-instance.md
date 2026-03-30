@@ -1,16 +1,16 @@
 # Component Instance {#component-instance}
 
 :::info
-Trang này ghi lại các thuộc tính và phương thức dựng sẵn được expose trên instance công khai của component, tức là `this`.
+This page documents the built-in properties and methods exposed on the component public instance, i.e. `this`.
 
-Tất cả thuộc tính liệt kê trên trang này đều là readonly (ngoại trừ các thuộc tính lồng nhau trong `$data`).
+All properties listed on this page are readonly (except nested properties in `$data`).
 :::
 
 ## $data {#data}
 
-Object được trả về từ tùy chọn [`data`](./options-state#data), được component làm cho có tính phản ứng. Instance component ủy quyền truy cập đến các thuộc tính trên data object của nó.
+The object returned from the [`data`](./options-state#data) option, made reactive by the component. The component instance proxies access to the properties on its data object.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -20,9 +20,9 @@ Object được trả về từ tùy chọn [`data`](./options-state#data), đư
 
 ## $props {#props}
 
-Một object đại diện cho các prop hiện tại đã được resolve của component.
+An object representing the component's current, resolved props.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -30,15 +30,15 @@ Một object đại diện cho các prop hiện tại đã được resolve củ
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Chỉ các prop được khai báo qua tùy chọn [`props`](./options-state#props) mới được đưa vào. Instance component ủy quyền truy cập đến các thuộc tính trên props object của nó.
+  Only props declared via the [`props`](./options-state#props) option will be included. The component instance proxies access to the properties on its props object.
 
 ## $el {#el}
 
-DOM node gốc mà instance component đang quản lý.
+The root DOM node that the component instance is managing.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -46,23 +46,23 @@ DOM node gốc mà instance component đang quản lý.
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  `$el` sẽ là `undefined` cho đến khi component được [mount](./options-lifecycle#mounted).
+  `$el` will be `undefined` until the component is [mounted](./options-lifecycle#mounted).
 
-  - Với component có một element gốc đơn, `$el` sẽ trỏ đến element đó.
-  - Với component có text gốc, `$el` sẽ trỏ đến text node.
-  - Với component có nhiều node gốc, `$el` sẽ là DOM node placeholder mà Vue dùng để theo dõi vị trí của component trong DOM (một text node, hoặc comment node ở chế độ SSR hydration).
+  - For components with a single root element, `$el` will point to that element.
+  - For components with text root, `$el` will point to the text node.
+  - For components with multiple root nodes, `$el` will be the placeholder DOM node that Vue uses to keep track of the component's position in the DOM (a text node, or a comment node in SSR hydration mode).
 
   :::tip
-  Để nhất quán, nên dùng [template ref](/guide/essentials/template-refs) để truy cập trực tiếp vào element thay vì dựa vào `$el`.
+  For consistency, it is recommended to use [template refs](/guide/essentials/template-refs) for direct access to elements instead of relying on `$el`.
   :::
 
 ## $options {#options}
 
-Các tùy chọn component đã được resolve dùng để khởi tạo instance component hiện tại.
+The resolved component options used for instantiating the current component instance.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -70,15 +70,15 @@ Các tùy chọn component đã được resolve dùng để khởi tạo instan
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Object `$options` expose các tùy chọn đã được resolve cho component hiện tại và là kết quả hợp nhất từ các nguồn có thể có:
+  The `$options` object exposes the resolved options for the current component and is the merge result of these possible sources:
 
-  - Global mixin
-  - Base `extends` của component
-  - Mixin của component
+  - Global mixins
+  - Component `extends` base
+  - Component mixins
 
-  Thường được dùng để hỗ trợ các tùy chọn component tùy chỉnh:
+  It is typically used to support custom component options:
 
   ```js
   const app = createApp({
@@ -89,13 +89,13 @@ Các tùy chọn component đã được resolve dùng để khởi tạo instan
   })
   ```
 
-- **Xem thêm** [`app.config.optionMergeStrategies`](/api/application#app-config-optionmergestrategies)
+- **See also** [`app.config.optionMergeStrategies`](/api/application#app-config-optionmergestrategies)
 
 ## $parent {#parent}
 
-Instance cha, nếu instance hiện tại có cha. Sẽ là `null` cho chính instance gốc.
+The parent instance, if the current instance has one. It will be `null` for the root instance itself.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -105,9 +105,9 @@ Instance cha, nếu instance hiện tại có cha. Sẽ là `null` cho chính in
 
 ## $root {#root}
 
-Instance component gốc của cây component hiện tại. Nếu instance hiện tại không có cha, giá trị này sẽ là chính nó.
+The root component instance of the current component tree. If the current instance has no parents this value will be itself.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -117,9 +117,9 @@ Instance component gốc của cây component hiện tại. Nếu instance hiệ
 
 ## $slots {#slots}
 
-Một object đại diện cho các [slot](/guide/components/slots) được truyền bởi component cha.
+An object representing the [slots](/guide/components/slots) passed by the parent component.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -129,21 +129,21 @@ Một object đại diện cho các [slot](/guide/components/slots) được tru
   type Slot = (...args: any[]) => VNode[]
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Thường được dùng khi viết thủ công [render function](/guide/extras/render-function), nhưng cũng có thể dùng để phát hiện xem một slot có hiện diện không.
+  Typically used when manually authoring [render functions](/guide/extras/render-function), but can also be used to detect whether a slot is present.
 
-  Mỗi slot được expose trên `this.$slots` như một hàm trả về mảng vnode theo key tương ứng với tên slot đó. Default slot được expose là `this.$slots.default`.
+  Each slot is exposed on `this.$slots` as a function that returns an array of vnodes under the key corresponding to that slot's name. The default slot is exposed as `this.$slots.default`.
 
-  Nếu một slot là [scoped slot](/guide/components/slots#scoped-slots), các đối số truyền vào hàm slot có sẵn trong slot như slot props của nó.
+  If a slot is a [scoped slot](/guide/components/slots#scoped-slots), arguments passed to the slot functions are available to the slot as its slot props.
 
-- **Xem thêm** [Render Function - Render Slot](/guide/extras/render-function#rendering-slots)
+- **See also** [Render Functions - Rendering Slots](/guide/extras/render-function#rendering-slots)
 
 ## $refs {#refs}
 
-Một object chứa các DOM element và instance component, được đăng ký qua [template ref](/guide/essentials/template-refs).
+An object of DOM elements and component instances, registered via [template refs](/guide/essentials/template-refs).
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -151,16 +151,16 @@ Một object chứa các DOM element và instance component, được đăng ký
   }
   ```
 
-- **Xem thêm**
+- **See also**
 
-  - [Template ref](/guide/essentials/template-refs)
-  - [Thuộc tính Đặc biệt - ref](./built-in-special-attributes.md#ref)
+  - [Template refs](/guide/essentials/template-refs)
+  - [Special Attributes - ref](./built-in-special-attributes.md#ref)
 
 ## $attrs {#attrs}
 
-Một object chứa các thuộc tính kế thừa của component.
+An object that contains the component's fallthrough attributes.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -168,21 +168,21 @@ Một object chứa các thuộc tính kế thừa của component.
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  [Thuộc tính kế thừa](/guide/components/attrs) là các thuộc tính và event handler được truyền bởi component cha, nhưng không được khai báo là prop hay sự kiện được emit bởi component con.
+  [Fallthrough Attributes](/guide/components/attrs) are attributes and event handlers passed by the parent component, but not declared as a prop or an emitted event by the child.
 
-  Mặc định, tất cả trong `$attrs` sẽ được tự động kế thừa trên element gốc của component nếu chỉ có một element gốc. Hành vi này bị tắt nếu component có nhiều node gốc, và có thể tắt rõ ràng bằng tùy chọn [`inheritAttrs`](./options-misc#inheritattrs).
+  By default, everything in `$attrs` will be automatically inherited on the component's root element if there is only a single root element. This behavior is disabled if the component has multiple root nodes, and can be explicitly disabled with the [`inheritAttrs`](./options-misc#inheritattrs) option.
 
-- **Xem thêm**
+- **See also**
 
-  - [Thuộc tính Kế thừa](/guide/components/attrs)
+  - [Fallthrough Attributes](/guide/components/attrs)
 
 ## $watch() {#watch}
 
-API mệnh lệnh (Imperative API) để tạo watcher.
+Imperative API for creating watchers.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -200,9 +200,9 @@ API mệnh lệnh (Imperative API) để tạo watcher.
   ) => void
 
   interface WatchOptions {
-    immediate?: boolean // mặc định: false
-    deep?: boolean // mặc định: false
-    flush?: 'pre' | 'post' | 'sync' // mặc định: 'pre'
+    immediate?: boolean // default: false
+    deep?: boolean // default: false
+    flush?: 'pre' | 'post' | 'sync' // default: 'pre'
     onTrack?: (event: DebuggerEvent) => void
     onTrigger?: (event: DebuggerEvent) => void
   }
@@ -210,62 +210,62 @@ API mệnh lệnh (Imperative API) để tạo watcher.
   type StopHandle = () => void
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Đối số đầu tiên là nguồn watch. Nó có thể là chuỗi tên thuộc tính component, chuỗi đường dẫn phân cách bằng dấu chấm đơn giản, hoặc một [getter function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description).
+  The first argument is the watch source. It can be a component property name string, a simple dot-delimited path string, or a [getter function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description).
 
-  Đối số thứ hai là hàm callback. Callback nhận giá trị mới và giá trị cũ của nguồn được watch.
+  The second argument is the callback function. The callback receives the new value and the old value of the watched source.
 
-  - **`immediate`**: kích hoạt callback ngay lập tức khi tạo watcher. Giá trị cũ sẽ là `undefined` ở lần gọi đầu tiên.
-  - **`deep`**: buộc duyệt sâu nguồn nếu nó là object, để callback được kích hoạt khi có thay đổi sâu. Xem [Deep Watcher](/guide/essentials/watchers#deep-watchers).
-  - **`flush`**: điều chỉnh thời điểm flush của callback. Xem [Thời điểm Flush Callback](/guide/essentials/watchers#callback-flush-timing) và [`watchEffect()`](/api/reactivity-core#watcheffect).
-  - **`onTrack / onTrigger`**: debug các dependency của watcher. Xem [Debug Watcher](/guide/extras/reactivity-in-depth#watcher-debugging).
+  - **`immediate`**: trigger the callback immediately on watcher creation. Old value will be `undefined` on the first call.
+  - **`deep`**: force deep traversal of the source if it is an object, so that the callback fires on deep mutations. See [Deep Watchers](/guide/essentials/watchers#deep-watchers).
+  - **`flush`**: adjust the callback's flush timing. See [Callback Flush Timing](/guide/essentials/watchers#callback-flush-timing) and [`watchEffect()`](/api/reactivity-core#watcheffect).
+  - **`onTrack / onTrigger`**: debug the watcher's dependencies. See [Watcher Debugging](/guide/extras/reactivity-in-depth#watcher-debugging).
 
-- **Ví dụ**
+- **Example**
 
-  Watch tên thuộc tính:
+  Watch a property name:
 
   ```js
   this.$watch('a', (newVal, oldVal) => {})
   ```
 
-  Watch đường dẫn phân cách bằng dấu chấm:
+  Watch a dot-delimited path:
 
   ```js
   this.$watch('a.b', (newVal, oldVal) => {})
   ```
 
-  Dùng getter cho các biểu thức phức tạp hơn:
+  Using getter for more complex expressions:
 
   ```js
   this.$watch(
-    // mỗi khi biểu thức `this.a + this.b` cho ra
-    // kết quả khác nhau, handler sẽ được gọi.
-    // Giống như ta đang watch một thuộc tính computed
-    // mà không cần định nghĩa chính thuộc tính computed đó.
+    // every time the expression `this.a + this.b` yields
+    // a different result, the handler will be called.
+    // It's as if we were watching a computed property
+    // without defining the computed property itself.
     () => this.a + this.b,
     (newVal, oldVal) => {}
   )
   ```
 
-  Dừng watcher:
+  Stopping the watcher:
 
   ```js
   const unwatch = this.$watch('a', cb)
 
-  // sau đó...
+  // later...
   unwatch()
   ```
 
-- **Xem thêm**
-  - [Tùy chọn - `watch`](/api/options-state#watch)
-  - [Hướng dẫn - Watcher](/guide/essentials/watchers)
+- **See also**
+  - [Options - `watch`](/api/options-state#watch)
+  - [Guide - Watchers](/guide/essentials/watchers)
 
 ## $emit() {#emit}
 
-Kích hoạt một custom event trên instance hiện tại. Bất kỳ đối số bổ sung nào sẽ được truyền vào hàm callback của listener.
+Trigger a custom event on the current instance. Any additional arguments will be passed into the listener's callback function.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -273,29 +273,29 @@ Kích hoạt một custom event trên instance hiện tại. Bất kỳ đối s
   }
   ```
 
-- **Ví dụ**
+- **Example**
 
   ```js
   export default {
     created() {
-      // chỉ sự kiện
+      // only event
       this.$emit('foo')
-      // với đối số bổ sung
+      // with additional arguments
       this.$emit('bar', 1, 2, 3)
     }
   }
   ```
 
-- **Xem thêm**
+- **See also**
 
-  - [Component - Sự kiện](/guide/components/events)
-  - [Tùy chọn `emits`](./options-state#emits)
+  - [Component - Events](/guide/components/events)
+  - [`emits` option](./options-state#emits)
 
 ## $forceUpdate() {#forceupdate}
 
-Buộc instance component re-render.
+Force the component instance to re-render.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -303,15 +303,15 @@ Buộc instance component re-render.
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Hiếm khi cần đến tính năng này khi đã có hệ thống tính phản ứng tự động hoàn toàn của Vue. Trường hợp duy nhất bạn có thể cần nó là khi bạn đã tạo rõ ràng state component không có tính phản ứng bằng các API tính phản ứng nâng cao.
+  This should be rarely needed given Vue's fully automatic reactivity system. The only cases where you may need it is when you have explicitly created non-reactive component state using advanced reactivity APIs.
 
 ## $nextTick() {#nexttick}
 
-Phiên bản ràng buộc với instance của global [`nextTick()`](./general#nexttick).
+Instance-bound version of the global [`nextTick()`](./general#nexttick).
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface ComponentPublicInstance {
@@ -319,8 +319,8 @@ Phiên bản ràng buộc với instance của global [`nextTick()`](./general#n
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Điểm khác biệt duy nhất so với phiên bản global của `nextTick()` là callback truyền vào `this.$nextTick()` sẽ có context `this` được ràng buộc với instance component hiện tại.
+  The only difference from the global version of `nextTick()` is that the callback passed to `this.$nextTick()` will have its `this` context bound to the current component instance.
 
-- **Xem thêm** [`nextTick()`](./general#nexttick)
+- **See also** [`nextTick()`](./general#nexttick)

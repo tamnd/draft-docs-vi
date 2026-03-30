@@ -1,15 +1,15 @@
 # \<script setup> {#script-setup}
 
-`<script setup>` là cú pháp đường tắt compile-time để dùng Composition API trong Single-File Component (SFC). Đây là cú pháp được khuyến nghị nếu bạn đang dùng cả SFC lẫn Composition API. Nó cung cấp một số ưu điểm so với cú pháp `<script>` thông thường:
+`<script setup>` is a compile-time syntactic sugar for using Composition API inside Single-File Components (SFCs). It is the recommended syntax if you are using both SFCs and Composition API. It provides a number of advantages over the normal `<script>` syntax:
 
-- Code ngắn gọn hơn, ít boilerplate hơn
-- Khả năng khai báo props và emitted event dùng TypeScript thuần túy
-- Hiệu suất runtime tốt hơn (template được biên dịch thành render function trong cùng scope, không cần proxy trung gian)
-- Hiệu suất suy luận kiểu IDE tốt hơn (ít công việc hơn cho language server để trích xuất kiểu từ code)
+- More succinct code with less boilerplate
+- Ability to declare props and emitted events using pure TypeScript
+- Better runtime performance (the template is compiled into a render function in the same scope, without an intermediate proxy)
+- Better IDE type-inference performance (less work for the language server to extract types from code)
 
-## Cú pháp Cơ bản {#basic-syntax}
+## Basic Syntax {#basic-syntax}
 
-Để bật cú pháp này, thêm thuộc tính `setup` vào khối `<script>`:
+To opt-in to the syntax, add the `setup` attribute to the `<script>` block:
 
 ```vue
 <script setup>
@@ -17,18 +17,18 @@ console.log('hello script setup')
 </script>
 ```
 
-Code bên trong được biên dịch như nội dung của hàm `setup()` của component. Điều này có nghĩa là khác với `<script>` thông thường chỉ thực thi một lần khi component được import lần đầu, code bên trong `<script setup>` sẽ **thực thi mỗi khi một instance của component được tạo**.
+The code inside is compiled as the content of the component's `setup()` function. This means that unlike normal `<script>`, which only executes once when the component is first imported, code inside `<script setup>` will **execute every time an instance of the component is created**.
 
-### Các binding cấp cao nhất được expose cho template {#top-level-bindings-are-exposed-to-template}
+### Top-level bindings are exposed to template {#top-level-bindings-are-exposed-to-template}
 
-Khi dùng `<script setup>`, bất kỳ binding cấp cao nhất nào (bao gồm biến, khai báo hàm, và import) được khai báo bên trong `<script setup>` đều có thể dùng trực tiếp trong template:
+When using `<script setup>`, any top-level bindings (including variables, function declarations, and imports) declared inside `<script setup>` are directly usable in the template:
 
 ```vue
 <script setup>
-// biến
+// variable
 const msg = 'Hello!'
 
-// hàm
+// functions
 function log() {
   console.log(msg)
 }
@@ -39,7 +39,7 @@ function log() {
 </template>
 ```
 
-Import cũng được expose theo cách tương tự. Điều này có nghĩa là bạn có thể dùng trực tiếp một helper function đã import trong template expression mà không cần expose nó qua tùy chọn `methods`:
+Imports are exposed in the same fashion. This means you can directly use an imported helper function in template expressions without having to expose it via the `methods` option:
 
 ```vue
 <script setup>
@@ -51,9 +51,9 @@ import { capitalize } from './helpers'
 </template>
 ```
 
-## Tính Phản ứng {#reactivity}
+## Reactivity {#reactivity}
 
-State phản ứng cần được tạo rõ ràng bằng cách dùng [Reactivity API](./reactivity-core). Tương tự các giá trị được trả về từ hàm `setup()`, ref được tự động unwrap khi được tham chiếu trong template:
+Reactive state needs to be explicitly created using [Reactivity APIs](./reactivity-core). Similar to values returned from a `setup()` function, refs are automatically unwrapped when referenced in templates:
 
 ```vue
 <script setup>
@@ -67,9 +67,9 @@ const count = ref(0)
 </template>
 ```
 
-## Dùng Component {#using-components}
+## Using Components {#using-components}
 
-Các giá trị trong scope của `<script setup>` cũng có thể dùng trực tiếp như tên tag custom component:
+Values in the scope of `<script setup>` can also be used directly as custom component tag names:
 
 ```vue
 <script setup>
@@ -81,11 +81,11 @@ import MyComponent from './MyComponent.vue'
 </template>
 ```
 
-Hãy coi `MyComponent` như được tham chiếu như một biến. Nếu bạn đã dùng JSX, mô hình tư duy ở đây tương tự. Tên kebab-case tương đương `<my-component>` cũng hoạt động trong template - tuy nhiên tag component PascalCase được khuyến nghị mạnh mẽ để nhất quán. Nó cũng giúp phân biệt với custom element native.
+Think of `MyComponent` as being referenced as a variable. If you have used JSX, the mental model is similar here. The kebab-case equivalent `<my-component>` also works in the template - however PascalCase component tags are strongly recommended for consistency. It also helps differentiating from native custom elements.
 
-### Component Động {#dynamic-components}
+### Dynamic Components {#dynamic-components}
 
-Vì component được tham chiếu như biến thay vì đăng ký theo string key, chúng ta nên dùng binding `:is` động khi dùng dynamic component bên trong `<script setup>`:
+Since components are referenced as variables instead of registered under string keys, we should use dynamic `:is` binding when using dynamic components inside `<script setup>`:
 
 ```vue
 <script setup>
@@ -99,21 +99,21 @@ import Bar from './Bar.vue'
 </template>
 ```
 
-Lưu ý cách component có thể dùng như biến trong biểu thức ternary.
+Note how the components can be used as variables in a ternary expression.
 
-### Component Đệ quy {#recursive-components}
+### Recursive Components {#recursive-components}
 
-Một SFC có thể ngầm tự tham chiếu qua tên file của nó. Ví dụ: file có tên `FooBar.vue` có thể tự tham chiếu như `<FooBar/>` trong template của nó.
+An SFC can implicitly refer to itself via its filename. E.g. a file named `FooBar.vue` can refer to itself as `<FooBar/>` in its template.
 
-Lưu ý điều này có độ ưu tiên thấp hơn component đã import. Nếu bạn có named import trùng với tên được suy luận của component, bạn có thể alias import:
+Note this has lower priority than imported components. If you have a named import that conflicts with the component's inferred name, you can alias the import:
 
 ```js
 import { FooBar as FooBarChild } from './components'
 ```
 
-### Component Namespace {#namespaced-components}
+### Namespaced Components {#namespaced-components}
 
-Bạn có thể dùng tag component với dấu chấm như `<Foo.Bar>` để tham chiếu các component lồng bên dưới các thuộc tính object. Điều này hữu ích khi bạn import nhiều component từ một file duy nhất:
+You can use component tags with dots like `<Foo.Bar>` to refer to components nested under object properties. This is useful when you import multiple components from a single file:
 
 ```vue
 <script setup>
@@ -127,24 +127,24 @@ import * as Form from './form-components'
 </template>
 ```
 
-## Dùng Custom Directive {#using-custom-directives}
+## Using Custom Directives {#using-custom-directives}
 
-Custom directive đã đăng ký toàn cục hoạt động bình thường. Custom directive cục bộ không cần đăng ký rõ ràng với `<script setup>`, nhưng chúng phải tuân theo quy tắc đặt tên `vTênDirective`:
+Globally registered custom directives just work as normal. Local custom directives don't need to be explicitly registered with `<script setup>`, but they must follow the naming scheme `vNameOfDirective`:
 
 ```vue
 <script setup>
 const vMyDirective = {
   beforeMount: (el) => {
-    // làm gì đó với element
+    // do something with the element
   }
 }
 </script>
 <template>
-  <h1 v-my-directive>Đây là Tiêu đề</h1>
+  <h1 v-my-directive>This is a Heading</h1>
 </template>
 ```
 
-Nếu bạn import directive từ chỗ khác, nó có thể được đổi tên để phù hợp với quy tắc đặt tên yêu cầu:
+If you're importing a directive from elsewhere, it can be renamed to fit the required naming scheme:
 
 ```vue
 <script setup>
@@ -154,7 +154,7 @@ import { myDirective as vMyDirective } from './MyDirective.js'
 
 ## defineProps() & defineEmits() {#defineprops-defineemits}
 
-Để khai báo các tùy chọn như `props` và `emits` với hỗ trợ suy luận kiểu đầy đủ, chúng ta có thể dùng các API `defineProps` và `defineEmits`, tự động có sẵn bên trong `<script setup>`:
+To declare options like `props` and `emits` with full type inference support, we can use the `defineProps` and `defineEmits` APIs, which are automatically available inside `<script setup>`:
 
 ```vue
 <script setup>
@@ -163,21 +163,21 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['change', 'delete'])
-// code setup
+// setup code
 </script>
 ```
 
-- `defineProps` và `defineEmits` là **compiler macro** chỉ có thể dùng bên trong `<script setup>`. Chúng không cần được import, và được biên dịch bỏ đi khi `<script setup>` được xử lý.
+- `defineProps` and `defineEmits` are **compiler macros** only usable inside `<script setup>`. They do not need to be imported, and are compiled away when `<script setup>` is processed.
 
-- `defineProps` chấp nhận cùng giá trị với tùy chọn `props`, trong khi `defineEmits` chấp nhận cùng giá trị với tùy chọn `emits`.
+- `defineProps` accepts the same value as the `props` option, while `defineEmits` accepts the same value as the `emits` option.
 
-- `defineProps` và `defineEmits` cung cấp suy luận kiểu phù hợp dựa trên các tùy chọn được truyền vào.
+- `defineProps` and `defineEmits` provide proper type inference based on the options passed.
 
-- Các tùy chọn được truyền vào `defineProps` và `defineEmits` sẽ được hoist ra ngoài setup vào module scope. Do đó, các tùy chọn không thể tham chiếu các biến cục bộ được khai báo trong setup scope. Làm vậy sẽ dẫn đến compile error. Tuy nhiên, nó _có thể_ tham chiếu các binding đã import vì chúng cũng trong module scope.
+- The options passed to `defineProps` and `defineEmits` will be hoisted out of setup into module scope. Therefore, the options cannot reference local variables declared in setup scope. Doing so will result in a compile error. However, it _can_ reference imported bindings since they are in the module scope as well.
 
-### Khai báo props/emit chỉ kiểu<sup class="vt-badge ts" /> {#type-only-props-emit-declarations}
+### Type-only props/emit declarations<sup class="vt-badge ts" /> {#type-only-props-emit-declarations}
 
-Props và emit cũng có thể được khai báo dùng cú pháp pure-type bằng cách truyền một literal type argument vào `defineProps` hoặc `defineEmits`:
+Props and emits can also be declared using pure-type syntax by passing a literal type argument to `defineProps` or `defineEmits`:
 
 ```ts
 const props = defineProps<{
@@ -190,51 +190,51 @@ const emit = defineEmits<{
   (e: 'update', value: string): void
 }>()
 
-// 3.3+: cú pháp thay thế, ngắn gọn hơn
+// 3.3+: alternative, more succinct syntax
 const emit = defineEmits<{
-  change: [id: number] // cú pháp named tuple
+  change: [id: number] // named tuple syntax
   update: [value: string]
 }>()
 ```
 
-- `defineProps` hoặc `defineEmits` chỉ có thể dùng khai báo runtime HOẶC khai báo type. Dùng cả hai cùng lúc sẽ dẫn đến compile error.
+- `defineProps` or `defineEmits` can only use either runtime declaration OR type declaration. Using both at the same time will result in a compile error.
 
-- Khi dùng khai báo type, khai báo runtime tương đương được tự động tạo ra từ phân tích static để bỏ nhu cầu khai báo đôi và vẫn đảm bảo hành vi runtime đúng.
+- When using type declaration, the equivalent runtime declaration is automatically generated from static analysis to remove the need for double declaration and still ensure correct runtime behavior.
 
-  - Trong chế độ dev, compiler sẽ cố suy luận runtime validation tương ứng từ các kiểu. Ví dụ ở đây `foo: String` được suy luận từ kiểu `foo: string`. Các kiểu đã import cũng được resolve, miễn là TypeScript được cài đặt như một peer dependency.
+  - In dev mode, the compiler will try to infer corresponding runtime validation from the types. For example here `foo: String` is inferred from the `foo: string` type. Imported types are also resolved, provided TypeScript is installed as a peer dependency.
 
-  - Trong chế độ prod, compiler sẽ tạo khai báo dạng mảng để giảm bundle size (các props ở đây sẽ được biên dịch thành `['foo', 'bar']`)
+  - In prod mode, the compiler will generate the array format declaration to reduce bundle size (the props here will be compiled into `['foo', 'bar']`)
 
-- Trong phiên bản 3.2 trở xuống, generic type parameter cho `defineProps()` bị giới hạn ở type literal hoặc tham chiếu đến local interface.
+- In version 3.2 and below, the generic type parameter for `defineProps()` were limited to a type literal or a reference to a local interface.
 
-  Giới hạn này được giải quyết trong 3.3. Phiên bản Vue mới nhất hỗ trợ tham chiếu các kiểu đã import và một tập hợp giới hạn các kiểu phức tạp trong vị trí type parameter. Tuy nhiên, vì chuyển đổi type sang runtime vẫn dựa trên AST, một số kiểu phức tạp yêu cầu phân tích kiểu thực sự, ví dụ: conditional type, không được hỗ trợ. Bạn có thể dùng conditional type cho kiểu của một prop đơn lẻ, nhưng không phải toàn bộ object props.
+  This limitation was resolved in 3.3. The latest version of Vue supports referencing imported and a limited set of complex types in the type parameter position. However, because the type to runtime conversion is still AST-based, some complex types that require actual type analysis, e.g. conditional types, are not supported. You can use conditional types for the type of a single prop, but not the entire props object.
 
 ### Reactive Props Destructure <sup class="vt-badge" data-text="3.5+" /> {#reactive-props-destructure}
 
-Trong Vue 3.5 trở lên, các biến được destructure từ giá trị trả về của `defineProps` là reactive. Compiler của Vue tự động thêm tiền tố `props.` khi code trong cùng khối `<script setup>` truy cập các biến được destructure từ `defineProps`:
+In Vue 3.5 and above, variables destructured from the return value of `defineProps` are reactive. Vue's compiler automatically prepends `props.` when code in the same `<script setup>` block accesses variables destructured from `defineProps`:
 
 ```ts
 const { foo } = defineProps(['foo'])
 
 watchEffect(() => {
-  // chạy chỉ một lần trước 3.5
-  // chạy lại khi prop "foo" thay đổi trong 3.5+
+  // runs only once before 3.5
+  // re-runs when the "foo" prop changes in 3.5+
   console.log(foo)
 })
 ```
 
-Code trên được biên dịch thành tương đương sau:
+The above is compiled to the following equivalent:
 
 ```js {5}
 const props = defineProps(['foo'])
 
 watchEffect(() => {
-  // `foo` được compiler chuyển đổi thành `props.foo`
+  // `foo` transformed to `props.foo` by the compiler
   console.log(props.foo)
 })
 ```
 
-Ngoài ra, bạn có thể dùng cú pháp giá trị mặc định native của JavaScript để khai báo giá trị mặc định cho các props. Điều này đặc biệt hữu ích khi dùng khai báo props dựa trên type:
+In addition, you can use JavaScript's native default value syntax to declare default values for the props. This is particularly useful when using the type-based props declaration:
 
 ```ts
 interface Props {
@@ -245,9 +245,9 @@ interface Props {
 const { msg = 'hello', labels = ['one', 'two'] } = defineProps<Props>()
 ```
 
-### Giá trị mặc định props khi dùng khai báo type <sup class="vt-badge ts" /> {#default-props-values-when-using-type-declaration}
+### Default props values when using type declaration <sup class="vt-badge ts" /> {#default-props-values-when-using-type-declaration}
 
-Trong 3.5 trở lên, giá trị mặc định có thể được khai báo tự nhiên khi dùng Reactive Props Destructure. Nhưng trong 3.4 trở xuống, Reactive Props Destructure không được bật mặc định. Để khai báo giá trị mặc định props với khai báo dựa trên type, cần dùng compiler macro `withDefaults`:
+In 3.5 and above, default values can be naturally declared when using Reactive Props Destructure. But in 3.4 and below, Reactive Props Destructure is not enabled by default. In order to declare props default values with type-based declaration, the `withDefaults` compiler macro is needed:
 
 ```ts
 interface Props {
@@ -261,42 +261,42 @@ const props = withDefaults(defineProps<Props>(), {
 })
 ```
 
-Điều này sẽ được biên dịch thành tùy chọn `default` props runtime tương đương. Ngoài ra, helper `withDefaults` cung cấp kiểm tra kiểu cho các giá trị mặc định, và đảm bảo kiểu `props` được trả về có các flag tùy chọn được loại bỏ cho các thuộc tính đã có khai báo giá trị mặc định.
+This will be compiled to equivalent runtime props `default` options. In addition, the `withDefaults` helper provides type checks for the default values, and ensures the returned `props` type has the optional flags removed for properties that do have default values declared.
 
 :::info
-Lưu ý rằng các giá trị mặc định cho kiểu tham chiếu có thể thay đổi (như mảng hoặc object) nên được bọc trong hàm khi dùng `withDefaults` để tránh thay đổi ngoài ý muốn và side effect bên ngoài. Điều này đảm bảo mỗi instance component nhận bản sao riêng của giá trị mặc định. Điều này **không** cần thiết khi dùng giá trị mặc định với destructure.
+Note that default values for mutable reference types (like arrays or objects) should be wrapped in functions when using `withDefaults` to avoid accidental modification and external side effects. This ensures each component instance gets its own copy of the default value. This is **not** necessary when using default values with destructure.
 :::
 
 ## defineModel() {#definemodel}
 
-- Chỉ có sẵn trong 3.4+
+- Only available in 3.4+
 
-Macro này có thể dùng để khai báo một prop binding hai chiều có thể sử dụng qua `v-model` từ component cha. Ví dụ sử dụng cũng được thảo luận trong hướng dẫn [Component `v-model`](/guide/components/v-model).
+This macro can be used to declare a two-way binding prop that can be consumed via `v-model` from the parent component. Example usage is also discussed in the [Component `v-model`](/guide/components/v-model) guide.
 
-Bên dưới, macro này khai báo một model prop và một event cập nhật giá trị tương ứng. Nếu đối số đầu tiên là chuỗi literal, nó sẽ được dùng làm tên prop; Ngược lại tên prop sẽ mặc định là `"modelValue"`. Trong cả hai trường hợp, bạn cũng có thể truyền thêm một object có thể bao gồm các tùy chọn của prop và các tùy chọn transform giá trị của model ref.
+Under the hood, this macro declares a model prop and a corresponding value update event. If the first argument is a literal string, it will be used as the prop name; Otherwise the prop name will default to `"modelValue"`. In both cases, you can also pass an additional object which can include the prop's options and the model ref's value transform options.
 
 ```js
-// khai báo prop "modelValue", được cha sử dụng qua v-model
+// declares "modelValue" prop, consumed by parent via v-model
 const model = defineModel()
-// HOẶC: khai báo prop "modelValue" với tùy chọn
+// OR: declares "modelValue" prop with options
 const model = defineModel({ type: String })
 
-// emit "update:modelValue" khi thay đổi
+// emits "update:modelValue" when mutated
 model.value = 'hello'
 
-// khai báo prop "count", được cha sử dụng qua v-model:count
+// declares "count" prop, consumed by parent via v-model:count
 const count = defineModel('count')
-// HOẶC: khai báo prop "count" với tùy chọn
+// OR: declares "count" prop with options
 const count = defineModel('count', { type: Number, default: 0 })
 
 function inc() {
-  // emit "update:count" khi thay đổi
+  // emits "update:count" when mutated
   count.value++
 }
 ```
 
 :::warning
-Nếu bạn có giá trị `default` cho prop `defineModel` và bạn không cung cấp bất kỳ giá trị nào cho prop này từ component cha, nó có thể gây mất đồng bộ giữa component cha và con. Trong ví dụ dưới đây, `myRef` của cha là undefined, nhưng `model` của con là 1:
+If you have a `default` value for `defineModel` prop and you don't provide any value for this prop from the parent component, it can cause a de-synchronization between parent and child components. In the example below, the parent's `myRef` is undefined, but the child's `model` is 1:
 
 ```vue [Child.vue]
 <script setup>
@@ -316,44 +316,44 @@ const myRef = ref()
 
 :::
 
-### Modifier và Transformer {#modifiers-and-transformers}
+### Modifiers and Transformers {#modifiers-and-transformers}
 
-Để truy cập các modifier được dùng với directive `v-model`, chúng ta có thể destructure giá trị trả về của `defineModel()` như sau:
+To access modifiers used with the `v-model` directive, we can destructure the return value of `defineModel()` like this:
 
 ```js
 const [modelValue, modelModifiers] = defineModel()
 
-// tương ứng với v-model.trim
+// corresponds to v-model.trim
 if (modelModifiers.trim) {
   // ...
 }
 ```
 
-Khi có modifier, chúng ta có thể cần transform giá trị khi đọc hoặc đồng bộ lại cho cha. Chúng ta có thể đạt điều này bằng cách dùng các tùy chọn transformer `get` và `set`:
+When a modifier is present, we likely need to transform the value when reading or syncing it back to the parent. We can achieve this by using the `get` and `set` transformer options:
 
 ```js
 const [modelValue, modelModifiers] = defineModel({
-  // get() bỏ qua vì không cần ở đây
+  // get() omitted as it is not needed here
   set(value) {
-    // nếu modifier .trim được dùng, trả về giá trị đã trim
+    // if the .trim modifier is used, return trimmed value
     if (modelModifiers.trim) {
       return value.trim()
     }
-    // ngược lại, trả về giá trị nguyên vẹn
+    // otherwise, return the value as-is
     return value
   }
 })
 ```
 
-### Dùng với TypeScript <sup class="vt-badge ts" /> {#usage-with-typescript}
+### Usage with TypeScript <sup class="vt-badge ts" /> {#usage-with-typescript}
 
-Giống như `defineProps` và `defineEmits`, `defineModel` cũng có thể nhận type argument để chỉ định kiểu của model value và modifier:
+Like `defineProps` and `defineEmits`, `defineModel` can also receive type arguments to specify the types of the model value and the modifiers:
 
 ```ts
 const modelValue = defineModel<string>()
 //    ^? Ref<string | undefined>
 
-// model mặc định với tùy chọn, required loại bỏ các giá trị undefined có thể
+// default model with options, required removes possible undefined values
 const modelValue = defineModel<string>({ required: true })
 //    ^? Ref<string>
 
@@ -363,9 +363,9 @@ const [modelValue, modifiers] = defineModel<string, 'trim' | 'uppercase'>()
 
 ## defineExpose() {#defineexpose}
 
-Các component dùng `<script setup>` là **đóng theo mặc định** - tức là public instance của component, được lấy qua template ref hoặc chuỗi `$parent`, sẽ **không** expose bất kỳ binding nào được khai báo bên trong `<script setup>`.
+Components using `<script setup>` are **closed by default** - i.e. the public instance of the component, which is retrieved via template refs or `$parent` chains, will **not** expose any of the bindings declared inside `<script setup>`.
 
-Để expose rõ ràng các thuộc tính trong component `<script setup>`, dùng compiler macro `defineExpose`:
+To explicitly expose properties in a `<script setup>` component, use the `defineExpose` compiler macro:
 
 ```vue
 <script setup>
@@ -381,13 +381,13 @@ defineExpose({
 </script>
 ```
 
-Khi cha nhận instance của component này qua template ref, instance được lấy sẽ có dạng `{ a: number, b: number }` (ref được tự động unwrap giống như trên các instance thông thường).
+When a parent gets an instance of this component via template refs, the retrieved instance will be of the shape `{ a: number, b: number }` (refs are automatically unwrapped just like on normal instances).
 
 ## defineOptions() {#defineoptions}
 
-- Chỉ hỗ trợ trong 3.3+
+- Only supported in 3.3+
 
-Macro này có thể dùng để khai báo component option trực tiếp bên trong `<script setup>` mà không cần dùng một khối `<script>` riêng biệt:
+This macro can be used to declare component options directly inside `<script setup>` without having to use a separate `<script>` block:
 
 ```vue
 <script setup>
@@ -400,17 +400,17 @@ defineOptions({
 </script>
 ```
 
-- Đây là macro. Các tùy chọn sẽ được hoist lên module scope và không thể truy cập các biến cục bộ trong `<script setup>` mà không phải là literal constant.
+- This is a macro. The options will be hoisted to module scope and cannot access local variables in `<script setup>` that are not literal constants.
 
 ## defineSlots()<sup class="vt-badge ts"/> {#defineslots}
 
-- Chỉ hỗ trợ trong 3.3+
+- Only supported in 3.3+
 
-Macro này có thể dùng để cung cấp type hint cho IDE để kiểm tra tên slot và kiểu props.
+This macro can be used to provide type hints to IDEs for slot name and props type checking.
 
-`defineSlots()` chỉ chấp nhận type parameter và không có runtime argument. Type parameter nên là type literal trong đó property key là tên slot, và value type là hàm slot. Đối số đầu tiên của hàm là props mà slot nhận, và kiểu của nó sẽ được dùng cho slot props trong template. Kiểu trả về hiện tại bị bỏ qua và có thể là `any`, nhưng chúng tôi có thể tận dụng nó để kiểm tra nội dung slot trong tương lai.
+`defineSlots()` only accepts a type parameter and no runtime arguments. The type parameter should be a type literal where the property key is the slot name, and the value type is the slot function. The first argument of the function is the props the slot expects to receive, and its type will be used for slot props in the template. The return type is currently ignored and can be `any`, but we may leverage it for slot content checking in the future.
 
-Nó cũng trả về object `slots`, tương đương với object `slots` được expose trên setup context hoặc được trả về bởi `useSlots()`.
+It also returns the `slots` object, which is equivalent to the `slots` object exposed on the setup context or returned by `useSlots()`.
 
 ```vue
 <script setup lang="ts">
@@ -422,7 +422,7 @@ const slots = defineSlots<{
 
 ## `useSlots()` & `useAttrs()` {#useslots-useattrs}
 
-Việc dùng `slots` và `attrs` bên trong `<script setup>` thường hiếm gặp, vì bạn có thể truy cập chúng trực tiếp như `$slots` và `$attrs` trong template. Trong trường hợp hiếm gặp khi bạn thực sự cần chúng, dùng helper `useSlots` và `useAttrs` tương ứng:
+Usage of `slots` and `attrs` inside `<script setup>` should be relatively rare, since you can access them directly as `$slots` and `$attrs` in the template. In the rare case where you do need them, use the `useSlots` and `useAttrs` helpers respectively:
 
 ```vue
 <script setup>
@@ -433,22 +433,22 @@ const attrs = useAttrs()
 </script>
 ```
 
-`useSlots` và `useAttrs` là các hàm runtime thực sự trả về tương đương của `setupContext.slots` và `setupContext.attrs`. Chúng cũng có thể dùng trong các hàm composition API thông thường.
+`useSlots` and `useAttrs` are actual runtime functions that return the equivalent of `setupContext.slots` and `setupContext.attrs`. They can be used in normal composition API functions as well.
 
-## Dùng cùng với `<script>` thông thường {#usage-alongside-normal-script}
+## Usage alongside normal `<script>` {#usage-alongside-normal-script}
 
-`<script setup>` có thể dùng cùng với `<script>` thông thường. Một `<script>` thông thường có thể cần trong các trường hợp chúng ta cần:
+`<script setup>` can be used alongside normal `<script>`. A normal `<script>` may be needed in cases where we need to:
 
-- Khai báo các tùy chọn không thể biểu đạt trong `<script setup>`, ví dụ `inheritAttrs` hoặc các tùy chọn tùy chỉnh được bật qua plugin (Có thể được thay thế bằng [`defineOptions`](/api/sfc-script-setup#defineoptions) trong 3.3+).
-- Khai báo named export.
-- Chạy side effect hoặc tạo object chỉ nên thực thi một lần.
+- Declare options that cannot be expressed in `<script setup>`, for example `inheritAttrs` or custom options enabled via plugins (Can be replaced by [`defineOptions`](/api/sfc-script-setup#defineoptions) in 3.3+).
+- Declaring named exports.
+- Run side effects or create objects that should only execute once.
 
 ```vue
 <script>
-// <script> thông thường, thực thi trong module scope (chỉ một lần)
+// normal <script>, executed in module scope (only once)
 runSideEffectOnce()
 
-// khai báo thêm tùy chọn
+// declare additional options
 export default {
   inheritAttrs: false,
   customOptions: {}
@@ -456,20 +456,20 @@ export default {
 </script>
 
 <script setup>
-// thực thi trong setup() scope (cho mỗi instance)
+// executed in setup() scope (for each instance)
 </script>
 ```
 
-Hỗ trợ kết hợp `<script setup>` và `<script>` trong cùng một component bị giới hạn ở các trường hợp được mô tả ở trên. Cụ thể:
+Support for combining `<script setup>` and `<script>` in the same component is limited to the scenarios described above. Specifically:
 
-- **KHÔNG** dùng phần `<script>` riêng biệt cho các tùy chọn đã có thể định nghĩa bằng `<script setup>`, như `props` và `emits`.
-- Các biến được tạo bên trong `<script setup>` không được thêm làm thuộc tính vào component instance, khiến chúng không thể truy cập từ Options API. Pha trộn API theo cách này bị khuyến cáo không nên làm.
+- Do **NOT** use a separate `<script>` section for options that can already be defined using `<script setup>`, such as `props` and `emits`.
+- Variables created inside `<script setup>` are not added as properties to the component instance, making them inaccessible from the Options API. Mixing APIs in this way is strongly discouraged.
 
-Nếu bạn thấy mình trong một trong các trường hợp không được hỗ trợ thì bạn nên cân nhắc chuyển sang hàm [`setup()`](/api/composition-api-setup) rõ ràng, thay vì dùng `<script setup>`.
+If you find yourself in one of the scenarios that is not supported then you should consider switching to an explicit [`setup()`](/api/composition-api-setup) function, instead of using `<script setup>`.
 
-## `await` cấp cao nhất {#top-level-await}
+## Top-level `await` {#top-level-await}
 
-`await` cấp cao nhất có thể dùng bên trong `<script setup>`. Code kết quả sẽ được biên dịch thành `async setup()`:
+Top-level `await` can be used inside `<script setup>`. The resulting code will be compiled as `async setup()`:
 
 ```vue
 <script setup>
@@ -477,16 +477,16 @@ const post = await fetch(`/api/post/1`).then((r) => r.json())
 </script>
 ```
 
-Ngoài ra, biểu thức được await sẽ được tự động biên dịch theo định dạng giữ nguyên context của component instance hiện tại sau `await`.
+In addition, the awaited expression will be automatically compiled in a format that preserves the current component instance context after the `await`.
 
-:::warning Lưu ý
-`async setup()` phải được dùng kết hợp với [`Suspense`](/guide/built-ins/suspense.html), hiện vẫn là tính năng thử nghiệm. Chúng tôi dự định hoàn thiện và tài liệu hóa nó trong một bản release tương lai - nhưng nếu bạn tò mò ngay bây giờ, bạn có thể tham khảo [các test](https://github.com/vuejs/core/blob/main/packages/runtime-core/__tests__/components/Suspense.spec.ts) của nó để xem cách hoạt động.
+:::warning Note
+`async setup()` must be used in combination with [`Suspense`](/guide/built-ins/suspense.html), which is currently still an experimental feature. We plan to finalize and document it in a future release - but if you are curious now, you can refer to its [tests](https://github.com/vuejs/core/blob/main/packages/runtime-core/__tests__/components/Suspense.spec.ts) to see how it works.
 :::
 
-## Câu lệnh Import {#imports-statements}
+## Import Statements {#imports-statements}
 
-Các câu lệnh import trong vue tuân theo [đặc tả ES module](https://nodejs.org/api/esm.html).
-Ngoài ra, bạn có thể dùng các alias được định nghĩa trong cấu hình build tool của bạn:
+Import statements in vue follow [ECMAScript module specification](https://nodejs.org/api/esm.html).
+In addition, you can use aliases defined in your build tool configuration:
 
 ```vue
 <script setup>
@@ -497,9 +497,9 @@ import { componentC } from '~/Components'
 </script>
 ```
 
-## Generic <sup class="vt-badge ts" /> {#generics}
+## Generics <sup class="vt-badge ts" /> {#generics}
 
-Generic type parameter có thể được khai báo bằng thuộc tính `generic` trên tag `<script>`:
+Generic type parameters can be declared using the `generic` attribute on the `<script>` tag:
 
 ```vue
 <script setup lang="ts" generic="T">
@@ -510,7 +510,7 @@ defineProps<{
 </script>
 ```
 
-Giá trị của `generic` hoạt động giống hệt danh sách parameter giữa `<...>` trong TypeScript. Ví dụ, bạn có thể dùng nhiều parameter, ràng buộc `extends`, kiểu mặc định, và tham chiếu các kiểu đã import:
+The value of `generic` works exactly the same as the parameter list between `<...>` in TypeScript. For example, you can use multiple parameters, `extends` constraints, default types, and reference imported types:
 
 ```vue
 <script
@@ -526,7 +526,7 @@ defineProps<{
 </script>
 ```
 
-Bạn có thể dùng directive `@vue-generic` để truyền vào các kiểu rõ ràng, cho khi kiểu không thể được suy luận:
+You can use `@vue-generic` the directive to pass in explicit types, for when the type cannot be inferred:
 
 ```vue
 <template>
@@ -538,7 +538,7 @@ Bạn có thể dùng directive `@vue-generic` để truyền vào các kiểu r
 </template>
 ```
 
-Để dùng tham chiếu đến generic component trong `ref`, bạn cần dùng thư viện [`vue-component-type-helpers`](https://www.npmjs.com/package/vue-component-type-helpers) vì `InstanceType` sẽ không hoạt động.
+In order to use a reference to a generic component in a `ref` you need to use the [`vue-component-type-helpers`](https://www.npmjs.com/package/vue-component-type-helpers) library as `InstanceType` won't work.
 
 ```vue
 <script
@@ -550,13 +550,13 @@ import genericComponent from '../generic-component.vue';
 
 import type { ComponentExposed } from 'vue-component-type-helpers';
 
-// Hoạt động cho component không có generic
+// Works for a component without generics
 ref<InstanceType<typeof componentWithoutGenerics>>();
 
 ref<ComponentExposed<typeof genericComponent>>();
 ```
 
-## Hạn chế {#restrictions}
+## Restrictions {#restrictions}
 
-- Do sự khác biệt trong ngữ nghĩa thực thi module, code bên trong `<script setup>` phụ thuộc vào context của một SFC. Khi chuyển vào các file `.js` hoặc `.ts` bên ngoài, nó có thể gây nhầm lẫn cho cả developer lẫn công cụ. Do đó, **`<script setup>`** không thể dùng với thuộc tính `src`.
-- `<script setup>` không hỗ trợ In-DOM Root Component Template. ([Thảo luận liên quan](https://github.com/vuejs/core/issues/8391))
+- Due to the difference in module execution semantics, code inside `<script setup>` relies on the context of an SFC. When moved into external `.js` or `.ts` files, it may lead to confusion for both developers and tools. Therefore, **`<script setup>`** cannot be used with the `src` attribute.
+- `<script setup>` does not support In-DOM Root Component Template.([Related Discussion](https://github.com/vuejs/core/issues/8391))

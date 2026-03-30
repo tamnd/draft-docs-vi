@@ -1,20 +1,20 @@
-# Kết xuất có điều kiện {#conditional-rendering}
+# Conditional Rendering {#conditional-rendering}
 
-Chúng ta có thể dùng directive `v-if` để render một element có điều kiện:
-
-```vue-html
-<h1 v-if="awesome">Vue thật tuyệt vời!</h1>
-```
-
-`<h1>` này sẽ chỉ được render nếu giá trị của `awesome` là [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy). Nếu `awesome` thay đổi thành giá trị [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), nó sẽ bị xóa khỏi DOM.
-
-Chúng ta cũng có thể dùng `v-else` và `v-else-if` để biểu thị các nhánh khác của điều kiện:
+We can use the `v-if` directive to conditionally render an element:
 
 ```vue-html
-<h1 v-if="awesome">Vue thật tuyệt vời!</h1>
-<h1 v-else>Ồ không 😢</h1>
+<h1 v-if="awesome">Vue is awesome!</h1>
 ```
 
-Hiện tại, demo đang hiển thị cả hai `<h1>` cùng lúc, và nút không làm gì. Hãy thêm directive `v-if` và `v-else` vào chúng, và triển khai method `toggle()` để chúng ta có thể dùng nút để chuyển đổi giữa chúng.
+This `<h1>` will be rendered only if the value of `awesome` is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy). If `awesome` changes to a [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) value, it will be removed from the DOM.
 
-Chi tiết thêm về `v-if`: <a target="_blank" href="/guide/essentials/conditional.html">Hướng dẫn - Kết xuất có điều kiện</a>
+We can also use `v-else` and `v-else-if` to denote other branches of the condition:
+
+```vue-html
+<h1 v-if="awesome">Vue is awesome!</h1>
+<h1 v-else>Oh no 😢</h1>
+```
+
+Currently, the demo is showing both `<h1>`s at the same time, and the button does nothing. Try to add `v-if` and `v-else` directives to them, and implement the `toggle()` method so that we can use the button to toggle between them.
+
+More details on `v-if`: <a target="_blank" href="/guide/essentials/conditional.html">Guide - Conditional Rendering</a>

@@ -2,50 +2,50 @@
 outline: deep
 ---
 
-# Flag Thời điểm Biên dịch {#compile-time-flags}
+# Compile-Time Flags {#compile-time-flags}
 
 :::tip
-Các flag thời điểm biên dịch chỉ áp dụng khi dùng bản build `esm-bundler` của Vue (tức là `vue/dist/vue.esm-bundler.js`).
+Compile-time flags only apply when using the `esm-bundler` build of Vue (i.e. `vue/dist/vue.esm-bundler.js`).
 :::
 
-Khi dùng Vue với bước build, có thể cấu hình một số flag thời điểm biên dịch để bật/tắt một số tính năng nhất định. Lợi ích của việc dùng flag thời điểm biên dịch là các tính năng bị tắt theo cách này có thể bị loại bỏ khỏi bundle cuối cùng qua tree-shaking.
+When using Vue with a build step, it is possible to configure a number of compile-time flags to enable / disable certain features. The benefit of using compile-time flags is that features disabled this way can be removed from the final bundle via tree-shaking.
 
-Vue vẫn hoạt động ngay cả khi các flag này không được cấu hình rõ ràng. Tuy nhiên, khuyến nghị luôn cấu hình chúng để các tính năng liên quan có thể được loại bỏ đúng cách khi có thể.
+Vue will work even if these flags are not explicitly configured. However, it is recommended to always configure them so that the relevant features can be properly removed when possible.
 
-Xem [Hướng dẫn Cấu hình](#configuration-guides) về cách cấu hình chúng tùy theo build tool của bạn.
+See [Configuration Guides](#configuration-guides) on how to configure them depending on your build tool.
 
 ## `__VUE_OPTIONS_API__` {#VUE_OPTIONS_API}
 
-- **Mặc định:** `true`
+- **Default:** `true`
 
-  Bật/tắt hỗ trợ Options API. Tắt tính năng này sẽ tạo ra bundle nhỏ hơn, nhưng có thể ảnh hưởng đến khả năng tương thích với các thư viện bên thứ ba nếu chúng phụ thuộc vào Options API.
+  Enable / disable Options API support. Disabling this will result in smaller bundles, but may affect compatibility with 3rd party libraries if they rely on Options API.
 
 ## `__VUE_PROD_DEVTOOLS__` {#VUE_PROD_DEVTOOLS}
 
-- **Mặc định:** `false`
+- **Default:** `false`
 
-  Bật/tắt hỗ trợ devtools trong bản build production. Điều này sẽ dẫn đến nhiều code hơn trong bundle, vì vậy chỉ khuyến nghị bật tính năng này cho mục đích debug.
+  Enable / disable devtools support in production builds. This will result in more code included in the bundle, so it is recommended to only enable this for debugging purposes.
 
 ## `__VUE_PROD_HYDRATION_MISMATCH_DETAILS__` {#VUE_PROD_HYDRATION_MISMATCH_DETAILS}
 
-- **Mặc định:** `false`
+- **Default:** `false`
 
-  Bật/tắt cảnh báo chi tiết về sai lệch hydration trong bản build production. Điều này sẽ dẫn đến nhiều code hơn trong bundle, vì vậy chỉ khuyến nghị bật tính năng này cho mục đích debug.
+  Enable/disable detailed warnings for hydration mismatches in production builds. This will result in more code included in the bundle, so it is recommended to only enable this for debugging purposes.
 
-- Chỉ có sẵn trong 3.4+
+- Only available in 3.4+
 
-## Hướng dẫn Cấu hình {#configuration-guides}
+## Configuration Guides {#configuration-guides}
 
 ### Vite {#vite}
 
-`@vitejs/plugin-vue` tự động cung cấp các giá trị mặc định cho các flag này. Để thay đổi giá trị mặc định, dùng [tùy chọn cấu hình `define`](https://vite.dev/config/shared-options.html#define) của Vite:
+`@vitejs/plugin-vue` automatically provides default values for these flags. To change the default values, use Vite's [`define` config option](https://vite.dev/config/shared-options.html#define):
 
 ```js [vite.config.js]
 import { defineConfig } from 'vite'
 
 export default defineConfig({
   define: {
-    // bật chi tiết sai lệch hydration trong bản build production
+    // enable hydration mismatch details in production build
     __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true'
   }
 })
@@ -53,7 +53,7 @@ export default defineConfig({
 
 ### vue-cli {#vue-cli}
 
-`@vue/cli-service` tự động cung cấp các giá trị mặc định cho một số flag này. Để cấu hình/thay đổi các giá trị:
+`@vue/cli-service` automatically provides default values for some of these flags. To configure /change the values:
 
 ```js [vue.config.js]
 module.exports = {
@@ -72,7 +72,7 @@ module.exports = {
 
 ### webpack {#webpack}
 
-Các flag nên được định nghĩa bằng [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) của webpack:
+Flags should be defined using webpack's [DefinePlugin](https://webpack.js.org/plugins/define-plugin/):
 
 ```js [webpack.config.js]
 module.exports = {
@@ -89,7 +89,7 @@ module.exports = {
 
 ### Rollup {#rollup}
 
-Các flag nên được định nghĩa bằng [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace):
+Flags should be defined using [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace):
 
 ```js [rollup.config.js]
 import replace from '@rollup/plugin-replace'

@@ -1,1 +1,1 @@
-Chúng ta có thể tạo ràng buộc hai chiều giữa state và input của form bằng directive v-model.
+We can create two-way bindings between state and form inputs using the v-model directive.

@@ -2,31 +2,31 @@
 
 ## createApp() {#createapp}
 
-Tạo một instance ứng dụng.
+Creates an application instance.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   function createApp(rootComponent: Component, rootProps?: object): App
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Đối số đầu tiên là component gốc. Đối số tùy chọn thứ hai là các props truyền vào component gốc.
+  The first argument is the root component. The second optional argument is the props to be passed to the root component.
 
-- **Ví dụ**
+- **Example**
 
-  Với component gốc inline:
+  With inline root component:
 
   ```js
   import { createApp } from 'vue'
 
   const app = createApp({
-    /* tùy chọn component gốc */
+    /* root component options */
   })
   ```
 
-  Với component được import:
+  With imported component:
 
   ```js
   import { createApp } from 'vue'
@@ -35,17 +35,17 @@ Tạo một instance ứng dụng.
   const app = createApp(App)
   ```
 
-- **Xem thêm** [Hướng dẫn - Tạo một Ứng dụng Vue](/guide/essentials/application)
+- **See also** [Guide - Creating a Vue Application](/guide/essentials/application)
 
 ## createSSRApp() {#createssrapp}
 
-Tạo một instance ứng dụng ở chế độ [SSR Hydration](/guide/scaling-up/ssr#client-hydration). Cách dùng hoàn toàn giống `createApp()`.
+Creates an application instance in [SSR Hydration](/guide/scaling-up/ssr#client-hydration) mode. Usage is exactly the same as `createApp()`.
 
 ## app.mount() {#app-mount}
 
-Mount instance ứng dụng vào một phần tử chứa.
+Mounts the application instance in a container element.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -53,17 +53,17 @@ Mount instance ứng dụng vào một phần tử chứa.
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Đối số có thể là một phần tử DOM thực hoặc một CSS selector (phần tử đầu tiên khớp sẽ được dùng). Trả về instance component gốc.
+  The argument can either be an actual DOM element or a CSS selector (the first matched element will be used). Returns the root component instance.
 
-  Nếu component có template hoặc render function được định nghĩa, nó sẽ thay thế tất cả DOM node hiện có bên trong container. Ngược lại, nếu runtime compiler có sẵn, `innerHTML` của container sẽ được dùng làm template.
+  If the component has a template or a render function defined, it will replace any existing DOM nodes inside the container. Otherwise, if the runtime compiler is available, the `innerHTML` of the container will be used as the template.
 
-  Ở chế độ SSR hydration, nó sẽ hydrate các DOM node hiện có bên trong container. Nếu có [sai lệch hydration](/guide/scaling-up/ssr#hydration-mismatch), các DOM node hiện có sẽ được biến đổi để khớp với kết quả mong đợi.
+  In SSR hydration mode, it will hydrate the existing DOM nodes inside the container. If there are [mismatches](/guide/scaling-up/ssr#hydration-mismatch), the existing DOM nodes will be morphed to match the expected output.
 
-  Mỗi instance ứng dụng chỉ được gọi `mount()` một lần.
+  For each app instance, `mount()` can only be called once.
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { createApp } from 'vue'
@@ -72,7 +72,7 @@ Mount instance ứng dụng vào một phần tử chứa.
   app.mount('#app')
   ```
 
-  Cũng có thể mount vào một phần tử DOM thực:
+  Can also mount to an actual DOM element:
 
   ```js
   app.mount(document.body.firstChild)
@@ -80,9 +80,9 @@ Mount instance ứng dụng vào một phần tử chứa.
 
 ## app.unmount() {#app-unmount}
 
-Unmount một instance ứng dụng đã được mount, kích hoạt các hook vòng đời unmount cho tất cả component trong cây component của ứng dụng.
+Unmounts a mounted application instance, triggering the unmount lifecycle hooks for all components in the application's component tree.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -92,9 +92,9 @@ Unmount một instance ứng dụng đã được mount, kích hoạt các hook 
 
 ## app.onUnmount() <sup class="vt-badge" data-text="3.5+" /> {#app-onunmount}
 
-Đăng ký callback được gọi khi ứng dụng bị unmount.
+Registers a callback to be called when the app is unmounted.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -104,9 +104,9 @@ Unmount một instance ứng dụng đã được mount, kích hoạt các hook 
 
 ## app.component() {#app-component}
 
-Đăng ký component toàn cục nếu truyền vào cả tên chuỗi và định nghĩa component, hoặc lấy component đã đăng ký nếu chỉ truyền tên.
+Registers a global component if passing both a name string and a component definition, or retrieves an already registered one if only the name is passed.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -115,29 +115,29 @@ Unmount một instance ứng dụng đã được mount, kích hoạt các hook 
   }
   ```
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { createApp } from 'vue'
 
   const app = createApp({})
 
-  // đăng ký một options object
+  // register an options object
   app.component('MyComponent', {
     /* ... */
   })
 
-  // lấy component đã đăng ký
+  // retrieve a registered component
   const MyComponent = app.component('MyComponent')
   ```
 
-- **Xem thêm** [Đăng ký Component](/guide/components/registration)
+- **See also** [Component Registration](/guide/components/registration)
 
 ## app.directive() {#app-directive}
 
-Đăng ký directive tùy chỉnh toàn cục nếu truyền vào cả tên chuỗi và định nghĩa directive, hoặc lấy directive đã đăng ký nếu chỉ truyền tên.
+Registers a global custom directive if passing both a name string and a directive definition, or retrieves an already registered one if only the name is passed.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -146,7 +146,7 @@ Unmount một instance ứng dụng đã được mount, kích hoạt các hook 
   }
   ```
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { createApp } from 'vue'
@@ -155,27 +155,27 @@ Unmount một instance ứng dụng đã được mount, kích hoạt các hook 
     /* ... */
   })
 
-  // đăng ký (directive dạng object)
+  // register (object directive)
   app.directive('myDirective', {
-    /* hook directive tùy chỉnh */
+    /* custom directive hooks */
   })
 
-  // đăng ký (cú pháp rút gọn dạng hàm)
+  // register (function directive shorthand)
   app.directive('myDirective', () => {
     /* ... */
   })
 
-  // lấy directive đã đăng ký
+  // retrieve a registered directive
   const myDirective = app.directive('myDirective')
   ```
 
-- **Xem thêm** [Directive Tùy chỉnh](/guide/reusability/custom-directives)
+- **See also** [Custom Directives](/guide/reusability/custom-directives)
 
 ## app.use() {#app-use}
 
-Cài đặt một [plugin](/guide/reusability/plugins).
+Installs a [plugin](/guide/reusability/plugins).
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -183,15 +183,15 @@ Cài đặt một [plugin](/guide/reusability/plugins).
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Nhận plugin là đối số đầu tiên, và các tùy chọn plugin tùy chọn là đối số thứ hai.
+  Expects the plugin as the first argument, and optional plugin options as the second argument.
 
-  Plugin có thể là một object có phương thức `install()`, hoặc đơn giản là một hàm sẽ được dùng làm phương thức `install()`. Các tùy chọn (đối số thứ hai của `app.use()`) sẽ được chuyển tiếp đến phương thức `install()` của plugin.
+  The plugin can either be an object with an `install()` method, or just a function that will be used as the `install()` method. The options (second argument of `app.use()`) will be passed along to the plugin's `install()` method.
 
-  Khi `app.use()` được gọi nhiều lần với cùng một plugin, plugin chỉ được cài đặt một lần.
+  When `app.use()` is called on the same plugin multiple times, the plugin will be installed only once.
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { createApp } from 'vue'
@@ -204,19 +204,19 @@ Cài đặt một [plugin](/guide/reusability/plugins).
   app.use(MyPlugin)
   ```
 
-- **Xem thêm** [Plugin](/guide/reusability/plugins)
+- **See also** [Plugins](/guide/reusability/plugins)
 
 ## app.mixin() {#app-mixin}
 
-Áp dụng một global mixin (trong phạm vi ứng dụng). Một global mixin áp dụng các option đi kèm cho mọi instance component trong ứng dụng.
+Applies a global mixin (scoped to the application). A global mixin applies its included options to every component instance in the application.
 
-:::warning Không khuyến nghị
-Mixin được hỗ trợ trong Vue 3 chủ yếu để tương thích ngược, do được dùng rộng rãi trong các thư viện ecosystem. Việc dùng mixin, đặc biệt là global mixin, nên tránh trong code ứng dụng.
+:::warning Not Recommended
+Mixins are supported in Vue 3 mainly for backwards compatibility, due to their widespread use in ecosystem libraries. Use of mixins, especially global mixins, should be avoided in application code.
 
-Để tái sử dụng logic, hãy dùng [Composable](/guide/reusability/composables) thay thế.
+For logic reuse, prefer [Composables](/guide/reusability/composables) instead.
 :::
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -226,9 +226,9 @@ Mixin được hỗ trợ trong Vue 3 chủ yếu để tương thích ngược,
 
 ## app.provide() {#app-provide}
 
-Cung cấp một giá trị có thể được inject trong tất cả component con trong ứng dụng.
+Provide a value that can be injected in all descendant components within the application.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -236,11 +236,11 @@ Cung cấp một giá trị có thể được inject trong tất cả component
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Nhận injection key là đối số đầu tiên, và giá trị được cung cấp là đối số thứ hai. Trả về instance ứng dụng.
+  Expects the injection key as the first argument, and the provided value as the second. Returns the application instance itself.
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { createApp } from 'vue'
@@ -250,7 +250,7 @@ Cung cấp một giá trị có thể được inject trong tất cả component
   app.provide('message', 'hello')
   ```
 
-  Bên trong một component trong ứng dụng:
+  Inside a component in the application:
 
   <div class="composition-api">
 
@@ -278,18 +278,18 @@ Cung cấp một giá trị có thể được inject trong tất cả component
 
   </div>
 
-- **Xem thêm**
+- **See also**
   - [Provide / Inject](/guide/components/provide-inject)
-  - [Provide ở cấp ứng dụng](/guide/components/provide-inject#app-level-provide)
+  - [App-level Provide](/guide/components/provide-inject#app-level-provide)
   - [app.runWithContext()](#app-runwithcontext)
 
 ## app.runWithContext() {#app-runwithcontext}
 
-- Chỉ hỗ trợ từ 3.3+
+- Only supported in 3.3+
 
-Thực thi một callback với ứng dụng hiện tại làm injection context.
+Execute a callback with the current app as injection context.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -297,11 +297,11 @@ Thực thi một callback với ứng dụng hiện tại làm injection context
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Nhận một hàm callback và chạy callback ngay lập tức. Trong suốt lời gọi đồng bộ của callback, các lời gọi `inject()` có thể tra cứu các injection từ các giá trị được cung cấp bởi ứng dụng hiện tại, ngay cả khi không có instance component active nào. Giá trị trả về của callback cũng sẽ được trả về.
+  Expects a callback function and runs the callback immediately. During the synchronous call of the callback, `inject()` calls are able to look up injections from the values provided by the current app, even when there is no current active component instance. The return value of the callback will also be returned.
 
-- **Ví dụ**
+- **Example**
 
   ```js
   import { inject } from 'vue'
@@ -317,9 +317,9 @@ Thực thi một callback với ứng dụng hiện tại làm injection context
 
 ## app.version {#app-version}
 
-Cung cấp phiên bản Vue mà ứng dụng được tạo với. Điều này hữu ích bên trong [plugin](/guide/reusability/plugins), nơi bạn có thể cần logic điều kiện dựa trên các phiên bản Vue khác nhau.
+Provides the version of Vue that the application was created with. This is useful inside [plugins](/guide/reusability/plugins), where you might need conditional logic based on different Vue versions.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface App {
@@ -327,26 +327,26 @@ Cung cấp phiên bản Vue mà ứng dụng được tạo với. Điều này 
   }
   ```
 
-- **Ví dụ**
+- **Example**
 
-  Kiểm tra phiên bản bên trong một plugin:
+  Performing a version check inside a plugin:
 
   ```js
   export default {
     install(app) {
       const version = Number(app.version.split('.')[0])
       if (version < 3) {
-        console.warn('Plugin này yêu cầu Vue 3')
+        console.warn('This plugin requires Vue 3')
       }
     }
   }
   ```
 
-- **Xem thêm** [Global API - version](/api/general#version)
+- **See also** [Global API - version](/api/general#version)
 
 ## app.config {#app-config}
 
-Mỗi instance ứng dụng đều có một object `config` chứa các cài đặt cấu hình cho ứng dụng đó. Bạn có thể thay đổi các thuộc tính của nó (được ghi lại bên dưới) trước khi mount ứng dụng.
+Every application instance exposes a `config` object that contains the configuration settings for that application. You can modify its properties (documented below) before mounting your application.
 
 ```js
 import { createApp } from 'vue'
@@ -358,58 +358,58 @@ console.log(app.config)
 
 ## app.config.errorHandler {#app-config-errorhandler}
 
-Gán một trình xử lý lỗi toàn cục cho các lỗi chưa được bắt truyền ra từ trong ứng dụng.
+Assign a global handler for uncaught errors propagating from within the application.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface AppConfig {
     errorHandler?: (
       err: unknown,
       instance: ComponentPublicInstance | null,
-      // `info` là thông tin lỗi riêng của Vue,
-      // ví dụ: hook vòng đời nào đã ném lỗi
+      // `info` is a Vue-specific error info,
+      // e.g. which lifecycle hook the error was thrown in
       info: string
     ) => void
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Trình xử lý lỗi nhận ba đối số: lỗi, instance component đã kích hoạt lỗi, và chuỗi thông tin chỉ định loại nguồn lỗi.
+  The error handler receives three arguments: the error, the component instance that triggered the error, and an information string specifying the error source type.
 
-  Nó có thể bắt lỗi từ các nguồn sau:
+  It can capture errors from the following sources:
 
-  - Render component
-  - Event handler
-  - Hook vòng đời
-  - Hàm `setup()`
-  - Watcher
-  - Hook directive tùy chỉnh
-  - Hook transition
+  - Component renders
+  - Event handlers
+  - Lifecycle hooks
+  - `setup()` function
+  - Watchers
+  - Custom directive hooks
+  - Transition hooks
 
   :::tip
-  Trong production, đối số thứ 3 (`info`) sẽ là mã rút gọn thay vì chuỗi thông tin đầy đủ. Bạn có thể tra cứu bảng ánh xạ mã trong [Tài liệu tra cứu mã lỗi Production](/error-reference/#runtime-errors).
+  In production, the 3rd argument (`info`) will be a shortened code instead of the full information string. You can find the code to string mapping in the [Production Error Code Reference](/error-reference/#runtime-errors).
   :::
 
-- **Ví dụ**
+- **Example**
 
   ```js
   app.config.errorHandler = (err, instance, info) => {
-    // xử lý lỗi, ví dụ: báo cáo lên một dịch vụ
+    // handle error, e.g. report to a service
   }
   ```
 
-- **Mặc định**
+- **Default**
 
-  Trình xử lý lỗi mặc định sẽ ném lại lỗi trong quá trình phát triển và ghi log lỗi trong production.
-  Bạn có thể cấu hình điều này bằng thuộc tính [throwUnhandledErrorInProduction](#app-config-throwunhandlederrorinproduction).
+  The default error handler will re-throw errors during development and log errors during production.
+  You can configure this using the [throwUnhandledErrorInProduction](#app-config-throwunhandlederrorinproduction) property.
 
 ## app.config.warnHandler {#app-config-warnhandler}
 
-Gán một trình xử lý tùy chỉnh cho các cảnh báo runtime từ Vue.
+Assign a custom handler for runtime warnings from Vue.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface AppConfig {
@@ -421,86 +421,86 @@ Gán một trình xử lý tùy chỉnh cho các cảnh báo runtime từ Vue.
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Trình xử lý cảnh báo nhận thông báo cảnh báo là đối số đầu tiên, instance component nguồn là đối số thứ hai, và chuỗi trace component là đối số thứ ba.
+  The warning handler receives the warning message as the first argument, the source component instance as the second argument, and a component trace string as the third.
 
-  Nó có thể dùng để lọc các cảnh báo cụ thể nhằm giảm bớt nhiễu trong console. Mọi cảnh báo Vue nên được giải quyết trong quá trình phát triển, do đó chỉ nên dùng tính năng này trong các phiên debug để tập trung vào cảnh báo cụ thể, và cần xóa đi sau khi debug xong.
+  It can be used to filter out specific warnings to reduce console verbosity. All Vue warnings should be addressed during development, so this is only recommended during debug sessions to focus on specific warnings among many, and should be removed once the debugging is done.
 
   :::tip
-  Cảnh báo chỉ hoạt động trong quá trình phát triển, nên cấu hình này bị bỏ qua ở chế độ production.
+  Warnings only work during development, so this config is ignored in production mode.
   :::
 
-- **Ví dụ**
+- **Example**
 
   ```js
   app.config.warnHandler = (msg, instance, trace) => {
-    // `trace` là trace cấu trúc phân cấp component
+    // `trace` is the component hierarchy trace
   }
   ```
 
 ## app.config.performance {#app-config-performance}
 
-Đặt thành `true` để bật theo dõi hiệu năng khởi tạo, biên dịch, render và patch của component trong bảng performance/timeline của browser devtool. Chỉ hoạt động ở chế độ development và trong các trình duyệt hỗ trợ API [performance.mark](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark).
+Set this to `true` to enable component init, compile, render and patch performance tracing in the browser devtool performance/timeline panel. Only works in development mode and in browsers that support the [performance.mark](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark) API.
 
-- **Kiểu:** `boolean`
+- **Type:** `boolean`
 
-- **Xem thêm** [Hướng dẫn - Hiệu năng](/guide/best-practices/performance)
+- **See also** [Guide - Performance](/guide/best-practices/performance)
 
 ## app.config.compilerOptions {#app-config-compileroptions}
 
-Cấu hình các tùy chọn cho runtime compiler. Các giá trị đặt trên object này sẽ được chuyển đến trình biên dịch template trong trình duyệt và ảnh hưởng đến mọi component trong ứng dụng được cấu hình. Lưu ý bạn cũng có thể ghi đè các tùy chọn này theo từng component bằng [tùy chọn `compilerOptions`](/api/options-rendering#compileroptions).
+Configure runtime compiler options. Values set on this object will be passed to the in-browser template compiler and affect every component in the configured app. Note you can also override these options on a per-component basis using the [`compilerOptions` option](/api/options-rendering#compileroptions).
 
-::: warning Quan trọng
-Tùy chọn cấu hình này chỉ có hiệu lực khi dùng bản build đầy đủ (tức là `vue.js` độc lập có thể biên dịch template trong trình duyệt). Nếu bạn dùng bản build chỉ có runtime với một build setup, các tùy chọn compiler phải được truyền vào `@vue/compiler-dom` qua cấu hình build tool.
+::: warning Important
+This config option is only respected when using the full build (i.e. the standalone `vue.js` that can compile templates in the browser). If you are using the runtime-only build with a build setup, compiler options must be passed to `@vue/compiler-dom` via build tool configurations instead.
 
-- Với `vue-loader`: [truyền qua tùy chọn loader `compilerOptions`](https://vue-loader.vuejs.org/options.html#compileroptions). Xem thêm [cách cấu hình trong `vue-cli`](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).
+- For `vue-loader`: [pass via the `compilerOptions` loader option](https://vue-loader.vuejs.org/options.html#compileroptions). Also see [how to configure it in `vue-cli`](https://cli.vuejs.org/guide/webpack.html#modifying-options-of-a-loader).
 
-- Với `vite`: [truyền qua tùy chọn `@vitejs/plugin-vue`](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#options).
+- For `vite`: [pass via `@vitejs/plugin-vue` options](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#options).
   :::
 
 ### app.config.compilerOptions.isCustomElement {#app-config-compileroptions-iscustomelement}
 
-Chỉ định phương thức kiểm tra để nhận biết các custom element native.
+Specifies a check method to recognize native custom elements.
 
-- **Kiểu:** `(tag: string) => boolean`
+- **Type:** `(tag: string) => boolean`
 
-- **Chi tiết**
+- **Details**
 
-  Nên trả về `true` nếu tag cần được coi là custom element native. Với tag được khớp, Vue sẽ render nó như một element native thay vì cố gắng resolve nó như một Vue component.
+  Should return `true` if the tag should be treated as a native custom element. For a matched tag, Vue will render it as a native element instead of attempting to resolve it as a Vue component.
 
-  Các tag HTML và SVG native không cần khớp trong hàm này - trình phân tích của Vue tự động nhận biết chúng.
+  Native HTML and SVG tags don't need to be matched in this function - Vue's parser recognizes them automatically.
 
-- **Ví dụ**
+- **Example**
 
   ```js
-  // coi tất cả tag bắt đầu bằng 'ion-' là custom element
+  // treat all tags starting with 'ion-' as custom elements
   app.config.compilerOptions.isCustomElement = (tag) => {
     return tag.startsWith('ion-')
   }
   ```
 
-- **Xem thêm** [Vue và Web Components](/guide/extras/web-components)
+- **See also** [Vue and Web Components](/guide/extras/web-components)
 
 ### app.config.compilerOptions.whitespace {#app-config-compileroptions-whitespace}
 
-Điều chỉnh hành vi xử lý khoảng trắng trong template.
+Adjusts template whitespace handling behavior.
 
-- **Kiểu:** `'condense' | 'preserve'`
+- **Type:** `'condense' | 'preserve'`
 
-- **Mặc định:** `'condense'`
+- **Default:** `'condense'`
 
-- **Chi tiết**
+- **Details**
 
-  Vue xóa/rút gọn các ký tự khoảng trắng trong template để tạo ra output đã biên dịch hiệu quả hơn. Chiến lược mặc định là "condense", với hành vi sau:
+  Vue removes / condenses whitespace characters in templates to produce more efficient compiled output. The default strategy is "condense", with the following behavior:
 
-  1. Ký tự khoảng trắng đầu/cuối bên trong một element được rút gọn thành một khoảng trắng đơn.
-  2. Ký tự khoảng trắng giữa các element có chứa newline bị xóa.
-  3. Các ký tự khoảng trắng liên tiếp trong text node được rút gọn thành một khoảng trắng đơn.
+  1. Leading / ending whitespace characters inside an element are condensed into a single space.
+  2. Whitespace characters between elements that contain newlines are removed.
+  3. Consecutive whitespace characters in text nodes are condensed into a single space.
 
-  Đặt tùy chọn này thành `'preserve'` sẽ tắt (2) và (3).
+  Setting this option to `'preserve'` will disable (2) and (3).
 
-- **Ví dụ**
+- **Example**
 
   ```js
   app.config.compilerOptions.whitespace = 'preserve'
@@ -508,36 +508,36 @@ Chỉ định phương thức kiểm tra để nhận biết các custom element
 
 ### app.config.compilerOptions.delimiters {#app-config-compileroptions-delimiters}
 
-Điều chỉnh các delimiter dùng cho nội suy văn bản trong template.
+Adjusts the delimiters used for text interpolation within the template.
 
-- **Kiểu:** `[string, string]`
+- **Type:** `[string, string]`
 
-- **Mặc định:** `{{ "['\u007b\u007b', '\u007d\u007d']" }}`
+- **Default:** `{{ "['\u007b\u007b', '\u007d\u007d']" }}`
 
-- **Chi tiết**
+- **Details**
 
-  Thường được dùng để tránh xung đột với các framework phía server cũng dùng cú pháp Mustache.
+  This is typically used to avoid conflicting with server-side frameworks that also use mustache syntax.
 
-- **Ví dụ**
+- **Example**
 
   ```js
-  // Delimiter được đổi sang kiểu chuỗi template ES6
+  // Delimiters changed to ES6 template string style
   app.config.compilerOptions.delimiters = ['${', '}']
   ```
 
 ### app.config.compilerOptions.comments {#app-config-compileroptions-comments}
 
-Điều chỉnh cách xử lý comment HTML trong template.
+Adjusts treatment of HTML comments in templates.
 
-- **Kiểu:** `boolean`
+- **Type:** `boolean`
 
-- **Mặc định:** `false`
+- **Default:** `false`
 
-- **Chi tiết**
+- **Details**
 
-  Mặc định, Vue sẽ xóa comment trong production. Đặt tùy chọn này thành `true` sẽ buộc Vue giữ lại comment ngay cả trong production. Comment luôn được giữ lại trong quá trình phát triển. Tùy chọn này thường được dùng khi Vue được kết hợp với các thư viện khác phụ thuộc vào comment HTML.
+  By default, Vue will remove the comments in production. Setting this option to `true` will force Vue to preserve comments even in production. Comments are always preserved during development. This option is typically used when Vue is used with other libraries that rely on HTML comments.
 
-- **Ví dụ**
+- **Example**
 
   ```js
   app.config.compilerOptions.comments = true
@@ -545,9 +545,9 @@ Chỉ định phương thức kiểm tra để nhận biết các custom element
 
 ## app.config.globalProperties {#app-config-globalproperties}
 
-Một object có thể dùng để đăng ký các thuộc tính toàn cục có thể truy cập trên bất kỳ instance component nào trong ứng dụng.
+An object that can be used to register global properties that can be accessed on any component instance inside the application.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface AppConfig {
@@ -555,19 +555,19 @@ Một object có thể dùng để đăng ký các thuộc tính toàn cục có
   }
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Đây là thay thế cho `Vue.prototype` của Vue 2, vốn không còn tồn tại trong Vue 3. Như mọi thứ toàn cục, nên dùng tiết kiệm.
+  This is a replacement of Vue 2's `Vue.prototype` which is no longer present in Vue 3. As with anything global, this should be used sparingly.
 
-  Nếu một thuộc tính toàn cục xung đột với thuộc tính riêng của component, thuộc tính riêng của component sẽ có độ ưu tiên cao hơn.
+  If a global property conflicts with a component’s own property, the component's own property will have higher priority.
 
-- **Cách dùng**
+- **Usage**
 
   ```js
   app.config.globalProperties.msg = 'hello'
   ```
 
-  Điều này làm `msg` có sẵn bên trong template của bất kỳ component nào trong ứng dụng, và cũng có trên `this` của bất kỳ instance component nào:
+  This makes `msg` available inside any component template in the application, and also on `this` of any component instance:
 
   ```js
   export default {
@@ -577,13 +577,13 @@ Một object có thể dùng để đăng ký các thuộc tính toàn cục có
   }
   ```
 
-- **Xem thêm** [Hướng dẫn - Mở rộng Thuộc tính Toàn cục](/guide/typescript/options-api#augmenting-global-properties) <sup class="vt-badge ts" />
+- **See also** [Guide - Augmenting Global Properties](/guide/typescript/options-api#augmenting-global-properties) <sup class="vt-badge ts" />
 
 ## app.config.optionMergeStrategies {#app-config-optionmergestrategies}
 
-Một object dùng để định nghĩa chiến lược hợp nhất cho các component option tùy chỉnh.
+An object for defining merging strategies for custom component options.
 
-- **Kiểu**
+- **Type**
 
   ```ts
   interface AppConfig {
@@ -593,77 +593,77 @@ Một object dùng để định nghĩa chiến lược hợp nhất cho các co
   type OptionMergeFunction = (to: unknown, from: unknown) => any
   ```
 
-- **Chi tiết**
+- **Details**
 
-  Một số plugin/thư viện thêm hỗ trợ cho các component option tùy chỉnh (bằng cách inject global mixin). Các option này có thể yêu cầu logic hợp nhất đặc biệt khi cùng một option cần được "hợp nhất" từ nhiều nguồn (ví dụ: mixin hoặc kế thừa component).
+  Some plugins / libraries add support for custom component options (by injecting global mixins). These options may require special merging logic when the same option needs to be "merged" from multiple sources (e.g. mixins or component inheritance).
 
-  Một hàm chiến lược hợp nhất có thể được đăng ký cho một option tùy chỉnh bằng cách gán nó vào object `app.config.optionMergeStrategies` với tên option làm key.
+  A merge strategy function can be registered for a custom option by assigning it on the `app.config.optionMergeStrategies` object using the option's name as the key.
 
-  Hàm chiến lược hợp nhất nhận giá trị của option được định nghĩa trên instance cha và con lần lượt là đối số đầu tiên và thứ hai.
+  The merge strategy function receives the value of that option defined on the parent and child instances as the first and second arguments, respectively.
 
-- **Ví dụ**
+- **Example**
 
   ```js
   const app = createApp({
-    // option từ chính nó
+    // option from self
     msg: 'Vue',
-    // option từ một mixin
+    // option from a mixin
     mixins: [
       {
         msg: 'Hello '
       }
     ],
     mounted() {
-      // các option đã hợp nhất được expose trên this.$options
+      // merged options exposed on this.$options
       console.log(this.$options.msg)
     }
   })
 
-  // định nghĩa chiến lược hợp nhất tùy chỉnh cho `msg`
+  // define a custom merge strategy for `msg`
   app.config.optionMergeStrategies.msg = (parent, child) => {
     return (parent || '') + (child || '')
   }
 
   app.mount('#app')
-  // ghi ra 'Hello Vue'
+  // logs 'Hello Vue'
   ```
 
-- **Xem thêm** [Instance Component - `$options`](/api/component-instance#options)
+- **See also** [Component Instance - `$options`](/api/component-instance#options)
 
 ## app.config.idPrefix <sup class="vt-badge" data-text="3.5+" /> {#app-config-idprefix}
 
-Cấu hình tiền tố cho tất cả ID được tạo qua [useId()](/api/composition-api-helpers.html#useid) bên trong ứng dụng này.
+Configure a prefix for all IDs generated via [useId()](/api/composition-api-helpers.html#useid) inside this application.
 
-- **Kiểu:** `string`
+- **Type:** `string`
 
-- **Mặc định:** `undefined`
+- **Default:** `undefined`
 
-- **Ví dụ**
+- **Example**
 
   ```js
   app.config.idPrefix = 'myApp'
   ```
 
   ```js
-  // trong một component:
+  // in a component:
   const id1 = useId() // 'myApp:0'
   const id2 = useId() // 'myApp:1'
   ```
 
 ## app.config.throwUnhandledErrorInProduction <sup class="vt-badge" data-text="3.5+" /> {#app-config-throwunhandlederrorinproduction}
 
-Buộc các lỗi chưa được xử lý phải được ném ra ở chế độ production.
+Force unhandled errors to be thrown in production mode.
 
-- **Kiểu:** `boolean`
+- **Type:** `boolean`
 
-- **Mặc định:** `false`
+- **Default:** `false`
 
-- **Chi tiết**
+- **Details**
 
-  Mặc định, các lỗi được ném ra bên trong một ứng dụng Vue nhưng không được xử lý rõ ràng sẽ có hành vi khác nhau giữa chế độ development và production:
+  By default, errors thrown inside a Vue application but not explicitly handled have different behavior between development and production modes:
 
-  - Trong development, lỗi được ném ra và có thể làm crash ứng dụng. Điều này giúp lỗi nổi bật hơn để có thể nhận thấy và sửa trong quá trình phát triển.
+  - In development, the error is thrown and can possibly crash the application. This is to make the error more prominent so that it can be noticed and fixed during development.
 
-  - Trong production, lỗi chỉ được ghi vào console để giảm thiểu tác động đến người dùng cuối. Tuy nhiên, điều này có thể ngăn các lỗi chỉ xảy ra trong production bị bắt bởi các dịch vụ giám sát lỗi.
+  - In production, the error will only be logged to the console to minimize the impact to end users. However, this may prevent errors that only happen in production from being caught by error monitoring services.
 
-  Khi đặt `app.config.throwUnhandledErrorInProduction` thành `true`, các lỗi chưa được xử lý sẽ được ném ra ngay cả ở chế độ production.
+  By setting `app.config.throwUnhandledErrorInProduction` to `true`, unhandled errors will be thrown even in production mode.

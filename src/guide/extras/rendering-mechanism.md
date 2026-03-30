@@ -2,17 +2,17 @@
 outline: deep
 ---
 
-# Cơ Chế Render {#rendering-mechanism}
+# Rendering Mechanism {#rendering-mechanism}
 
-Làm thế nào Vue lấy một template rồi biến nó thành các DOM node thực sự? Làm thế nào Vue cập nhật các DOM node đó một cách hiệu quả? Ở đây, ta sẽ cố gắng làm sáng tỏ những câu hỏi này bằng cách đi sâu vào cơ chế render nội bộ của Vue.
+How does Vue take a template and turn it into actual DOM nodes? How does Vue update those DOM nodes efficiently? We will attempt to shed some light on these questions here by diving into Vue's internal rendering mechanism.
 
 ## Virtual DOM {#virtual-dom}
 
-Có lẽ bạn đã từng nghe đến khái niệm "virtual DOM", nền tảng mà hệ thống render của Vue dựa vào.
+You have probably heard about the term "virtual DOM", which Vue's rendering system is based upon.
 
-Virtual DOM (VDOM) là một khái niệm lập trình trong đó một biểu diễn UI lý tưởng, hay "ảo", được giữ trong bộ nhớ rồi đồng bộ với DOM "thật". Khái niệm này được [React](https://react.dev/) khai phá đầu tiên, và sau đó được nhiều framework khác áp dụng với các cách cài đặt khác nhau, trong đó có Vue.
+The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM. The concept was pioneered by [React](https://react.dev/), and has been adopted in many other frameworks with different implementations, including Vue.
 
-Virtual DOM là một pattern nhiều hơn là một công nghệ cụ thể, nên không có một cách cài đặt chuẩn duy nhất nào. Ta có thể minh họa ý tưởng này bằng một ví dụ đơn giản:
+Virtual DOM is more of a pattern than a specific technology, so there is no one canonical implementation. We can illustrate the idea using a simple example:
 
 ```js
 const vnode = {
@@ -21,89 +21,89 @@ const vnode = {
     id: 'hello'
   },
   children: [
-    /* thêm vnode con */
+    /* more vnodes */
   ]
 }
 ```
 
-Ở đây, `vnode` là một object JavaScript thuần (một "virtual node") đại diện cho phần tử `<div>`. Nó chứa toàn bộ thông tin cần thiết để tạo ra phần tử thật. Nó cũng chứa thêm các vnode con, khiến nó trở thành gốc của một cây virtual DOM.
+Here, `vnode` is a plain JavaScript object (a "virtual node") representing a `<div>` element. It contains all the information that we need to create the actual element. It also contains more children vnodes, which makes it the root of a virtual DOM tree.
 
-Một renderer runtime có thể duyệt cây virtual DOM rồi dựng nên cây DOM thật từ đó. Quá trình này được gọi là **mount**.
+A runtime renderer can walk a virtual DOM tree and construct a real DOM tree from it. This process is called **mount**.
 
-Nếu ta có hai bản sao của cây virtual DOM, renderer cũng có thể duyệt và so sánh hai cây, tìm ra sự khác biệt rồi áp dụng những thay đổi đó lên DOM thật. Quá trình này được gọi là **patch**, còn được biết tới với tên "diffing" hoặc "reconciliation".
+If we have two copies of virtual DOM trees, the renderer can also walk and compare the two trees, figuring out the differences, and apply those changes to the actual DOM. This process is called **patch**, also known as "diffing" or "reconciliation".
 
-Lợi ích chính của virtual DOM là nó cho phép developer tạo, kiểm tra và kết hợp cấu trúc UI mong muốn theo cách khai báo bằng mã lệnh, trong khi việc thao tác DOM trực tiếp được giao lại cho renderer.
+The main benefit of virtual DOM is that it gives the developer the ability to programmatically create, inspect and compose desired UI structures in a declarative way, while leaving the direct DOM manipulation to the renderer.
 
-## Pipeline Render {#render-pipeline}
+## Render Pipeline {#render-pipeline}
 
-Ở mức khái quát, đây là điều xảy ra khi một component Vue được mount:
+At the high level, this is what happens when a Vue component is mounted:
 
-1. **Compile**: Template Vue được biên dịch thành **render function**, tức các hàm trả về cây virtual DOM. Bước này có thể được thực hiện trước thông qua build step, hoặc thực hiện ngay lúc chạy bằng runtime compiler.
+1. **Compile**: Vue templates are compiled into **render functions**: functions that return virtual DOM trees. This step can be done either ahead-of-time via a build step, or on-the-fly by using the runtime compiler.
 
-2. **Mount**: Renderer runtime gọi các render function, duyệt cây virtual DOM trả về, rồi tạo ra các DOM node thật từ đó. Bước này được thực hiện dưới dạng một [reactive effect](./reactivity-in-depth), vì vậy nó sẽ theo dõi mọi dependency phản ứng đã được dùng.
+2. **Mount**: The runtime renderer invokes the render functions, walks the returned virtual DOM tree, and creates actual DOM nodes based on it. This step is performed as a [reactive effect](./reactivity-in-depth), so it keeps track of all reactive dependencies that were used.
 
-3. **Patch**: Khi một dependency được dùng trong lúc mount thay đổi, effect sẽ chạy lại. Lần này, một cây Virtual DOM mới đã cập nhật sẽ được tạo ra. Renderer runtime duyệt cây mới, so sánh nó với cây cũ và áp dụng những cập nhật cần thiết lên DOM thật.
+3. **Patch**: When a dependency used during mount changes, the effect re-runs. This time, a new, updated Virtual DOM tree is created. The runtime renderer walks the new tree, compares it with the old one, and applies necessary updates to the actual DOM.
 
 ![render pipeline](./images/render-pipeline.png)
 
 <!-- https://www.figma.com/file/elViLsnxGJ9lsQVsuhwqxM/Rendering-Mechanism -->
 
-## Template So Với Render Function {#templates-vs-render-functions}
+## Templates vs. Render Functions {#templates-vs-render-functions}
 
-Template Vue được biên dịch thành render function tạo virtual DOM. Vue cũng cung cấp API cho phép ta bỏ qua bước biên dịch template và tự viết render function trực tiếp. Render function linh hoạt hơn template khi phải xử lý logic rất động, vì bạn có thể thao tác với vnode bằng toàn bộ sức mạnh của JavaScript.
+Vue templates are compiled into virtual DOM render functions. Vue also provides APIs that allow us to skip the template compilation step and directly author render functions. Render functions are more flexible than templates when dealing with highly dynamic logic, because you can work with vnodes using the full power of JavaScript.
 
-Vậy tại sao Vue vẫn khuyến nghị dùng template theo mặc định? Có một số lý do:
+So why does Vue recommend templates by default? There are a number of reasons:
 
-1. Template gần với HTML thực hơn. Điều này giúp tái sử dụng snippet HTML hiện có dễ hơn, áp dụng best practice về khả năng tiếp cận, style bằng CSS, đồng thời cũng giúp designer dễ hiểu và dễ chỉnh sửa hơn.
+1. Templates are closer to actual HTML. This makes it easier to reuse existing HTML snippets, apply accessibility best practices, style with CSS, and for designers to understand and modify.
 
-2. Template dễ được phân tích tĩnh hơn nhờ cú pháp mang tính xác định cao hơn. Điều này cho phép trình biên dịch template của Vue áp dụng nhiều tối ưu ở thời điểm biên dịch để cải thiện hiệu năng của virtual DOM, điều mà ta sẽ bàn ngay dưới đây.
+2. Templates are easier to statically analyze due to their more deterministic syntax. This allows Vue's template compiler to apply many compile-time optimizations to improve the performance of the virtual DOM (which we will discuss below).
 
-Trên thực tế, template là đủ cho hầu hết trường hợp trong ứng dụng. Render function thường chỉ được dùng trong các component có thể tái sử dụng cần xử lý logic render rất động. Cách dùng render function được trình bày chi tiết hơn trong [Render Functions & JSX](./render-function).
+In practice, templates are sufficient for most use cases in applications. Render functions are typically only used in reusable components that need to deal with highly dynamic rendering logic. Render function usage is discussed in more detail in [Render Functions & JSX](./render-function).
 
-## Virtual DOM Được Trình Biên Dịch Hỗ Trợ {#compiler-informed-virtual-dom}
+## Compiler-Informed Virtual DOM {#compiler-informed-virtual-dom}
 
-Cách cài đặt virtual DOM trong React và đa số hệ thống virtual DOM khác đều thuần runtime: thuật toán reconciliation không thể đưa ra giả định nào về cây virtual DOM đi vào, nên nó phải duyệt toàn bộ cây và diff props của từng vnode để bảo đảm tính đúng đắn. Ngoài ra, kể cả khi một phần của cây không bao giờ thay đổi, mỗi lần render lại vẫn luôn tạo ra vnode mới cho phần đó, gây áp lực bộ nhớ không cần thiết. Đây là một trong những điểm bị phê bình nhiều nhất của virtual DOM: quy trình reconciliation mang tính "vét cạn" hy sinh hiệu quả để đổi lấy tính khai báo và tính đúng đắn.
+The virtual DOM implementation in React and most other virtual-DOM implementations are purely runtime: the reconciliation algorithm cannot make any assumptions about the incoming virtual DOM tree, so it has to fully traverse the tree and diff the props of every vnode in order to ensure correctness. In addition, even if a part of the tree never changes, new vnodes are always created for them on each re-render, resulting in unnecessary memory pressure. This is one of the most criticized aspect of virtual DOM: the somewhat brute-force reconciliation process sacrifices efficiency in return for declarativeness and correctness.
 
-Nhưng không nhất thiết phải như vậy. Trong Vue, framework kiểm soát cả trình biên dịch lẫn runtime. Điều này cho phép ta triển khai nhiều tối ưu ở thời điểm biên dịch mà chỉ renderer gắn kết chặt chẽ mới có thể tận dụng được. Trình biên dịch có thể phân tích tĩnh template và để lại gợi ý trong mã được sinh ra để runtime có thể đi đường tắt bất cứ khi nào có thể. Đồng thời, ta vẫn giữ khả năng cho người dùng hạ xuống tầng render function để kiểm soát trực tiếp hơn trong những edge case. Chúng tôi gọi cách tiếp cận lai này là **Compiler-Informed Virtual DOM**.
+But it doesn't have to be that way. In Vue, the framework controls both the compiler and the runtime. This allows us to implement many compile-time optimizations that only a tightly-coupled renderer can take advantage of. The compiler can statically analyze the template and leave hints in the generated code so that the runtime can take shortcuts whenever possible. At the same time, we still preserve the capability for the user to drop down to the render function layer for more direct control in edge cases. We call this hybrid approach **Compiler-Informed Virtual DOM**.
 
-Bên dưới, ta sẽ bàn về một vài tối ưu chính mà trình biên dịch template của Vue thực hiện để cải thiện hiệu năng runtime của virtual DOM.
+Below, we will discuss a few major optimizations done by the Vue template compiler to improve the virtual DOM's runtime performance.
 
-### Cache Phần Tĩnh {#cache-static}
+### Cache Static {#cache-static}
 
-Rất thường xuyên sẽ có những phần trong template không chứa bất kỳ ràng buộc động nào:
+Quite often there will be parts in a template that do not contain any dynamic bindings:
 
 ```vue-html{2-3}
 <div>
-  <div>foo</div> <!-- được cache -->
-  <div>bar</div> <!-- được cache -->
+  <div>foo</div> <!-- cached -->
+  <div>bar</div> <!-- cached -->
   <div>{{ dynamic }}</div>
 </div>
 ```
 
-[Kiểm tra trong Template Explorer](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2PmZvbzwvZGl2PiA8IS0tIGNhY2hlZCAtLT5cbiAgPGRpdj5iYXI8L2Rpdj4gPCEtLSBjYWNoZWQgLS0+XG4gIDxkaXY+e3sgZHluYW1pYyB9fTwvZGl2PlxuPC9kaXY+XG4iLCJvcHRpb25zIjp7ImhvaXN0U3RhdGljIjp0cnVlfX0=)
+[Inspect in Template Explorer](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2PmZvbzwvZGl2PiA8IS0tIGNhY2hlZCAtLT5cbiAgPGRpdj5iYXI8L2Rpdj4gPCEtLSBjYWNoZWQgLS0+XG4gIDxkaXY+e3sgZHluYW1pYyB9fTwvZGl2PlxuPC9kaXY+XG4iLCJvcHRpb25zIjp7ImhvaXN0U3RhdGljIjp0cnVlfX0=)
 
-Hai `div` chứa `foo` và `bar` là phần tĩnh. Việc tạo lại vnode và diff chúng ở mỗi lần render lại là không cần thiết. Renderer tạo các vnode này ở lần render đầu tiên, cache chúng lại và tái sử dụng cùng các vnode đó cho mọi lần render sau. Renderer cũng có thể bỏ qua hoàn toàn việc diff chúng khi nhận ra vnode cũ và vnode mới chính là cùng một đối tượng.
+The `foo` and `bar` divs are static - re-creating vnodes and diffing them on each re-render is unnecessary. The renderer creates these vnodes during the initial render, caches them, and reuses the same vnodes for every subsequent re-render. The renderer is also able to completely skip diffing them when it notices the old vnode and the new vnode are the same one.
 
-Ngoài ra, khi có đủ nhiều phần tử tĩnh đứng liền nhau, chúng sẽ được gom thành một "static vnode" duy nhất chứa chuỗi HTML thô của toàn bộ các node đó ([Ví dụ](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdiBjbGFzcz1cImZvb1wiPmZvbzwvZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdiB7eyBkeW5hbWljIH19PC9kaXY+XG48L2Rpdj4iLCJzc3IiOmZhbHNlLCJvcHRpb25zIjp7ImhvaXN0U3RhdGljIjp0cnVlfX0=)). Những static vnode này được mount bằng cách gán trực tiếp `innerHTML`.
+In addition, when there are enough consecutive static elements, they will be condensed into a single "static vnode" that contains the plain HTML string for all these nodes ([Example](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdiBjbGFzcz1cImZvb1wiPmZvbzwvZGl2PlxuICA8ZGl2IGNsYXNzPVwiZm9vXCI+Zm9vPC9kaXY+XG4gIDxkaXYgY2xhc3M9XCJmb29cIj5mb288L2Rpdj5cbiAgPGRpdj57eyBkeW5hbWljIH19PC9kaXY+XG48L2Rpdj4iLCJzc3IiOmZhbHNlLCJvcHRpb25zIjp7ImhvaXN0U3RhdGljIjp0cnVlfX0=)). These static vnodes are mounted by directly setting `innerHTML`.
 
-### Patch Flag {#patch-flags}
+### Patch Flags {#patch-flags}
 
-Với một phần tử đơn có ràng buộc động, ta cũng có thể suy ra khá nhiều thông tin từ lúc biên dịch:
+For a single element with dynamic bindings, we can also infer a lot of information from it at compile time:
 
 ```vue-html
-<!-- chỉ bind class -->
+<!-- class binding only -->
 <div :class="{ active }"></div>
 
-<!-- chỉ bind id và value -->
+<!-- id and value bindings only -->
 <input :id="id" :value="value">
 
-<!-- chỉ có text con -->
+<!-- text children only -->
 <div>{{ dynamic }}</div>
 ```
 
-[Kiểm tra trong Template Explorer](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2IDpjbGFzcz1cInsgYWN0aXZlIH1cIj48L2Rpdj5cblxuPGlucHV0IDppZD1cImlkXCIgOnZhbHVlPVwidmFsdWVcIj5cblxuPGRpdj57eyBkeW5hbWljIH19PC9kaXY+Iiwib3B0aW9ucyI6e319)
+[Inspect in Template Explorer](https://template-explorer.vuejs.org/#eyJzcmMiOiI8ZGl2IDpjbGFzcz1cInsgYWN0aXZlIH1cIj48L2Rpdj5cblxuPGlucHV0IDppZD1cImlkXCIgOnZhbHVlPVwidmFsdWVcIj5cblxuPGRpdj57eyBkeW5hbWljIH19PC9kaXY+Iiwib3B0aW9ucyI6e319)
 
-Khi sinh mã render function cho các phần tử này, Vue mã hóa trực tiếp kiểu cập nhật cần thiết của từng phần tử vào lệnh tạo vnode:
+When generating the render function code for these elements, Vue encodes the type of update each of them needs directly in the vnode creation call:
 
 ```js{3}
 createElementVNode("div", {
@@ -111,17 +111,17 @@ createElementVNode("div", {
 }, null, 2 /* CLASS */)
 ```
 
-Đối số cuối cùng, `2`, là một [patch flag](https://github.com/vuejs/core/blob/main/packages/shared/src/patchFlags.ts). Một phần tử có thể mang nhiều patch flag, và chúng sẽ được gộp thành một con số duy nhất. Renderer runtime sau đó có thể kiểm tra các flag bằng [bitwise operations](https://en.wikipedia.org/wiki/Bitwise_operation) để xác định xem có cần làm một công việc nào đó hay không:
+The last argument, `2`, is a [patch flag](https://github.com/vuejs/core/blob/main/packages/shared/src/patchFlags.ts). An element can have multiple patch flags, which will be merged into a single number. The runtime renderer can then check against the flags using [bitwise operations](https://en.wikipedia.org/wiki/Bitwise_operation) to determine whether it needs to do certain work:
 
 ```js
 if (vnode.patchFlag & PatchFlags.CLASS /* 2 */) {
-  // cập nhật class của phần tử
+  // update the element's class
 }
 ```
 
-Bitwise check chạy cực nhanh. Với patch flag, Vue có thể làm đúng lượng công việc tối thiểu cần thiết khi cập nhật phần tử có ràng buộc động.
+Bitwise checks are extremely fast. With the patch flags, Vue is able to do the least amount of work necessary when updating elements with dynamic bindings.
 
-Vue cũng mã hóa cả kiểu con mà một vnode có. Ví dụ, một template có nhiều node gốc sẽ được biểu diễn bằng một fragment. Trong phần lớn trường hợp, ta biết chắc thứ tự của các node gốc này sẽ không bao giờ thay đổi, nên thông tin đó cũng có thể được cung cấp cho runtime dưới dạng patch flag:
+Vue also encodes the type of children a vnode has. For example, a template that has multiple root nodes is represented as a fragment. In most cases, we know for sure that the order of these root nodes will never change, so this information can also be provided to the runtime as a patch flag:
 
 ```js{4}
 export function render() {
@@ -131,11 +131,11 @@ export function render() {
 }
 ```
 
-Nhờ đó runtime có thể bỏ qua hoàn toàn bước reconciliation thứ tự con cho fragment gốc.
+The runtime can thus completely skip child-order reconciliation for the root fragment.
 
-### Làm Phẳng Cây {#tree-flattening}
+### Tree Flattening {#tree-flattening}
 
-Nếu nhìn lại đoạn mã sinh ra từ ví dụ trước, bạn sẽ thấy gốc của cây virtual DOM trả về được tạo bằng lời gọi đặc biệt `createElementBlock()`:
+Taking another look at the generated code from the previous example, you'll notice the root of the returned virtual DOM tree is created using a special `createElementBlock()` call:
 
 ```js{2}
 export function render() {
@@ -145,34 +145,34 @@ export function render() {
 }
 ```
 
-Về mặt ý niệm, một "block" là phần của template có cấu trúc bên trong ổn định. Trong trường hợp này, toàn bộ template chỉ có một block vì nó không chứa directive cấu trúc như `v-if` và `v-for`.
+Conceptually, a "block" is a part of the template that has stable inner structure. In this case, the entire template has a single block because it does not contain any structural directives like `v-if` and `v-for`.
 
-Mỗi block sẽ theo dõi mọi node hậu duệ có patch flag, chứ không chỉ con trực tiếp. Ví dụ:
+Each block tracks any descendant nodes (not just direct children) that have patch flags. For example:
 
 ```vue-html{3,5}
-<div> <!-- block gốc -->
-  <div>...</div>         <!-- không được theo dõi -->
-  <div :id="id"></div>   <!-- được theo dõi -->
-  <div>                  <!-- không được theo dõi -->
-    <div>{{ bar }}</div> <!-- được theo dõi -->
+<div> <!-- root block -->
+  <div>...</div>         <!-- not tracked -->
+  <div :id="id"></div>   <!-- tracked -->
+  <div>                  <!-- not tracked -->
+    <div>{{ bar }}</div> <!-- tracked -->
   </div>
 </div>
 ```
 
-Kết quả là một mảng đã làm phẳng chỉ chứa các node hậu duệ động:
+The result is a flattened array that contains only the dynamic descendant nodes:
 
 ```
-div (gốc block)
-- div có ràng buộc :id
-- div có ràng buộc {{ bar }}
+div (block root)
+- div with :id binding
+- div with {{ bar }} binding
 ```
 
-Khi component này cần render lại, nó chỉ cần duyệt cây đã làm phẳng thay vì duyệt toàn bộ cây. Đây được gọi là **Tree Flattening**, và nó giảm rất mạnh số lượng node cần phải duyệt trong quá trình reconciliation của virtual DOM. Mọi phần tĩnh của template về thực chất sẽ bị bỏ qua.
+When this component needs to re-render, it only needs to traverse the flattened tree instead of the full tree. This is called **Tree Flattening**, and it greatly reduces the number of nodes that need to be traversed during virtual DOM reconciliation. Any static parts of the template are effectively skipped.
 
-Directive `v-if` và `v-for` sẽ tạo ra block node mới:
+`v-if` and `v-for` directives will create new block nodes:
 
 ```vue-html
-<div> <!-- block gốc -->
+<div> <!-- root block -->
   <div>
     <div v-if> <!-- if block -->
       ...
@@ -181,12 +181,12 @@ Directive `v-if` và `v-for` sẽ tạo ra block node mới:
 </div>
 ```
 
-Một block con sẽ được theo dõi bên trong mảng hậu duệ động của block cha. Điều này giữ được cấu trúc ổn định cho block cha.
+A child block is tracked inside the parent block's array of dynamic descendants. This retains a stable structure for the parent block.
 
-### Tác Động Lên SSR Hydration {#impact-on-ssr-hydration}
+### Impact on SSR Hydration {#impact-on-ssr-hydration}
 
-Cả patch flag lẫn tree flattening cũng cải thiện đáng kể hiệu năng [SSR Hydration](/guide/scaling-up/ssr#client-hydration) của Vue:
+Both patch flags and tree flattening also greatly improve Vue's [SSR Hydration](/guide/scaling-up/ssr#client-hydration) performance:
 
-- Hydration cho phần tử đơn có thể đi theo nhánh nhanh dựa trên patch flag tương ứng của vnode.
+- Single element hydration can take fast paths based on the corresponding vnode's patch flag.
 
-- Chỉ block node và hậu duệ động của chúng mới cần được duyệt trong lúc hydration, nhờ đó về thực chất đạt được partial hydration ở cấp template.
+- Only block nodes and their dynamic descendants need to be traversed during hydration, effectively achieving partial hydration at the template level.

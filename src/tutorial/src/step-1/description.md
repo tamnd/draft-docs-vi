@@ -1,36 +1,36 @@
-# Bắt đầu {#getting-started}
+# Getting Started {#getting-started}
 
-Chào mừng bạn đến với hướng dẫn Vue!
+Welcome to the Vue tutorial!
 
-Mục tiêu của hướng dẫn này là giúp bạn nhanh chóng cảm nhận cách làm việc với Vue ngay trong trình duyệt. Hướng dẫn không đặt mục tiêu bao quát toàn bộ, và bạn không cần hiểu mọi thứ trước khi tiếp tục. Tuy nhiên, sau khi hoàn thành, hãy nhớ đọc <a target="_blank" href="/guide/introduction.html">Hướng dẫn</a> để tìm hiểu từng chủ đề sâu hơn.
+The goal of this tutorial is to quickly give you an experience of what it feels like to work with Vue, right in the browser. It does not aim to be comprehensive, and you don't need to understand everything before moving on. However, after you complete it, make sure to also read the <a target="_blank" href="/guide/introduction.html">Guide</a> which covers each topic in more detail.
 
-## Điều kiện tiên quyết {#prerequisites}
+## Prerequisites {#prerequisites}
 
-Hướng dẫn này giả định bạn đã có kiến thức cơ bản về HTML, CSS và JavaScript. Nếu bạn hoàn toàn mới với lập trình front-end, tốt nhất không nên bắt đầu ngay bằng một framework - hãy nắm vững các kiến thức nền tảng trước rồi quay lại đây! Kinh nghiệm với các framework khác sẽ hữu ích, nhưng không bắt buộc.
+The tutorial assumes basic familiarity with HTML, CSS and JavaScript. If you are totally new to front-end development, it might not be the best idea to jump right into a framework as your first step - grasp the basics then come back! Prior experience with other frameworks helps, but is not required.
 
-## Cách sử dụng hướng dẫn này {#how-to-use-this-tutorial}
+## How to Use This Tutorial {#how-to-use-this-tutorial}
 
-Bạn có thể chỉnh sửa code <span class="wide">ở bên phải</span><span class="narrow">bên dưới</span> và thấy kết quả cập nhật tức thì. Mỗi bước sẽ giới thiệu một tính năng cốt lõi của Vue, và bạn sẽ cần hoàn thiện code để demo hoạt động. Nếu bị mắc kẹt, bạn sẽ có nút "Chỉ cho tôi!" hiển thị code hoạt động cho bạn. Cố gắng đừng phụ thuộc vào nó quá nhiều - bạn sẽ học nhanh hơn khi tự tìm ra.
+You can edit the code <span class="wide">on the right</span><span class="narrow">below</span> and see the result update instantly. Each step will introduce a core feature of Vue, and you will be expected to complete the code to get the demo working. If you get stuck, you will have a "Show me!" button that reveals the working code for you. Try not to rely on it too much - you'll learn faster by figuring things out on your own.
 
-Nếu bạn là developer có kinh nghiệm đến từ Vue 2 hoặc các framework khác, có một số cài đặt bạn có thể điều chỉnh để tận dụng tốt nhất hướng dẫn này. Nếu bạn là người mới bắt đầu, khuyến nghị dùng các cài đặt mặc định.
+If you are an experienced developer coming from Vue 2 or other frameworks, there are a few settings you can tweak to make the best use of this tutorial. If you are a beginner, it's recommended to go with the defaults.
 
 <details>
-<summary>Chi tiết cài đặt hướng dẫn</summary>
+<summary>Tutorial Setting Details</summary>
 
-- Vue cung cấp hai phong cách API: Options API và Composition API. Hướng dẫn này được thiết kế để hoạt động với cả hai - bạn có thể chọn phong cách ưa thích bằng nút **API Preference** ở trên cùng. <a target="_blank" href="/guide/introduction.html#api-styles">Tìm hiểu thêm về phong cách API</a>.
+- Vue offers two API styles: Options API and Composition API. This tutorial is designed to work for both - you can choose your preferred style using the **API Preference** switches at the top. <a target="_blank" href="/guide/introduction.html#api-styles">Learn more about API styles</a>.
 
-- Bạn cũng có thể chuyển đổi giữa chế độ SFC hoặc HTML. Chế độ trước sẽ hiển thị ví dụ code theo định dạng <a target="_blank" href="/guide/introduction.html#single-file-components">Single-File Component</a> (SFC), đây là cách hầu hết developer dùng khi sử dụng Vue với build step. Chế độ HTML hiển thị cách dùng không có build step.
+- You can also switch between SFC-mode or HTML-mode. The former will show code examples in <a target="_blank" href="/guide/introduction.html#single-file-components">Single-File Component</a> (SFC) format, which is what most developers use when they use Vue with a build step. HTML-mode shows usage without a build step.
 
 <div class="html">
 
 :::tip
-Nếu bạn sắp dùng chế độ HTML không có build step trong ứng dụng của mình, hãy đảm bảo bạn thay đổi các import thành:
+If you're about to use HTML-mode without a build step in your own applications, make sure you either change imports to:
 
 ```js
 import { ... } from 'vue/dist/vue.esm-bundler.js'
 ```
 
-bên trong script của bạn hoặc cấu hình build tool để resolve `vue` tương ứng. Cấu hình mẫu cho [Vite](https://vite.dev/):
+inside your scripts or configure your build tool to resolve `vue` accordingly. Sample config for [Vite](https://vite.dev/):
 
 ```js [vite.config.js]
 export default {
@@ -42,11 +42,11 @@ export default {
 }
 ```
 
-Xem [phần tương ứng trong hướng dẫn Tooling](/guide/scaling-up/tooling.html#note-on-in-browser-template-compilation) để biết thêm thông tin.
+See the respective [section in Tooling guide](/guide/scaling-up/tooling.html#note-on-in-browser-template-compilation) for more information.
 :::
 
 </div>
 
 </details>
 
-Sẵn sàng chưa? Nhấn "Tiếp theo" để bắt đầu.
+Ready? Click "Next" to get started.
