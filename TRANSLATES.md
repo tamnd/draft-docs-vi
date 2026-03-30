@@ -182,31 +182,31 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 ## Tutorial
 
-- [ ] `src/tutorial/index.md`
-- [ ] `src/tutorial/src/step-1/description.md`
-- [ ] `src/tutorial/src/step-10/description.md`
-- [ ] `src/tutorial/src/step-11/description.md`
-- [ ] `src/tutorial/src/step-12/description.md`
-- [ ] `src/tutorial/src/step-13/description.md`
-- [ ] `src/tutorial/src/step-14/description.md`
-- [ ] `src/tutorial/src/step-15/description.md`
-- [ ] `src/tutorial/src/step-2/description.md`
-- [ ] `src/tutorial/src/step-3/description.md`
-- [ ] `src/tutorial/src/step-4/description.md`
-- [ ] `src/tutorial/src/step-5/description.md`
-- [ ] `src/tutorial/src/step-6/description.md`
-- [ ] `src/tutorial/src/step-7/description.md`
-- [ ] `src/tutorial/src/step-8/description.md`
-- [ ] `src/tutorial/src/step-9/description.md`
+- [x] `src/tutorial/index.md`
+- [x] `src/tutorial/src/step-1/description.md`
+- [x] `src/tutorial/src/step-10/description.md`
+- [x] `src/tutorial/src/step-11/description.md`
+- [x] `src/tutorial/src/step-12/description.md`
+- [x] `src/tutorial/src/step-13/description.md`
+- [x] `src/tutorial/src/step-14/description.md`
+- [x] `src/tutorial/src/step-15/description.md`
+- [x] `src/tutorial/src/step-2/description.md`
+- [x] `src/tutorial/src/step-3/description.md`
+- [x] `src/tutorial/src/step-4/description.md`
+- [x] `src/tutorial/src/step-5/description.md`
+- [x] `src/tutorial/src/step-6/description.md`
+- [x] `src/tutorial/src/step-7/description.md`
+- [x] `src/tutorial/src/step-8/description.md`
+- [x] `src/tutorial/src/step-9/description.md`
 
 ## About
 
-- [ ] `src/about/coc.md`
-- [ ] `src/about/community-guide.md`
-- [ ] `src/about/faq.md`
-- [ ] `src/about/privacy.md`
-- [ ] `src/about/releases.md`
-- [ ] `src/about/team.md`
+- [x] `src/about/coc.md`
+- [x] `src/about/community-guide.md`
+- [x] `src/about/faq.md`
+- [x] `src/about/privacy.md`
+- [x] `src/about/releases.md`
+- [x] `src/about/team.md`
 
 ## Ecosystem
 
@@ -215,11 +215,11 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 ## Style guide
 
-- [ ] `src/style-guide/index.md`
-- [ ] `src/style-guide/rules-essential.md`
-- [ ] `src/style-guide/rules-recommended.md`
-- [ ] `src/style-guide/rules-strongly-recommended.md`
-- [ ] `src/style-guide/rules-use-with-caution.md`
+- [x] `src/style-guide/index.md`
+- [x] `src/style-guide/rules-essential.md`
+- [x] `src/style-guide/rules-recommended.md`
+- [x] `src/style-guide/rules-strongly-recommended.md`
+- [x] `src/style-guide/rules-use-with-caution.md`
 
 ## Sponsor and partners
 
