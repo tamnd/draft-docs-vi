@@ -1,6 +1,6 @@
 # Vòng đời và Template Ref {#lifecycle-and-template-refs}
 
-Cho đến nay, Vue đã xử lý tất cả cập nhật DOM cho chúng ta, nhờ tính phản ứng và render khai báo. Tuy nhiên, chắc chắn sẽ có những trường hợp chúng ta cần làm việc trực tiếp với DOM.
+Cho đến nay, Vue đã xử lý tất cả cập nhật DOM cho chúng ta, nhờ tính phản ứng và kết xuất khai báo. Tuy nhiên, chắc chắn sẽ có những trường hợp chúng ta cần làm việc trực tiếp với DOM.
 
 Chúng ta có thể yêu cầu **template ref** - tức là tham chiếu đến một element trong template - bằng cách dùng <a target="_blank" href="/api/built-in-special-attributes.html#ref">thuộc tính đặc biệt `ref`</a>:
 

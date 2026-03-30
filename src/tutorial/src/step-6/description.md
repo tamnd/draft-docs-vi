@@ -1,4 +1,4 @@
-# Render Có điều kiện {#conditional-rendering}
+# Kết xuất có điều kiện {#conditional-rendering}
 
 Chúng ta có thể dùng directive `v-if` để render một element có điều kiện:
 
@@ -17,4 +17,4 @@ Chúng ta cũng có thể dùng `v-else` và `v-else-if` để biểu thị các
 
 Hiện tại, demo đang hiển thị cả hai `<h1>` cùng lúc, và nút không làm gì. Hãy thêm directive `v-if` và `v-else` vào chúng, và triển khai method `toggle()` để chúng ta có thể dùng nút để chuyển đổi giữa chúng.
 
-Chi tiết thêm về `v-if`: <a target="_blank" href="/guide/essentials/conditional.html">Hướng dẫn - Render Có điều kiện</a>
+Chi tiết thêm về `v-if`: <a target="_blank" href="/guide/essentials/conditional.html">Hướng dẫn - Kết xuất có điều kiện</a>

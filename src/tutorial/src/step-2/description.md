@@ -1,4 +1,4 @@
-# Render Khai báo {#declarative-rendering}
+# Kết xuất khai báo {#declarative-rendering}
 
 <div class="sfc">
 
@@ -6,7 +6,7 @@ Những gì bạn thấy trong trình soạn thảo là một Vue Single-File Co
 
 </div>
 
-Tính năng cốt lõi của Vue là **render khai báo**: dùng cú pháp template mở rộng HTML, chúng ta có thể mô tả HTML trông như thế nào dựa trên JavaScript state. Khi state thay đổi, HTML tự động cập nhật.
+Tính năng cốt lõi của Vue là **kết xuất khai báo**: dùng cú pháp template mở rộng HTML, chúng ta có thể mô tả HTML trông như thế nào dựa trên JavaScript state. Khi state thay đổi, HTML tự động cập nhật.
 
 <div class="composition-api">
 
@@ -34,7 +34,7 @@ console.log(message.value) // "Hello World!"
 message.value = 'Changed'
 ```
 
-Chi tiết về `reactive()` và `ref()` được thảo luận trong <a target="_blank" href="/guide/essentials/reactivity-fundamentals.html">Hướng dẫn - Cơ bản về Tính Phản ứng</a>.
+Chi tiết về `reactive()` và `ref()` được thảo luận trong <a target="_blank" href="/guide/essentials/reactivity-fundamentals.html">Hướng dẫn - Nền tảng về Tính phản ứng</a>.
 
 <div class="sfc">
 

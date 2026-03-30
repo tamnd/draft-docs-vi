@@ -1,4 +1,4 @@
-# Render Danh sách {#list-rendering}
+# Kết xuất danh sách {#list-rendering}
 
 Chúng ta có thể dùng directive `v-for` để render danh sách các element dựa trên mảng nguồn:
 
@@ -52,4 +52,4 @@ Có hai cách để cập nhật danh sách:
 
 Đây chúng ta có một danh sách todo đơn giản - hãy thử triển khai logic cho các method `addTodo()` và `removeTodo()` để làm cho nó hoạt động!
 
-Chi tiết thêm về `v-for`: <a target="_blank" href="/guide/essentials/list.html">Hướng dẫn - Render Danh sách</a>
+Chi tiết thêm về `v-for`: <a target="_blank" href="/guide/essentials/list.html">Hướng dẫn - Kết xuất danh sách</a>

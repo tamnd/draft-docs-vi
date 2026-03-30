@@ -1,4 +1,4 @@
-# Binding Thuộc tính {#attribute-bindings}
+# Ràng buộc thuộc tính {#attribute-bindings}
 
 Trong Vue, mustache chỉ dùng cho nội suy text. Để bind một thuộc tính vào giá trị động, chúng ta dùng directive `v-bind`:
 

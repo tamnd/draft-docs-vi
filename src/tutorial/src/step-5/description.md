@@ -1,4 +1,4 @@
-# Binding Form {#form-bindings}
+# Ràng buộc form {#form-bindings}
 
 Dùng `v-bind` và `v-on` cùng nhau, chúng ta có thể tạo binding hai chiều trên các element input của form:
 
@@ -42,6 +42,6 @@ Thử nhập vào ô input - bạn sẽ thấy text trong `<p>` cập nhật khi
 
 `v-model` tự động đồng bộ giá trị của `<input>` với state được bind, vì vậy chúng ta không cần dùng event handler cho điều đó nữa.
 
-`v-model` không chỉ hoạt động trên text input, mà còn trên các loại input khác như checkbox, radio button, và select dropdown. Chúng tôi đề cập thêm chi tiết trong <a target="_blank" href="/guide/essentials/forms.html">Hướng dẫn - Binding Form</a>.
+`v-model` không chỉ hoạt động trên text input, mà còn trên các loại input khác như checkbox, radio button, và select dropdown. Chúng tôi đề cập thêm chi tiết trong <a target="_blank" href="/guide/essentials/forms.html">Hướng dẫn - Ràng buộc input của form</a>.
 
 Bây giờ, hãy thử refactor code để dùng `v-model` thay thế.
