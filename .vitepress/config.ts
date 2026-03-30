@@ -182,7 +182,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           text: 'Xử lý sự kiện',
           link: '/guide/essentials/event-handling'
         },
-        { text: 'Ràng buộc biểu mẫu', link: '/guide/essentials/forms' },
+        { text: 'Ràng buộc form', link: '/guide/essentials/forms' },
         { text: 'Watcher', link: '/guide/essentials/watchers' },
         { text: 'Template ref', link: '/guide/essentials/template-refs' },
         {
@@ -311,11 +311,11 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/extras/composition-api-faq'
         },
         {
-          text: 'Tính phản ứng chuyên sâu',
+          text: 'Chuyên sâu về tính phản ứng (reactivity)',
           link: '/guide/extras/reactivity-in-depth'
         },
         {
-          text: 'Cơ chế kết xuất',
+          text: 'Cơ chế render (kết xuất)',
           link: '/guide/extras/rendering-mechanism'
         },
         {
@@ -345,7 +345,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
     {
       text: 'API toàn cục',
       items: [
-        { text: 'Application', link: '/api/application' },
+        { text: 'Ứng dụng', link: '/api/application' },
         {
           text: 'Chung',
           link: '/api/general'
@@ -397,13 +397,13 @@ export const sidebar: ThemeConfig['sidebar'] = {
         },
         { text: 'Options: Khác', link: '/api/options-misc' },
         {
-          text: 'Instance component',
+          text: 'Instance của component',
           link: '/api/component-instance'
         }
       ]
     },
     {
-      text: 'Dựng sẵn',
+      text: 'Thành phần dựng sẵn',
       items: [
         { text: 'Directive', link: '/api/built-in-directives' },
         { text: 'Component', link: '/api/built-in-components' },
@@ -458,7 +458,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/examples/#conditionals-and-loops'
         },
         {
-          text: 'Ràng buộc biểu mẫu',
+          text: 'Ràng buộc form',
           link: '/examples/#form-bindings'
         },
         {
@@ -618,7 +618,7 @@ export default defineConfigWithTheme<ThemeConfig>({
 
   lang: 'vi',
   title: 'Vue.js',
-  description: 'Vue.js - Progressive JavaScript Framework',
+  description: 'Vue.js - Framework Javascript linh hoạt',
   srcDir: 'src',
   srcExclude: ['tutorial/**/description.md'],
 
@@ -631,7 +631,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       'meta',
       {
         property: 'og:description',
-        content: 'Vue.js - Progressive JavaScript Framework'
+        content: 'Vue.js - Framework Javascript linh hoạt'
       }
     ],
     [
