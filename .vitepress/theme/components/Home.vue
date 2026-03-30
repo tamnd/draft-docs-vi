@@ -13,18 +13,18 @@ onMounted(load)
   <section id="hero">
     <img id="uwu" alt="Vue.js Kawaii Logo by @icarusgkx" />
     <h1 class="tagline">
-      Framework
-      <span class="accent">JavaScript Tiến Bộ</span>
-      <br />cho giao diện web
+      The
+      <span class="accent">Progressive</span>
+      <br />JavaScript Framework
     </h1>
     <p class="description">
-      Một framework dễ tiếp cận, hiệu năng cao, và linh hoạt để xây dựng giao
-      diện người dùng trên web.
+      An approachable, performant and versatile framework for building web
+      user interfaces.
     </p>
     <p class="actions">
       <VueMasteryModal />
       <a class="get-started" href="/guide/introduction.html">
-        Bắt đầu
+        Get Started
         <svg
           class="icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -37,9 +37,9 @@ onMounted(load)
           />
         </svg>
       </a>
-      <a class="setup" href="/guide/quick-start.html">Cài đặt</a>
+      <a class="setup" href="/guide/quick-start.html">Install</a>
       <a class="security" href="https://v2.vuejs.org/eol/" target="_blank">
-        Nhận bản cập nhật bảo mật cho Vue 2
+        Get Security Updates for Vue 2
         <svg
           class="icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ onMounted(load)
   </section>
 
   <section v-if="data && data.special" id="special-spsr">
-    <span class="lead">Nhà tài trợ đặc biệt</span>
+    <span class="lead">Special Sponsor</span>
     <template v-for="{ url, img, name, description } of data.special">
       <a :href="url" target="_blank" rel="sponsored noopener">
         <picture v-if="img.endsWith('png')">
@@ -78,39 +78,39 @@ onMounted(load)
   <section v-else id="special-spsr">
     <span>
       <a href="/sponsor/#tier-benefits">
-        Vị trí nhà tài trợ đặc biệt hiện đang trống, liên hệ ngay
+        Special Sponsor slot is now vacant - Inquire now
       </a>
     </span>
   </section>
 
   <section id="highlights" class="vt-box-container">
     <div class="vt-box">
-      <h2>Dễ tiếp cận</h2>
+      <h2>Approachable</h2>
       <p>
-        Được xây dựng trên nền HTML, CSS, và JavaScript tiêu chuẩn với API trực
-        quan và tài liệu chất lượng hàng đầu.
+        Builds on top of standard HTML, CSS and JavaScript with intuitive
+        API and world-class documentation.
       </p>
     </div>
     <div class="vt-box">
-      <h2>Hiệu năng cao</h2>
+      <h2>Performant</h2>
       <p>
-        Hệ thống kết xuất thực sự phản ứng, được tối ưu bởi compiler và hiếm
-        khi cần tối ưu thủ công.
+        Truly reactive, compiler-optimized rendering system that rarely
+        requires manual optimization.
       </p>
     </div>
     <div class="vt-box">
-      <h2>Linh hoạt</h2>
+      <h2>Versatile</h2>
       <p>
-        Một hệ sinh thái phong phú, có thể áp dụng dần dần và mở rộng từ một
-        thư viện nhỏ đến một framework đầy đủ tính năng.
+        A rich, incrementally adoptable ecosystem that scales between a
+        library and a full-featured framework.
       </p>
     </div>
   </section>
 
   <section id="spsrs">
-    <h2>Nhà tài trợ Bạch kim</h2>
+    <h2>Platinum Sponsors</h2>
     <SponsorsGroup tier="platinum" placement="landing" />
-    <h2>Nhà tài trợ Vàng</h2>
+    <h2>Gold Sponsors</h2>
     <SponsorsGroup tier="gold" placement="landing" />
   </section>
 
