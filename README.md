@@ -1,39 +1,39 @@
-# vuejs.org Bản Dịch Tiếng Việt
+# Bản dịch tiếng Việt cho vuejs.org
 
-Đây là kho mã cho bản dịch tiếng Việt của tài liệu Vue.js tại [vuejs.org](https://vuejs.org).
+Đây là repository (kho mã nguồn) chứa bản dịch tiếng Việt của tài liệu Vue.js trên [vuejs.org](https://vuejs.org).
 
-Xem thêm:
+Tham khảo thêm:
 
-- tài liệu tiếng Anh gốc tại [vuejs.org](https://vuejs.org)
-- kho mã gốc tại [vuejs/docs](https://github.com/vuejs/docs)
-- hướng dẫn cộng đồng dịch thuật tại [vuejs-translations/guidelines](https://github.com/vuejs-translations/guidelines)
+* Tài liệu tiếng Anh gốc tại [vuejs.org](https://vuejs.org)
+* Repository gốc tại [vuejs/docs](https://github.com/vuejs/docs)
+* Hướng dẫn dành cho cộng đồng dịch thuật tại [vuejs-translations/guidelines](https://github.com/vuejs-translations/guidelines)
 
-## Cách tham gia đóng góp
+## Tham gia đóng góp
 
-Kho mã này bám sát [vuejs/docs](https://github.com/vuejs/docs). Mục tiêu là đồng bộ nội dung gốc và dịch sang tiếng Việt, không phát triển tài liệu tách nhánh với nội dung riêng.
+Repository này được duy trì đồng bộ với [vuejs/docs](https://github.com/vuejs/docs). Mục tiêu là bám sát nội dung gốc và chuyển ngữ sang tiếng Việt, không tách riêng hay phát triển nội dung độc lập.
 
-Nếu bạn có góp ý về nội dung gốc tiếng Anh, hãy mở issue hoặc pull request trực tiếp tại [vuejs/docs](https://github.com/vuejs/docs).
+Nếu bạn có ý kiến về nội dung tiếng Anh, hãy tạo issue hoặc pull request trực tiếp tại [vuejs/docs](https://github.com/vuejs/docs).
 
-Trong repo này, bạn có thể đóng góp bằng cách:
+Tại repository này, bạn có thể đóng góp bằng cách:
 
-- dịch các trang còn thiếu
-- rà soát và chỉnh sửa câu chữ, thuật ngữ, chính tả, và định dạng
-- mở issue để thảo luận về cách dịch, thuật ngữ, hoặc workflow cộng tác
-- đồng bộ thay đổi mới từ bản tiếng Anh
+* Dịch các trang chưa có bản tiếng Việt
+* Rà soát và cải thiện câu chữ, thuật ngữ, chính tả, và định dạng
+* Tạo issue để thảo luận về cách dịch, thuật ngữ, hoặc quy trình cộng tác
+* Cập nhật nội dung theo các thay đổi mới từ bản gốc
 
-Danh sách công việc dịch được theo dõi trong [ROADMAP.md](./ROADMAP.md).
+Danh sách công việc hiện được theo dõi trong [ROADMAP.md](./ROADMAP.md).
 
-## Phát triển cục bộ
+## Chạy local
 
-Trang này được xây dựng với [VitePress](https://github.com/vuejs/vitepress) và phụ thuộc vào [@vue/theme](https://github.com/vuejs/vue-theme). Nội dung được viết bằng Markdown trong thư mục `src`.
+Trang web được xây dựng bằng [VitePress](https://github.com/vuejs/vitepress) và sử dụng theme từ [@vue/theme](https://github.com/vuejs/vue-theme). Toàn bộ nội dung nằm trong thư mục `src`, được viết dưới dạng Markdown.
 
-Yêu cầu Node.js `v20` trở lên. Nên bật corepack:
+Yêu cầu Node.js phiên bản `v20` trở lên. Khuyến nghị bật corepack:
 
 ```bash
 corepack enable
 ```
 
-Dùng [pnpm](https://pnpm.io/) làm trình quản lý gói:
+Sử dụng [pnpm](https://pnpm.io/) để quản lý dependencies:
 
 ```bash
 pnpm i
