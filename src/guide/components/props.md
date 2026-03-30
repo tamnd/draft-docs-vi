@@ -121,7 +121,7 @@ Chi tiết hơn: [Typing Component Props](/guide/typescript/composition-api#typi
 
 ## Destructure Props Phản Ứng <sup class="vt-badge" data-text="3.5+" /> \*\* {#reactive-props-destructure}
 
-Hệ phản ứng của Vue theo dõi việc sử dụng state dựa trên truy cập property. Ví dụ, khi bạn truy cập `props.foo` trong getter của computed hoặc trong watcher, prop `foo` sẽ được theo dõi như một dependency.
+Hệ thống tính phản ứng của Vue theo dõi việc sử dụng state dựa trên truy cập property. Ví dụ, khi bạn truy cập `props.foo` trong getter của computed hoặc trong watcher, prop `foo` sẽ được theo dõi như một dependency.
 
 Vì vậy, với đoạn mã sau:
 
