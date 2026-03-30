@@ -7,10 +7,10 @@ Step-by-step translation plan for [`vuejs-translations/docs-vi`](https://github.
 > Get the site running in Vietnamese with correct navigation and UI labels.
 > ~830 lines, ~1,800 words
 
-- [ ] `README.md` - repo introduction, local setup instructions, contribution guide
-- [ ] `.vitepress/config.ts` - set `lang`, translate all nav, sidebar, and i18n strings
-- [ ] `src/index.md` - homepage (hero, tagline, CTA buttons)
-- [ ] `CHECKPOINT.md` - record the upstream commit hash at the start of translation
+- [x] `README.md` - repo introduction, local setup instructions, contribution guide
+- [x] `.vitepress/config.ts` - set `lang`, translate all nav, sidebar, and i18n strings
+- [x] `src/index.md` - homepage (hero, tagline, CTA buttons)
+- [x] `CHECKPOINT.md` - record the upstream commit hash at the start of translation
 
 ## Introduction and Quick Start
 
