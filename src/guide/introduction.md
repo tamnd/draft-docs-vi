@@ -108,7 +108,7 @@ Nếu những khái niệm này khiến bạn thấy hơi ngợp, đừng lo. Ph
 
 Nếu bạn là một lập trình viên có kinh nghiệm và muốn biết cách tích hợp Vue vào stack của mình sao cho phù hợp nhất, hoặc đơn giản là tò mò những thuật ngữ trên có nghĩa gì, chúng tôi đã thảo luận chi tiết hơn trong [Các cách sử dụng Vue](/guide/extras/ways-of-using-vue).
 
-Dù rất linh hoạt, kiến thức cốt lõi về cách Vue hoạt động vẫn được chia sẻ giữa tất cả các trường hợp sử dụng này. Ngay cả khi bây giờ bạn mới chỉ là người mới bắt đầu, những gì bạn học được vẫn sẽ tiếp tục hữu ích khi bạn phát triển để chinh phục những mục tiêu tham vọng hơn trong tương lai. Còn nếu bạn là người đã dày dạn kinh nghiệm, bạn có thể chọn cách tận dụng Vue tối ưu nhất dựa trên vấn đề mình đang muốn giải quyết mà vẫn giữ nguyên năng suất. Đó là lý do chúng tôi gọi Vue là "Framework Tiến Bộ": một framework có thể phát triển cùng bạn và thích nghi với nhu cầu của bạn.
+Dù rất linh hoạt, kiến thức cốt lõi về cách Vue hoạt động vẫn được chia sẻ giữa tất cả các trường hợp sử dụng này. Ngay cả khi bây giờ bạn mới chỉ là người mới bắt đầu, những gì bạn học được vẫn sẽ tiếp tục hữu ích khi bạn phát triển để chinh phục những mục tiêu tham vọng hơn trong tương lai. Còn nếu bạn là người đã dày dặn kinh nghiệm, bạn có thể chọn cách tận dụng Vue tối ưu nhất dựa trên vấn đề mình đang muốn giải quyết mà vẫn giữ nguyên năng suất. Đó là lý do chúng tôi gọi Vue là "Framework Tiến Bộ": một framework có thể phát triển cùng bạn và thích nghi với nhu cầu của bạn.
 
 ## Single-File Components {#single-file-components}
 
@@ -209,7 +209,7 @@ export default {
 
 Với Composition API, chúng ta định nghĩa logic của component bằng các hàm API được import vào. Trong SFC, Composition API thường được dùng cùng với [`<script setup>`](/api/sfc-script-setup). Thuộc tính `setup` là một chỉ dấu để Vue thực hiện các phép biến đổi ở thời điểm biên dịch, từ đó cho phép chúng ta dùng Composition API với ít boilerplate hơn. Ví dụ, các import và các biến / hàm cấp cao nhất được khai báo trong `<script setup>` có thể dùng trực tiếp trong template.
 
-Đây là cùng một component, với chính xác template như trên, nhưng được viết bằng Composition API và `<script setup>`:
+Đây là cùng một component với đúng template như trên, nhưng được viết bằng Composition API và `<script setup>`:
 
 ```vue
 <script setup>
