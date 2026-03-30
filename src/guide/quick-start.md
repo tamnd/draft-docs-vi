@@ -6,29 +6,29 @@ footer: false
 import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 </script>
 
-# Quick Start {#quick-start}
+# Bắt đầu nhanh {#quick-start}
 
-## Try Vue Online {#try-vue-online}
+## Thử Vue trực tuyến {#try-vue-online}
 
-- To quickly get a taste of Vue, you can try it directly in our [Playground](https://play.vuejs.org/#eNo9jcEKwjAMhl/lt5fpQYfXUQfefAMvvRQbddC1pUuHUPrudg4HIcmXjyRZXEM4zYlEJ+T0iEPgXjn6BB8Zhp46WUZWDjCa9f6w9kAkTtH9CRinV4fmRtZ63H20Ztesqiylphqy3R5UYBqD1UyVAPk+9zkvV1CKbCv9poMLiTEfR2/IXpSoXomqZLtti/IFwVtA9A==).
+- Để nhanh chóng trải nghiệm Vue, bạn có thể thử trực tiếp trên [Playground](https://play.vuejs.org/#eNo9jcEKwjAMhl/lt5fpQYfXUQfefAMvvRQbddC1pUuHUPrudg4HIcmXjyRZXEM4zYlEJ+T0iEPgXjn6BB8Zhp46WUZWDjCa9f6w9kAkTtH9CRinV4fmRtZ63H20Ztesqiylphqy3R5UYBqD1UyVAPk+9zkvV1CKbCv9poMLiTEfR2/IXpSoXomqZLtti/IFwVtA9A==).
 
-- If you prefer a plain HTML setup without any build steps, you can use this [JSFiddle](https://jsfiddle.net/yyx990803/2ke1ab0z/) as your starting point.
+- Nếu bạn thích một thiết lập HTML thuần không có bước build nào, bạn có thể dùng [JSFiddle](https://jsfiddle.net/yyx990803/2ke1ab0z/) này làm điểm bắt đầu.
 
-- If you are already familiar with Node.js and the concept of build tools, you can also try a complete build setup right within your browser on [StackBlitz](https://vite.new/vue).
+- Nếu bạn đã quen với Node.js và build tool, bạn cũng có thể thử luôn một dự án hoàn chỉnh ngay trong trình duyệt qua [StackBlitz](https://vite.new/vue).
 
-- To get a walkthrough of the recommended setup, watch this interactive [Scrimba](http://scrimba.com/links/vue-quickstart) tutorial that shows you how to run, edit, and deploy your first Vue app.
+- Để xem hướng dẫn từng bước về thiết lập được khuyến nghị, hãy thử [hướng dẫn tương tác trên Scrimba](http://scrimba.com/links/vue-quickstart), nơi bạn sẽ được hướng dẫn cách chạy, chỉnh sửa, và triển khai ứng dụng Vue đầu tiên của mình.
 
-## Creating a Vue Application {#creating-a-vue-application}
+## Tạo ứng dụng Vue {#creating-a-vue-application}
 
-:::tip Prerequisites
+:::tip Điều kiện tiên quyết
 
-- Familiarity with the command line
-- Install [Node.js](https://nodejs.org/) version `^20.19.0 || >=22.12.0`
+- Quen thuộc với command line
+- Cài đặt [Node.js](https://nodejs.org/) phiên bản `^20.19.0 || >=22.12.0`
   :::
 
-In this section we will introduce how to scaffold a Vue [Single Page Application](/guide/extras/ways-of-using-vue#single-page-application-spa) on your local machine. The created project will be using a build setup based on [Vite](https://vite.dev/) and allow us to use Vue [Single-File Components](/guide/scaling-up/sfc) (SFCs).
+Trong phần này, chúng ta sẽ tạo thử một [Single Page Application](/guide/extras/ways-of-using-vue#single-page-application-spa) Vue trên máy của bạn. Dự án được tạo ra sẽ dùng cấu hình build dựa trên [Vite](https://vite.dev/) và cho phép chúng ta sử dụng Vue [Single-File Components](/guide/scaling-up/sfc) (SFC).
 
-Make sure you have an up-to-date version of [Node.js](https://nodejs.org/) installed and your current working directory is the one where you intend to create a project. Run the following command in your command line (without the `$` sign):
+Hãy đảm bảo bạn đã cài đặt phiên bản [Node.js](https://nodejs.org/) mới và thư mục làm việc hiện tại chính là nơi bạn muốn tạo dự án. Chạy lệnh sau trong command line của bạn, không cần gõ ký hiệu `$`:
 
 ::: code-group
 
@@ -41,13 +41,13 @@ $ pnpm create vue@latest
 ```
 
 ```sh [yarn]
-# For Yarn (v1+)
+# Dành cho Yarn (v1+)
 $ yarn create vue
 
-# For Yarn Modern (v2+)
+# Dành cho Yarn Modern (v2+)
 $ yarn create vue@latest
   
-# For Yarn ^v4.11
+# Dành cho Yarn ^v4.11
 $ yarn dlx create-vue@latest
 ```
 
@@ -56,23 +56,23 @@ $ bun create vue@latest
 ```
 :::
 
-This command will install and execute [create-vue](https://github.com/vuejs/create-vue), the official Vue project scaffolding tool. You will be presented with prompts for several optional features such as TypeScript and testing support:
+Lệnh này sẽ cài và chạy [create-vue](https://github.com/vuejs/create-vue), công cụ tạo dự án chính thức của Vue. Sau đó bạn sẽ thấy một số câu hỏi về các tính năng tùy chọn như TypeScript hay testing:
 
 <div class="language-sh"><pre><code><span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Project name: <span style="color:#888;">… <span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span></span></span>
-<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add TypeScript? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
-<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add JSX Support? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
-<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Vue Router for Single Page Application development? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
-<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Pinia for state management? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
-<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Vitest for Unit testing? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
+<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add TypeScript? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Có</span></span>
+<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add JSX Support? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Có</span></span>
+<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Vue Router for Single Page Application development? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Có</span></span>
+<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Pinia for state management? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Có</span></span>
+<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Vitest for Unit testing? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Có</span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add an End-to-End Testing Solution? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Cypress / Nightwatch / Playwright</span></span>
-<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add ESLint for code quality? <span style="color:#888;">… No / <span style="color:#89DDFF;text-decoration:underline">Yes</span></span></span>
-<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Prettier for code formatting? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
-<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Vue DevTools 7 extension for debugging? (experimental) <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
+<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add ESLint for code quality? <span style="color:#888;">… No / <span style="color:#89DDFF;text-decoration:underline">Có</span></span></span>
+<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Prettier for code formatting? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Có</span></span>
+<span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Vue DevTools 7 extension for debugging? (experimental) <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Có</span></span>
 <span></span>
-<span style="color:#A6ACCD;">Scaffolding project in ./<span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span>...</span>
-<span style="color:#A6ACCD;">Done.</span></code></pre></div>
+<span style="color:#A6ACCD;">Đang tạo dự án vào ./<span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span>...</span>
+<span style="color:#A6ACCD;">Hoàn tất.</span></code></pre></div>
 
-If you are unsure about an option, simply choose `No` by hitting enter for now. Once the project is created, follow the instructions to install dependencies and start the dev server:
+Nếu bạn chưa chắc về một tùy chọn nào đó, cứ nhấn Enter để chọn `No` trước. Sau khi dự án được tạo xong, hãy làm theo hướng dẫn để cài đặt dependencies và khởi động dev server:
 
 ::: code-group
 
@@ -103,14 +103,14 @@ $ bun run dev
 :::
 
 
-You should now have your first Vue project running! Note that the example components in the generated project are written using the [Composition API](/guide/introduction#composition-api) and `<script setup>`, rather than the [Options API](/guide/introduction#options-api). Here are some additional tips:
+Giờ đây bạn đã có dự án Vue đầu tiên đang chạy. Lưu ý rằng các component ví dụ trong dự án được tạo ra sẽ dùng [Composition API](/guide/introduction#composition-api) và `<script setup>`, thay vì [Options API](/guide/introduction#options-api). Dưới đây là một vài gợi ý thêm:
 
-- The recommended IDE setup is [Visual Studio Code](https://code.visualstudio.com/) + [Vue - Official extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar). If you use other editors, check out the [IDE support section](/guide/scaling-up/tooling#ide-support).
-- More tooling details, including integration with backend frameworks, are discussed in the [Tooling Guide](/guide/scaling-up/tooling).
-- To learn more about the underlying build tool Vite, check out the [Vite docs](https://vite.dev/).
-- If you choose to use TypeScript, check out the [TypeScript Usage Guide](typescript/overview).
+- Thiết lập IDE được khuyến nghị là [Visual Studio Code](https://code.visualstudio.com/) + [Vue - Official extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar). Nếu bạn dùng editor khác, hãy xem phần [hỗ trợ IDE](/guide/scaling-up/tooling#ide-support).
+- Chi tiết hơn về công cụ phát triển, bao gồm cả tích hợp với các backend framework, được trình bày trong [Hướng dẫn công cụ](/guide/scaling-up/tooling).
+- Để hiểu thêm về Vite, build tool nền tảng phía sau, hãy xem [tài liệu Vite](https://vite.dev/).
+- Nếu bạn chọn sử dụng TypeScript, hãy xem [Hướng dẫn sử dụng TypeScript](/guide/typescript/overview).
 
-When you are ready to ship your app to production, run the following:
+Khi bạn sẵn sàng đưa ứng dụng lên production, hãy chạy lệnh sau:
 
 ::: code-group
 
@@ -133,25 +133,25 @@ $ bun run build
 :::
 
 
-This will create a production-ready build of your app in the project's `./dist` directory. Check out the [Production Deployment Guide](/guide/best-practices/production-deployment) to learn more about shipping your app to production.
+Lệnh này sẽ tạo ra bản build sẵn sàng cho production của ứng dụng trong thư mục `./dist` của dự án. Hãy xem [Hướng dẫn triển khai production](/guide/best-practices/production-deployment) để tìm hiểu thêm về cách đưa ứng dụng của bạn lên production.
 
-[Next Steps >](#next-steps)
+[Các bước tiếp theo >](#next-steps)
 
-## Using Vue from CDN {#using-vue-from-cdn}
+## Dùng Vue từ CDN {#using-vue-from-cdn}
 
-You can use Vue directly from a CDN via a script tag:
+Bạn có thể dùng Vue trực tiếp từ CDN thông qua một thẻ script:
 
 ```html
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 ```
 
-Here we are using [unpkg](https://unpkg.com/), but you can also use any CDN that serves npm packages, for example [jsdelivr](https://www.jsdelivr.com/package/npm/vue) or [cdnjs](https://cdnjs.com/libraries/vue). Of course, you can also download this file and serve it yourself.
+Ở đây chúng ta dùng [unpkg](https://unpkg.com/), nhưng bạn cũng có thể dùng bất kỳ CDN nào phân phối package npm, ví dụ như [jsdelivr](https://www.jsdelivr.com/package/npm/vue) hoặc [cdnjs](https://cdnjs.com/libraries/vue). Tất nhiên, bạn cũng có thể tải tệp này về và tự phục vụ nó.
 
-When using Vue from a CDN, there is no "build step" involved. This makes the setup a lot simpler, and is suitable for enhancing static HTML or integrating with a backend framework. However, you won't be able to use the Single-File Component (SFC) syntax.
+Khi dùng Vue từ CDN, sẽ không có "bước build" nào cả. Điều này giúp thiết lập đơn giản hơn nhiều và phù hợp để tăng cường HTML tĩnh hoặc tích hợp với backend framework. Tuy nhiên, bạn sẽ không thể sử dụng cú pháp Single-File Component (SFC).
 
-### Using the Global Build {#using-the-global-build}
+### Dùng bản build global {#using-the-global-build}
 
-The above link loads the _global build_ of Vue, where all top-level APIs are exposed as properties on the global `Vue` object. Here is a full example using the global build:
+Liên kết phía trên tải _global build_ của Vue, nơi tất cả API cấp cao nhất được expose dưới dạng thuộc tính trên object toàn cục `Vue`. Dưới đây là ví dụ đầy đủ sử dụng global build:
 
 <div class="options-api">
 
@@ -166,14 +166,14 @@ The above link loads the _global build_ of Vue, where all top-level APIs are exp
   createApp({
     data() {
       return {
-        message: 'Hello Vue!'
+        message: 'Xin chào Vue!'
       }
     }
   }).mount('#app')
 </script>
 ```
 
-[CodePen Demo >](https://codepen.io/vuejs-examples/pen/QWJwJLp)
+[Demo trên CodePen >](https://codepen.io/vuejs-examples/pen/QWJwJLp)
 
 </div>
 
@@ -189,7 +189,7 @@ The above link loads the _global build_ of Vue, where all top-level APIs are exp
 
   createApp({
     setup() {
-      const message = ref('Hello vue!')
+      const message = ref('Xin chào Vue!')
       return {
         message
       }
@@ -198,17 +198,17 @@ The above link loads the _global build_ of Vue, where all top-level APIs are exp
 </script>
 ```
 
-[CodePen Demo >](https://codepen.io/vuejs-examples/pen/eYQpQEG)
+[Demo trên CodePen >](https://codepen.io/vuejs-examples/pen/eYQpQEG)
 
 :::tip
-Many of the examples for Composition API throughout the guide will be using the `<script setup>` syntax, which requires build tools. If you intend to use Composition API without a build step, consult the usage of the [`setup()` option](/api/composition-api-setup).
+Rất nhiều ví dụ về Composition API trong phần hướng dẫn sẽ dùng cú pháp `<script setup>`, vốn yêu cầu build tool. Nếu bạn muốn dùng Composition API mà không có bước build, hãy tham khảo cách dùng [`setup()` option](/api/composition-api-setup).
 :::
 
 </div>
 
-### Using the ES Module Build {#using-the-es-module-build}
+### Dùng bản build ES modules {#using-the-es-module-build}
 
-Throughout the rest of the documentation, we will be primarily using [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) syntax. Most modern browsers now support ES modules natively, so we can use Vue from a CDN via native ES modules like this:
+Trong phần còn lại của tài liệu, chúng tôi sẽ chủ yếu sử dụng cú pháp [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). Hầu hết các trình duyệt hiện đại ngày nay đã hỗ trợ ES modules một cách tự nhiên, vì vậy chúng ta có thể dùng Vue từ CDN thông qua ES modules như sau:
 
 <div class="options-api">
 
@@ -221,7 +221,7 @@ Throughout the rest of the documentation, we will be primarily using [ES modules
   createApp({
     data() {
       return {
-        message: 'Hello Vue!'
+        message: 'Xin chào Vue!'
       }
     }
   }).mount('#app')
@@ -240,7 +240,7 @@ Throughout the rest of the documentation, we will be primarily using [ES modules
 
   createApp({
     setup() {
-      const message = ref('Hello Vue!')
+      const message = ref('Xin chào Vue!')
       return {
         message
       }
@@ -251,28 +251,28 @@ Throughout the rest of the documentation, we will be primarily using [ES modules
 
 </div>
 
-Notice that we are using `<script type="module">`, and the imported CDN URL is pointing to the **ES modules build** of Vue instead.
+Lưu ý rằng ở đây chúng ta đang dùng `<script type="module">`, và URL CDN được import vào đang trỏ tới **bản build ES modules** của Vue.
 
 <div class="options-api">
 
-[CodePen Demo >](https://codepen.io/vuejs-examples/pen/VwVYVZO)
+[Demo trên CodePen >](https://codepen.io/vuejs-examples/pen/VwVYVZO)
 
 </div>
 <div class="composition-api">
 
-[CodePen Demo >](https://codepen.io/vuejs-examples/pen/MWzazEv)
+[Demo trên CodePen >](https://codepen.io/vuejs-examples/pen/MWzazEv)
 
 </div>
 
-### Enabling Import maps {#enabling-import-maps}
+### Bật Import Maps {#enabling-import-maps}
 
-In the above example, we are importing from the full CDN URL, but in the rest of the documentation you will see code like this:
+Trong ví dụ ở trên, chúng ta import từ URL CDN đầy đủ, nhưng ở phần còn lại của tài liệu bạn sẽ thấy đoạn mã như thế này:
 
 ```js
 import { createApp } from 'vue'
 ```
 
-We can teach the browser where to locate the `vue` import by using [Import Maps](https://caniuse.com/import-maps):
+Chúng ta có thể chỉ cho trình duyệt biết vị trí của import `vue` bằng [Import Maps](https://caniuse.com/import-maps):
 
 <div class="options-api">
 
@@ -293,14 +293,14 @@ We can teach the browser where to locate the `vue` import by using [Import Maps]
   createApp({
     data() {
       return {
-        message: 'Hello Vue!'
+        message: 'Xin chào Vue!'
       }
     }
   }).mount('#app')
 </script>
 ```
 
-[CodePen Demo >](https://codepen.io/vuejs-examples/pen/wvQKQyM)
+[Demo trên CodePen >](https://codepen.io/vuejs-examples/pen/wvQKQyM)
 
 </div>
 
@@ -322,7 +322,7 @@ We can teach the browser where to locate the `vue` import by using [Import Maps]
 
   createApp({
     setup() {
-      const message = ref('Hello Vue!')
+      const message = ref('Xin chào Vue!')
       return {
         message
       }
@@ -331,25 +331,25 @@ We can teach the browser where to locate the `vue` import by using [Import Maps]
 </script>
 ```
 
-[CodePen Demo >](https://codepen.io/vuejs-examples/pen/YzRyRYM)
+[Demo trên CodePen >](https://codepen.io/vuejs-examples/pen/YzRyRYM)
 
 </div>
 
-You can also add entries for other dependencies to the import map - but make sure they point to the ES modules version of the library you intend to use.
+Bạn cũng có thể thêm các mục cho dependency khác vào import map, nhưng hãy đảm bảo chúng trỏ tới phiên bản ES modules của thư viện mà bạn muốn dùng.
 
-:::tip Import Maps Browser Support
-Import Maps is a relatively new browser feature. Make sure to use a browser within its [support range](https://caniuse.com/import-maps). In particular, it is only supported in Safari 16.4+.
+:::tip Khả năng hỗ trợ Import Maps trên trình duyệt
+Import Maps là một tính năng trình duyệt tương đối mới. Hãy đảm bảo bạn dùng trình duyệt nằm trong [phạm vi hỗ trợ](https://caniuse.com/import-maps) của nó. Đặc biệt, Safari chỉ hỗ trợ từ phiên bản 16.4 trở lên.
 :::
 
-:::warning Notes on Production Use
-The examples so far are using the development build of Vue - if you intend to use Vue from a CDN in production, make sure to check out the [Production Deployment Guide](/guide/best-practices/production-deployment#without-build-tools).
+:::warning Lưu ý khi dùng trong production
+Các ví dụ đến đây vẫn đang sử dụng bản development build của Vue. Nếu bạn định dùng Vue từ CDN trong production, hãy nhớ xem [Hướng dẫn triển khai production](/guide/best-practices/production-deployment#without-build-tools).
 
-While it is possible to use Vue without a build system, an alternative approach to consider is using [`vuejs/petite-vue`](https://github.com/vuejs/petite-vue) that could better suit the context where [`jquery/jquery`](https://github.com/jquery/jquery) (in the past) or [`alpinejs/alpine`](https://github.com/alpinejs/alpine) (in the present) might be used instead.
+Mặc dù hoàn toàn có thể dùng Vue mà không cần hệ thống build, một hướng tiếp cận thay thế đáng cân nhắc là [`vuejs/petite-vue`](https://github.com/vuejs/petite-vue), vốn có thể phù hợp hơn trong những bối cảnh mà trước đây người ta thường dùng [`jquery/jquery`](https://github.com/jquery/jquery), hoặc hiện nay là [`alpinejs/alpine`](https://github.com/alpinejs/alpine).
 :::
 
-### Splitting Up the Modules {#splitting-up-the-modules}
+### Tách các module {#splitting-up-the-modules}
 
-As we dive deeper into the guide, we may need to split our code into separate JavaScript files so that they are easier to manage. For example:
+Khi đi sâu hơn vào phần hướng dẫn, chúng ta có thể cần tách mã nguồn ra thành các tệp JavaScript riêng để dễ quản lý hơn. Ví dụ:
 
 ```html [index.html]
 <div id="app"></div>
@@ -369,7 +369,7 @@ export default {
   data() {
     return { count: 0 }
   },
-  template: `<div>Count is: {{ count }}</div>`
+  template: `<div>Số đếm là: {{ count }}</div>`
 }
 ```
 
@@ -383,35 +383,35 @@ export default {
     const count = ref(0)
     return { count }
   },
-  template: `<div>Count is: {{ count }}</div>`
+  template: `<div>Số đếm là: {{ count }}</div>`
 }
 ```
 
 </div>
 
-If you directly open the above `index.html` in your browser, you will find that it throws an error because ES modules cannot work over the `file://` protocol, which is the protocol the browser uses when you open a local file.
+Nếu bạn mở trực tiếp `index.html` ở trên trong trình duyệt, bạn sẽ thấy lỗi xuất hiện vì ES modules không thể hoạt động qua giao thức `file://`, vốn là giao thức mà trình duyệt dùng khi bạn mở một tệp cục bộ.
 
-Due to security reasons, ES modules can only work over the `http://` protocol, which is what the browsers use when opening pages on the web. In order for ES modules to work on our local machine, we need to serve the `index.html` over the `http://` protocol, with a local HTTP server.
+Vì lý do bảo mật, ES modules chỉ có thể hoạt động qua giao thức `http://`, cũng là giao thức mà trình duyệt dùng khi mở các trang trên web. Để ES modules hoạt động trên máy cục bộ, chúng ta cần phục vụ `index.html` thông qua giao thức `http://` bằng một HTTP server cục bộ.
 
-To start a local HTTP server, first make sure you have [Node.js](https://nodejs.org/en/) installed, then run `npx serve` from the command line in the same directory where your HTML file is. You can also use any other HTTP server that can serve static files with the correct MIME types.
+Để khởi động một HTTP server cục bộ, trước tiên hãy chắc chắn rằng bạn đã cài [Node.js](https://nodejs.org/en/), sau đó chạy `npx serve` trong command line tại chính thư mục chứa tệp HTML của bạn. Bạn cũng có thể dùng bất kỳ HTTP server nào khác có khả năng phục vụ tệp tĩnh với MIME type chính xác.
 
-You may have noticed that the imported component's template is inlined as a JavaScript string. If you are using VS Code, you can install the [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) extension and prefix the strings with a `/*html*/` comment to get syntax highlighting for them.
+Bạn có thể nhận ra rằng template của component được import ở đây đang được viết inline dưới dạng một chuỗi JavaScript. Nếu bạn đang dùng VS Code, bạn có thể cài extension [es6-string-html](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html) và thêm comment `/*html*/` trước chuỗi để có syntax highlighting.
 
-## Next Steps {#next-steps}
+## Các bước tiếp theo {#next-steps}
 
-If you skipped the [Introduction](/guide/introduction), we strongly recommend reading it before moving on to the rest of the documentation.
+Nếu bạn đã bỏ qua phần [Giới thiệu](/guide/introduction), chúng tôi đặc biệt khuyến nghị bạn đọc nó trước khi tiếp tục với phần còn lại của tài liệu.
 
 <div class="vt-box-container next-steps">
   <a class="vt-box" href="/guide/essentials/application.html">
-    <p class="next-steps-link">Continue with the Guide</p>
-    <p class="next-steps-caption">The guide walks you through every aspect of the framework in full detail.</p>
+    <p class="next-steps-link">Tiếp tục với phần hướng dẫn</p>
+    <p class="next-steps-caption">Phần hướng dẫn sẽ đưa bạn đi qua từng khía cạnh của framework một cách đầy đủ và chi tiết.</p>
   </a>
   <a class="vt-box" href="/tutorial/">
-    <p class="next-steps-link">Try the Tutorial</p>
-    <p class="next-steps-caption">For those who prefer learning things hands-on.</p>
+    <p class="next-steps-link">Thử phần hướng dẫn tương tác</p>
+    <p class="next-steps-caption">Dành cho những ai thích học bằng cách trực tiếp thực hành.</p>
   </a>
   <a class="vt-box" href="/examples/">
-    <p class="next-steps-link">Check out the Examples</p>
-    <p class="next-steps-caption">Explore examples of core features and common UI tasks.</p>
+    <p class="next-steps-link">Xem các ví dụ</p>
+    <p class="next-steps-caption">Khám phá các ví dụ về những tính năng cốt lõi và các tác vụ UI phổ biến.</p>
   </a>
 </div>
