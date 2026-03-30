@@ -64,8 +64,8 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `TRANSLATES.md`
 - [ ] `.vitepress/config.ts`
 - [ ] `src/index.md`
-- [ ] `src/guide/introduction.md`
-- [ ] `src/guide/quick-start.md`
+- [x] `src/guide/introduction.md`
+- [x] `src/guide/quick-start.md`
 - [x] `src/guide/essentials/application.md`
 - [x] `src/guide/essentials/template-syntax.md`
 - [x] `src/guide/essentials/class-and-style.md`
@@ -133,8 +133,8 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `src/guide/extras/rendering-mechanism.md`
 - [ ] `src/guide/extras/ways-of-using-vue.md`
 - [ ] `src/guide/extras/web-components.md`
-- [ ] `src/guide/introduction.md`
-- [ ] `src/guide/quick-start.md`
+- [x] `src/guide/introduction.md`
+- [x] `src/guide/quick-start.md`
 - [x] `src/guide/reusability/composables.md`
 - [x] `src/guide/reusability/custom-directives.md`
 - [x] `src/guide/reusability/plugins.md`
@@ -150,35 +150,35 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 ## API
 
-- [ ] `src/api/application.md`
-- [ ] `src/api/built-in-components.md`
-- [ ] `src/api/built-in-directives.md`
-- [ ] `src/api/built-in-special-attributes.md`
-- [ ] `src/api/built-in-special-elements.md`
-- [ ] `src/api/compile-time-flags.md`
-- [ ] `src/api/component-instance.md`
-- [ ] `src/api/composition-api-dependency-injection.md`
-- [ ] `src/api/composition-api-helpers.md`
-- [ ] `src/api/composition-api-lifecycle.md`
-- [ ] `src/api/composition-api-setup.md`
-- [ ] `src/api/custom-elements.md`
-- [ ] `src/api/custom-renderer.md`
-- [ ] `src/api/general.md`
-- [ ] `src/api/index.md`
-- [ ] `src/api/options-composition.md`
-- [ ] `src/api/options-lifecycle.md`
-- [ ] `src/api/options-misc.md`
-- [ ] `src/api/options-rendering.md`
-- [ ] `src/api/options-state.md`
-- [ ] `src/api/reactivity-advanced.md`
-- [ ] `src/api/reactivity-core.md`
-- [ ] `src/api/reactivity-utilities.md`
-- [ ] `src/api/render-function.md`
-- [ ] `src/api/sfc-css-features.md`
-- [ ] `src/api/sfc-script-setup.md`
-- [ ] `src/api/sfc-spec.md`
-- [ ] `src/api/ssr.md`
-- [ ] `src/api/utility-types.md`
+- [x] `src/api/application.md`
+- [x] `src/api/built-in-components.md`
+- [x] `src/api/built-in-directives.md`
+- [x] `src/api/built-in-special-attributes.md`
+- [x] `src/api/built-in-special-elements.md`
+- [x] `src/api/compile-time-flags.md`
+- [x] `src/api/component-instance.md`
+- [x] `src/api/composition-api-dependency-injection.md`
+- [x] `src/api/composition-api-helpers.md`
+- [x] `src/api/composition-api-lifecycle.md`
+- [x] `src/api/composition-api-setup.md`
+- [x] `src/api/custom-elements.md`
+- [x] `src/api/custom-renderer.md`
+- [x] `src/api/general.md`
+- [x] `src/api/index.md`
+- [x] `src/api/options-composition.md`
+- [x] `src/api/options-lifecycle.md`
+- [x] `src/api/options-misc.md`
+- [x] `src/api/options-rendering.md`
+- [x] `src/api/options-state.md`
+- [x] `src/api/reactivity-advanced.md`
+- [x] `src/api/reactivity-core.md`
+- [x] `src/api/reactivity-utilities.md`
+- [x] `src/api/render-function.md`
+- [x] `src/api/sfc-css-features.md`
+- [x] `src/api/sfc-script-setup.md`
+- [x] `src/api/sfc-spec.md`
+- [x] `src/api/ssr.md`
+- [x] `src/api/utility-types.md`
 
 ## Tutorial
 
