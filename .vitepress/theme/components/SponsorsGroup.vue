@@ -100,7 +100,7 @@ function resolveList(data: SponsorData) {
       href="/sponsor/#tier-benefits"
       class="spsr-item action"
       @click="track(true)"
-      >Tìm hiểu về gói tài trợ đặc biệt</
+      >Tìm hiểu về gói tài trợ Đặc biệt</
     >
   </div>
 </template>

@@ -15,7 +15,7 @@ onMounted(load)
     <h1 class="tagline">
       Framework JavaScript
       <br />
-      <span class="accent">linh hoạt</span>
+      <span class="accent">linh động</span>
     </h1>
     <p class="description">
       Một framework dễ tiếp cận, hiệu năng cao và linh hoạt để xây dựng
@@ -78,7 +78,7 @@ onMounted(load)
   <section v-else id="special-spsr">
     <span>
       <a href="/sponsor/#tier-benefits">
-        Vị trí nhà tài trợ đặc biệt đang trống - Liên hệ ngay
+        Vị trí Nhà tài trợ đặc biệt đang trống - Liên hệ ngay
       </a>
     </span>
   </section>
@@ -94,8 +94,8 @@ onMounted(load)
     <div class="vt-box">
       <h2>Hiệu năng cao</h2>
       <p>
-        Hệ thống render phản ứng thực sự, tối ưu hóa bởi compiler, hiếm khi
-        cần tối ưu thủ công.
+        Hệ thống render mang tính reactive (phản ứng), tối ưu hóa bởi compiler,
+        hiếm khi cần tối ưu thủ công.
       </p>
     </div>
     <div class="vt-box">

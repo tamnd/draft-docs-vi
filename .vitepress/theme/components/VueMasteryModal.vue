@@ -80,7 +80,7 @@ watch(
                 rel="sponsored noopener"
                 title="Khóa học Vue.js trên Vue Mastery"
               >
-                Giới thiệu Vue.</a
+                Khóa học Giới thiệu Vue.</a
               >
             </p>
           </div>

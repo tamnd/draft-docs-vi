@@ -102,7 +102,7 @@ function dismiss() {
         <p>Kiểu API mặc định hiện tại là Composition API.</p>
         <p>
           Một số trang có nội dung khác nhau tùy theo kiểu API được chọn.
-          Dùng công tắc này để chuyển đổi giữa các kiểu API.
+          Dùng nút chuyển đổi này để chuyển giữa các kiểu API.
         </p>
       </template>
       <template v-else-if="source && source.startsWith('url')">

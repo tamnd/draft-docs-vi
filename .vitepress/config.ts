@@ -60,7 +60,7 @@ const nav: ThemeConfig['nav'] = [
             link: 'https://certificates.dev/vuejs/?ref=vuejs-nav'
           },
           { text: 'Việc làm', link: 'https://vuejobs.com/?ref=vuejs' },
-          { text: 'Cửa hàng', link: 'https://vue.threadless.com/' }
+          { text: 'Cửa hàng áo thun', link: 'https://vue.threadless.com/' }
         ]
       },
       {
@@ -259,7 +259,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
         },
         { text: 'Kiểm thử', link: '/guide/scaling-up/testing' },
         {
-          text: 'Kết xuất phía máy chủ (SSR)',
+          text: 'SSR (render phía máy chủ)',
           link: '/guide/scaling-up/ssr'
         }
       ]
@@ -373,7 +373,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/api/composition-api-lifecycle'
         },
         {
-          text: 'Tiêm phụ thuộc',
+          text: 'Dependency Injection (Cung cấp / nhận phụ thuộc)',
           link: '/api/composition-api-dependency-injection'
         },
         {
@@ -430,9 +430,9 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: 'Custom Elements', link: '/api/custom-elements' },
         { text: 'Render function', link: '/api/render-function' },
-        { text: 'Kết xuất phía máy chủ', link: '/api/ssr' },
+        { text: 'SSR (render phía máy chủ)', link: '/api/ssr' },
         { text: 'Utility Types của TypeScript', link: '/api/utility-types' },
-        { text: 'Custom Renderer', link: '/api/custom-renderer' },
+        { text: 'Tuỳ chọn render', link: '/api/custom-renderer' },
         { text: 'Cờ biên dịch', link: '/api/compile-time-flags' }
       ]
     }
