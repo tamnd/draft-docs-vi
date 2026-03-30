@@ -2,7 +2,7 @@
 
 ## version {#version}
 
-Expose phiên bản hiện tại của Vue.
+Phiên bản hiện tại của Vue.
 
 - **Kiểu:** `string`
 

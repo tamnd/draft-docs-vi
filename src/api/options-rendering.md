@@ -28,7 +28,7 @@ Một string template cho component.
 
 ## render {#render}
 
-Một hàm lập trình trả về cây virtual DOM của component.
+Hàm dùng để xây dựng cây virtual DOM của component theo kiểu lập trình.
 
 - **Kiểu**
 
