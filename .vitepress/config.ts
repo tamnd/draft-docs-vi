@@ -25,7 +25,7 @@ const nav: ThemeConfig['nav'] = [
       { text: 'Hướng dẫn tương tác', link: '/tutorial/' },
       { text: 'Ví dụ', link: '/examples/' },
       { text: 'API', link: '/api/' },
-      // { text: 'Hướng dẫn phong cách', link: '/style-guide/' },
+      // { text: 'Quy chuẩn phong cách (Style Guide)', link: '/style-guide/' },
       { text: 'Thuật ngữ', link: '/glossary/' },
       { text: 'Tra cứu lỗi', link: '/error-reference/' },
       {
@@ -56,7 +56,7 @@ const nav: ThemeConfig['nav'] = [
             link: 'https://www.vue-plugins.org/'
           },
           {
-            text: 'Chứng nhận',
+            text: 'Chứng chỉ',
             link: 'https://certificates.dev/vuejs/?ref=vuejs-nav'
           },
           { text: 'Việc làm', link: 'https://vuejobs.com/?ref=vuejs' },
@@ -536,7 +536,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
   ],
   '/style-guide/': [
     {
-      text: 'Hướng dẫn phong cách',
+      text: 'Quy chuẩn phong cách (Style Guide)',
       items: [
         {
           text: 'Tổng quan',

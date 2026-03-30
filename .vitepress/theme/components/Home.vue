@@ -88,7 +88,7 @@ onMounted(load)
       <h2>Dễ tiếp cận</h2>
       <p>
         Xây dựng trên nền HTML, CSS và JavaScript chuẩn với API trực quan
-        và tài liệu đẳng cấp thế giới.
+        và tài liệu chất lượng hàng đầu.
       </p>
     </div>
     <div class="vt-box">
