@@ -184,11 +184,11 @@ export default {
 
 </div>
 
-<span class="composition-api">Nếu component con đang dùng Options API hoặc không dùng `<script setup>`, thì</span><span class="options-api">Thì</span> instance được tham chiếu sẽ giống hệt `this` của component con. Điều đó có nghĩa là component cha sẽ truy cập được toàn bộ property và method của component con. Cách này rất dễ làm cho chi tiết cài đặt giữa cha và con bị gắn chặt với nhau, nên chỉ nên dùng component ref khi thật sự cần. Trong đa số trường hợp, bạn nên ưu tiên dùng props và emit tiêu chuẩn để component cha và con giao tiếp với nhau.
+<span class="composition-api">Nếu component con đang dùng Options API hoặc không dùng `<script setup>`, thì</span><span class="options-api">Khi đó,</span> instance được tham chiếu sẽ giống hệt `this` của component con. Điều đó có nghĩa là component cha sẽ truy cập được toàn bộ property và method của component con. Cách này rất dễ làm cho chi tiết cài đặt giữa cha và con bị gắn chặt với nhau, nên chỉ nên dùng component ref khi thật sự cần. Trong đa số trường hợp, bạn nên ưu tiên dùng props và emit tiêu chuẩn để component cha và con giao tiếp với nhau.
 
 <div class="composition-api">
 
-Một ngoại lệ ở đây là các component dùng `<script setup>` sẽ **được giữ riêng tư theo mặc định**: component cha khi tham chiếu tới một component con dùng `<script setup>` sẽ không truy cập được gì cả, trừ khi component con chủ động công khai giao diện công khai bằng macro `defineExpose`:
+Một ngoại lệ ở đây là các component dùng `<script setup>` sẽ **được giữ riêng tư theo mặc định**: component cha khi tham chiếu tới một component con dùng `<script setup>` sẽ không truy cập được gì cả, trừ khi component con chủ động công khai giao diện của mình bằng macro `defineExpose`:
 
 ```vue
 <script setup>

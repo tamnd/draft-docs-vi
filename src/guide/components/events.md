@@ -145,7 +145,7 @@ function buttonClick() {
 
 Macro `defineEmits()` **không thể** được dùng bên trong một hàm; nó phải được đặt trực tiếp trong `<script setup>` như ví dụ trên.
 
-Nếu bạn dùng hàm `setup` tường minh thay vì `<script setup>`, các sự kiện nên được khai báo bằng option [`emits`](/api/options-state#emits), còn hàm `emit` sẽ được lộ ra trong context `setup()`:
+Nếu bạn dùng hàm `setup` tường minh thay vì `<script setup>`, các sự kiện nên được khai báo bằng option [`emits`](/api/options-state#emits), còn hàm `emit` sẽ được expose trong context `setup()`:
 
 ```js
 export default {
@@ -224,7 +224,7 @@ Xem thêm: [Typing Component Emits](/guide/typescript/options-api#typing-compone
 
 </div>
 
-Dù là tùy chọn, ta vẫn nên định nghĩa đầy đủ các sự kiện được phát ra để tài liệu hóa rõ hơn cách component hoạt động. Điều này cũng cho phép Vue loại bỏ các listener đã biết khỏi [thuộc tính kế thừa](/guide/components/attrs#v-on-listener-inheritance), nhờ đó tránh được các edge case do sự kiện DOM bị code bên thứ ba phát thủ công.
+Dù là tùy chọn, ta vẫn nên định nghĩa đầy đủ các sự kiện được phát ra để tài liệu hóa rõ hơn cách component hoạt động. Điều này cũng cho phép Vue loại bỏ các listener đã biết khỏi [thuộc tính kế thừa](/guide/components/attrs#v-on-listener-inheritance), nhờ đó tránh được các edge case do sự kiện DOM cùng tên bị dispatch thủ công bởi code bên thứ ba.
 
 :::tip
 Nếu một sự kiện gốc (ví dụ `click`) được định nghĩa trong option `emits`, listener sẽ chỉ còn lắng nghe các sự kiện `click` do component phát ra và không còn phản ứng với sự kiện `click` DOM gốc nữa.

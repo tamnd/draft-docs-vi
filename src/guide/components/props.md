@@ -46,7 +46,7 @@ Props được khai báo bằng option [`props`](/api/options-state#props):
 export default {
   props: ['foo'],
   created() {
-    // props được lộ ra trên `this`
+    // props được expose trên `this`
     console.log(this.foo)
   }
 }
@@ -119,7 +119,7 @@ Chi tiết hơn: [Typing Component Props](/guide/typescript/composition-api#typi
 
 <div class="composition-api">
 
-## Destructure Props Có Tính Phản Ứng <sup class="vt-badge" data-text="3.5+" /> \*\* {#reactive-props-destructure}
+## Destructure Props Phản Ứng <sup class="vt-badge" data-text="3.5+" /> \*\* {#reactive-props-destructure}
 
 Hệ phản ứng của Vue theo dõi việc sử dụng state dựa trên truy cập property. Ví dụ, khi bạn truy cập `props.foo` trong getter của computed hoặc trong watcher, prop `foo` sẽ được theo dõi như một dependency.
 
@@ -178,7 +178,7 @@ Ngoài ra, đây cũng là cách làm được khuyến nghị khi cần truyề
 useComposable(() => foo)
 ```
 
-Hàm bên ngoài có thể gọi getter đó (hoặc chuẩn hóa nó bằng [toValue](/api/reactivity-utilities.html#tovalue)) khi cần theo dõi sự thay đổi của prop được truyền vào, ví dụ trong getter của computed hoặc watcher.
+Hàm bên ngoài có thể gọi getter đó (hoặc chuẩn hóa nó bằng [toValue](/api/reactivity-utilities#tovalue)) khi cần theo dõi sự thay đổi của prop được truyền vào, ví dụ trong getter của computed hoặc watcher.
 
 </div>
 
@@ -295,7 +295,7 @@ Trong hai ví dụ trên, ta tình cờ truyền giá trị chuỗi, nhưng prop
 <BlogPost :author="post.author" />
 ```
 
-### Bind Nhiều Property Bằng Một Object {#binding-multiple-properties-using-an-object}
+### Gắn Kết Nhiều Property Bằng Một Object {#binding-multiple-properties-using-an-object}
 
 Nếu muốn truyền toàn bộ property của một object làm props, bạn có thể dùng [`v-bind` không có đối số](/guide/essentials/template-syntax#dynamically-binding-multiple-attributes) (`v-bind` thay vì `:prop-name`). Ví dụ, với một object `post`:
 
@@ -571,7 +571,7 @@ Khi validation prop thất bại, Vue sẽ phát ra cảnh báo trong console (n
 
 <div class="composition-api">
 
-Nếu dùng [cách khai báo props dựa trên kiểu](/api/sfc-script-setup#type-only-props-emit-declarations) <sup class="vt-badge ts" />, Vue sẽ cố gắng biên dịch chú thích kiểu thành khai báo prop runtime tương đương. Ví dụ, `defineProps<{ msg: string }>` sẽ được biên dịch thành `{ msg: { type: String, required: true }}`.
+Nếu dùng [cách khai báo props dựa trên kiểu](/api/sfc-script-setup#type-only-props-emit-declarations) <sup class="vt-badge ts" />, Vue sẽ cố gắng biên dịch chú thích kiểu thành khai báo prop runtime tương đương. Ví dụ, `defineProps<{ msg: string }>()` sẽ được biên dịch thành `{ msg: { type: String, required: true }}`.
 
 </div>
 <div class="options-api">
