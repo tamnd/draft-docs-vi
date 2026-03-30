@@ -4,9 +4,9 @@
   Xem bài học video tương tác trên Scrimba
 </ScrimbaLink>
 
-Vue sử dụng một cú pháp template dựa trên HTML, cho phép bạn khai báo ràng buộc DOM được render với dữ liệu của component instance. Mọi template của Vue đều là HTML hợp lệ về mặt cú pháp, nên có thể được phân tích bởi các trình duyệt và HTML parser tuân theo chuẩn.
+Vue sử dụng cú pháp template dựa trên HTML, cho phép bạn khai báo ràng buộc giữa DOM được render và dữ liệu của component instance. Mọi template Vue đều là HTML hợp lệ về mặt cú pháp, nên có thể được phân tích bởi các trình duyệt và HTML parser tuân chuẩn.
 
-Ở phía sau, Vue sẽ biên dịch template thành mã JavaScript đã được tối ưu rất kỹ. Kết hợp với hệ thống tính phản ứng, Vue có thể tính ra một cách thông minh số lượng component tối thiểu cần render lại và chỉ thực hiện lượng thao tác DOM ít nhất khi state của ứng dụng thay đổi.
+Ở phía sau, Vue biên dịch template thành mã JavaScript được tối ưu cao. Kết hợp với hệ thống tính phản ứng, Vue có thể xác định thông minh số lượng component tối thiểu cần render lại và chỉ thực hiện lượng thao tác DOM ít nhất khi state ứng dụng thay đổi.
 
 Nếu bạn đã quen với khái niệm Virtual DOM và thích sự linh hoạt thuần túy của JavaScript, bạn cũng có thể [viết render function trực tiếp](/guide/extras/render-function) thay cho template, kèm hỗ trợ JSX nếu muốn. Tuy vậy, hãy lưu ý rằng chúng không có cùng mức tối ưu ở thời điểm biên dịch như template.
 
@@ -38,7 +38,7 @@ Hai dấu mustache sẽ coi dữ liệu là văn bản thuần, không phải HT
   <p>Dùng directive v-html: <span v-html="rawHtml"></span></p>
 </div>
 
-Ở đây chúng ta gặp một khái niệm mới. Thuộc tính `v-html` mà bạn đang thấy được gọi là một **directive**. Các directive đều bắt đầu bằng tiền tố `v-` để cho biết đây là những thuộc tính đặc biệt do Vue cung cấp. Đúng như bạn có thể đoán, chúng áp dụng hành vi phản ứng đặc biệt lên DOM đã được render. Ở đây, ý nghĩa của nó gần như là: "hãy luôn giữ `innerHTML` của phần tử này đồng bộ với thuộc tính `rawHtml` trên instance hiện tại."
+Ở đây chúng ta gặp một khái niệm mới. Thuộc tính `v-html` bạn thấy ở đây được gọi là **directive**. Directive đều bắt đầu bằng tiền tố `v-` để cho biết đây là những thuộc tính đặc biệt do Vue cung cấp. Như bạn có thể đoán, chúng áp dụng hành vi phản ứng đặc biệt lên DOM được render. Ở đây, ý nghĩa của nó gần như là: "hãy luôn giữ `innerHTML` của phần tử này đồng bộ với thuộc tính `rawHtml` trên instance hiện tại."
 
 Nội dung của thẻ `span` sẽ được thay bằng giá trị của thuộc tính `rawHtml`, và giá trị này sẽ được hiểu như HTML thuần, các ràng buộc dữ liệu bên trong sẽ bị bỏ qua. Lưu ý là bạn không thể dùng `v-html` để ghép các mẩu template lại với nhau, vì Vue không phải là một template engine dựa trên chuỗi. Thay vào đó, component mới là đơn vị cơ bản để tái sử dụng và tổ chức UI.
 

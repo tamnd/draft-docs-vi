@@ -221,7 +221,7 @@ methods: {
 
 ## Modifier cho sự kiện {#event-modifiers}
 
-Việc gọi `event.preventDefault()` hoặc `event.stopPropagation()` bên trong event handler là nhu cầu rất thường gặp. Dù ta có thể làm điều này dễ dàng trong method, sẽ tốt hơn nếu method chỉ tập trung vào logic dữ liệu thay vì phải xử lý chi tiết của sự kiện DOM.
+Việc gọi `event.preventDefault()` hoặc `event.stopPropagation()` bên trong event handler là nhu cầu rất thường gặp. Dù ta có thể làm điều này trong method, sẽ tốt hơn nếu method chỉ tập trung vào logic dữ liệu thay vì phải lo chi tiết sự kiện DOM.
 
 Để giải quyết chuyện đó, Vue cung cấp **event modifiers** cho `v-on`. Nhắc lại một chút, modifier là phần hậu tố của directive và được viết với dấu chấm.
 

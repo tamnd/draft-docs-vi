@@ -2,7 +2,7 @@
 
 ## Ví dụ cơ bản {#basic-example}
 
-Thuộc tính computed cho phép ta khai báo giá trị dẫn xuất một cách rõ ràng. Tuy vậy, có những trường hợp ta cần thực hiện side effect khi state thay đổi, ví dụ sửa DOM, hoặc cập nhật một phần state khác dựa trên kết quả của một thao tác async.
+Thuộc tính computed cho phép ta khai báo rõ ràng các giá trị dẫn xuất. Tuy vậy, đôi khi ta cần thực hiện side effect khi state thay đổi — chẳng hạn sửa DOM, hoặc cập nhật một phần state khác dựa trên kết quả của một thao tác bất đồng bộ.
 
 <div class="options-api">
 
@@ -232,7 +232,7 @@ Deep watch buộc Vue phải duyệt qua mọi property lồng bên trong của 
 
 ## Eager Watcher {#eager-watchers}
 
-`watch` mặc định là lazy: callback sẽ không được gọi cho tới khi nguồn đang theo dõi thay đổi. Nhưng có những lúc ta muốn cùng một callback được chạy ngay từ đầu, ví dụ tải dữ liệu ban đầu, rồi tải lại mỗi khi state liên quan thay đổi.
+`watch` mặc định là lazy: callback sẽ không được gọi cho tới khi nguồn theo dõi thay đổi. Nhưng đôi khi ta muốn callback chạy ngay từ đầu — ví dụ tải dữ liệu ban đầu, rồi tải lại mỗi khi state liên quan thay đổi.
 
 <div class="options-api">
 

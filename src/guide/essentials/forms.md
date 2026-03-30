@@ -29,7 +29,7 @@ const options = ref([
   <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-user-inputs-in-vue" title="Bài học miễn phí về input người dùng trong Vue.js"/>
 </div>
 
-Khi làm việc với form ở phía frontend, chúng ta thường cần đồng bộ state của các phần tử input trong form với state tương ứng ở phía JavaScript. Nếu tự nối `value` binding và `change` event listener bằng tay thì khá cồng kềnh:
+Khi làm việc với form ở frontend, chúng ta thường cần đồng bộ state của các phần tử input với state tương ứng trong JavaScript. Nếu tự kết hợp `value` binding và `change` event listener bằng tay thì khá cồng kềnh:
 
 ```vue-html
 <input

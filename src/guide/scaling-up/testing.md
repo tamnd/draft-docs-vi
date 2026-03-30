@@ -262,19 +262,19 @@ Kiểm thử end-to-end (E2E) trên web từng mang tiếng xấu vì test hay b
 
 #### Kiểm Thử Đa Trình Duyệt {#cross-browser-testing}
 
-Một trong những lợi ích chính khiến kiểm thử end-to-end (E2E) được biết đến nhiều là khả năng kiểm thử ứng dụng của bạn trên nhiều trình duyệt. Mặc dù nghe có vẻ hấp dẫn khi đạt độ bao phủ đa trình duyệt 100%, điều quan trọng cần lưu ý là kiểm thử đa trình duyệt sẽ đem lại lợi ích giảm dần so với tài nguyên của nhóm do cần thêm thời gian và năng lực máy để chạy ổn định. Vì vậy, bạn cần cân nhắc đánh đổi này khi quyết định mức độ kiểm thử đa trình duyệt mà ứng dụng của bạn thật sự cần.
+Một trong những lợi ích lớn nhất của kiểm thử E2E là khả năng kiểm thử ứng dụng trên nhiều trình duyệt. Tuy nhiên, kiểm thử đa trình duyệt 100% nghe có vẻ hấp dẫn nhưng lại có lợi ích giảm dần so với tài nguyên đầu tư, vì cần thêm thời gian và năng lực máy để chạy ổn định. Hãy cân nhắc kỹ đánh đổi này khi quyết định mức độ kiểm thử đa trình duyệt mà ứng dụng thật sự cần.
 
 #### Vòng Phản Hồi Nhanh Hơn {#faster-feedback-loops}
 
-Một trong những vấn đề lớn của kiểm thử end-to-end (E2E) trong quá trình phát triển là chạy toàn bộ suite tốn rất nhiều thời gian. Thông thường điều này chỉ được thực hiện trong pipeline continuous integration và deployment (CI/CD). Các framework kiểm thử E2E hiện đại đã góp phần giải quyết vấn đề này bằng các tính năng như chạy song song, cho phép pipeline CI/CD thường chạy nhanh hơn nhiều lần so với trước đây. Ngoài ra, khi phát triển cục bộ, khả năng chỉ chạy một test cho đúng trang bạn đang làm, đồng thời vẫn có hot reload cho test, có thể cải thiện đáng kể quy trình làm việc và năng suất của lập trình viên.
+Một trong những vấn đề lớn của kiểm thử E2E là chạy toàn bộ suite tốn rất nhiều thời gian, nên thường chỉ được thực hiện trong pipeline CI/CD. Các framework E2E hiện đại đã góp phần giải quyết điều này bằng tính năng chạy song song, giúp pipeline CI/CD chạy nhanh hơn nhiều. Ngoài ra, khi phát triển cục bộ, khả năng chỉ chạy một test cho đúng trang đang làm — kết hợp hot reload cho test — cải thiện đáng kể năng suất của lập trình viên.
 
 #### Trải Nghiệm Debug Hạng Nhất {#first-class-debugging-experience}
 
-Trong khi trước đây lập trình viên thường phải dựa vào việc rà log trong cửa sổ terminal để xác định test hỏng ở đâu, các framework kiểm thử end-to-end (E2E) hiện đại cho phép tận dụng những công cụ mà lập trình viên đã quen dùng sẵn, chẳng hạn như browser developer tools.
+Trước đây, lập trình viên thường phải rà log trong terminal để xác định test hỏng ở đâu. Ngày nay, các framework E2E hiện đại cho phép tận dụng trực tiếp các công cụ quen thuộc như browser developer tools.
 
 #### Khả Năng Quan Sát Ở Chế Độ Headless {#visibility-in-headless-mode}
 
-Khi kiểm thử end-to-end (E2E) được chạy trong pipeline continuous integration/deployment, chúng thường chạy trong trình duyệt headless (tức là không mở trình duyệt hiển thị cho người dùng quan sát). Một tính năng quan trọng của các framework kiểm thử E2E hiện đại là khả năng xem ảnh chụp nhanh và/hoặc video của ứng dụng trong quá trình kiểm thử, nhờ đó cung cấp thêm manh mối về nguyên nhân lỗi xảy ra. Trước đây việc duy trì các tích hợp như vậy khá phiền phức.
+Khi kiểm thử E2E chạy trong pipeline CI/CD, chúng thường chạy trong trình duyệt headless — tức là không mở trình duyệt hiển thị ra màn hình. Các framework E2E hiện đại hỗ trợ xem ảnh chụp màn hình và/hoặc video của ứng dụng trong quá trình kiểm thử, giúp bạn dễ tìm hiểu nguyên nhân lỗi. Trước đây việc duy trì các tích hợp như vậy khá phiền phức.
 
 ### Khuyến Nghị {#recommendation-2}
 

@@ -34,7 +34,7 @@ SSR cũng đi kèm một số đánh đổi cần cân nhắc:
 
 - Tải phía server nhiều hơn. Việc render cả ứng dụng trong Node.js sẽ tốn CPU hơn đáng kể so với chỉ phục vụ file tĩnh. Vì vậy, nếu bạn kỳ vọng lưu lượng truy cập cao, hãy chuẩn bị cho tải phía server tương ứng và áp dụng chiến lược cache hợp lý.
 
-Trước khi dùng SSR cho ứng dụng, câu hỏi đầu tiên bạn nên đặt ra là liệu bạn có thực sự cần nó hay không. Điều này chủ yếu phụ thuộc vào mức độ quan trọng của time-to-content đối với ứng dụng của bạn. Ví dụ, nếu bạn đang xây một dashboard nội bộ nơi việc tải lần đầu chậm hơn vài trăm mili giây không quan trọng lắm, SSR có thể là quá mức cần thiết. Nhưng trong những trường hợp mà time-to-content thực sự mang tính quyết định, SSR sẽ giúp bạn đạt được hiệu năng tải ban đầu tốt nhất có thể.
+Trước khi dùng SSR, câu hỏi đầu tiên bạn nên đặt ra là liệu bạn có thực sự cần nó hay không. Câu trả lời chủ yếu phụ thuộc vào mức độ quan trọng của time-to-content đối với ứng dụng. Ví dụ, nếu bạn đang xây một dashboard nội bộ mà việc tải lần đầu chậm hơn vài trăm mili giây không quan trọng lắm, SSR có thể là quá mức cần thiết. Nhưng nếu time-to-content thực sự mang tính quyết định, SSR sẽ giúp bạn đạt hiệu năng tải ban đầu tốt nhất có thể.
 
 ### SSR So Với SSG {#ssr-vs-ssg}
 
@@ -202,7 +202,7 @@ Ngoài ra, để nạp được file client trong trình duyệt, ta còn cần:
 
 ## Các Giải Pháp Ở Mức Cao Hơn {#higher-level-solutions}
 
-Đi từ ví dụ trên tới một ứng dụng SSR sẵn sàng cho production sẽ phức tạp hơn nhiều. Ta sẽ cần:
+Đi từ ví dụ trên đến một ứng dụng SSR sẵn sàng cho production còn nhiều việc phải làm. Ta sẽ cần:
 
 - Hỗ trợ Vue SFC và những yêu cầu build step khác. Trên thực tế, ta sẽ cần phối hợp hai lần build cho cùng một ứng dụng: một cho client và một cho server.
 
@@ -214,7 +214,7 @@ Ngoài ra, để nạp được file client trong trình duyệt, ta còn cần:
 
 - Quản lý routing, fetch dữ liệu và store quản lý state theo cách dùng chung cho cả server và client.
 
-Một cài đặt đầy đủ sẽ khá phức tạp và phụ thuộc vào toolchain build mà bạn chọn. Vì vậy, chúng tôi rất khuyến nghị dùng một giải pháp ở mức cao hơn, có quan điểm rõ ràng, để che đi phần phức tạp này. Dưới đây là một vài giải pháp SSR được khuyến nghị trong hệ sinh thái Vue.
+Một cài đặt đầy đủ sẽ khá phức tạp và phụ thuộc vào toolchain build bạn chọn. Vì vậy, chúng tôi rất khuyến nghị dùng một giải pháp ở mức cao hơn, có quan điểm rõ ràng, để bớt phải lo về phần phức tạp này. Dưới đây là một vài giải pháp SSR được khuyến nghị trong hệ sinh thái Vue.
 
 ### Nuxt {#nuxt}
 

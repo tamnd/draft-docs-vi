@@ -164,7 +164,7 @@ const attrs = useAttrs()
 </script>
 ```
 
-Nếu không dùng `<script setup>`, `attrs` sẽ được lộ ra như một property của context `setup()`:
+Nếu không dùng `<script setup>`, `attrs` sẽ khả dụng như một property của context `setup()`:
 
 ```js
 export default {

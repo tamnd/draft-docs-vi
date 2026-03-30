@@ -160,7 +160,7 @@ Dưới đây là ví dụ chạy trực tiếp trên [Codepen](https://codepen.
 
 ### `<script setup>` \*\* {#script-setup}
 
-Việc tự tay đưa state và method ra ngoài thông qua `setup()` đôi khi khá dài dòng. May là có thể tránh điều này khi dùng [Single-File Component (SFC)](/guide/scaling-up/sfc). Ta có thể viết gọn hơn với `<script setup>`:
+Việc tự tay đưa state và method ra ngoài thông qua `setup()` đôi khi khá dài dòng. May mắn là điều này có thể tránh được khi dùng [Single-File Component (SFC)](/guide/scaling-up/sfc). Ta có thể viết gọn hơn với `<script setup>`:
 
 ```vue{1}
 <script setup>
@@ -215,7 +215,7 @@ const myRef = {
 }
 ```
 
-Một điểm hay khác của ref là khác với biến thường, bạn có thể truyền ref vào hàm mà vẫn giữ được quyền truy cập tới giá trị mới nhất và giữ nguyên kết nối với hệ thống tính phản ứng. Điều này đặc biệt hữu ích khi tách logic phức tạp thành code có thể tái sử dụng.
+Một ưu điểm nữa của ref là khác với biến thường, bạn có thể truyền ref vào hàm mà vẫn giữ được quyền truy cập tới giá trị mới nhất và duy trì kết nối với hệ thống tính phản ứng. Điều này đặc biệt hữu ích khi tách logic phức tạp thành code có thể tái sử dụng.
 
 Hệ thống tính phản ứng sẽ được bàn kỹ hơn trong phần [Tìm hiểu sâu về tính phản ứng](/guide/extras/reactivity-in-depth).
 </div>
