@@ -206,7 +206,7 @@ Rất nhiều ví dụ về Composition API trong phần hướng dẫn sẽ dù
 
 </div>
 
-### Dùng bản build ES Module {#using-the-es-module-build}
+### Dùng bản build ES modules {#using-the-es-module-build}
 
 Trong phần còn lại của tài liệu, chúng tôi sẽ chủ yếu sử dụng cú pháp [ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). Hầu hết các trình duyệt hiện đại ngày nay đã hỗ trợ ES modules một cách tự nhiên, vì vậy chúng ta có thể dùng Vue từ CDN thông qua ES modules như sau:
 

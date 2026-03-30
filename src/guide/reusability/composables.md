@@ -180,9 +180,9 @@ const { data, error } = useFetch('...')
 </script>
 ```
 
-### Chấp Nhận State Reactive {#accepting-reactive-state}
+### Chấp Nhận State Phản Ứng {#accepting-reactive-state}
 
-`useFetch()` nhận đầu vào là một chuỗi URL tĩnh, nên nó chỉ fetch một lần rồi kết thúc. Nhưng nếu ta muốn nó fetch lại mỗi khi URL thay đổi thì sao? Để làm vậy, ta cần truyền state reactive vào composable, rồi để composable tạo watcher thực hiện hành động dựa trên state đó.
+`useFetch()` nhận đầu vào là một chuỗi URL tĩnh, nên nó chỉ fetch một lần rồi kết thúc. Nhưng nếu ta muốn nó fetch lại mỗi khi URL thay đổi thì sao? Để làm vậy, ta cần truyền state phản ứng vào composable, rồi để composable tạo watcher thực hiện hành động dựa trên state đó.
 
 Ví dụ, `useFetch()` nên có thể nhận một ref:
 
@@ -238,7 +238,7 @@ Phiên bản `useFetch()` này giờ chấp nhận chuỗi URL tĩnh, ref và ge
 
 Đây là [phiên bản cập nhật của `useFetch()`](https://play.vuejs.org/#eNp9Vdtu20YQ/ZUpUUA0qpAOjL4YktCbC7Rom8BN8sSHrMihtfZql9iLZEHgv2dml6SpxMiDIWkuZ+acmR2fs1+7rjgEzG6zlaut7Dw49KHbVFruO2M9nMFiu4Ta7LvgsYEeWmv2sKCkxSwoOPwTfb2b/EU5mopHR5GVro12HrbC4UerYA2Lnfeduy3LR2d0p0SNO6MatIU/dbI2DRZUtPSmMa4kgJQuG8qkjvLF28XVaAwRb2wxz69gvZkK/UQ5xUGogBQ/ZpyhEV4sAa01lnpeTwRyApsFWvT2RO6Eea40THBMgfq6NLwlS1/pVZnUJB3ph8c98fNIvwD+MaKBzkQut2xYbYP3RsPhTWvsusokSA0/Vxn8UitZP7GFSX/+8Sz7z1W2OZ9BQt+vypQXS1R+1cgDQciW4iMrimR0wu8270znfoC7SBaJWdAeLTa3QFgxuNijc+IBIy5PPyYOjU19RDEI954/Z/UptKTy6VvqA5XD1AwLTTl/0Aco4s5lV51F5sG+VJJ+v4qxYbmkfiiKYvSvyknPbJnNtoyW+HJpj4Icd22LtV+CN5/ikC4XuNL4HFPaoGsvie3FIqSJp1WIzabl00HxkoyetEVfufhv1kAu3EnX8z0CKEtKofcGzhMb2CItAELL1SPlFMV1pwVj+GROc/vWPoc26oDgdxhfSArlLnbWaBOcOoEzIP3CgbeifqLXLRyICaDBDnVD+3KC7emCSyQ4sifspOx61Hh4Qy/d8BsaOEdkYb1sZS2FoiJKnIC6FbqhsaTVZfk8gDgK6cHLPZowFGUzAQTNWl/BUSrFbzRYHXmSdeAp28RMsI0fyFDaUJg9Spd0SbERZcvZDBRleCPdQMCPh8ARwdRRnBCTjGz5WkT0i0GlSMqixTR6VKyHmmWEHIfV+naSOETyRx8vEYwMv7pa8dJU+hU9Kz2t86ReqjcgaTzCe3oGpEOeD4uyJOcjTXe+obScHwaAi82lo9dC/q/wuyINjrwbuC5uZrS4WAQeyTN9ftOXIVwy537iecoX92kR4q/F1UvqIMsSbq6vo5XF6ekCeEcTauVDFJpuQESvMv53IBXadx3r4KqMrt0w0kwoZY5/R5u3AZejvd5h/fSK/dE9s63K3vN7tQesssnnhX1An9x3//+Hz/R9cu5NExRFf8d5zyIF7jGF/RZ0Q23P4mK3f8XLRmfhg7t79qjdSIobjXLE+Cqju/b7d6i/tHtT3MQ8VrH/Ahstp5A=), có thêm độ trễ giả lập và lỗi ngẫu nhiên để làm demo.
 
-## Quy Ước Và Best Practice {#conventions-and-best-practices}
+## Quy Ước Và Thực Hành Tốt Nhất {#conventions-and-best-practices}
 
 ### Đặt Tên {#naming}
 

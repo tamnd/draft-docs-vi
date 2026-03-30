@@ -168,9 +168,9 @@ export function createApp() {
 }
 ```
 
-File này và các dependency của nó được chia sẻ giữa server và client. Ta gọi chúng là **universal code**. Có một số điều bạn cần chú ý khi viết universal code, như ta sẽ [bàn bên dưới](#writing-ssr-friendly-code).
+File này và các dependency của nó được chia sẻ giữa server và client. Ta gọi chúng là **mã dùng chung** (universal code). Có một số điều bạn cần chú ý khi viết mã dùng chung, như ta sẽ [bàn bên dưới](#writing-ssr-friendly-code).
 
-Entry phía client import phần universal code, tạo ứng dụng và mount:
+Entry phía client import phần mã dùng chung, tạo ứng dụng và mount:
 
 ```js [client.js]
 import { createApp } from './app.js'

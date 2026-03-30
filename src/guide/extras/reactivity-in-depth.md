@@ -208,9 +208,9 @@ Các API `ref()`, `computed()` và `watchEffect()` đều thuộc Composition AP
 
 ## Tính Phản Ứng Runtime Và Compile-time {#runtime-vs-compile-time-reactivity}
 
-Hệ phản ứng của Vue chủ yếu hoạt động ở runtime: việc track và trigger đều được thực hiện khi mã đang chạy trực tiếp trong trình duyệt. Ưu điểm của reactivity runtime là nó có thể hoạt động mà không cần bước build và có ít edge case hơn. Mặt khác, nó bị giới hạn bởi cú pháp JavaScript, nên ta cần đến những value container như ref của Vue.
+Hệ phản ứng của Vue chủ yếu hoạt động ở runtime: việc track và trigger đều được thực hiện khi mã đang chạy trực tiếp trong trình duyệt. Ưu điểm của tính phản ứng runtime là nó có thể hoạt động mà không cần bước build và có ít edge case hơn. Mặt khác, nó bị giới hạn bởi cú pháp JavaScript, nên ta cần đến những value container như ref của Vue.
 
-Một số framework như [Svelte](https://svelte.dev/) lại chọn vượt qua giới hạn này bằng cách triển khai tính phản ứng ở thời điểm biên dịch. Chúng phân tích và biến đổi mã để mô phỏng reactivity. Bước biên dịch cho phép framework thay đổi chính ngữ nghĩa của JavaScript, ví dụ tự động chèn mã để phân tích dependency và trigger effect quanh việc truy cập biến cục bộ. Đổi lại, cách này yêu cầu build step, và việc thay đổi ngữ nghĩa JavaScript về bản chất là tạo ra một ngôn ngữ trông giống JavaScript nhưng biên dịch thành thứ khác.
+Một số framework như [Svelte](https://svelte.dev/) lại chọn vượt qua giới hạn này bằng cách triển khai tính phản ứng ở thời điểm biên dịch. Chúng phân tích và biến đổi mã để mô phỏng tính phản ứng. Bước biên dịch cho phép framework thay đổi chính ngữ nghĩa của JavaScript, ví dụ tự động chèn mã để phân tích dependency và trigger effect quanh việc truy cập biến cục bộ. Đổi lại, cách này yêu cầu build step, và việc thay đổi ngữ nghĩa JavaScript về bản chất là tạo ra một ngôn ngữ trông giống JavaScript nhưng biên dịch thành thứ khác.
 
 Đội ngũ Vue cũng từng thử hướng đi này qua tính năng thử nghiệm [Reactivity Transform](/guide/extras/reactivity-transform), nhưng cuối cùng chúng tôi quyết định đây không phải lựa chọn phù hợp cho dự án vì [những lý do được giải thích tại đây](https://github.com/vuejs/rfcs/discussions/369#discussioncomment-5059028).
 

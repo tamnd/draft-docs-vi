@@ -184,7 +184,7 @@ Việc khai báo label tường minh với `id` khớp nhau vẫn được công
 
 #### `aria-label` {#aria-label}
 
-Bạn cũng có thể gán cho input một tên có thể tiếp cận được bằng [`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label).
+Bạn cũng có thể gán cho input một tên truy cập được (accessible name) bằng [`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label).
 
 ```vue-html
 <label for="name">Tên: </label>
@@ -344,7 +344,7 @@ Hoặc bạn có thể gắn phần hướng dẫn cho input bằng [`aria-descr
 
 ### Ẩn nội dung {#hiding-content}
 
-Thông thường, không nên ẩn label khỏi giao diện, kể cả khi input đã có accessible name. Tuy vậy, nếu chức năng của input có thể hiểu được từ nội dung xung quanh, ta có thể ẩn phần label hiển thị.
+Thông thường, không nên ẩn label khỏi giao diện, kể cả khi input đã có tên truy cập được (accessible name). Tuy vậy, nếu chức năng của input có thể hiểu được từ nội dung xung quanh, ta có thể ẩn phần label hiển thị.
 
 Hãy xem trường tìm kiếm sau:
 
