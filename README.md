@@ -1,28 +1,41 @@
-# vuejs.org
+# vuejs.org Bản Dịch Tiếng Việt
 
-## Contributing
+Đây là kho mã cho bản dịch tiếng Việt của tài liệu Vue.js tại [vuejs.org](https://vuejs.org).
 
-This site is built with [VitePress](https://github.com/vuejs/vitepress) and depends on [@vue/theme](https://github.com/vuejs/vue-theme). Site content is written in Markdown format located in `src`. For simple edits, you can directly edit the file on GitHub and generate a Pull Request.
+Xem thêm:
 
-For local development, [pnpm](https://pnpm.io/) is preferred as package manager:
+- tài liệu tiếng Anh gốc tại [vuejs.org](https://vuejs.org)
+- kho mã gốc tại [vuejs/docs](https://github.com/vuejs/docs)
+- hướng dẫn cộng đồng dịch thuật tại [vuejs-translations/guidelines](https://github.com/vuejs-translations/guidelines)
 
-```bash
-pnpm i
-pnpm run dev
-```
+## Cách tham gia đóng góp
 
-This project requires Node.js to be `v20` or higher. And it is recommended to enable corepack:
+Kho mã này bám sát [vuejs/docs](https://github.com/vuejs/docs). Mục tiêu là đồng bộ nội dung gốc và dịch sang tiếng Việt, không phát triển tài liệu tách nhánh với nội dung riêng.
+
+Nếu bạn có góp ý về nội dung gốc tiếng Anh, hãy mở issue hoặc pull request trực tiếp tại [vuejs/docs](https://github.com/vuejs/docs).
+
+Trong repo này, bạn có thể đóng góp bằng cách:
+
+- dịch các trang còn thiếu
+- rà soát và chỉnh sửa câu chữ, thuật ngữ, chính tả, và định dạng
+- mở issue để thảo luận về cách dịch, thuật ngữ, hoặc workflow cộng tác
+- đồng bộ thay đổi mới từ bản tiếng Anh
+
+Danh sách công việc dịch được theo dõi trong [ROADMAP.md](./ROADMAP.md).
+
+## Phát triển cục bộ
+
+Trang này được xây dựng với [VitePress](https://github.com/vuejs/vitepress) và phụ thuộc vào [@vue/theme](https://github.com/vuejs/vue-theme). Nội dung được viết bằng Markdown trong thư mục `src`.
+
+Yêu cầu Node.js `v20` trở lên. Nên bật corepack:
 
 ```bash
 corepack enable
 ```
 
-## Working on the content
+Dùng [pnpm](https://pnpm.io/) làm trình quản lý gói:
 
-- See VitePress docs on supported [Markdown Extensions](https://vitepress.dev/guide/markdown) and the ability to [use Vue syntax inside markdown](https://vitepress.dev/guide/using-vue).
-
-- See the [Writing Guide](https://github.com/vuejs/docs/blob/main/.github/contributing/writing-guide.md) for our rules and recommendations on writing and maintaining documentation content.
-
-## Working on the theme
-
-If changes need to be made for the theme, check out the [instructions for developing the theme alongside the docs](https://github.com/vuejs/vue-theme#developing-with-real-content).
+```bash
+pnpm i
+pnpm run dev
+```
