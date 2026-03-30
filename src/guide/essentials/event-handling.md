@@ -116,7 +116,7 @@ methods: {
 
 </div>
 
-Method handler sẽ tự động nhận object DOM Event gốc đã kích hoạt nó. Trong ví dụ trên, chúng ta có thể truy cập phần tử phát ra sự kiện qua `event.target`.
+Method handler sẽ tự động nhận object DOM Event gốc đã kích hoạt nó. Trong ví dụ trên, chúng ta có thể truy cập phần tử kích hoạt sự kiện qua `event.target`.
 
 <div class="composition-api">
 
@@ -254,7 +254,7 @@ Việc gọi `event.preventDefault()` hoặc `event.stopPropagation()` bên tron
 Thứ tự có ý nghĩa khi dùng modifier vì đoạn mã tương ứng sẽ được tạo ra theo đúng thứ tự đó. Vì vậy, `@click.prevent.self` sẽ chặn **hành vi mặc định của click trên chính phần tử đó và cả phần tử con của nó**, trong khi `@click.self.prevent` chỉ chặn hành vi mặc định của click trên chính phần tử đó.
 :::
 
-Các modifier `.capture`, `.once` và `.passive` phản chiếu các [tùy chọn của phương thức `addEventListener` gốc](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#options):
+Các modifier `.capture`, `.once` và `.passive` tương ứng với các [tùy chọn của phương thức `addEventListener` gốc](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#options):
 
 ```vue-html
 <!-- dùng chế độ capture khi thêm event listener         -->
