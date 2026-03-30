@@ -186,7 +186,7 @@ Hàm bên ngoài có thể gọi getter đó (hoặc chuẩn hóa nó bằng [to
 
 ### Kiểu Chữ Của Tên Prop {#prop-name-casing}
 
-Ta khai báo tên prop dài dưới dạng camelCase vì làm như vậy sẽ tránh phải đặt chúng trong dấu nháy khi dùng làm key của object, đồng thời cho phép tham chiếu trực tiếp trong biểu thức template vì chúng là định danh JavaScript hợp lệ:
+Ta khai báo tên prop dài dưới dạng camelCase vì cách này tránh phải đặt chúng trong dấu nháy khi dùng làm key của object, đồng thời cho phép tham chiếu trực tiếp trong biểu thức template vì chúng là định danh JavaScript hợp lệ:
 
 <div class="composition-api">
 
@@ -430,9 +430,9 @@ Thông thường, có hai trường hợp dễ khiến ta muốn thay đổi pro
 
 ### Thay Đổi Prop Kiểu Object / Array {#mutating-object-array-props}
 
-Khi object và array được truyền làm prop, dù component con không thể thay đổi bản thân liên kết của prop, nó **vẫn có thể** thay đổi các property lồng bên trong object hoặc array đó. Lý do là vì trong JavaScript, object và array được truyền bằng tham chiếu, và Vue sẽ phải trả một chi phí quá lớn nếu cố ngăn chặn hoàn toàn các thay đổi kiểu này.
+Khi object và array được truyền làm prop, dù component con không thể thay đổi bản thân liên kết prop, nó **vẫn có thể** thay đổi các property lồng bên trong object hoặc array đó. Lý do là trong JavaScript, object và array được truyền bằng tham chiếu, và Vue sẽ phải trả một chi phí quá lớn nếu cố ngăn chặn hoàn toàn các thay đổi như vậy.
 
-Nhược điểm chính của kiểu thay đổi đó là nó cho phép component con ảnh hưởng tới state của component cha theo một cách không rõ ràng với component cha, khiến việc suy luận về luồng dữ liệu sau này có thể khó hơn. Thực hành tốt nhất là nên tránh những thay đổi như vậy trừ khi component cha và component con vốn đã được thiết kế để gắn chặt với nhau. Trong đa số trường hợp, component con nên [phát ra một sự kiện](/guide/components/events) để component cha tự thực hiện thay đổi.
+Nhược điểm chính của kiểu thay đổi này là nó cho phép component con tác động tới state của component cha theo một cách không rõ ràng với component cha, có thể khiến luồng dữ liệu khó suy luận về sau. Thực hành tốt nhất là nên tránh những thay đổi như vậy trừ khi component cha và component con được thiết kế để gắn chặt với nhau. Trong đa số trường hợp, component con nên [phát ra một sự kiện](/guide/components/events) để component cha tự thực hiện thay đổi.
 
 ## Kiểm Tra Tính Hợp Lệ Của Prop {#prop-validation}
 

@@ -55,7 +55,7 @@ app.mount('#app')
 
 Nội dung của root component sẽ được render vào bên trong phần tử chứa. Bản thân phần tử chứa không được tính là một phần của ứng dụng.
 
-Phương thức `.mount()` luôn nên được gọi sau khi bạn đã cấu hình xong ứng dụng và đăng ký xong các asset cần thiết. Cũng cần lưu ý rằng giá trị trả về của nó, khác với các phương thức đăng ký asset, là root component instance chứ không phải application instance.
+Phương thức `.mount()` phải được gọi sau khi bạn đã cấu hình xong ứng dụng và đăng ký xong tất cả asset. Ngoài ra cần lưu ý: giá trị trả về của nó là root component instance, khác với các phương thức đăng ký asset vốn trả về application instance.
 
 ### Template của component gốc viết ngay trong DOM {#in-dom-root-component-template}
 
@@ -103,7 +103,7 @@ app.component('TodoDeleteButton', TodoDeleteButton)
 
 Việc này sẽ giúp `TodoDeleteButton` có thể được dùng ở bất cứ đâu trong ứng dụng. Chúng ta sẽ nói kỹ hơn về việc đăng ký component và các loại asset khác ở những phần sau của hướng dẫn. Bạn cũng có thể xem đầy đủ danh sách API của application instance trong phần [API reference](/api/application).
 
-Hãy nhớ áp dụng toàn bộ cấu hình ứng dụng trước khi mount ứng dụng.
+Hãy nhớ áp dụng toàn bộ cấu hình ứng dụng trước khi gọi `.mount()`!
 
 ## Nhiều instance ứng dụng {#multiple-application-instances}
 

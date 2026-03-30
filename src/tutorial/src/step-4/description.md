@@ -1,4 +1,4 @@
-# Event Listener {#event-listeners}
+# Event Listeners {#event-listeners}
 
 Chúng ta có thể lắng nghe sự kiện DOM bằng directive `v-on`:
 
