@@ -17,8 +17,8 @@ Step-by-step translation plan for [`vuejs-translations/docs-vi`](https://github.
 > The first pages every new user reads.
 > ~700 lines, ~3,300 words
 
-- [ ] `src/guide/introduction.md`
-- [ ] `src/guide/quick-start.md`
+- [x] `src/guide/introduction.md`
+- [x] `src/guide/quick-start.md`
 
 ## Essentials
 
