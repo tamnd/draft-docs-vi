@@ -201,21 +201,21 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 ## About
 
-- [ ] `src/about/coc.md`
-- [ ] `src/about/community-guide.md`
-- [ ] `src/about/faq.md`
-- [ ] `src/about/privacy.md`
-- [ ] `src/about/releases.md`
-- [ ] `src/about/team.md`
+- [x] `src/about/coc.md`
+- [x] `src/about/community-guide.md`
+- [x] `src/about/faq.md`
+- [x] `src/about/privacy.md`
+- [x] `src/about/releases.md`
+- [x] `src/about/team.md`
 
 ## Ecosystem
 
-- [ ] `src/ecosystem/newsletters.md`
-- [ ] `src/ecosystem/themes.md`
+- [x] `src/ecosystem/newsletters.md`
+- [x] `src/ecosystem/themes.md`
 
 ## Style guide
 
-- [ ] `src/style-guide/index.md`
+- [x] `src/style-guide/index.md`
 - [ ] `src/style-guide/rules-essential.md`
 - [ ] `src/style-guide/rules-recommended.md`
 - [ ] `src/style-guide/rules-strongly-recommended.md`
@@ -223,30 +223,30 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 ## Sponsor and partners
 
-- [ ] `src/sponsor/index.md`
-- [ ] `src/partners/[partnerId].md`
-- [ ] `src/partners/all.md`
-- [ ] `src/partners/index.md`
+- [x] `src/sponsor/index.md`
+- [x] `src/partners/[partnerId].md`
+- [x] `src/partners/all.md`
+- [x] `src/partners/index.md`
 
 ## Examples descriptions
 
-- [ ] `src/examples/src/attribute-bindings/description.txt`
-- [ ] `src/examples/src/cells/description.txt`
-- [ ] `src/examples/src/circle-drawer/description.txt`
-- [ ] `src/examples/src/conditionals-and-loops/description.txt`
-- [ ] `src/examples/src/counter/description.txt`
-- [ ] `src/examples/src/crud/description.txt`
-- [ ] `src/examples/src/fetching-data/description.txt`
-- [ ] `src/examples/src/flight-booker/description.txt`
-- [ ] `src/examples/src/form-bindings/description.txt`
-- [ ] `src/examples/src/grid/description.txt`
-- [ ] `src/examples/src/handling-input/description.txt`
-- [ ] `src/examples/src/hello-world/description.txt`
-- [ ] `src/examples/src/list-transition/description.txt`
-- [ ] `src/examples/src/markdown/description.txt`
-- [ ] `src/examples/src/modal/description.txt`
-- [ ] `src/examples/src/simple-component/description.txt`
-- [ ] `src/examples/src/svg/description.txt`
-- [ ] `src/examples/src/temperature-converter/description.txt`
-- [ ] `src/examples/src/timer/description.txt`
-- [ ] `src/examples/src/tree/description.txt`
+- [x] `src/examples/src/attribute-bindings/description.txt`
+- [x] `src/examples/src/cells/description.txt`
+- [x] `src/examples/src/circle-drawer/description.txt`
+- [x] `src/examples/src/conditionals-and-loops/description.txt`
+- [x] `src/examples/src/counter/description.txt`
+- [x] `src/examples/src/crud/description.txt`
+- [x] `src/examples/src/fetching-data/description.txt`
+- [x] `src/examples/src/flight-booker/description.txt`
+- [x] `src/examples/src/form-bindings/description.txt`
+- [x] `src/examples/src/grid/description.txt`
+- [x] `src/examples/src/handling-input/description.txt`
+- [x] `src/examples/src/hello-world/description.txt`
+- [x] `src/examples/src/list-transition/description.txt`
+- [x] `src/examples/src/markdown/description.txt`
+- [x] `src/examples/src/modal/description.txt`
+- [x] `src/examples/src/simple-component/description.txt`
+- [x] `src/examples/src/svg/description.txt`
+- [x] `src/examples/src/temperature-converter/description.txt`
+- [x] `src/examples/src/timer/description.txt`
+- [x] `src/examples/src/tree/description.txt`
