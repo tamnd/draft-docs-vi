@@ -241,23 +241,24 @@ onMounted(() => {
 
 ### Nên chọn kiểu nào? {#which-to-choose}
 
-Cả hai đều dùng được cho hầu hết trường hợp. Chúng là hai giao diện khác nhau nhưng chạy trên cùng một hệ thống nền tảng. Options API được xây dựng trên chính Composition API.
+Cả hai kiểu API đều đủ khả năng đáp ứng các trường hợp sử dụng phổ biến. Chúng chỉ khác nhau ở cách viết (interface), còn bên dưới chạy trên cùng một hệ thống. Thực tế, Options API được xây dựng dựa trên Composition API. Vì vậy, các khái niệm và kiến thức cốt lõi của Vue là giống nhau ở cả hai kiểu.
 
-- **Options API**: dễ hiểu hơn với người mới, giống kiểu class. Tổ chức mã nguồn thông qua các nhóm option.
+Options API xoay quanh khái niệm "component instance" (`this` như trong ví dụ). Cách này thường phù hợp hơn với tư duy kiểu class của những người đến từ các ngôn ngữ lập trình hướng đối tượng (OOP). Nó cũng dễ tiếp cận với người mới vì đã ẩn bớt chi tiết về reactivity, đồng thời giúp tổ chức code rõ ràng thông qua các nhóm option.
 
-- **Composition API**: linh hoạt hơn, dễ tái sử dụng logic, phù hợp dự án lớn. Đòi hỏi hiểu cách tính phản ứng hoạt động trong Vue.
+Composition API thì tập trung vào việc khai báo trực tiếp các biến state phản ứng trong phạm vi của hàm, và kết hợp state từ nhiều hàm để xử lý các logic phức tạp. Cách này linh hoạt hơn, nhưng cũng yêu cầu bạn hiểu cách reactivity hoạt động trong Vue để sử dụng hiệu quả. Đổi lại, nó cho phép áp dụng các pattern mạnh hơn để tổ chức và tái sử dụng logic.
 
-Bạn có thể tìm hiểu thêm trong [Composition API FAQ](/guide/extras/composition-api-faq).
+Bạn có thể tìm hiểu thêm về sự khác nhau giữa hai kiểu này cũng như các lợi ích của Composition API trong phần [Composition API FAQ](/guide/extras/composition-api-faq).
 
-Khuyến nghị:
+Nếu bạn mới làm quen với Vue, đây là một số khuyến nghị chung:
 
-- Học: chọn cái dễ hiểu. Bạn luôn có thể học thêm kiểu còn lại sau.
+- Khi học, hãy chọn kiểu nào bạn thấy dễ hiểu hơn. Hầu hết các khái niệm cốt lõi đều giống nhau, và bạn luôn có thể học thêm kiểu còn lại sau.
 
-- Dự án đơn giản, không build: dùng Options API.
+- Khi dùng trong production:
 
-- Dự án lớn: dùng Composition API + SFC.
+  - Chọn Options API nếu bạn không dùng build tool, hoặc chỉ dùng Vue cho các trường hợp đơn giản (ví dụ: progressive enhancement).
+  - Chọn Composition API + Single-File Components nếu bạn xây dựng ứng dụng hoàn chỉnh với Vue.
 
-Bạn có thể dùng cả hai, không cần chọn một cố định. Phần còn lại của tài liệu sẽ cung cấp ví dụ cho cả hai kiểu, và bạn có thể chuyển đổi bằng **nút API Preference** ở phía trên cùng của thanh điều hướng bên trái.
+Bạn không cần phải chọn cố định một kiểu trong giai đoạn học. Tài liệu sẽ cung cấp ví dụ cho cả hai kiểu khi phù hợp, và bạn có thể chuyển đổi qua lại bất cứ lúc nào bằng **nút API Preference** ở phía trên thanh điều hướng bên trái.
 
 ## Vẫn còn câu hỏi? {#still-got-questions}
 
