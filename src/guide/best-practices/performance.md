@@ -6,14 +6,14 @@ outline: deep
 
 ## Tổng quan {#overview}
 
-Vue được thiết kế để có hiệu năng tốt trong hầu hết các trường hợp phổ biến mà không cần tối ưu thủ công quá nhiều. Tuy vậy, vẫn luôn có những tình huống khó hơn đòi hỏi phải tinh chỉnh thêm. Trong phần này, ta sẽ bàn về những điểm bạn nên chú ý khi nói tới hiệu năng trong một ứng dụng Vue.
+Vue được thiết kế để có hiệu năng tốt trong hầu hết các trường hợp phổ biến mà không cần tối ưu thủ công quá nhiều. Tuy vậy, vẫn luôn có những tình huống khó hơn đòi hỏi phải tinh chỉnh thêm. Trong phần này, ta sẽ bàn về những điểm cần chú ý khi nói tới hiệu năng trong ứng dụng Vue.
 
 Trước hết, hãy nói về hai mặt chính của hiệu năng web:
 
 - **Hiệu năng tải trang**: ứng dụng hiển thị nội dung và trở nên tương tác được nhanh đến đâu ở lần truy cập đầu tiên. Phần này thường được đo bằng các chỉ số web vital như [Largest Contentful Paint (LCP)](https://web.dev/lcp/) và [Interaction to Next Paint](https://web.dev/articles/inp).
 - **Hiệu năng cập nhật**: ứng dụng phản hồi với thao tác người dùng nhanh đến đâu. Ví dụ, danh sách cập nhật nhanh ra sao khi người dùng gõ vào ô tìm kiếm, hoặc trang chuyển nhanh tới mức nào khi người dùng bấm vào một liên kết điều hướng trong một Single-Page Application (SPA).
 
-Lý tưởng nhất là tối ưu được cả hai, nhưng mỗi kiểu kiến trúc frontend lại ảnh hưởng khác nhau tới việc đạt được hiệu năng mong muốn ở từng mặt. Ngoài ra, loại ứng dụng bạn đang xây dựng cũng ảnh hưởng rất lớn tới việc nên ưu tiên tối ưu cái gì. Vì vậy, bước đầu tiên để bảo đảm hiệu năng tốt là chọn đúng kiến trúc cho loại ứng dụng bạn đang làm:
+Lý tưởng nhất là tối ưu được cả hai, nhưng mỗi kiểu kiến trúc frontend lại ảnh hưởng khác nhau đến từng mặt. Ngoài ra, loại ứng dụng bạn đang xây cũng ảnh hưởng lớn đến việc nên ưu tiên tối ưu cái gì. Bước đầu tiên để có hiệu năng tốt là chọn đúng kiến trúc cho loại ứng dụng của bạn:
 
 - Xem [Ways of Using Vue](/guide/extras/ways-of-using-vue) để hiểu những cách khác nhau mà bạn có thể tận dụng Vue.
 - Jason Miller bàn về các loại ứng dụng web và cách triển khai / phân phối phù hợp nhất của chúng trong bài [Application Holotypes](https://jasonformat.com/application-holotypes/).
