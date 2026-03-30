@@ -1,12 +1,12 @@
-# Global API: General {#global-api-general}
+# Global API: Tổng quát {#global-api-general}
 
 ## version {#version}
 
-Exposes the current version of Vue.
+Expose phiên bản hiện tại của Vue.
 
-- **Type:** `string`
+- **Kiểu:** `string`
 
-- **Example**
+- **Ví dụ**
 
   ```js
   import { version } from 'vue'
@@ -16,21 +16,21 @@ Exposes the current version of Vue.
 
 ## nextTick() {#nexttick}
 
-A utility for waiting for the next DOM update flush.
+Tiện ích để chờ lần flush cập nhật DOM tiếp theo.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function nextTick(callback?: () => void): Promise<void>
   ```
 
-- **Details**
+- **Chi tiết**
 
-  When you mutate reactive state in Vue, the resulting DOM updates are not applied synchronously. Instead, Vue buffers them until the "next tick" to ensure that each component updates only once no matter how many state changes you have made.
+  Khi bạn thay đổi state phản ứng trong Vue, các cập nhật DOM kết quả không được áp dụng đồng bộ. Thay vào đó, Vue đệm chúng cho đến "next tick" để đảm bảo mỗi component chỉ cập nhật một lần dù bạn đã thực hiện bao nhiêu thay đổi state.
 
-  `nextTick()` can be used immediately after a state change to wait for the DOM updates to complete. You can either pass a callback as an argument, or await the returned Promise.
+  `nextTick()` có thể được dùng ngay sau khi thay đổi state để chờ cập nhật DOM hoàn tất. Bạn có thể truyền callback làm đối số, hoặc await Promise được trả về.
 
-- **Example**
+- **Ví dụ**
 
   <div class="composition-api">
 
@@ -43,11 +43,11 @@ A utility for waiting for the next DOM update flush.
   async function increment() {
     count.value++
 
-    // DOM not yet updated
+    // DOM chưa được cập nhật
     console.log(document.getElementById('counter').textContent) // 0
 
     await nextTick()
-    // DOM is now updated
+    // DOM đã được cập nhật
     console.log(document.getElementById('counter').textContent) // 1
   }
   </script>
@@ -74,11 +74,11 @@ A utility for waiting for the next DOM update flush.
       async increment() {
         this.count++
 
-        // DOM not yet updated
+        // DOM chưa được cập nhật
         console.log(document.getElementById('counter').textContent) // 0
 
         await nextTick()
-        // DOM is now updated
+        // DOM đã được cập nhật
         console.log(document.getElementById('counter').textContent) // 1
       }
     }
@@ -92,36 +92,36 @@ A utility for waiting for the next DOM update flush.
 
   </div>
 
-- **See also** [`this.$nextTick()`](/api/component-instance#nexttick)
+- **Xem thêm** [`this.$nextTick()`](/api/component-instance#nexttick)
 
 ## defineComponent() {#definecomponent}
 
-A type helper for defining a Vue component with type inference.
+Tiện ích kiểu để định nghĩa Vue component với suy luận kiểu.
 
-- **Type**
+- **Kiểu**
 
   ```ts
-  // options syntax
+  // cú pháp options
   function defineComponent(
     component: ComponentOptions
   ): ComponentConstructor
 
-  // function syntax (requires 3.3+)
+  // cú pháp hàm (yêu cầu 3.3+)
   function defineComponent(
     setup: ComponentOptions['setup'],
     extraOptions?: ComponentOptions
   ): () => any
   ```
 
-  > Type is simplified for readability.
+  > Kiểu được đơn giản hóa để dễ đọc.
 
-- **Details**
+- **Chi tiết**
 
-  The first argument expects a component options object. The return value will be the same options object, since the function is essentially a runtime no-op for type inference purposes only.
+  Đối số đầu tiên nhận một component options object. Giá trị trả về sẽ là cùng options object đó, vì hàm về cơ bản là no-op lúc chạy chỉ dành cho mục đích suy luận kiểu.
 
-  Note that the return type is a bit special: it will be a constructor type whose instance type is the inferred component instance type based on the options. This is used for type inference when the returned type is used as a tag in TSX.
+  Lưu ý kiểu trả về hơi đặc biệt: nó sẽ là một kiểu constructor có kiểu instance là kiểu instance component được suy luận dựa trên các options. Điều này được dùng để suy luận kiểu khi kiểu được trả về dùng làm tag trong TSX.
 
-  You can extract the instance type of a component (equivalent to the type of `this` in its options) from the return type of `defineComponent()` like this:
+  Bạn có thể trích xuất kiểu instance của một component (tương đương với kiểu của `this` trong options của nó) từ kiểu trả về của `defineComponent()` như sau:
 
   ```ts
   const Foo = defineComponent(/* ... */)
@@ -129,28 +129,28 @@ A type helper for defining a Vue component with type inference.
   type FooInstance = InstanceType<typeof Foo>
   ```
 
-  ### Function Signature {#function-signature}
+  ### Chữ ký Hàm {#function-signature}
 
-  - Only supported in 3.3+
+  - Chỉ hỗ trợ từ 3.3+
 
-  `defineComponent()` also has an alternative signature that is meant to be used with the Composition API and [render functions or JSX](/guide/extras/render-function.html).
+  `defineComponent()` cũng có chữ ký thay thế được thiết kế để dùng với Composition API và [render function hoặc JSX](/guide/extras/render-function.html).
 
-  Instead of passing in an options object, a function is expected instead. This function works the same as the Composition API [`setup()`](/api/composition-api-setup.html#composition-api-setup) function: it receives the props and the setup context. The return value should be a render function - both `h()` and JSX are supported:
+  Thay vì truyền vào options object, một hàm được nhận thay thế. Hàm này hoạt động giống hàm [`setup()`](/api/composition-api-setup.html#composition-api-setup) của Composition API: nó nhận props và setup context. Giá trị trả về phải là render function - cả `h()` lẫn JSX đều được hỗ trợ:
 
   ```js
   import { ref, h } from 'vue'
 
   const Comp = defineComponent(
     (props) => {
-      // use Composition API here like in <script setup>
+      // dùng Composition API ở đây giống trong <script setup>
       const count = ref(0)
 
       return () => {
-        // render function or JSX
+        // render function hoặc JSX
         return h('div', count.value)
       }
     },
-    // extra options, e.g. declare props and emits
+    // options bổ sung, ví dụ: khai báo props và emits
     {
       props: {
         /* ... */
@@ -159,47 +159,47 @@ A type helper for defining a Vue component with type inference.
   )
   ```
 
-  The main use case for this signature is with TypeScript (and in particular with TSX), as it supports generics:
+  Trường hợp sử dụng chính cho chữ ký này là với TypeScript (và đặc biệt là với TSX), vì nó hỗ trợ generic:
 
   ```tsx
   const Comp = defineComponent(
     <T extends string | number>(props: { msg: T; list: T[] }) => {
-      // use Composition API here like in <script setup>
+      // dùng Composition API ở đây giống trong <script setup>
       const count = ref(0)
 
       return () => {
-        // render function or JSX
+        // render function hoặc JSX
         return <div>{count.value}</div>
       }
     },
-    // manual runtime props declaration is currently still needed.
+    // hiện tại vẫn cần khai báo runtime props thủ công.
     {
       props: ['msg', 'list']
     }
   )
   ```
 
-  In the future, we plan to provide a Babel plugin that automatically infers and injects the runtime props (like for `defineProps` in SFCs) so that the runtime props declaration can be omitted.
+  Trong tương lai, chúng tôi có kế hoạch cung cấp Babel plugin tự động suy luận và inject runtime props (giống như `defineProps` trong SFC) để có thể bỏ qua khai báo runtime props.
 
-  ### Note on webpack Treeshaking {#note-on-webpack-treeshaking}
+  ### Lưu ý về Treeshaking trong webpack {#note-on-webpack-treeshaking}
 
-  Because `defineComponent()` is a function call, it could look like it would produce side-effects to some build tools, e.g. webpack. This will prevent the component from being tree-shaken even when the component is never used.
+  Vì `defineComponent()` là một lời gọi hàm, nó có thể trông như tạo ra side effect với một số build tool, ví dụ webpack. Điều này sẽ ngăn component bị tree-shaken ngay cả khi component không bao giờ được dùng.
 
-  To tell webpack that this function call is safe to be tree-shaken, you can add a `/*#__PURE__*/` comment notation before the function call:
+  Để nói với webpack rằng lời gọi hàm này an toàn để tree-shaken, bạn có thể thêm chú thích `/*#__PURE__*/` trước lời gọi hàm:
 
   ```js
   export default /*#__PURE__*/ defineComponent(/* ... */)
   ```
 
-  Note this is not necessary if you are using Vite, because Rollup (the underlying production bundler used by Vite) is smart enough to determine that `defineComponent()` is in fact side-effect-free without the need for manual annotations.
+  Lưu ý điều này không cần thiết nếu bạn đang dùng Vite, vì Rollup (bundler production nền tảng được Vite sử dụng) đủ thông minh để xác định rằng `defineComponent()` thực sự không có side effect mà không cần chú thích thủ công.
 
-- **See also** [Guide - Using Vue with TypeScript](/guide/typescript/overview#general-usage-notes)
+- **Xem thêm** [Hướng dẫn - Dùng Vue với TypeScript](/guide/typescript/overview#general-usage-notes)
 
 ## defineAsyncComponent() {#defineasynccomponent}
 
-Define an async component which is lazy loaded only when it is rendered. The argument can either be a loader function, or an options object for more advanced control of the loading behavior.
+Định nghĩa một async component được lazy load chỉ khi nó được render. Đối số có thể là hàm loader, hoặc options object để kiểm soát nâng cao hơn về hành vi tải.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function defineAsyncComponent(
@@ -224,4 +224,4 @@ Define an async component which is lazy loaded only when it is rendered. The arg
   }
   ```
 
-- **See also** [Guide - Async Components](/guide/components/async)
+- **Xem thêm** [Hướng dẫn - Async Component](/guide/components/async)

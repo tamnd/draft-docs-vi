@@ -1,2 +1,2 @@
-Here we are reactively binding element attributes / properties to the state.
-The :title syntax is short for v-bind:title.
+Ở đây chúng ta ràng buộc reactively các thuộc tính / property của element vào state.
+Cú pháp :title là viết tắt của v-bind:title.

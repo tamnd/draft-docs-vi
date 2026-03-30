@@ -1,2 +1,2 @@
-FLIP list transitions with the built-in <TransitionGroup>.
+Hiệu ứng chuyển đổi danh sách dùng kỹ thuật FLIP với <TransitionGroup> dựng sẵn.
 https://aerotwist.com/blog/flip-your-animations/

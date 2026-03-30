@@ -1,1 +1,1 @@
-An example of creating a reusable grid component and using it with external data.
+Ví dụ tạo một grid component có thể tái sử dụng và dùng nó với dữ liệu bên ngoài.

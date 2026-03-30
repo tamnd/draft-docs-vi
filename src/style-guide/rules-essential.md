@@ -1,66 +1,66 @@
-# Priority A Rules: Essential {#priority-a-rules-essential}
+# Quy tắc Ưu tiên A: Thiết yếu {#priority-a-rules-essential}
 
-::: warning Note
-This Vue.js Style Guide is outdated and needs to be reviewed. If you have any questions or suggestions, please [open an issue](https://github.com/vuejs/docs/issues/new).
+::: warning Lưu ý
+Hướng dẫn phong cách Vue.js này đã lỗi thời và cần được xem xét lại. Nếu bạn có câu hỏi hoặc gợi ý, vui lòng [mở issue](https://github.com/vuejs/docs/issues/new).
 :::
 
-These rules help prevent errors, so learn and abide by them at all costs. Exceptions may exist, but should be very rare and only be made by those with expert knowledge of both JavaScript and Vue.
+Các quy tắc này giúp ngăn ngừa lỗi, vì vậy hãy học và tuân thủ chúng bằng mọi giá. Có thể có ngoại lệ, nhưng phải rất hiếm và chỉ được thực hiện bởi những người có kiến thức chuyên sâu về cả JavaScript và Vue.
 
-## Use multi-word component names {#use-multi-word-component-names}
+## Dùng tên component nhiều từ {#use-multi-word-component-names}
 
-User component names should always be multi-word, except for root `App` components. This [prevents conflicts](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name) with existing and future HTML elements, since all HTML elements are a single word.
+Tên component người dùng nên luôn nhiều từ, ngoại trừ component gốc `App`. Điều này [ngăn xung đột](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name) với các element HTML hiện có và tương lai, vì tất cả element HTML đều là một từ.
 
 <div class="style-example style-example-bad">
-<h3>Bad</h3>
+<h3>Không nên</h3>
 
 ```vue-html
-<!-- in pre-compiled templates -->
+<!-- trong template đã biên dịch trước -->
 <Item />
 
-<!-- in in-DOM templates -->
+<!-- trong template trong DOM -->
 <item></item>
 ```
 
 </div>
 
 <div class="style-example style-example-good">
-<h3>Good</h3>
+<h3>Nên</h3>
 
 ```vue-html
-<!-- in pre-compiled templates -->
+<!-- trong template đã biên dịch trước -->
 <TodoItem />
 
-<!-- in in-DOM templates -->
+<!-- trong template trong DOM -->
 <todo-item></todo-item>
 ```
 
 </div>
 
-## Use detailed prop definitions {#use-detailed-prop-definitions}
+## Dùng định nghĩa prop chi tiết {#use-detailed-prop-definitions}
 
-In committed code, prop definitions should always be as detailed as possible, specifying at least type(s).
+Trong code đã commit, định nghĩa prop nên luôn chi tiết nhất có thể, tối thiểu phải chỉ định kiểu dữ liệu.
 
-::: details Detailed Explanation
-Detailed [prop definitions](/guide/components/props#prop-validation) have two advantages:
+::: details Giải thích chi tiết
+[Định nghĩa prop](/guide/components/props#prop-validation) chi tiết có hai lợi ích:
 
-- They document the API of the component, so that it's easy to see how the component is meant to be used.
-- In development, Vue will warn you if a component is ever provided incorrectly formatted props, helping you catch potential sources of error.
+- Chúng ghi lại API của component, giúp dễ thấy cách component được thiết kế để dùng.
+- Trong development, Vue sẽ cảnh báo nếu component nhận prop sai định dạng, giúp phát hiện nguồn gốc lỗi tiềm ẩn.
   :::
 
 <div class="options-api">
 
 <div class="style-example style-example-bad">
-<h3>Bad</h3>
+<h3>Không nên</h3>
 
 ```js
-// This is only OK when prototyping
+// Chỉ chấp nhận khi đang prototype
 props: ['status']
 ```
 
 </div>
 
 <div class="style-example style-example-good">
-<h3>Good</h3>
+<h3>Nên</h3>
 
 ```js
 props: {
@@ -69,7 +69,7 @@ props: {
 ```
 
 ```js
-// Even better!
+// Càng tốt hơn!
 props: {
   status: {
     type: String,
@@ -94,17 +94,17 @@ props: {
 <div class="composition-api">
 
 <div class="style-example style-example-bad">
-<h3>Bad</h3>
+<h3>Không nên</h3>
 
 ```js
-// This is only OK when prototyping
+// Chỉ chấp nhận khi đang prototype
 const props = defineProps(['status'])
 ```
 
 </div>
 
 <div class="style-example style-example-good">
-<h3>Good</h3>
+<h3>Nên</h3>
 
 ```js
 const props = defineProps({
@@ -113,7 +113,7 @@ const props = defineProps({
 ```
 
 ```js
-// Even better!
+// Càng tốt hơn!
 
 const props = defineProps({
   status: {
@@ -133,12 +133,12 @@ const props = defineProps({
 
 </div>
 
-## Use keyed `v-for` {#use-keyed-v-for}
+## Dùng `v-for` có key {#use-keyed-v-for}
 
-`key` with `v-for` is _always_ required on components, in order to maintain internal component state down the subtree. Even for elements though, it's a good practice to maintain predictable behavior, such as [object constancy](https://bost.ocks.org/mike/constancy/) in animations.
+`key` với `v-for` là _bắt buộc_ trên component để duy trì state nội bộ của component trong cây con. Ngay cả với element thông thường, việc dùng key là thực hành tốt để đảm bảo hành vi dự đoán được, ví dụ như [object constancy](https://bost.ocks.org/mike/constancy/) trong animation.
 
-::: details Detailed Explanation
-Let's say you have a list of todos:
+::: details Giải thích chi tiết
+Giả sử bạn có danh sách todos:
 
 <div class="options-api">
 
@@ -178,15 +178,15 @@ const todos = ref([
 
 </div>
 
-Then you sort them alphabetically. When updating the DOM, Vue will optimize rendering to perform the cheapest DOM mutations possible. That might mean deleting the first todo element, then adding it again at the end of the list.
+Sau đó bạn sắp xếp chúng theo thứ tự alphabet. Khi cập nhật DOM, Vue sẽ tối ưu hóa render để thực hiện ít thao tác DOM nhất có thể. Điều đó có thể có nghĩa là xóa phần tử todo đầu tiên, rồi thêm lại ở cuối danh sách.
 
-The problem is, there are cases where it's important not to delete elements that will remain in the DOM. For example, you may want to use `<transition-group>` to animate list sorting, or maintain focus if the rendered element is an `<input>`. In these cases, adding a unique key for each item (e.g. `:key="todo.id"`) will tell Vue how to behave more predictably.
+Vấn đề là có những trường hợp quan trọng là không xóa các element vẫn còn trong DOM. Ví dụ: bạn có thể muốn dùng `<transition-group>` để animate việc sắp xếp danh sách, hoặc duy trì focus nếu element được render là `<input>`. Trong những trường hợp này, thêm key duy nhất cho mỗi item (ví dụ: `:key="todo.id"`) sẽ cho Vue biết cách hoạt động có thể dự đoán hơn.
 
-In our experience, it's better to _always_ add a unique key, so that you and your team simply never have to worry about these edge cases. Then in the rare, performance-critical scenarios where object constancy isn't necessary, you can make a conscious exception.
+Theo kinh nghiệm, tốt hơn là _luôn_ thêm key duy nhất để bạn và nhóm không bao giờ phải lo về các edge case này. Sau đó trong các tình huống hiếm gặp, đòi hỏi hiệu năng cao mà object constancy không cần thiết, bạn có thể tạo ngoại lệ có chủ đích.
 :::
 
 <div class="style-example style-example-bad">
-<h3>Bad</h3>
+<h3>Không nên</h3>
 
 ```vue-html
 <ul>
@@ -199,7 +199,7 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 </div>
 
 <div class="style-example style-example-good">
-<h3>Good</h3>
+<h3>Nên</h3>
 
 ```vue-html
 <ul>
@@ -214,18 +214,18 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 
 </div>
 
-## Avoid `v-if` with `v-for` {#avoid-v-if-with-v-for}
+## Tránh dùng `v-if` với `v-for` {#avoid-v-if-with-v-for}
 
-**Never use `v-if` on the same element as `v-for`.**
+**Không bao giờ dùng `v-if` trên cùng element với `v-for`.**
 
-There are two common cases where this can be tempting:
+Có hai trường hợp phổ biến khiến điều này trở nên hấp dẫn:
 
-- To filter items in a list (e.g. `v-for="user in users" v-if="user.isActive"`). In these cases, replace `users` with a new computed property that returns your filtered list (e.g. `activeUsers`).
+- Để lọc items trong danh sách (ví dụ: `v-for="user in users" v-if="user.isActive"`). Trong những trường hợp này, thay `users` bằng computed property mới trả về danh sách đã lọc (ví dụ: `activeUsers`).
 
-- To avoid rendering a list if it should be hidden (e.g. `v-for="user in users" v-if="shouldShowUsers"`). In these cases, move the `v-if` to a container element (e.g. `ul`, `ol`).
+- Để tránh render danh sách khi cần ẩn (ví dụ: `v-for="user in users" v-if="shouldShowUsers"`). Trong những trường hợp này, chuyển `v-if` lên element container (ví dụ: `ul`, `ol`).
 
-::: details Detailed Explanation
-When Vue processes directives, `v-if` has a higher priority than `v-for`, so that this template:
+::: details Giải thích chi tiết
+Khi Vue xử lý directive, `v-if` có độ ưu tiên cao hơn `v-for`, nên template này:
 
 ```vue-html
 <ul>
@@ -239,9 +239,9 @@ When Vue processes directives, `v-if` has a higher priority than `v-for`, so tha
 </ul>
 ```
 
-Will throw an error, because the `v-if` directive will be evaluated first and the iteration variable `user` does not exist at this moment.
+Sẽ báo lỗi, vì directive `v-if` được đánh giá trước và biến lặp `user` chưa tồn tại lúc đó.
 
-This could be fixed by iterating over a computed property instead, like this:
+Có thể khắc phục bằng cách lặp qua computed property:
 
 <div class="options-api">
 
@@ -276,7 +276,7 @@ const activeUsers = computed(() => {
 </ul>
 ```
 
-Alternatively, we can use a `<template>` tag with `v-for` to wrap the `<li>` element:
+Ngoài ra, có thể dùng tag `<template>` với `v-for` để bọc element `<li>`:
 
 ```vue-html
 <ul>
@@ -291,7 +291,7 @@ Alternatively, we can use a `<template>` tag with `v-for` to wrap the `<li>` ele
 :::
 
 <div class="style-example style-example-bad">
-<h3>Bad</h3>
+<h3>Không nên</h3>
 
 ```vue-html
 <ul>
@@ -308,7 +308,7 @@ Alternatively, we can use a `<template>` tag with `v-for` to wrap the `<li>` ele
 </div>
 
 <div class="style-example style-example-good">
-<h3>Good</h3>
+<h3>Nên</h3>
 
 ```vue-html
 <ul>
@@ -333,24 +333,24 @@ Alternatively, we can use a `<template>` tag with `v-for` to wrap the `<li>` ele
 
 </div>
 
-## Use component-scoped styling {#use-component-scoped-styling}
+## Dùng styling có phạm vi component {#use-component-scoped-styling}
 
-For applications, styles in a top-level `App` component and in layout components may be global, but all other components should always be scoped.
+Đối với ứng dụng, style trong component `App` cấp cao nhất và trong layout component có thể là global, nhưng tất cả component khác nên luôn có phạm vi.
 
-This is only relevant for [Single-File Components](/guide/scaling-up/sfc). It does _not_ require that the [`scoped` attribute](https://vue-loader.vuejs.org/guide/scoped-css.html) be used. Scoping could be through [CSS modules](https://vue-loader.vuejs.org/guide/css-modules.html), a class-based strategy such as [BEM](http://getbem.com/), or another library/convention.
+Điều này chỉ liên quan đến [Single-File Component](/guide/scaling-up/sfc). Nó _không_ yêu cầu phải dùng [thuộc tính `scoped`](https://vue-loader.vuejs.org/guide/scoped-css.html). Phạm vi có thể thông qua [CSS modules](https://vue-loader.vuejs.org/guide/css-modules.html), chiến lược dựa trên class như [BEM](http://getbem.com/), hoặc thư viện/quy ước khác.
 
-**Component libraries, however, should prefer a class-based strategy instead of using the `scoped` attribute.**
+**Tuy nhiên, thư viện component nên ưu tiên chiến lược dựa trên class thay vì dùng thuộc tính `scoped`.**
 
-This makes overriding internal styles easier, with human-readable class names that don't have too high specificity, but are still very unlikely to result in a conflict.
+Điều này giúp việc ghi đè style nội bộ dễ dàng hơn, với tên class dễ đọc không có độ đặc hiệu quá cao, nhưng vẫn rất khó dẫn đến xung đột.
 
-::: details Detailed Explanation
-If you are developing a large project, working with other developers, or sometimes include 3rd-party HTML/CSS (e.g. from Auth0), consistent scoping will ensure that your styles only apply to the components they are meant for.
+::: details Giải thích chi tiết
+Nếu bạn đang phát triển dự án lớn, làm việc với developer khác, hoặc đôi khi dùng HTML/CSS bên thứ ba (ví dụ: từ Auth0), việc scoping nhất quán sẽ đảm bảo style của bạn chỉ áp dụng cho các component được thiết kế.
 
-Beyond the `scoped` attribute, using unique class names can help ensure that 3rd-party CSS does not apply to your own HTML. For example, many projects use the `button`, `btn`, or `icon` class names, so even if not using a strategy such as BEM, adding an app-specific and/or component-specific prefix (e.g. `ButtonClose-icon`) can provide some protection.
+Ngoài thuộc tính `scoped`, dùng tên class duy nhất có thể giúp đảm bảo CSS bên thứ ba không áp dụng vào HTML của bạn. Ví dụ: nhiều dự án dùng tên class `button`, `btn`, hoặc `icon`, vì vậy ngay cả khi không dùng chiến lược như BEM, thêm tiền tố đặc thù cho app và/hoặc component (ví dụ: `ButtonClose-icon`) có thể cung cấp một số bảo vệ.
 :::
 
 <div class="style-example style-example-bad">
-<h3>Bad</h3>
+<h3>Không nên</h3>
 
 ```vue-html
 <template>
@@ -367,14 +367,14 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 </div>
 
 <div class="style-example style-example-good">
-<h3>Good</h3>
+<h3>Nên</h3>
 
 ```vue-html
 <template>
   <button class="button button-close">×</button>
 </template>
 
-<!-- Using the `scoped` attribute -->
+<!-- Dùng thuộc tính `scoped` -->
 <style scoped>
 .button {
   border: none;
@@ -392,7 +392,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
   <button :class="[$style.button, $style.buttonClose]">×</button>
 </template>
 
-<!-- Using CSS modules -->
+<!-- Dùng CSS modules -->
 <style module>
 .button {
   border: none;
@@ -410,7 +410,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
   <button class="c-Button c-Button--close">×</button>
 </template>
 
-<!-- Using the BEM convention -->
+<!-- Dùng quy ước BEM -->
 <style>
 .c-Button {
   border: none;

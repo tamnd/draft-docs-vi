@@ -1,6 +1,6 @@
-# Form Bindings {#form-bindings}
+# Binding Form {#form-bindings}
 
-Using `v-bind` and `v-on` together, we can create two-way bindings on form input elements:
+Dùng `v-bind` và `v-on` cùng nhau, chúng ta có thể tạo binding hai chiều trên các element input của form:
 
 ```vue-html
 <input :value="text" @input="onInput">
@@ -11,8 +11,8 @@ Using `v-bind` and `v-on` together, we can create two-way bindings on form input
 ```js
 methods: {
   onInput(e) {
-    // a v-on handler receives the native DOM event
-    // as the argument.
+    // v-on handler nhận native DOM event
+    // làm đối số.
     this.text = e.target.value
   }
 }
@@ -24,24 +24,24 @@ methods: {
 
 ```js
 function onInput(e) {
-  // a v-on handler receives the native DOM event
-  // as the argument.
+  // v-on handler nhận native DOM event
+  // làm đối số.
   text.value = e.target.value
 }
 ```
 
 </div>
 
-Try typing in the input box - you should see the text in `<p>` updating as you type.
+Thử nhập vào ô input - bạn sẽ thấy text trong `<p>` cập nhật khi bạn gõ.
 
-To simplify two-way bindings, Vue provides a directive, `v-model`, which is essentially syntactic sugar for the above:
+Để đơn giản hóa binding hai chiều, Vue cung cấp directive `v-model`, về cơ bản là syntactic sugar cho những gì ở trên:
 
 ```vue-html
 <input v-model="text">
 ```
 
-`v-model` automatically syncs the `<input>`'s value with the bound state, so we no longer need to use an event handler for that.
+`v-model` tự động đồng bộ giá trị của `<input>` với state được bind, vì vậy chúng ta không cần dùng event handler cho điều đó nữa.
 
-`v-model` works not only on text inputs, but also on other input types such as checkboxes, radio buttons, and select dropdowns. We cover more details in <a target="_blank" href="/guide/essentials/forms.html">Guide - Form Bindings</a>.
+`v-model` không chỉ hoạt động trên text input, mà còn trên các loại input khác như checkbox, radio button, và select dropdown. Chúng tôi đề cập thêm chi tiết trong <a target="_blank" href="/guide/essentials/forms.html">Hướng dẫn - Binding Form</a>.
 
-Now, try to refactor the code to use `v-model` instead.
+Bây giờ, hãy thử refactor code để dùng `v-model` thay thế.

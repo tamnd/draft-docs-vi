@@ -1,59 +1,59 @@
-# Priority C Rules: Recommended {#priority-c-rules-recommended}
+# Quy tắc Ưu tiên C: Khuyến nghị {#priority-c-rules-recommended}
 
-::: warning Note
-This Vue.js Style Guide is outdated and needs to be reviewed. If you have any questions or suggestions, please [open an issue](https://github.com/vuejs/docs/issues/new).
+::: warning Lưu ý
+Hướng dẫn phong cách Vue.js này đã lỗi thời và cần được xem xét lại. Nếu bạn có câu hỏi hoặc gợi ý, vui lòng [mở issue](https://github.com/vuejs/docs/issues/new).
 :::
 
-Where multiple, equally good options exist, an arbitrary choice can be made to ensure consistency. In these rules, we describe each acceptable option and suggest a default choice. That means you can feel free to make a different choice in your own codebase, as long as you're consistent and have a good reason. Please do have a good reason though! By adapting to the community standard, you will:
+Khi có nhiều lựa chọn tốt như nhau, có thể chọn tùy ý để đảm bảo nhất quán. Trong các quy tắc này, chúng tôi mô tả từng lựa chọn chấp nhận được và đề xuất mặc định. Điều đó có nghĩa là bạn hoàn toàn có thể chọn khác trong codebase của mình, miễn là nhất quán và có lý do chính đáng. Hãy thực sự có lý do! Khi thích nghi với tiêu chuẩn cộng đồng, bạn sẽ:
 
-1. Train your brain to more easily parse most of the community code you encounter
-2. Be able to copy and paste most community code examples without modification
-3. Often find new hires are already accustomed to your preferred coding style, at least in regards to Vue
+1. Rèn não để phân tích phần lớn code cộng đồng dễ dàng hơn
+2. Có thể sao chép dán hầu hết ví dụ code của cộng đồng mà không cần sửa đổi
+3. Thường thấy nhân viên mới đã quen với phong cách code bạn ưa thích, ít nhất liên quan đến Vue
 
-## Component/instance options order {#component-instance-options-order}
+## Thứ tự option của component/instance {#component-instance-options-order}
 
-**Component/instance options should be ordered consistently.**
+**Các option của component/instance nên được sắp xếp theo thứ tự nhất quán.**
 
-This is the default order we recommend for component options. They're split into categories, so you'll know where to add new properties from plugins.
+Đây là thứ tự mặc định chúng tôi khuyến nghị cho các option component. Chúng được chia thành các danh mục để bạn biết nơi thêm các property mới từ plugin.
 
-1. **Global Awareness** (requires knowledge beyond the component)
+1. **Global Awareness** (yêu cầu kiến thức ngoài component)
 
    - `name`
 
-2. **Template Compiler Options** (changes the way templates are compiled)
+2. **Template Compiler Options** (thay đổi cách template được biên dịch)
 
    - `compilerOptions`
 
-3. **Template Dependencies** (assets used in the template)
+3. **Template Dependencies** (asset dùng trong template)
 
    - `components`
    - `directives`
 
-4. **Composition** (merges properties into the options)
+4. **Composition** (hợp nhất property vào options)
 
    - `extends`
    - `mixins`
    - `provide`/`inject`
 
-5. **Interface** (the interface to the component)
+5. **Interface** (giao diện của component)
 
    - `inheritAttrs`
    - `props`
    - `emits`
 
-6. **Composition API** (the entry point for using the Composition API)
+6. **Composition API** (điểm vào để dùng Composition API)
 
    - `setup`
 
-7. **Local State** (local reactive properties)
+7. **Local State** (các property reactive cục bộ)
 
    - `data`
    - `computed`
 
-8. **Events** (callbacks triggered by reactive events)
+8. **Events** (callback được kích hoạt bởi các sự kiện reactive)
 
    - `watch`
-   - Lifecycle Events (in the order they are called)
+   - Lifecycle Events (theo thứ tự được gọi)
      - `beforeCreate`
      - `created`
      - `beforeMount`
@@ -68,28 +68,28 @@ This is the default order we recommend for component options. They're split into
      - `renderTracked`
      - `renderTriggered`
 
-9. **Non-Reactive Properties** (instance properties independent of the reactivity system)
+9. **Non-Reactive Properties** (property instance độc lập với hệ thống reactivity)
 
    - `methods`
 
-10. **Rendering** (the declarative description of the component output)
+10. **Rendering** (mô tả khai báo về output của component)
     - `template`/`render`
 
-## Element attribute order {#element-attribute-order}
+## Thứ tự thuộc tính element {#element-attribute-order}
 
-**The attributes of elements (including components) should be ordered consistently.**
+**Các thuộc tính của element (bao gồm component) nên được sắp xếp theo thứ tự nhất quán.**
 
-This is the default order we recommend for component options. They're split into categories, so you'll know where to add custom attributes and directives.
+Đây là thứ tự mặc định chúng tôi khuyến nghị cho các option component. Chúng được chia thành danh mục để bạn biết nơi thêm thuộc tính và directive tùy chỉnh.
 
-1. **Definition** (provides the component options)
+1. **Definition** (cung cấp các option component)
 
    - `is`
 
-2. **List Rendering** (creates multiple variations of the same element)
+2. **List Rendering** (tạo nhiều biến thể của cùng một element)
 
    - `v-for`
 
-3. **Conditionals** (whether the element is rendered/shown)
+3. **Conditionals** (element có được render/hiển thị không)
 
    - `v-if`
    - `v-else-if`
@@ -97,44 +97,44 @@ This is the default order we recommend for component options. They're split into
    - `v-show`
    - `v-cloak`
 
-4. **Render Modifiers** (changes the way the element renders)
+4. **Render Modifiers** (thay đổi cách element render)
 
    - `v-pre`
    - `v-once`
 
-5. **Global Awareness** (requires knowledge beyond the component)
+5. **Global Awareness** (yêu cầu kiến thức ngoài component)
 
    - `id`
 
-6. **Unique Attributes** (attributes that require unique values)
+6. **Unique Attributes** (thuộc tính yêu cầu giá trị duy nhất)
 
    - `ref`
    - `key`
 
-7. **Two-Way Binding** (combining binding and events)
+7. **Two-Way Binding** (kết hợp binding và event)
 
    - `v-model`
 
-8. **Other Attributes** (all unspecified bound & unbound attributes)
+8. **Other Attributes** (tất cả thuộc tính bound và unbound chưa được chỉ định)
 
-9. **Events** (component event listeners)
+9. **Events** (event listener của component)
 
    - `v-on`
 
-10. **Content** (overrides the content of the element)
+10. **Content** (ghi đè nội dung của element)
     - `v-html`
     - `v-text`
 
-## Empty lines in component/instance options {#empty-lines-in-component-instance-options}
+## Dòng trống trong option của component/instance {#empty-lines-in-component-instance-options}
 
-**You may want to add one empty line between multi-line properties, particularly if the options can no longer fit on your screen without scrolling.**
+**Bạn có thể muốn thêm một dòng trống giữa các property nhiều dòng, đặc biệt khi các option không còn vừa màn hình mà không cần cuộn.**
 
-When components begin to feel cramped or difficult to read, adding spaces between multi-line properties can make them easier to skim again. In some editors, such as Vim, formatting options like this can also make them easier to navigate with the keyboard.
+Khi component bắt đầu cảm thấy chật chội hoặc khó đọc, thêm khoảng trắng giữa các property nhiều dòng có thể giúp dễ lướt qua hơn. Trong một số editor như Vim, tùy chọn định dạng như thế này cũng có thể giúp điều hướng bằng bàn phím dễ hơn.
 
 <div class="options-api">
 
 <div class="style-example style-example-bad">
-<h3>Bad</h3>
+<h3>Không nên</h3>
 
 ```js
 props: {
@@ -166,11 +166,11 @@ computed: {
 </div>
 
 <div class="style-example style-example-good">
-<h3>Good</h3>
+<h3>Nên</h3>
 
 ```js
-// No spaces are also fine, as long as the component
-// is still easy to read and navigate.
+// Không có khoảng trắng cũng được, miễn là component
+// vẫn dễ đọc và điều hướng.
 props: {
   value: {
     type: String,
@@ -200,7 +200,7 @@ computed: {
 <div class="composition-api">
 
 <div class="style-example style-example-bad">
-<h3>Bad</h3>
+<h3>Không nên</h3>
 
 ```js
 defineProps({
@@ -226,7 +226,7 @@ const inputClasses = computed(() => {
 </div>
 
 <div class="style-example style-example-good">
-<h3>Good</h3>
+<h3>Nên</h3>
 
 ```js
 defineProps({
@@ -257,12 +257,12 @@ const inputClasses = computed(() => {
 
 </div>
 
-## Single-file component top-level element order {#single-file-component-top-level-element-order}
+## Thứ tự các element cấp cao nhất trong Single-File Component {#single-file-component-top-level-element-order}
 
-**[Single-File Components](/guide/scaling-up/sfc) should always order `<script>`, `<template>`, and `<style>` tags consistently, with `<style>` last, because at least one of the other two is always necessary.**
+**[Single-File Component](/guide/scaling-up/sfc) nên luôn sắp xếp các tag `<script>`, `<template>` và `<style>` nhất quán, với `<style>` cuối cùng, vì ít nhất một trong hai tag kia luôn cần thiết.**
 
 <div class="style-example style-example-bad">
-<h3>Bad</h3>
+<h3>Không nên</h3>
 
 ```vue-html [ComponentX.vue]
 <style>/* ... */</style>
@@ -285,7 +285,7 @@ const inputClasses = computed(() => {
 </div>
 
 <div class="style-example style-example-good">
-<h3>Good</h3>
+<h3>Nên</h3>
 
 ```vue-html [ComponentA.vue]
 <script>/* ... */</script>
@@ -299,7 +299,7 @@ const inputClasses = computed(() => {
 <style>/* ... */</style>
 ```
 
-or
+hoặc
 
 ```vue-html  [ComponentA.vue]
 <template>...</template>

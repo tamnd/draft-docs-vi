@@ -2,9 +2,9 @@
 
 ## shallowRef() {#shallowref}
 
-Shallow version of [`ref()`](./reactivity-core#ref).
+Phiên bản shallow của [`ref()`](./reactivity-core#ref).
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function shallowRef<T>(value: T): ShallowRef<T>
@@ -14,62 +14,62 @@ Shallow version of [`ref()`](./reactivity-core#ref).
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  Unlike `ref()`, the inner value of a shallow ref is stored and exposed as-is, and will not be made deeply reactive. Only the `.value` access is reactive.
+  Khác với `ref()`, giá trị bên trong của shallow ref được lưu trữ và truy cập nguyên vẹn, và sẽ không được làm phản ứng sâu. Chỉ có truy cập `.value` là reactive.
 
-  `shallowRef()` is typically used for performance optimizations of large data structures, or integration with external state management systems.
+  `shallowRef()` thường được dùng để tối ưu hiệu suất cho các cấu trúc dữ liệu lớn, hoặc tích hợp với các hệ thống quản lý state bên ngoài.
 
-- **Example**
+- **Ví dụ**
 
   ```js
   const state = shallowRef({ count: 1 })
 
-  // does NOT trigger change
+  // KHÔNG kích hoạt thay đổi
   state.value.count = 2
 
-  // does trigger change
+  // kích hoạt thay đổi
   state.value = { count: 2 }
   ```
 
-- **See also**
-  - [Guide - Reduce Reactivity Overhead for Large Immutable Structures](/guide/best-practices/performance#reduce-reactivity-overhead-for-large-immutable-structures)
-  - [Guide - Integration with External State Systems](/guide/extras/reactivity-in-depth#integration-with-external-state-systems)
+- **Xem thêm**
+  - [Hướng dẫn - Giảm Overhead Reactivity cho Cấu trúc Bất biến Lớn](/guide/best-practices/performance#reduce-reactivity-overhead-for-large-immutable-structures)
+  - [Hướng dẫn - Tích hợp với Hệ thống State Bên ngoài](/guide/extras/reactivity-in-depth#integration-with-external-state-systems)
 
 ## triggerRef() {#triggerref}
 
-Force trigger effects that depend on a [shallow ref](#shallowref). This is typically used after making deep mutations to the inner value of a shallow ref.
+Buộc kích hoạt các effect phụ thuộc vào một [shallow ref](#shallowref). Thường được dùng sau khi thực hiện các thay đổi sâu cho giá trị bên trong của shallow ref.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function triggerRef(ref: ShallowRef): void
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
   const shallow = shallowRef({
     greet: 'Hello, world'
   })
 
-  // Logs "Hello, world" once for the first run-through
+  // In "Hello, world" một lần trong lần chạy đầu tiên
   watchEffect(() => {
     console.log(shallow.value.greet)
   })
 
-  // This won't trigger the effect because the ref is shallow
+  // Điều này sẽ không kích hoạt effect vì ref là shallow
   shallow.value.greet = 'Hello, universe'
 
-  // Logs "Hello, universe"
+  // In "Hello, universe"
   triggerRef(shallow)
   ```
 
 ## customRef() {#customref}
 
-Creates a customized ref with explicit control over its dependency tracking and updates triggering.
+Tạo một ref tùy chỉnh với quyền kiểm soát rõ ràng việc theo dõi dependency và kích hoạt cập nhật của nó.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function customRef<T>(factory: CustomRefFactory<T>): Ref<T>
@@ -83,15 +83,15 @@ Creates a customized ref with explicit control over its dependency tracking and 
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  `customRef()` expects a factory function, which receives `track` and `trigger` functions as arguments and should return an object with `get` and `set` methods.
+  `customRef()` nhận một factory function, nhận các hàm `track` và `trigger` làm đối số và nên trả về một object với các method `get` và `set`.
 
-  In general, `track()` should be called inside `get()`, and `trigger()` should be called inside `set()`. However, you have full control over when they should be called, or whether they should be called at all.
+  Thông thường, `track()` nên được gọi bên trong `get()`, và `trigger()` nên được gọi bên trong `set()`. Tuy nhiên, bạn có toàn quyền kiểm soát khi nào chúng nên được gọi, hoặc có nên gọi hay không.
 
-- **Example**
+- **Ví dụ**
 
-  Creating a debounced ref that only updates the value after a certain timeout after the latest set call:
+  Tạo một debounced ref chỉ cập nhật giá trị sau một khoảng thời gian nhất định sau lần gọi set cuối cùng:
 
   ```js
   import { customRef } from 'vue'
@@ -116,7 +116,7 @@ Creates a customized ref with explicit control over its dependency tracking and 
   }
   ```
 
-  Usage in component:
+  Dùng trong component:
 
   ```vue
   <script setup>
@@ -129,36 +129,36 @@ Creates a customized ref with explicit control over its dependency tracking and 
   </template>
   ```
 
-  [Try it in the Playground](https://play.vuejs.org/#eNplUkFugzAQ/MqKC1SiIekxIpEq9QVV1BMXCguhBdsyaxqE/PcuGAhNfYGd3Z0ZDwzeq1K7zqB39OI205UiaJGMOieiapTUBAOYFt/wUxqRYf6OBVgotGzA30X5Bt59tX4iMilaAsIbwelxMfCvWNfSD+Gw3++fEhFHTpLFuCBsVJ0ScgUQjw6Az+VatY5PiroHo3IeaeHANlkrh7Qg1NBL43cILUmlMAfqVSXK40QUOSYmHAZHZO0KVkIZgu65kTnWp8Qb+4kHEXfjaDXkhd7DTTmuNZ7MsGyzDYbz5CgSgbdppOBFqqT4l0eX1gZDYOm057heOBQYRl81coZVg9LQWGr+IlrchYKAdJp9h0C6KkvUT3A6u8V1dq4ASqRgZnVnWg04/QWYNyYzC2rD5Y3/hkDgz8fY/cOT1ZjqizMZzGY3rDPC12KGZYyd3J26M8ny1KKx7c3X25q1c1wrZN3L9LCMWs/+AmeG6xI=)
+  [Thử trong Playground](https://play.vuejs.org/#eNplUkFugzAQ/MqKC1SiIekxIpEq9QVV1BMXCguhBdsyaxqE/PcuGAhNfYGd3Z0ZDwzeq1K7zqB39OI205UiaJGMOieiapTUBAOYFt/wUxqRYf6OBVgotGzA30X5Bt59tX4iMilaAsIbwelxMfCvWNfSD+Gw3++fEhFHTpLFuCBsVJ0ScgUQjw6Az+VatY5PiroHo3IeaeHANlkrh7Qg1NBL43cILUmlMAfqVSXK40QUOSYmHAZHZO0KVkIZgu65kTnWp8Qb+4kHEXfjaDXkhd7DTTmuNZ7MsGyzDYbz5CgSgbdppOBFqqT4l0eX1gZDYOm057heOBQYRl81coZVg9LQWGr+IlrchYKAdJp9h0C6KkvUT3A6u8V1dq4ASqRgZnVnWg04/QWYNyYzC2rD5Y3/hkDgz8fY/cOT1ZjqizMZzGY3rDPC12KGZYyd3J26M8ny1KKx7c3X25q1c1wrZN3L9LCMWs/+AmeG6xI=)
 
-  :::warning Use with caution
-  When using customRef, we should be cautious about the return value of its getter, particularly when generating new object datatypes each time the getter is run. This affects the relationship between parent and child components, where such a customRef has been passed as a prop.
+  :::warning Dùng thận trọng
+  Khi dùng customRef, nên thận trọng với giá trị trả về của getter, đặc biệt khi tạo kiểu dữ liệu object mới mỗi lần getter chạy. Điều này ảnh hưởng đến mối quan hệ giữa component cha và con, khi customRef như vậy được truyền làm prop.
 
-  The parent component's render function could be triggered by changes to a different reactive state. During rerender, the value of our customRef is reevaluated, returning a new object datatype as a prop to a child component. This prop is compared with its last value in the child component, and since they are different, the reactive dependencies of the customRef are triggered in the child component. Meanwhile, the reactive dependencies in the parent component do not run because the customRef's setter was not called, and its dependencies were not triggered as a result.
+  Hàm render của component cha có thể bị kích hoạt bởi các thay đổi của state reactive khác. Trong quá trình render lại, giá trị của customRef được tính lại, trả về kiểu dữ liệu object mới làm prop cho component con. Prop này được so sánh với giá trị trước đó trong component con, và vì chúng khác nhau, các reactive dependency của customRef sẽ bị kích hoạt trong component con. Trong khi đó, các reactive dependency trong component cha không chạy vì setter của customRef không được gọi, và do đó các dependency của nó cũng không bị kích hoạt.
 
-  [See it in the Playground](https://play.vuejs.org/#eNqFVEtP3DAQ/itTS9Vm1ZCt1J6WBZUiDvTQIsoNcwiOkzU4tmU7+9Aq/71jO1mCWuhlN/PyfPP45kAujCk2HSdLsnLMCuPBcd+Zc6pEa7T1cADWOa/bW17nYMPPtvRsDT3UVrcww+DZ0flStybpKSkWQQqPU0IVVUwr58FYvdvDWXgpu6ek1pqSHL0fS0vJw/z0xbN1jUPHY/Ys87Zkzzl4K5qG2zmcnUN2oAqg4T6bQ/wENKNXNk+CxWKsSlmLTSk7XlhedYxnWclYDiK+MkQCoK4wnVtnIiBJuuEJNA2qPof7hzkEoc8DXgg9yzYTBBFgNr4xyY4FbaK2p6qfI0iqFgtgulOe27HyQRy69Dk1JXY9C03JIeQ6wg4xWvJCqFpnlNytOcyC2wzYulQNr0Ao+Mhw0KnTTEttl/CIaIJiMz8NGBHFtYetVrPwa58/IL48Zag4N0ssquNYLYBoW16J0vOkC3VQtVqk7cG9QcHz1kj0QAlgVYkNMFk6d0bJ1pbGYKUkmtD42HmvFfi94WhOEiXwjUnBnlEz9OLTJwy5qCo44D4O7en71SIFjI/F9VuG4jEy/GHQKq5hQrJAKOc4uNVighBF5/cygS0GgOMoK+HQb7+EWvLdMM7weVIJy5kXWi0Rj+xaNRhLKRp1IvB9hxYegA6WJ1xkUe9PcF4e9a+suA3YwYiC5MQ79KlFUzw5rZCZEUtoRWuE5PaXCXmxtuWIkpJSSr39EXXHQcWYNWfP/9A/uV3QUXJjueN2E1ZhtPnSIqGS+er3T77D76Ox1VUn0fsd4y3HfewCxuT2vVMVwp74RbTX8WQI1dy5qx12xI1Fpa1K5AreeEHCCN8q/QXul+LrSC3s4nh93jltkVPDIYt5KJkcIKStCReo4rVQ/CZI6dyEzToCCJu7hAtry/1QH/qXncQB400KJwqPxZHxEyona0xS/E3rt1m9Ld1rZl+uhaxecRtP3EjtgddCyimtXyj9H/Ii3eId7uOGTkyk/wOEbQ9h)
+  [Xem trong Playground](https://play.vuejs.org/#eNqFVEtP3DAQ/itTS9Vm1ZCt1J6WBZUiDvTQIsoNcwiOkzU4tmU7+9Aq/71jO1mCWuhlN/PyfPP45kAujCk2HSdLsnLMCuPBcd+Zc6pEa7T1cADWOa/bW17nYMPPtvRsDT3UVrcww+DZ0flStybpKSkWQQqPU0IVVUwr58FYvdvDWXgpu6ek1pqSHL0fS0vJw/z0xbN1jUPHY/Ys87Zkzzl4K5qG2zmcnUN2oAqg4T6bQ/wENKNXNk+CxWKsSlmLTSk7XlhedYxnWclYDiK+MkQCoK4wnVtnIiBJuuEJNA2qPof7hzkEoc8DXgg9yzYTBBFgNr4xyY4FbaK2p6qfI0iqFgtgulOe27HyQRy69Dk1JXY9C03JIeQ6wg4xWvJCqFpnlNytOcyC2wzYulQNr0Ao+Mhw0KnTTEttl/CIaIJiMz8NGBHFtYetVrPwa58/IL48Zag4N0ssquNYLYBoW16J0vOkC3VQtVqk7cG9QcHz1kj0QAlgVYkNMFk6d0bJ1pbGYKUkmtD42HmvFfi94WhOEiXwjUnBnlEz9OLTJwy5qCo44D4O7en71SIFjI/F9VuG4jEy/GHQKq5hQrJAKOc4uNVighBF5/cygS0GgOMoK+HQb7+EWvLdMM7weVIJy5kXWi0Rj+xaNRhLKRp1IvB9hxYegA6WJ1xkUe9PcF4e9a+suA3YwYiC5MQ79KlFUzw5rZCZEUtoRWuE5PaXCXmxtuWIkpJSSr39EXXHQcWYNWfP/9A/uV3QUXJjueN2E1ZhtPnSIqGS+er3T77D76Ox1VUn0fsd4y3HfewCxuT2vVMVwp74RbTX8WQI1dy5qx12xI1Fpa1K5AreeEHCCN8q/QXul+LrSC3s4nh93jltkVPDIYt5KJkcIKStCReo4rVQ/CZI6dyEzToCCJu7hAtry/1QH/qXncQB400KJwqPxZHxEyona0xS/E3rt1m9Ld1rZl+uhaxecRtP3EjtgddCyimtXyj9H/Ii3eId7uOGTkyk/wOEbQ9h)
 
   :::
 
 ## shallowReactive() {#shallowreactive}
 
-Shallow version of [`reactive()`](./reactivity-core#reactive).
+Phiên bản shallow của [`reactive()`](./reactivity-core#reactive).
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function shallowReactive<T extends object>(target: T): T
   ```
 
-- **Details**
+- **Chi tiết**
 
-  Unlike `reactive()`, there is no deep conversion: only root-level properties are reactive for a shallow reactive object. Property values are stored and exposed as-is - this also means properties with ref values will **not** be automatically unwrapped.
+  Khác với `reactive()`, không có chuyển đổi sâu: chỉ các thuộc tính cấp gốc mới là reactive cho một shallow reactive object. Giá trị thuộc tính được lưu trữ và truy cập nguyên vẹn - điều này cũng có nghĩa là các thuộc tính có giá trị ref sẽ **không** được tự động unwrap.
 
-  :::warning Use with Caution
-  Shallow data structures should only be used for root level state in a component. Avoid nesting it inside a deep reactive object as it creates a tree with inconsistent reactivity behavior which can be difficult to understand and debug.
+  :::warning Dùng thận trọng
+  Cấu trúc dữ liệu shallow chỉ nên dùng cho state cấp gốc trong component. Tránh lồng nó vào trong một reactive object sâu vì tạo ra cây với hành vi reactivity không nhất quán, khó hiểu và debug.
   :::
 
-- **Example**
+- **Ví dụ**
 
   ```js
   const state = shallowReactive({
@@ -168,35 +168,35 @@ Shallow version of [`reactive()`](./reactivity-core#reactive).
     }
   })
 
-  // mutating state's own properties is reactive
+  // thay đổi thuộc tính riêng của state là reactive
   state.foo++
 
-  // ...but does not convert nested objects
+  // ...nhưng không chuyển đổi các object lồng nhau
   isReactive(state.nested) // false
 
-  // NOT reactive
+  // KHÔNG reactive
   state.nested.bar++
   ```
 
 ## shallowReadonly() {#shallowreadonly}
 
-Shallow version of [`readonly()`](./reactivity-core#readonly).
+Phiên bản shallow của [`readonly()`](./reactivity-core#readonly).
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function shallowReadonly<T extends object>(target: T): Readonly<T>
   ```
 
-- **Details**
+- **Chi tiết**
 
-  Unlike `readonly()`, there is no deep conversion: only root-level properties are made readonly. Property values are stored and exposed as-is - this also means properties with ref values will **not** be automatically unwrapped.
+  Khác với `readonly()`, không có chuyển đổi sâu: chỉ các thuộc tính cấp gốc mới được làm readonly. Giá trị thuộc tính được lưu trữ và truy cập nguyên vẹn - điều này cũng có nghĩa là các thuộc tính có giá trị ref sẽ **không** được tự động unwrap.
 
-  :::warning Use with Caution
-  Shallow data structures should only be used for root level state in a component. Avoid nesting it inside a deep reactive object as it creates a tree with inconsistent reactivity behavior which can be difficult to understand and debug.
+  :::warning Dùng thận trọng
+  Cấu trúc dữ liệu shallow chỉ nên dùng cho state cấp gốc trong component. Tránh lồng nó vào trong một reactive object sâu vì tạo ra cây với hành vi reactivity không nhất quán, khó hiểu và debug.
   :::
 
-- **Example**
+- **Ví dụ**
 
   ```js
   const state = shallowReadonly({
@@ -206,33 +206,33 @@ Shallow version of [`readonly()`](./reactivity-core#readonly).
     }
   })
 
-  // mutating state's own properties will fail
+  // thay đổi thuộc tính riêng của state sẽ thất bại
   state.foo++
 
-  // ...but works on nested objects
+  // ...nhưng hoạt động với các object lồng nhau
   isReadonly(state.nested) // false
 
-  // works
+  // hoạt động
   state.nested.bar++
   ```
 
 ## toRaw() {#toraw}
 
-Returns the raw, original object of a Vue-created proxy.
+Trả về object gốc, nguyên bản của một proxy do Vue tạo ra.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function toRaw<T>(proxy: T): T
   ```
 
-- **Details**
+- **Chi tiết**
 
-  `toRaw()` can return the original object from proxies created by [`reactive()`](./reactivity-core#reactive), [`readonly()`](./reactivity-core#readonly), [`shallowReactive()`](#shallowreactive) or [`shallowReadonly()`](#shallowreadonly).
+  `toRaw()` có thể trả về object gốc từ các proxy được tạo bởi [`reactive()`](./reactivity-core#reactive), [`readonly()`](./reactivity-core#readonly), [`shallowReactive()`](#shallowreactive) hoặc [`shallowReadonly()`](#shallowreadonly).
 
-  This is an escape hatch that can be used to temporarily read without incurring proxy access / tracking overhead or write without triggering changes. It is **not** recommended to hold a persistent reference to the original object. Use with caution.
+  Đây là một lối thoát có thể dùng để tạm thời đọc mà không phát sinh overhead truy cập proxy / theo dõi hoặc ghi mà không kích hoạt thay đổi. **Không** khuyến nghị giữ một tham chiếu bền vững đến object gốc. Dùng thận trọng.
 
-- **Example**
+- **Ví dụ**
 
   ```js
   const foo = {}
@@ -243,33 +243,33 @@ Returns the raw, original object of a Vue-created proxy.
 
 ## markRaw() {#markraw}
 
-Marks an object so that it will never be converted to a proxy. Returns the object itself.
+Đánh dấu một object để nó sẽ không bao giờ được chuyển đổi thành proxy. Trả về chính object đó.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function markRaw<T extends object>(value: T): T
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
   const foo = markRaw({})
   console.log(isReactive(reactive(foo))) // false
 
-  // also works when nested inside other reactive objects
+  // cũng hoạt động khi lồng bên trong các reactive object khác
   const bar = reactive({ foo })
   console.log(isReactive(bar.foo)) // false
   ```
 
-  :::warning Use with Caution
-  `markRaw()` and shallow APIs such as `shallowReactive()` allow you to selectively opt-out of the default deep reactive/readonly conversion and embed raw, non-proxied objects in your state graph. They can be used for various reasons:
+  :::warning Dùng thận trọng
+  `markRaw()` và các shallow API như `shallowReactive()` cho phép bạn chọn không dùng chuyển đổi reactive/readonly sâu mặc định và nhúng các object thô, không được proxy vào graph state của bạn. Chúng có thể dùng vì nhiều lý do:
 
-  - Some values simply should not be made reactive, for example a complex 3rd party class instance, or a Vue component object.
+  - Một số giá trị đơn giản không nên được làm reactive, ví dụ: instance class phức tạp của bên thứ ba, hoặc object component Vue.
 
-  - Skipping proxy conversion can provide performance improvements when rendering large lists with immutable data sources.
+  - Bỏ qua chuyển đổi proxy có thể cải thiện hiệu suất khi render các danh sách lớn với nguồn dữ liệu bất biến.
 
-  They are considered advanced because the raw opt-out is only at the root level, so if you set a nested, non-marked raw object into a reactive object and then access it again, you get the proxied version back. This can lead to **identity hazards** - i.e. performing an operation that relies on object identity but using both the raw and the proxied version of the same object:
+  Chúng được coi là nâng cao vì việc chọn không dùng raw chỉ ở cấp gốc, vì vậy nếu bạn đặt một nested, non-marked raw object vào reactive object rồi truy cập lại, bạn sẽ nhận được phiên bản proxied. Điều này có thể dẫn đến **identity hazard** - tức là thực hiện thao tác dựa trên định danh object nhưng dùng cả phiên bản raw và proxied của cùng một object:
 
   ```js
   const foo = markRaw({
@@ -277,33 +277,33 @@ Marks an object so that it will never be converted to a proxy. Returns the objec
   })
 
   const bar = reactive({
-    // although `foo` is marked as raw, foo.nested is not.
+    // mặc dù `foo` được đánh dấu raw, foo.nested thì không.
     nested: foo.nested
   })
 
   console.log(foo.nested === bar.nested) // false
   ```
 
-  Identity hazards are in general rare. However, to properly utilize these APIs while safely avoiding identity hazards requires a solid understanding of how the reactivity system works.
+  Identity hazard thường hiếm gặp. Tuy nhiên, để sử dụng đúng các API này trong khi tránh an toàn identity hazard cần hiểu vững cách hệ thống reactivity hoạt động.
 
   :::
 
 ## effectScope() {#effectscope}
 
-Creates an effect scope object which can capture the reactive effects (i.e. computed and watchers) created within it so that these effects can be disposed together. For detailed use cases of this API, please consult its corresponding [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0041-reactivity-effect-scope.md).
+Tạo một effect scope object có thể bắt các reactive effect (tức là computed và watcher) được tạo bên trong nó để các effect này có thể được hủy bỏ cùng nhau. Để biết các trường hợp sử dụng chi tiết của API này, vui lòng tham khảo [RFC](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0041-reactivity-effect-scope.md) tương ứng.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function effectScope(detached?: boolean): EffectScope
 
   interface EffectScope {
-    run<T>(fn: () => T): T | undefined // undefined if scope is inactive
+    run<T>(fn: () => T): T | undefined // undefined nếu scope không hoạt động
     stop(): void
   }
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
   const scope = effectScope()
@@ -316,15 +316,15 @@ Creates an effect scope object which can capture the reactive effects (i.e. comp
     watchEffect(() => console.log('Count: ', doubled.value))
   })
 
-  // to dispose all effects in the scope
+  // để hủy bỏ tất cả effect trong scope
   scope.stop()
   ```
 
 ## getCurrentScope() {#getcurrentscope}
 
-Returns the current active [effect scope](#effectscope) if there is one.
+Trả về [effect scope](#effectscope) đang hoạt động hiện tại nếu có.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function getCurrentScope(): EffectScope | undefined
@@ -332,13 +332,13 @@ Returns the current active [effect scope](#effectscope) if there is one.
 
 ## onScopeDispose() {#onscopedispose}
 
-Registers a dispose callback on the current active [effect scope](#effectscope). The callback will be invoked when the associated effect scope is stopped.
+Đăng ký một dispose callback trên [effect scope](#effectscope) đang hoạt động hiện tại. Callback sẽ được gọi khi effect scope liên quan bị dừng.
 
-This method can be used as a non-component-coupled replacement of `onUnmounted` in reusable composition functions, since each Vue component's `setup()` function is also invoked in an effect scope.
+Method này có thể dùng như một thay thế cho `onUnmounted` không gắn với component trong các hàm composable có thể tái sử dụng, vì hàm `setup()` của mỗi Vue component cũng được gọi trong một effect scope.
 
-A warning will be thrown if this function is called without an active effect scope. In 3.5+, this warning can be suppressed by passing `true` as the second argument.
+Một cảnh báo sẽ được ném ra nếu hàm này được gọi mà không có effect scope đang hoạt động. Trong 3.5+, cảnh báo này có thể được bỏ qua bằng cách truyền `true` làm đối số thứ hai.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   function onScopeDispose(fn: () => void, failSilently?: boolean): void

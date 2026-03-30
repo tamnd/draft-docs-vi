@@ -2,12 +2,12 @@
 pageClass: api
 ---
 
-# Built-in Components {#built-in-components}
+# Component Dựng sẵn {#built-in-components}
 
-:::info Registration and Usage
-Built-in components can be used directly in templates without needing to be registered. They are also tree-shakeable: they are only included in the build when they are used.
+:::info Đăng ký và Sử dụng
+Các component dựng sẵn có thể được dùng trực tiếp trong template mà không cần đăng ký. Chúng cũng hỗ trợ tree-shaking: chỉ được đưa vào bản build khi được dùng đến.
 
-When using them in [render functions](/guide/extras/render-function), they need to be imported explicitly. For example:
+Khi dùng trong [render function](/guide/extras/render-function), chúng cần được import rõ ràng. Ví dụ:
 
 ```js
 import { h, Transition } from 'vue'
@@ -21,50 +21,50 @@ h(Transition, {
 
 ## `<Transition>` {#transition}
 
-Provides animated transition effects to a **single** element or component.
+Cung cấp hiệu ứng chuyển cảnh cho **một** element hoặc component đơn.
 
 - **Props**
 
   ```ts
   interface TransitionProps {
     /**
-     * Used to automatically generate transition CSS class names.
-     * e.g. `name: 'fade'` will auto expand to `.fade-enter`,
-     * `.fade-enter-active`, etc.
+     * Dùng để tự động sinh tên class CSS cho transition.
+     * Ví dụ: `name: 'fade'` sẽ tự mở rộng thành `.fade-enter`,
+     * `.fade-enter-active`, v.v.
      */
     name?: string
     /**
-     * Whether to apply CSS transition classes.
-     * Default: true
+     * Có áp dụng các class CSS transition hay không.
+     * Mặc định: true
      */
     css?: boolean
     /**
-     * Specifies the type of transition events to wait for to
-     * determine transition end timing.
-     * Default behavior is auto detecting the type that has
-     * longer duration.
+     * Chỉ định loại sự kiện transition cần chờ để
+     * xác định thời điểm kết thúc transition.
+     * Hành vi mặc định là tự phát hiện loại có
+     * thời gian dài hơn.
      */
     type?: 'transition' | 'animation'
     /**
-     * Specifies explicit durations of the transition.
-     * Default behavior is wait for the first `transitionend`
-     * or `animationend` event on the root transition element.
+     * Chỉ định thời lượng rõ ràng của transition.
+     * Hành vi mặc định là chờ sự kiện `transitionend`
+     * hoặc `animationend` đầu tiên trên element gốc của transition.
      */
     duration?: number | { enter: number; leave: number }
     /**
-     * Controls the timing sequence of leaving/entering transitions.
-     * Default behavior is simultaneous.
+     * Kiểm soát thứ tự thời gian của transition rời/vào.
+     * Hành vi mặc định là đồng thời.
      */
     mode?: 'in-out' | 'out-in' | 'default'
     /**
-     * Whether to apply transition on initial render.
-     * Default: false
+     * Có áp dụng transition khi render lần đầu hay không.
+     * Mặc định: false
      */
     appear?: boolean
 
     /**
-     * Props for customizing transition classes.
-     * Use kebab-case in templates, e.g. enter-from-class="xxx"
+     * Props để tùy chỉnh các class CSS transition.
+     * Dùng kebab-case trong template, ví dụ: enter-from-class="xxx"
      */
     enterFromClass?: string
     enterActiveClass?: string
@@ -78,7 +78,7 @@ Provides animated transition effects to a **single** element or component.
   }
   ```
 
-- **Events**
+- **Sự kiện**
 
   - `@before-enter`
   - `@before-leave`
@@ -89,20 +89,20 @@ Provides animated transition effects to a **single** element or component.
   - `@after-leave`
   - `@after-appear`
   - `@enter-cancelled`
-  - `@leave-cancelled` (`v-show` only)
+  - `@leave-cancelled` (chỉ `v-show`)
   - `@appear-cancelled`
 
-- **Example**
+- **Ví dụ**
 
-  Simple element:
+  Element đơn giản:
 
   ```vue-html
   <Transition>
-    <div v-if="ok">toggled content</div>
+    <div v-if="ok">nội dung được chuyển đổi</div>
   </Transition>
   ```
 
-  Forcing a transition by changing the `key` attribute:
+  Buộc transition bằng cách thay đổi thuộc tính `key`:
 
   ```vue-html
   <Transition>
@@ -110,7 +110,7 @@ Provides animated transition effects to a **single** element or component.
   </Transition>
   ```
 
-  Dynamic component, with transition mode + animate on appear:
+  Component động, với transition mode + animate khi xuất hiện:
 
   ```vue-html
   <Transition name="fade" mode="out-in" appear>
@@ -118,51 +118,51 @@ Provides animated transition effects to a **single** element or component.
   </Transition>
   ```
 
-  Listening to transition events:
+  Lắng nghe sự kiện transition:
 
   ```vue-html
   <Transition @after-enter="onTransitionComplete">
-    <div v-show="ok">toggled content</div>
+    <div v-show="ok">nội dung được chuyển đổi</div>
   </Transition>
   ```
 
-- **See also** [Guide - Transition](/guide/built-ins/transition)
+- **Xem thêm** [Hướng dẫn - Transition](/guide/built-ins/transition)
 
 ## `<TransitionGroup>` {#transitiongroup}
 
-Provides transition effects for **multiple** elements or components in a list.
+Cung cấp hiệu ứng transition cho **nhiều** element hoặc component trong một danh sách.
 
 - **Props**
 
-  `<TransitionGroup>` accepts the same props as `<Transition>` except `mode`, plus two additional props:
+  `<TransitionGroup>` chấp nhận các props giống `<Transition>` ngoại trừ `mode`, cộng thêm hai props bổ sung:
 
   ```ts
   interface TransitionGroupProps extends Omit<TransitionProps, 'mode'> {
     /**
-     * If not defined, renders as a fragment.
+     * Nếu không được định nghĩa, render dưới dạng fragment.
      */
     tag?: string
     /**
-     * For customizing the CSS class applied during move transitions.
-     * Use kebab-case in templates, e.g. move-class="xxx"
+     * Để tùy chỉnh class CSS áp dụng trong quá trình move transition.
+     * Dùng kebab-case trong template, ví dụ: move-class="xxx"
      */
     moveClass?: string
   }
   ```
 
-- **Events**
+- **Sự kiện**
 
-  `<TransitionGroup>` emits the same events as `<Transition>`.
+  `<TransitionGroup>` phát ra các sự kiện giống `<Transition>`.
 
-- **Details**
+- **Chi tiết**
 
-  By default, `<TransitionGroup>` doesn't render a wrapper DOM element, but one can be defined via the `tag` prop.
+  Mặc định, `<TransitionGroup>` không render một wrapper DOM element, nhưng có thể định nghĩa qua prop `tag`.
 
-  Note that every child in a `<transition-group>` must be [**uniquely keyed**](/guide/essentials/list#maintaining-state-with-key) for the animations to work properly.
+  Lưu ý rằng mọi phần tử con trong `<transition-group>` phải có [**key duy nhất**](/guide/essentials/list#maintaining-state-with-key) để animation hoạt động đúng.
 
-  `<TransitionGroup>` supports moving transitions via CSS transform. When a child's position on screen has changed after an update, it will get applied a moving CSS class (auto generated from the `name` attribute or configured with the `move-class` prop). If the CSS `transform` property is "transition-able" when the moving class is applied, the element will be smoothly animated to its destination using the [FLIP technique](https://aerotwist.com/blog/flip-your-animations/).
+  `<TransitionGroup>` hỗ trợ move transition qua CSS transform. Khi vị trí của một phần tử con trên màn hình thay đổi sau khi cập nhật, nó sẽ được áp dụng một class CSS di chuyển (được tự sinh từ thuộc tính `name` hoặc cấu hình qua prop `move-class`). Nếu thuộc tính CSS `transform` có thể "transition" khi class di chuyển được áp dụng, element sẽ được animate mượt mà đến đích bằng [kỹ thuật FLIP](https://aerotwist.com/blog/flip-your-animations/).
 
-- **Example**
+- **Ví dụ**
 
   ```vue-html
   <TransitionGroup tag="ul" name="slide">
@@ -172,28 +172,28 @@ Provides transition effects for **multiple** elements or components in a list.
   </TransitionGroup>
   ```
 
-- **See also** [Guide - TransitionGroup](/guide/built-ins/transition-group)
+- **Xem thêm** [Hướng dẫn - TransitionGroup](/guide/built-ins/transition-group)
 
 ## `<KeepAlive>` {#keepalive}
 
-Caches dynamically toggled components wrapped inside.
+Cache các component động được bọc bên trong.
 
 - **Props**
 
   ```ts
   interface KeepAliveProps {
     /**
-     * If specified, only components with names matched by
-     * `include` will be cached.
+     * Nếu được chỉ định, chỉ các component có tên khớp với
+     * `include` mới được cache.
      */
     include?: MatchPattern
     /**
-     * Any component with a name matched by `exclude` will
-     * not be cached.
+     * Bất kỳ component nào có tên khớp với `exclude` sẽ
+     * không được cache.
      */
     exclude?: MatchPattern
     /**
-     * The maximum number of component instances to cache.
+     * Số lượng tối đa các instance component được cache.
      */
     max?: number | string
   }
@@ -201,17 +201,17 @@ Caches dynamically toggled components wrapped inside.
   type MatchPattern = string | RegExp | (string | RegExp)[]
   ```
 
-- **Details**
+- **Chi tiết**
 
-  When wrapped around a dynamic component, `<KeepAlive>` caches the inactive component instances without destroying them.
+  Khi bọc xung quanh một component động, `<KeepAlive>` cache các instance component không active mà không hủy chúng.
 
-  There can only be one active component instance as the direct child of `<KeepAlive>` at any time.
+  Chỉ có thể có một instance component active là phần tử con trực tiếp của `<KeepAlive>` tại bất kỳ thời điểm nào.
 
-  When a component is toggled inside `<KeepAlive>`, its `activated` and `deactivated` lifecycle hooks will be invoked accordingly, providing an alternative to `mounted` and `unmounted`, which are not called. This applies to the direct child of `<KeepAlive>` as well as to all of its descendants.
+  Khi một component được chuyển đổi bên trong `<KeepAlive>`, các hook vòng đời `activated` và `deactivated` của nó sẽ được gọi tương ứng, thay thế cho `mounted` và `unmounted` vốn không được gọi. Điều này áp dụng cho cả phần tử con trực tiếp của `<KeepAlive>` lẫn tất cả các component con của nó.
 
-- **Example**
+- **Ví dụ**
 
-  Basic usage:
+  Sử dụng cơ bản:
 
   ```vue-html
   <KeepAlive>
@@ -219,7 +219,7 @@ Caches dynamically toggled components wrapped inside.
   </KeepAlive>
   ```
 
-  When used with `v-if` / `v-else` branches, there must be only one component rendered at a time:
+  Khi dùng với các nhánh `v-if` / `v-else`, chỉ có thể render một component tại một thời điểm:
 
   ```vue-html
   <KeepAlive>
@@ -228,7 +228,7 @@ Caches dynamically toggled components wrapped inside.
   </KeepAlive>
   ```
 
-  Used together with `<Transition>`:
+  Dùng cùng với `<Transition>`:
 
   ```vue-html
   <Transition>
@@ -238,26 +238,26 @@ Caches dynamically toggled components wrapped inside.
   </Transition>
   ```
 
-  Using `include` / `exclude`:
+  Dùng `include` / `exclude`:
 
   ```vue-html
-  <!-- comma-delimited string -->
+  <!-- chuỗi phân cách bằng dấu phẩy -->
   <KeepAlive include="a,b">
     <component :is="view"></component>
   </KeepAlive>
 
-  <!-- regex (use `v-bind`) -->
+  <!-- regex (dùng `v-bind`) -->
   <KeepAlive :include="/a|b/">
     <component :is="view"></component>
   </KeepAlive>
 
-  <!-- Array (use `v-bind`) -->
+  <!-- Mảng (dùng `v-bind`) -->
   <KeepAlive :include="['a', 'b']">
     <component :is="view"></component>
   </KeepAlive>
   ```
 
-  Usage with `max`:
+  Dùng với `max`:
 
   ```vue-html
   <KeepAlive :max="10">
@@ -265,39 +265,38 @@ Caches dynamically toggled components wrapped inside.
   </KeepAlive>
   ```
 
-- **See also** [Guide - KeepAlive](/guide/built-ins/keep-alive)
+- **Xem thêm** [Hướng dẫn - KeepAlive](/guide/built-ins/keep-alive)
 
 ## `<Teleport>` {#teleport}
 
-Renders its slot content to another part of the DOM.
+Render nội dung slot của nó đến một phần khác của DOM.
 
 - **Props**
 
   ```ts
   interface TeleportProps {
     /**
-     * Required. Specify target container.
-     * Can either be a selector or an actual element.
+     * Bắt buộc. Chỉ định container đích.
+     * Có thể là selector hoặc element thực.
      */
     to: string | HTMLElement
     /**
-     * When `true`, the content will remain in its original
-     * location instead of moved into the target container.
-     * Can be changed dynamically.
+     * Khi `true`, nội dung sẽ giữ nguyên vị trí gốc
+     * thay vì được di chuyển vào container đích.
+     * Có thể thay đổi động.
      */
     disabled?: boolean
     /**
-     * When `true`, the Teleport will defer until other
-     * parts of the application have been mounted before
-     * resolving its target. (3.5+)
+     * Khi `true`, Teleport sẽ trì hoãn đến khi các phần
+     * khác của ứng dụng được mount trước khi resolve đích. (3.5+)
      */
     defer?: boolean
   }
   ```
 
-- **Example**
+- **Ví dụ**
 
-  Specifying target container:
+  Chỉ định container đích:
 
   ```vue-html
   <Teleport to="#some-id" />
@@ -305,7 +304,7 @@ Renders its slot content to another part of the DOM.
   <Teleport to="[data-teleport]" />
   ```
 
-  Conditionally disabling:
+  Vô hiệu hóa có điều kiện:
 
   ```vue-html
   <Teleport to="#popup" :disabled="displayVideoInline">
@@ -313,20 +312,20 @@ Renders its slot content to another part of the DOM.
   </Teleport>
   ```
 
-  Defer target resolution <sup class="vt-badge" data-text="3.5+" />:
+  Trì hoãn resolve đích <sup class="vt-badge" data-text="3.5+" />:
 
   ```vue-html
   <Teleport defer to="#late-div">...</Teleport>
 
-  <!-- somewhere later in the template -->
+  <!-- ở đâu đó sau trong template -->
   <div id="late-div"></div>
   ```
 
-- **See also** [Guide - Teleport](/guide/built-ins/teleport)
+- **Xem thêm** [Hướng dẫn - Teleport](/guide/built-ins/teleport)
 
 ## `<Suspense>` <sup class="vt-badge experimental" /> {#suspense}
 
-Used for orchestrating nested async dependencies in a component tree.
+Dùng để điều phối các dependency async lồng nhau trong cây component.
 
 - **Props**
 
@@ -337,18 +336,18 @@ Used for orchestrating nested async dependencies in a component tree.
   }
   ```
 
-- **Events**
+- **Sự kiện**
 
   - `@resolve`
   - `@pending`
   - `@fallback`
 
-- **Details**
+- **Chi tiết**
 
-  `<Suspense>` accepts two slots: the `#default` slot and the `#fallback` slot. It will display the content of the fallback slot while rendering the default slot in memory.
+  `<Suspense>` chấp nhận hai slot: slot `#default` và slot `#fallback`. Nó sẽ hiển thị nội dung của fallback slot trong khi render default slot trong bộ nhớ.
 
-  If it encounters async dependencies ([Async Components](/guide/components/async) and components with [`async setup()`](/guide/built-ins/suspense#async-setup)) while rendering the default slot, it will wait until all of them are resolved before displaying the default slot.
+  Nếu gặp các dependency async ([Component async](/guide/components/async) và component có [`async setup()`](/guide/built-ins/suspense#async-setup)) khi render default slot, nó sẽ chờ cho đến khi tất cả được resolve trước khi hiển thị default slot.
 
-  By setting the Suspense as `suspensible`, all the async dependency handling will be handled by the parent Suspense. See [implementation details](https://github.com/vuejs/core/pull/6736)
+  Khi đặt Suspense là `suspensible`, tất cả việc xử lý dependency async sẽ do Suspense cha đảm nhiệm. Xem [chi tiết triển khai](https://github.com/vuejs/core/pull/6736)
 
-- **See also** [Guide - Suspense](/guide/built-ins/suspense)
+- **Xem thêm** [Hướng dẫn - Suspense](/guide/built-ins/suspense)

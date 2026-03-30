@@ -1,1 +1,1 @@
-We can render content conditionally or in a loop with the v-if and v-for directives.
+Chúng ta có thể render nội dung có điều kiện hoặc theo vòng lặp với các directive v-if và v-for.

@@ -1,10 +1,10 @@
-# SFC Syntax Specification {#sfc-syntax-specification}
+# Đặc tả Cú pháp SFC {#sfc-syntax-specification}
 
-## Overview {#overview}
+## Tổng quan {#overview}
 
-A Vue Single-File Component (SFC), conventionally using the `*.vue` file extension, is a custom file format that uses an HTML-like syntax to describe a Vue component. A Vue SFC is syntactically compatible with HTML.
+Một Vue Single-File Component (SFC), theo quy ước dùng phần mở rộng file `*.vue`, là một định dạng file tùy chỉnh sử dụng cú pháp giống HTML để mô tả một Vue component. Một Vue SFC về mặt cú pháp tương thích với HTML.
 
-Each `*.vue` file consists of three types of top-level language blocks: `<template>`, `<script>`, and `<style>`, and optionally additional custom blocks:
+Mỗi file `*.vue` bao gồm ba loại khối ngôn ngữ cấp cao nhất: `<template>`, `<script>`, và `<style>`, và tùy chọn các khối tùy chỉnh bổ sung:
 
 ```vue
 <template>
@@ -28,67 +28,67 @@ export default {
 </style>
 
 <custom1>
-  This could be e.g. documentation for the component.
+  Đây có thể là tài liệu cho component chẳng hạn.
 </custom1>
 ```
 
-## Language Blocks {#language-blocks}
+## Các Khối Ngôn ngữ {#language-blocks}
 
 ### `<template>` {#template}
 
-- Each `*.vue` file can contain at most one top-level `<template>` block.
+- Mỗi file `*.vue` có thể chứa tối đa một khối `<template>` cấp cao nhất.
 
-- Contents will be extracted and passed on to `@vue/compiler-dom`, pre-compiled into JavaScript render functions, and attached to the exported component as its `render` option.
+- Nội dung sẽ được trích xuất và truyền vào `@vue/compiler-dom`, được biên dịch trước thành các hàm render JavaScript, và được đính kèm vào component được export là tùy chọn `render` của nó.
 
 ### `<script>` {#script}
 
-- Each `*.vue` file can contain at most one `<script>` block (excluding [`<script setup>`](/api/sfc-script-setup)).
+- Mỗi file `*.vue` có thể chứa tối đa một khối `<script>` (ngoại trừ [`<script setup>`](/api/sfc-script-setup)).
 
-- The script is executed as an ES Module.
+- Script được thực thi như một ES Module.
 
-- The **default export** should be a Vue component options object, either as a plain object or as the return value of [defineComponent](/api/general#definecomponent).
+- **Default export** nên là một options object Vue component, có thể là plain object hoặc là giá trị trả về của [defineComponent](/api/general#definecomponent).
 
 ### `<script setup>` {#script-setup}
 
-- Each `*.vue` file can contain at most one `<script setup>` block (excluding normal `<script>`).
+- Mỗi file `*.vue` có thể chứa tối đa một khối `<script setup>` (ngoại trừ `<script>` thông thường).
 
-- The script is pre-processed and used as the component's `setup()` function, which means it will be executed **for each instance of the component**. Top-level bindings in `<script setup>` are automatically exposed to the template. For more details, see [dedicated documentation on `<script setup>`](/api/sfc-script-setup).
+- Script được xử lý trước và dùng như hàm `setup()` của component, nghĩa là nó sẽ được thực thi **cho mỗi instance của component**. Các binding cấp cao nhất trong `<script setup>` tự động được expose cho template. Để biết thêm chi tiết, xem [tài liệu dành riêng cho `<script setup>`](/api/sfc-script-setup).
 
 ### `<style>` {#style}
 
-- A single `*.vue` file can contain multiple `<style>` tags.
+- Một file `*.vue` có thể chứa nhiều tag `<style>`.
 
-- A `<style>` tag can have `scoped` or `module` attributes (see [SFC Style Features](/api/sfc-css-features) for more details) to help encapsulate the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
+- Một tag `<style>` có thể có các thuộc tính `scoped` hoặc `module` (xem [Tính năng Style SFC](/api/sfc-css-features) để biết thêm chi tiết) để giúp đóng gói style vào component hiện tại. Nhiều tag `<style>` với các chế độ đóng gói khác nhau có thể được pha trộn trong cùng một component.
 
-### Custom Blocks {#custom-blocks}
+### Khối Tùy chỉnh {#custom-blocks}
 
-Additional custom blocks can be included in a `*.vue` file for any project-specific needs, for example a `<docs>` block. Some real-world examples of custom blocks include:
+Các khối tùy chỉnh bổ sung có thể được đưa vào file `*.vue` cho bất kỳ nhu cầu cụ thể của dự án nào, ví dụ: khối `<docs>`. Một số ví dụ thực tế về các khối tùy chỉnh bao gồm:
 
 - [Gridsome: `<page-query>`](https://gridsome.org/docs/querying-data/)
 - [vite-plugin-vue-gql: `<gql>`](https://github.com/wheatjs/vite-plugin-vue-gql)
 - [vue-i18n: `<i18n>`](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n#i18n-custom-block)
 
-Handling of Custom Blocks will depend on tooling - if you want to build your own custom block integrations, see the [SFC custom block integrations tooling section](/guide/scaling-up/tooling#sfc-custom-block-integrations) for more details.
+Việc xử lý Khối Tùy chỉnh sẽ phụ thuộc vào tooling - nếu bạn muốn xây dựng tích hợp khối tùy chỉnh của riêng mình, xem [phần tooling tích hợp khối tùy chỉnh SFC](/guide/scaling-up/tooling#sfc-custom-block-integrations) để biết thêm chi tiết.
 
-## Automatic Name Inference {#automatic-name-inference}
+## Suy luận Tên Tự động {#automatic-name-inference}
 
-An SFC automatically infers the component's name from its **filename** in the following cases:
+Một SFC tự động suy luận tên của component từ **tên file** trong các trường hợp sau:
 
-- Dev warning formatting
-- DevTools inspection
-- Recursive self-reference, e.g. a file named `FooBar.vue` can refer to itself as `<FooBar/>` in its template. This has lower priority than explicitly registered/imported components.
+- Định dạng cảnh báo dev
+- Kiểm tra DevTools
+- Tự tham chiếu đệ quy, ví dụ: file có tên `FooBar.vue` có thể tự tham chiếu như `<FooBar/>` trong template của nó. Điều này có độ ưu tiên thấp hơn các component đã đăng ký/import rõ ràng.
 
-## Pre-Processors {#pre-processors}
+## Pre-Processor {#pre-processors}
 
-Blocks can declare pre-processor languages using the `lang` attribute. The most common case is using TypeScript for the `<script>` block:
+Các khối có thể khai báo ngôn ngữ pre-processor bằng thuộc tính `lang`. Trường hợp phổ biến nhất là dùng TypeScript cho khối `<script>`:
 
 ```vue-html
 <script lang="ts">
-  // use TypeScript
+  // dùng TypeScript
 </script>
 ```
 
-`lang` can be applied to any block - for example we can use `<style>` with [Sass](https://sass-lang.com/) and `<template>` with [Pug](https://pugjs.org/api/getting-started.html):
+`lang` có thể áp dụng cho bất kỳ khối nào - ví dụ chúng ta có thể dùng `<style>` với [Sass](https://sass-lang.com/) và `<template>` với [Pug](https://pugjs.org/api/getting-started.html):
 
 ```vue-html
 <template lang="pug">
@@ -103,15 +103,15 @@ p {{ msg }}
 </style>
 ```
 
-Note that integration with various pre-processors may differ by toolchain. Check out the respective documentation for examples:
+Lưu ý rằng việc tích hợp với các pre-processor khác nhau có thể khác nhau tùy theo toolchain. Kiểm tra tài liệu tương ứng để xem ví dụ:
 
 - [Vite](https://vite.dev/guide/features.html#css-pre-processors)
 - [Vue CLI](https://cli.vuejs.org/guide/css.html#pre-processors)
 - [webpack + vue-loader](https://vue-loader.vuejs.org/guide/pre-processors.html#using-pre-processors)
 
-## `src` Imports {#src-imports}
+## Import `src` {#src-imports}
 
-If you prefer splitting up your `*.vue` components into multiple files, you can use the `src` attribute to import an external file for a language block:
+Nếu bạn muốn tách các component `*.vue` thành nhiều file, bạn có thể dùng thuộc tính `src` để import một file bên ngoài cho một khối ngôn ngữ:
 
 ```vue
 <template src="./template.html"></template>
@@ -119,30 +119,30 @@ If you prefer splitting up your `*.vue` components into multiple files, you can 
 <script src="./script.js"></script>
 ```
 
-Beware that `src` imports follow the same path resolution rules as webpack module requests, which means:
+Lưu ý các import `src` tuân theo các quy tắc phân giải đường dẫn giống như webpack module request, nghĩa là:
 
-- Relative paths need to start with `./`
-- You can import resources from npm dependencies:
+- Đường dẫn tương đối cần bắt đầu bằng `./`
+- Bạn có thể import tài nguyên từ npm dependencies:
 
 ```vue
-<!-- import a file from the installed "todomvc-app-css" npm package -->
+<!-- import file từ package npm "todomvc-app-css" đã cài đặt -->
 <style src="todomvc-app-css/index.css" />
 ```
 
-`src` imports also work with custom blocks, e.g.:
+Import `src` cũng hoạt động với các khối tùy chỉnh, ví dụ:
 
 ```vue
 <unit-test src="./unit-test.js">
 </unit-test>
 ```
 
-:::warning Note
-While using aliases in `src`, don't start with `~`, anything after it is interpreted as a module request. This means you can reference assets inside node modules:
+:::warning Lưu ý
+Khi dùng alias trong `src`, đừng bắt đầu bằng `~`, tất cả phần sau đó được hiểu là module request. Điều này có nghĩa là bạn có thể tham chiếu tài nguyên bên trong node_modules:
 ```vue
 <img src="~some-npm-package/foo.png">
 ```
 :::
 
-## Comments {#comments}
+## Chú thích {#comments}
 
-Inside each block you shall use the comment syntax of the language being used (HTML, CSS, JavaScript, Pug, etc.). For top-level comments, use HTML comment syntax: `<!-- comment contents here -->`
+Bên trong mỗi khối bạn phải dùng cú pháp chú thích của ngôn ngữ đang được dùng (HTML, CSS, JavaScript, Pug, v.v.). Cho các chú thích cấp cao nhất, dùng cú pháp chú thích HTML: `<!-- nội dung chú thích ở đây -->`

@@ -2,9 +2,9 @@
 
 ## data {#data}
 
-A function that returns the initial reactive state for the component instance.
+Hàm trả về state phản ứng ban đầu cho instance component.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -15,17 +15,17 @@ A function that returns the initial reactive state for the component instance.
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  The function is expected to return a plain JavaScript object, which will be made reactive by Vue. After the instance is created, the reactive data object can be accessed as `this.$data`. The component instance also proxies all the properties found on the data object, so `this.a` will be equivalent to `this.$data.a`.
+  Hàm dự kiến trả về một plain JavaScript object, sẽ được Vue làm cho có tính phản ứng. Sau khi instance được tạo, data object phản ứng có thể được truy cập là `this.$data`. Instance component cũng ủy quyền tất cả thuộc tính tìm thấy trên data object, vì vậy `this.a` sẽ tương đương với `this.$data.a`.
 
-  All top-level data properties must be included in the returned data object. Adding new properties to `this.$data` is possible, but it is **not** recommended. If the desired value of a property is not yet available then an empty value such as `undefined` or `null` should be included as a placeholder to ensure that Vue knows that the property exists.
+  Tất cả thuộc tính data cấp cao nhất phải được đưa vào data object được trả về. Thêm thuộc tính mới vào `this.$data` là có thể, nhưng **không** khuyến nghị. Nếu giá trị mong muốn của một thuộc tính chưa có sẵn thì nên đưa vào một giá trị rỗng như `undefined` hoặc `null` làm placeholder để đảm bảo Vue biết thuộc tính đó tồn tại.
 
-  Properties that start with `_` or `$` will **not** be proxied on the component instance because they may conflict with Vue's internal properties and API methods. You will have to access them as `this.$data._property`.
+  Các thuộc tính bắt đầu bằng `_` hoặc `$` sẽ **không** được ủy quyền trên instance component vì chúng có thể xung đột với các thuộc tính nội bộ và phương thức API của Vue. Bạn sẽ phải truy cập chúng là `this.$data._property`.
 
-  It is **not** recommended to return objects with their own stateful behavior like browser API objects and prototype properties. The returned object should ideally be a plain object that only represents the state of the component.
+  **Không** khuyến nghị trả về các object có hành vi có trạng thái riêng như các object browser API và thuộc tính prototype. Object được trả về lý tưởng nhất là một plain object chỉ biểu diễn state của component.
 
-- **Example**
+- **Ví dụ**
 
   ```js
   export default {
@@ -39,19 +39,19 @@ A function that returns the initial reactive state for the component instance.
   }
   ```
 
-  Note that if you use an arrow function with the `data` property, `this` won't be the component's instance, but you can still access the instance as the function's first argument:
+  Lưu ý nếu bạn dùng arrow function với thuộc tính `data`, `this` sẽ không phải instance của component, nhưng bạn vẫn có thể truy cập instance là đối số đầu tiên của hàm:
 
   ```js
   data: (vm) => ({ a: vm.myProp })
   ```
 
-- **See also** [Reactivity in Depth](/guide/extras/reactivity-in-depth)
+- **Xem thêm** [Tính Phản ứng Chuyên sâu](/guide/extras/reactivity-in-depth)
 
 ## props {#props}
 
-Declare the props of a component.
+Khai báo các prop của một component.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -74,30 +74,30 @@ Declare the props of a component.
   type PropType<T> = { new (): T } | { new (): T }[]
   ```
 
-  > Types are simplified for readability.
+  > Các kiểu được đơn giản hóa để dễ đọc.
 
-- **Details**
+- **Chi tiết**
 
-  In Vue, all component props need to be explicitly declared. Component props can be declared in two forms:
+  Trong Vue, tất cả prop của component cần được khai báo rõ ràng. Prop component có thể được khai báo ở hai dạng:
 
-  - Simple form using an array of strings
-  - Full form using an object where each property key is the name of the prop, and the value is the prop's type (a constructor function) or advanced options.
+  - Dạng đơn giản dùng mảng chuỗi
+  - Dạng đầy đủ dùng object trong đó mỗi key thuộc tính là tên của prop, và giá trị là kiểu của prop (hàm constructor) hoặc các tùy chọn nâng cao.
 
-  With object-based syntax, each prop can further define the following options:
+  Với cú pháp dựa trên object, mỗi prop có thể định nghĩa thêm các tùy chọn sau:
 
-  - **`type`**: Can be one of the following native constructors: `String`, `Number`, `Boolean`, `Array`, `Object`, `Date`, `Function`, `Symbol`, any custom constructor function or an array of those. In development mode, Vue will check if a prop's value matches the declared type, and will throw a warning if it doesn't. See [Prop Validation](/guide/components/props#prop-validation) for more details.
+  - **`type`**: Có thể là một trong các constructor native sau: `String`, `Number`, `Boolean`, `Array`, `Object`, `Date`, `Function`, `Symbol`, bất kỳ hàm constructor tùy chỉnh nào hoặc mảng của những cái đó. Trong chế độ development, Vue sẽ kiểm tra xem giá trị của prop có khớp với kiểu được khai báo không, và sẽ ném cảnh báo nếu không. Xem [Xác thực Prop](/guide/components/props#prop-validation) để biết thêm chi tiết.
 
-    Also note that a prop with `Boolean` type affects its value casting behavior in both development and production. See [Boolean Casting](/guide/components/props#boolean-casting) for more details.
+    Cũng lưu ý rằng prop có kiểu `Boolean` ảnh hưởng đến hành vi ép kiểu giá trị của nó trong cả development và production. Xem [Boolean Casting](/guide/components/props#boolean-casting) để biết thêm chi tiết.
 
-  - **`default`**: Specifies a default value for the prop when it is not passed by the parent or has `undefined` value. Object or array defaults must be returned using a factory function. The factory function also receives the raw props object as the argument.
+  - **`default`**: Chỉ định giá trị mặc định cho prop khi nó không được truyền bởi cha hoặc có giá trị `undefined`. Mặc định object hoặc array phải được trả về bằng hàm factory. Hàm factory cũng nhận object props thô là đối số.
 
-  - **`required`**: Defines if the prop is required. In a non-production environment, a console warning will be thrown if this value is truthy and the prop is not passed.
+  - **`required`**: Định nghĩa liệu prop có bắt buộc không. Trong môi trường không phải production, cảnh báo console sẽ được ném nếu giá trị này là truthy và prop không được truyền.
 
-  - **`validator`**: Custom validator function that takes the prop value and props object as arguments. In development mode, a console warning will be thrown if this function returns a falsy value (i.e. the validation fails).
+  - **`validator`**: Hàm validator tùy chỉnh nhận giá trị prop và props object làm đối số. Trong chế độ development, cảnh báo console sẽ được ném nếu hàm này trả về giá trị falsy (tức là xác thực thất bại).
 
-- **Example**
+- **Ví dụ**
 
-  Simple declaration:
+  Khai báo đơn giản:
 
   ```js
   export default {
@@ -105,14 +105,14 @@ Declare the props of a component.
   }
   ```
 
-  Object declaration with validations:
+  Khai báo object với xác thực:
 
   ```js
   export default {
     props: {
-      // type check
+      // kiểm tra kiểu
       height: Number,
-      // type check plus other validations
+      // kiểm tra kiểu cộng các xác thực khác
       age: {
         type: Number,
         default: 0,
@@ -125,15 +125,15 @@ Declare the props of a component.
   }
   ```
 
-- **See also**
-  - [Guide - Props](/guide/components/props)
-  - [Guide - Typing Component Props](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
+- **Xem thêm**
+  - [Hướng dẫn - Props](/guide/components/props)
+  - [Hướng dẫn - Khai báo Kiểu cho Props của Component](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
 
 ## computed {#computed}
 
-Declare computed properties to be exposed on the component instance.
+Khai báo các thuộc tính computed để expose trên instance component.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -158,13 +158,13 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  The option accepts an object where the key is the name of the computed property, and the value is either a computed getter, or an object with `get` and `set` methods (for writable computed properties).
+  Tùy chọn nhận một object trong đó key là tên của thuộc tính computed, và giá trị là computed getter, hoặc object có phương thức `get` và `set` (cho thuộc tính computed có thể ghi).
 
-  All getters and setters have their `this` context automatically bound to the component instance.
+  Tất cả getter và setter đều có context `this` được tự động ràng buộc với instance component.
 
-  Note that if you use an arrow function with a computed property, `this` won't point to the component's instance, but you can still access the instance as the function's first argument:
+  Lưu ý nếu bạn dùng arrow function với thuộc tính computed, `this` sẽ không trỏ đến instance của component, nhưng bạn vẫn có thể truy cập instance là đối số đầu tiên của hàm:
 
   ```js
   export default {
@@ -174,7 +174,7 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **Example**
+- **Ví dụ**
 
   ```js
   export default {
@@ -186,7 +186,7 @@ Declare computed properties to be exposed on the component instance.
       aDouble() {
         return this.a * 2
       },
-      // writable
+      // có thể ghi
       aPlus: {
         get() {
           return this.a + 1
@@ -207,15 +207,15 @@ Declare computed properties to be exposed on the component instance.
   }
   ```
 
-- **See also**
-  - [Guide - Computed Properties](/guide/essentials/computed)
-  - [Guide - Typing Computed Properties](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
+- **Xem thêm**
+  - [Hướng dẫn - Thuộc tính Computed](/guide/essentials/computed)
+  - [Hướng dẫn - Khai báo Kiểu cho Thuộc tính Computed](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
 
 ## methods {#methods}
 
-Declare methods to be mixed into the component instance.
+Khai báo các phương thức để trộn vào instance component.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -225,13 +225,13 @@ Declare methods to be mixed into the component instance.
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  Declared methods can be directly accessed on the component instance, or used in template expressions. All methods have their `this` context automatically bound to the component instance, even when passed around.
+  Các phương thức được khai báo có thể được truy cập trực tiếp trên instance component, hoặc dùng trong biểu thức template. Tất cả phương thức đều có context `this` được tự động ràng buộc với instance component, ngay cả khi được truyền đi.
 
-  Avoid using arrow functions when declaring methods, as they will not have access to the component instance via `this`.
+  Tránh dùng arrow function khi khai báo method, vì chúng sẽ không có quyền truy cập vào instance component qua `this`.
 
-- **Example**
+- **Ví dụ**
 
   ```js
   export default {
@@ -250,13 +250,13 @@ Declare methods to be mixed into the component instance.
   }
   ```
 
-- **See also** [Event Handling](/guide/essentials/event-handling)
+- **Xem thêm** [Xử lý Sự kiện](/guide/essentials/event-handling)
 
 ## watch {#watch}
 
-Declare watch callbacks to be invoked on data change.
+Khai báo các watch callback được gọi khi data thay đổi.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -275,32 +275,32 @@ Declare watch callbacks to be invoked on data change.
 
   type ObjectWatchOptionItem = {
     handler: WatchCallback | string
-    immediate?: boolean // default: false
-    deep?: boolean // default: false
-    flush?: 'pre' | 'post' | 'sync' // default: 'pre'
+    immediate?: boolean // mặc định: false
+    deep?: boolean // mặc định: false
+    flush?: 'pre' | 'post' | 'sync' // mặc định: 'pre'
     onTrack?: (event: DebuggerEvent) => void
     onTrigger?: (event: DebuggerEvent) => void
   }
   ```
 
-  > Types are simplified for readability.
+  > Các kiểu được đơn giản hóa để dễ đọc.
 
-- **Details**
+- **Chi tiết**
 
-  The `watch` option expects an object where keys are the reactive component instance properties to watch (e.g. properties declared via `data` or `computed`) — and values are the corresponding callbacks. The callback receives the new value and the old value of the watched source.
+  Tùy chọn `watch` nhận một object trong đó key là các thuộc tính instance component phản ứng cần watch (ví dụ: thuộc tính được khai báo qua `data` hoặc `computed`) - và giá trị là callback tương ứng. Callback nhận giá trị mới và giá trị cũ của nguồn được watch.
 
-  In addition to a root-level property, the key can also be a simple dot-delimited path, e.g. `a.b.c`. Note that this usage does **not** support complex expressions - only dot-delimited paths are supported. If you need to watch complex data sources, use the imperative [`$watch()`](/api/component-instance#watch) API instead.
+  Ngoài thuộc tính cấp cao nhất, key cũng có thể là đường dẫn phân cách bằng dấu chấm đơn giản, ví dụ `a.b.c`. Lưu ý cách dùng này **không** hỗ trợ biểu thức phức tạp - chỉ các đường dẫn phân cách bằng dấu chấm được hỗ trợ. Nếu bạn cần watch các nguồn dữ liệu phức tạp, hãy dùng API [`$watch()`](/api/component-instance#watch) bắt buộc thay thế.
 
-  The value can also be a string of a method name (declared via `methods`), or an object that contains additional options. When using the object syntax, the callback should be declared under the `handler` field. Additional options include:
+  Giá trị cũng có thể là chuỗi tên phương thức (được khai báo qua `methods`), hoặc object chứa các tùy chọn bổ sung. Khi dùng cú pháp object, callback nên được khai báo dưới trường `handler`. Các tùy chọn bổ sung bao gồm:
 
-  - **`immediate`**: trigger the callback immediately on watcher creation. Old value will be `undefined` on the first call.
-  - **`deep`**: force deep traversal of the source if it is an object or an array, so that the callback fires on deep mutations. See [Deep Watchers](/guide/essentials/watchers#deep-watchers).
-  - **`flush`**: adjust the callback's flush timing. See [Callback Flush Timing](/guide/essentials/watchers#callback-flush-timing) and [`watchEffect()`](/api/reactivity-core#watcheffect).
-  - **`onTrack / onTrigger`**: debug the watcher's dependencies. See [Watcher Debugging](/guide/extras/reactivity-in-depth#watcher-debugging).
+  - **`immediate`**: kích hoạt callback ngay lập tức khi tạo watcher. Giá trị cũ sẽ là `undefined` ở lần gọi đầu tiên.
+  - **`deep`**: buộc duyệt sâu nguồn nếu nó là object hoặc array, để callback được kích hoạt khi có thay đổi sâu. Xem [Deep Watcher](/guide/essentials/watchers#deep-watchers).
+  - **`flush`**: điều chỉnh thời điểm flush của callback. Xem [Thời điểm Flush Callback](/guide/essentials/watchers#callback-flush-timing) và [`watchEffect()`](/api/reactivity-core#watcheffect).
+  - **`onTrack / onTrigger`**: debug các dependency của watcher. Xem [Debug Watcher](/guide/extras/reactivity-in-depth#watcher-debugging).
 
-  Avoid using arrow functions when declaring watch callbacks as they will not have access to the component instance via `this`.
+  Tránh dùng arrow function khi khai báo watch callback vì chúng sẽ không có quyền truy cập vào instance component qua `this`.
 
-- **Example**
+- **Ví dụ**
 
   ```js
   export default {
@@ -316,31 +316,31 @@ Declare watch callbacks to be invoked on data change.
       }
     },
     watch: {
-      // watching top-level property
+      // watch thuộc tính cấp cao nhất
       a(val, oldVal) {
         console.log(`new: ${val}, old: ${oldVal}`)
       },
-      // string method name
+      // tên phương thức chuỗi
       b: 'someMethod',
-      // the callback will be called whenever any of the watched object properties change regardless of their nested depth
+      // callback sẽ được gọi bất cứ khi nào bất kỳ thuộc tính object được watch thay đổi bất kể độ sâu lồng nhau của chúng
       c: {
         handler(val, oldVal) {
           console.log('c changed')
         },
         deep: true
       },
-      // watching a single nested property:
+      // watch một thuộc tính lồng nhau đơn lẻ:
       'c.d': function (val, oldVal) {
-        // do something
+        // làm gì đó
       },
-      // the callback will be called immediately after the start of the observation
+      // callback sẽ được gọi ngay sau khi bắt đầu quan sát
       e: {
         handler(val, oldVal) {
           console.log('e changed')
         },
         immediate: true
       },
-      // you can pass array of callbacks, they will be called one-by-one
+      // bạn có thể truyền mảng callback, chúng sẽ được gọi lần lượt
       f: [
         'handle1',
         function handle2(val, oldVal) {
@@ -368,13 +368,13 @@ Declare watch callbacks to be invoked on data change.
   }
   ```
 
-- **See also** [Watchers](/guide/essentials/watchers)
+- **Xem thêm** [Watcher](/guide/essentials/watchers)
 
 ## emits {#emits}
 
-Declare the custom events emitted by the component.
+Khai báo các custom event được emit bởi component.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -388,20 +388,20 @@ Declare the custom events emitted by the component.
   type EmitValidator = (...args: unknown[]) => boolean
   ```
 
-- **Details**
+- **Chi tiết**
 
-  Emitted events can be declared in two forms:
+  Sự kiện được emit có thể được khai báo ở hai dạng:
 
-  - Simple form using an array of strings
-  - Full form using an object where each property key is the name of the event, and the value is either `null` or a validator function.
+  - Dạng đơn giản dùng mảng chuỗi
+  - Dạng đầy đủ dùng object trong đó mỗi key thuộc tính là tên của sự kiện, và giá trị là `null` hoặc hàm validator.
 
-  The validation function will receive the additional arguments passed to the component's `$emit` call. For example, if `this.$emit('foo', 1)` is called, the corresponding validator for `foo` will receive the argument `1`. The validator function should return a boolean to indicate whether the event arguments are valid.
+  Hàm validator sẽ nhận các đối số bổ sung được truyền vào lời gọi `$emit` của component. Ví dụ, nếu `this.$emit('foo', 1)` được gọi, validator tương ứng cho `foo` sẽ nhận đối số `1`. Hàm validator nên trả về boolean để chỉ ra liệu các đối số sự kiện có hợp lệ không.
 
-  Note that the `emits` option affects which event listeners are considered component event listeners, rather than native DOM event listeners. The listeners for declared events will be removed from the component's `$attrs` object, so they will not be passed through to the component's root element. See [Fallthrough Attributes](/guide/components/attrs) for more details.
+  Lưu ý tùy chọn `emits` ảnh hưởng đến việc event listener nào được coi là component event listener, thay vì native DOM event listener. Các listener cho sự kiện được khai báo sẽ bị xóa khỏi object `$attrs` của component, vì vậy chúng sẽ không được truyền qua element gốc của component. Xem [Thuộc tính Kế thừa](/guide/components/attrs) để biết thêm chi tiết.
 
-- **Example**
+- **Ví dụ**
 
-  Array syntax:
+  Cú pháp mảng:
 
   ```js
   export default {
@@ -412,20 +412,20 @@ Declare the custom events emitted by the component.
   }
   ```
 
-  Object syntax:
+  Cú pháp object:
 
   ```js
   export default {
     emits: {
-      // no validation
+      // không có xác thực
       click: null,
 
-      // with validation
+      // có xác thực
       submit: (payload) => {
         if (payload.email && payload.password) {
           return true
         } else {
-          console.warn(`Invalid submit event payload!`)
+          console.warn(`Payload sự kiện submit không hợp lệ!`)
           return false
         }
       }
@@ -433,15 +433,15 @@ Declare the custom events emitted by the component.
   }
   ```
 
-- **See also**
-  - [Guide - Fallthrough Attributes](/guide/components/attrs)
-  - [Guide - Typing Component Emits](/guide/typescript/options-api#typing-component-emits) <sup class="vt-badge ts" />
+- **Xem thêm**
+  - [Hướng dẫn - Thuộc tính Kế thừa](/guide/components/attrs)
+  - [Hướng dẫn - Khai báo Kiểu cho Emits của Component](/guide/typescript/options-api#typing-component-emits) <sup class="vt-badge ts" />
 
 ## expose {#expose}
 
-Declare exposed public properties when the component instance is accessed by a parent via template refs.
+Khai báo các thuộc tính công khai được expose khi instance component được cha truy cập qua template ref.
 
-- **Type**
+- **Kiểu**
 
   ```ts
   interface ComponentOptions {
@@ -449,19 +449,19 @@ Declare exposed public properties when the component instance is accessed by a p
   }
   ```
 
-- **Details**
+- **Chi tiết**
 
-  By default, a component instance exposes all instance properties to the parent when accessed via `$parent`, `$root`, or template refs. This can be undesirable, since a component most likely has internal state or methods that should be kept private to avoid tight coupling.
+  Mặc định, instance component expose tất cả thuộc tính instance cho cha khi được truy cập qua `$parent`, `$root`, hoặc template ref. Điều này có thể không mong muốn, vì component hầu như có state nội bộ hoặc method nên được giữ private để tránh coupling chặt chẽ.
 
-  The `expose` option expects a list of property name strings. When `expose` is used, only the properties explicitly listed will be exposed on the component's public instance.
+  Tùy chọn `expose` nhận danh sách chuỗi tên thuộc tính. Khi `expose` được dùng, chỉ các thuộc tính được liệt kê rõ ràng mới được expose trên instance công khai của component.
 
-  `expose` only affects user-defined properties - it does not filter out built-in component instance properties.
+  `expose` chỉ ảnh hưởng đến các thuộc tính do người dùng định nghĩa - nó không lọc ra các thuộc tính instance component dựng sẵn.
 
-- **Example**
+- **Ví dụ**
 
   ```js
   export default {
-    // only `publicMethod` will be available on the public instance
+    // chỉ `publicMethod` sẽ có sẵn trên instance công khai
     expose: ['publicMethod'],
     methods: {
       publicMethod() {

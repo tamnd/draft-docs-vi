@@ -1,6 +1,6 @@
-# List Rendering {#list-rendering}
+# Render Danh sách {#list-rendering}
 
-We can use the `v-for` directive to render a list of elements based on a source array:
+Chúng ta có thể dùng directive `v-for` để render danh sách các element dựa trên mảng nguồn:
 
 ```vue-html
 <ul>
@@ -10,13 +10,13 @@ We can use the `v-for` directive to render a list of elements based on a source 
 </ul>
 ```
 
-Here `todo` is a local variable representing the array element currently being iterated on. It's only accessible on or inside the `v-for` element, similar to a function scope.
+Ở đây `todo` là biến cục bộ đại diện cho phần tử mảng đang được lặp lại. Nó chỉ có thể truy cập trên hoặc bên trong element `v-for`, tương tự phạm vi hàm.
 
-Notice how we are also giving each todo object a unique `id`, and binding it as the <a target="_blank" href="/api/built-in-special-attributes.html#key">special `key` attribute</a> for each `<li>`. The `key` allows Vue to accurately move each `<li>` to match the position of its corresponding object in the array.
+Chú ý cách chúng ta cũng gán cho mỗi todo object một `id` duy nhất, và bind nó làm <a target="_blank" href="/api/built-in-special-attributes.html#key">thuộc tính đặc biệt `key`</a> cho mỗi `<li>`. `key` cho phép Vue di chuyển chính xác từng `<li>` để khớp với vị trí của object tương ứng trong mảng.
 
-There are two ways to update the list:
+Có hai cách để cập nhật danh sách:
 
-1. Call [mutating methods](https://stackoverflow.com/questions/9009879/which-javascript-array-functions-are-mutating) on the source array:
+1. Gọi [mutating method](https://stackoverflow.com/questions/9009879/which-javascript-array-functions-are-mutating) trên mảng nguồn:
 
    <div class="composition-api">
 
@@ -33,7 +33,7 @@ There are two ways to update the list:
 
    </div>
 
-2. Replace the array with a new one:
+2. Thay thế mảng bằng một mảng mới:
 
    <div class="composition-api">
 
@@ -50,6 +50,6 @@ There are two ways to update the list:
 
    </div>
 
-Here we have a simple todo list - try to implement the logic for `addTodo()` and `removeTodo()` methods to make it work!
+Đây chúng ta có một danh sách todo đơn giản - hãy thử triển khai logic cho các method `addTodo()` và `removeTodo()` để làm cho nó hoạt động!
 
-More details on `v-for`: <a target="_blank" href="/guide/essentials/list.html">Guide - List Rendering</a>
+Chi tiết thêm về `v-for`: <a target="_blank" href="/guide/essentials/list.html">Hướng dẫn - Render Danh sách</a>
