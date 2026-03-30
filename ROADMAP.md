@@ -2,8 +2,6 @@
 
 Step-by-step translation plan for [`vuejs-translations/docs-vi`](https://github.com/vuejs-translations/docs-vi), the official Vietnamese translation of the Vue.js documentation.
 
-Word counts include code blocks and markdown syntax (raw file content).
-
 ## Site Shell
 
 > Get the site running in Vietnamese with correct navigation and UI labels.
@@ -24,7 +22,7 @@ Word counts include code blocks and markdown syntax (raw file content).
 
 ## Essentials
 
-> 13 pages covering the core of Vue. Translate in order, roughly 3-4 pages per PR.
+> 13 pages covering the core of Vue. 
 > ~4,870 lines, ~20,000 words
 
 - [ ] `src/guide/essentials/application.md`
@@ -104,7 +102,7 @@ Word counts include code blocks and markdown syntax (raw file content).
 
 ## API Reference
 
-> 29 pages plus the ApiIndex component. Can be worked on in parallel with Scaling Up and Advanced.
+> 29 pages plus the ApiIndex component.
 > ~7,965 lines, ~30,900 words
 
 - [ ] `src/api/application.md`
