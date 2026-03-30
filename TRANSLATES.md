@@ -70,7 +70,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `src/guide/essentials/template-syntax.md`
 - [ ] `src/guide/essentials/class-and-style.md`
 - [ ] `src/guide/essentials/component-basics.md`
-- [ ] `src/guide/essentials/computed.md`
+- [x] `src/guide/essentials/computed.md`
 - [ ] `src/guide/essentials/conditional.md`
 - [ ] `src/guide/essentials/event-handling.md`
 - [ ] `src/guide/essentials/forms.md`
@@ -115,7 +115,7 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [x] `src/guide/essentials/application.md`
 - [ ] `src/guide/essentials/class-and-style.md`
 - [ ] `src/guide/essentials/component-basics.md`
-- [ ] `src/guide/essentials/computed.md`
+- [x] `src/guide/essentials/computed.md`
 - [ ] `src/guide/essentials/conditional.md`
 - [ ] `src/guide/essentials/event-handling.md`
 - [ ] `src/guide/essentials/forms.md`
