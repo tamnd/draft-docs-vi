@@ -29,7 +29,7 @@ const options = ref([
   <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-user-inputs-in-vue" title="Bài học miễn phí về input người dùng trong Vue.js"/>
 </div>
 
-Khi làm việc với form ở phía frontend, chúng ta thường cần đồng bộ state của các phần tử input trong form với state tương ứng ở phía JavaScript. Nếu tự nối `value` binding và `change` event listener bằng tay thì khá vất vả:
+Khi làm việc với form ở phía frontend, chúng ta thường cần đồng bộ state của các phần tử input trong form với state tương ứng ở phía JavaScript. Nếu tự nối `value` binding và `change` event listener bằng tay thì khá cồng kềnh:
 
 ```vue-html
 <input
@@ -47,7 +47,7 @@ Ngoài ra, `v-model` có thể dùng trên nhiều loại input khác nhau, trê
 
 - `<input>` kiểu văn bản và phần tử `<textarea>` dùng property `value` và event `input`;
 - `<input type="checkbox">` và `<input type="radio">` dùng property `checked` và event `change`;
-- `<select>` dùng `value` làm prop và `change` làm event.
+- `<select>` dùng `value` làm property và `change` làm event.
 
 ::: tip Lưu ý
 `v-model` sẽ bỏ qua các thuộc tính `value`, `checked` hoặc `selected` ban đầu có trên phần tử form. Nó luôn xem state JavaScript đang được bind hiện tại là nguồn dữ liệu chuẩn. Bạn nên khai báo giá trị ban đầu ở phía JavaScript, bằng <span class="options-api">option [`data`](/api/options-state.html#data)</span><span class="composition-api">[reactivity API](/api/reactivity-core.html#reactivity-api-core)</span>.
@@ -80,7 +80,7 @@ Ngoài ra, `v-model` có thể dùng trên nhiều loại input khác nhau, trê
 
 <span id="vmodel-ime-tip"></span>
 ::: tip Lưu ý
-Với những ngôn ngữ cần dùng [IME](https://en.wikipedia.org/wiki/Input_method) (tiếng Trung, tiếng Nhật, tiếng Hàn...), bạn sẽ thấy `v-model` không được cập nhật trong lúc đang nhập bằng IME. Nếu bạn cũng muốn phản ứng với những cập nhật đó, hãy tự dùng `input` event listener và `value` binding thay vì `v-model`.
+Với những ngôn ngữ cần dùng [IME](https://en.wikipedia.org/wiki/Input_method) (tiếng Trung, tiếng Nhật, tiếng Hàn...), bạn sẽ thấy `v-model` không cập nhật trong quá trình nhập ký tự bằng IME. Nếu bạn cũng muốn phản ứng với những cập nhật đó, hãy tự dùng `input` event listener và `value` binding thay vì `v-model`.
 :::
 
 ### Multiline Text {#multiline-text}
@@ -442,7 +442,7 @@ Thuộc tính `true-value` và `false-value` không ảnh hưởng tới thuộc
 
 ### `.lazy` {#lazy}
 
-Mặc định, `v-model` đồng bộ input với dữ liệu sau mỗi `input` event, ngoại trừ trường hợp nhập bằng IME như [đã nói ở trên](#vmodel-ime-tip). Bạn có thể thêm modifier `lazy` để thay vào đó chỉ đồng bộ sau `change` event:
+Mặc định, `v-model` đồng bộ input với state sau mỗi `input` event, ngoại trừ trường hợp nhập bằng IME như [đã nói ở trên](#vmodel-ime-tip). Bạn có thể thêm modifier `lazy` để thay vào đó chỉ đồng bộ sau `change` event:
 
 ```vue-html
 <!-- đồng bộ sau "change" thay vì "input" -->

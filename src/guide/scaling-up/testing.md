@@ -33,7 +33,7 @@ Kiểm thử tự động giúp bạn và cả nhóm xây dựng các ứng dụ
 
 Trong hướng dẫn này, chúng ta sẽ đi qua các thuật ngữ cơ bản và đưa ra khuyến nghị về công cụ nên chọn cho ứng dụng Vue 3.
 
-Có một phần dành riêng cho Vue nói về composable. Xem [Kiểm Thử Composable](#testing-composables) bên dưới để biết thêm chi tiết.
+Có một mục dành riêng về composable trong Vue. Xem [Kiểm Thử Composable](#testing-composables) bên dưới để biết thêm chi tiết.
 
 ## Khi Nào Nên Kiểm Thử {#when-to-test}
 
@@ -70,7 +70,7 @@ export function increment(current, max = 10) {
 }
 ```
 
-Vì nó rất khép kín, ta có thể dễ dàng gọi hàm increment và khẳng định rằng nó trả về đúng giá trị mong đợi, nên ta sẽ viết một Unit Test.
+Vì nó rất khép kín, ta có thể dễ dàng gọi hàm increment và khẳng định rằng nó trả về đúng giá trị mong đợi, nên ta sẽ viết một unit test.
 
 Nếu bất kỳ assertion nào dưới đây thất bại, ta sẽ biết rõ vấn đề nằm ngay trong hàm `increment`.
 

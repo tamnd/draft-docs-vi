@@ -145,7 +145,7 @@ const app = createSSRApp({
 })
 
 // việc mount ứng dụng SSR ở client giả định rằng
-// HTML đã được render sẵn, nên nó sẽ hydration
+// HTML đã được render sẵn, nên nó sẽ thực hiện hydration
 // thay vì mount các node DOM mới.
 app.mount('#app')
 ```
@@ -256,7 +256,7 @@ Lưu ý rằng nếu một thư viện bên thứ ba không được viết vớ
 
 ### Ô Nhiễm State Giữa Các Request {#cross-request-state-pollution}
 
-Trong chương Quản Lý State, ta đã giới thiệu [một pattern quản lý state đơn giản bằng Reactivity API](state-management#simple-state-management-with-reactivity-api). Trong bối cảnh SSR, pattern này cần thêm một vài điều chỉnh.
+Trong phần [Quản Lý State](./state-management), ta đã giới thiệu [một pattern quản lý state đơn giản bằng Reactivity API](state-management#simple-state-management-with-reactivity-api). Trong bối cảnh SSR, pattern này cần thêm một vài điều chỉnh.
 
 Pattern đó khai báo state dùng chung ở phạm vi gốc của module JavaScript. Điều này biến chúng thành **singleton**, tức chỉ có một instance của object reactive trong suốt vòng đời của ứng dụng. Điều này hoạt động đúng như mong đợi trong ứng dụng Vue chạy thuần phía client, vì module của ứng dụng được khởi tạo lại từ đầu cho mỗi lần tải trang trong trình duyệt.
 

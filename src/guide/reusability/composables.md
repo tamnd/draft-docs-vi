@@ -310,7 +310,7 @@ Những giới hạn này rất quan trọng vì đây là các ngữ cảnh mà
 
 ## Tách Composable Để Tổ Chức Mã {#extracting-composables-for-code-organization}
 
-Composable có thể được tách ra không chỉ để tái sử dụng, mà còn để tổ chức mã. Khi độ phức tạp của component tăng lên, bạn có thể sẽ kết thúc với những component quá lớn, khó điều hướng và khó suy luận. Composition API cho bạn toàn quyền linh hoạt để tổ chức mã component thành các hàm nhỏ hơn dựa trên từng mối quan tâm logic:
+Composable có thể được tách ra không chỉ để tái sử dụng, mà còn để tổ chức mã. Khi độ phức tạp của component tăng lên, bạn có thể sẽ gặp phải những component quá lớn, khó điều hướng và khó suy luận. Composition API cho bạn toàn quyền linh hoạt để tổ chức mã component thành các hàm nhỏ hơn dựa trên từng mối quan tâm logic:
 
 ```vue
 <script setup>
@@ -324,7 +324,7 @@ const { qux } = useFeatureC(baz)
 </script>
 ```
 
-Ở một mức độ nào đó, bạn có thể xem những composable được tách ra này như các dịch vụ ở phạm vi component có thể giao tiếp với nhau.
+Ở một mức độ nào đó, bạn có thể xem những composable được tách ra này như các dịch vụ trong phạm vi component có thể giao tiếp với nhau.
 
 ## Dùng Composable Trong Options API {#using-composables-in-options-api}
 
@@ -360,7 +360,7 @@ Người dùng chuyển sang từ Vue 2 có thể đã quen với option [mixins
 
 3. **Giao tiếp ngầm giữa các mixin**: nhiều mixin cần tương tác với nhau sẽ phải dựa vào các key property dùng chung, khiến chúng bị gắn chặt với nhau một cách ngầm định. Với composable, giá trị trả về từ composable này có thể được truyền vào composable khác dưới dạng đối số, giống hệt hàm bình thường.
 
-Vì các lý do trên, chúng tôi không còn khuyến nghị dùng mixin trong Vue 3 nữa. Tính năng này chỉ được giữ lại vì lý do chuyển đổi và để người dùng quen tay.
+Vì các lý do trên, chúng tôi không còn khuyến nghị dùng mixin trong Vue 3 nữa. Tính năng này chỉ được giữ lại vì lý do chuyển đổi và để tương thích với mã cũ.
 
 ### So Với Renderless Component {#vs-renderless-components}
 

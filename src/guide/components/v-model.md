@@ -38,7 +38,7 @@ Giá trị do `defineModel()` trả về là một ref. Nó có thể được t
 - `.value` của nó được đồng bộ với giá trị được bind từ `v-model` của component cha;
 - Khi component con thay đổi nó, giá trị được bind ở component cha cũng sẽ được cập nhật.
 
-Điều này có nghĩa là bạn cũng có thể bind ref này vào một phần tử input gốc bằng `v-model`, giúp việc bọc các phần tử input gốc mà vẫn giữ nguyên cách dùng `v-model` trở nên rất thẳng thắn:
+Điều này có nghĩa là bạn cũng có thể bind ref này vào một phần tử input gốc bằng `v-model`, giúp việc bọc các phần tử input gốc mà vẫn giữ nguyên cách dùng `v-model` trở nên rất đơn giản:
 
 ```vue
 <script setup>
@@ -262,7 +262,7 @@ defineEmits(['update:title'])
 </div>
 <div class="options-api">
 
-Trong trường hợp này, thay vì prop mặc định `modelValue` và sự kiện `update:modelValue`, component con nên chờ một prop `title` và phát ra sự kiện `update:title` để cập nhật giá trị ở component cha:
+Trong trường hợp này, thay vì prop mặc định `modelValue` và sự kiện `update:modelValue`, component con nên nhận prop `title` và phát ra sự kiện `update:title` để cập nhật giá trị ở component cha:
 
 ```vue [MyComponent.vue]
 <script>

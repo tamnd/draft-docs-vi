@@ -8,7 +8,7 @@ outline: deep
 
 ## Kế Thừa Thuộc Tính {#attribute-inheritance}
 
-"Thuộc tính kế thừa" là một thuộc tính hoặc listener sự kiện `v-on` được truyền vào component nhưng không được khai báo tường minh trong [props](./props) hoặc [emits](./events#declaring-emitted-events) của component nhận. Một vài ví dụ phổ biến là các thuộc tính `class`, `style` và `id`.
+"Thuộc tính kế thừa" là một thuộc tính hoặc event listener `v-on` được truyền vào component nhưng không được khai báo tường minh trong [props](./props) hoặc [emits](./events#declaring-emitted-events) của component nhận. Một vài ví dụ phổ biến là các thuộc tính `class`, `style` và `id`.
 
 Khi một component render ra đúng một phần tử gốc, các thuộc tính kế thừa sẽ tự động được thêm vào thuộc tính của phần tử gốc đó. Ví dụ, giả sử component `<MyButton>` có template như sau:
 
@@ -48,7 +48,7 @@ Khi đó DOM cuối cùng sẽ trở thành:
 
 ### Kế Thừa Listener `v-on` {#v-on-listener-inheritance}
 
-Quy tắc tương tự cũng áp dụng cho listener sự kiện `v-on`:
+Quy tắc tương tự cũng áp dụng cho event listener `v-on`:
 
 ```vue-html
 <MyButton @click="onClick" />
@@ -79,7 +79,7 @@ Nếu bạn **không** muốn một component tự động kế thừa thuộc t
 
 <div class="composition-api">
 
- Từ bản 3.3, bạn cũng có thể dùng trực tiếp [`defineOptions`](/api/sfc-script-setup#defineoptions) trong `<script setup>`:
+Từ bản 3.3, bạn cũng có thể dùng trực tiếp [`defineOptions`](/api/sfc-script-setup#defineoptions) trong `<script setup>`:
 
 ```vue
 <script setup>
@@ -100,13 +100,13 @@ Bạn có thể truy cập trực tiếp các thuộc tính kế thừa này tro
 <span>Thuộc tính kế thừa: {{ $attrs }}</span>
 ```
 
-Object `$attrs` bao gồm mọi thuộc tính không được khai báo trong options `props` hoặc `emits` của component (ví dụ `class`, `style`, listener `v-on`, v.v.).
+Object `$attrs` bao gồm mọi thuộc tính không được khai báo trong options `props` hoặc `emits` của component (ví dụ `class`, `style`, event listener `v-on`, v.v.).
 
 Một vài lưu ý:
 
 - Khác với props, thuộc tính kế thừa giữ nguyên kiểu chữ gốc của chúng trong JavaScript, vì vậy một thuộc tính như `foo-bar` phải được truy cập bằng `$attrs['foo-bar']`.
 
-- Một listener sự kiện `v-on` như `@click` sẽ được lộ ra trên object dưới dạng một hàm nằm ở `$attrs.onClick`.
+- Một event listener `v-on` như `@click` sẽ được lộ ra trên object dưới dạng một hàm nằm ở `$attrs.onClick`.
 
 Quay lại ví dụ `<MyButton>` ở [phần trước](#attribute-inheritance), đôi khi ta cần bọc phần tử `<button>` thật bằng một `<div>` bổ sung để phục vụ việc styling:
 
@@ -116,7 +116,7 @@ Quay lại ví dụ `<MyButton>` ở [phần trước](#attribute-inheritance), 
 </div>
 ```
 
-Ta muốn mọi thuộc tính kế thừa như `class` và listener `v-on` được áp dụng vào `<button>` bên trong, không phải `<div>` bên ngoài. Ta có thể làm điều đó với `inheritAttrs: false` và `v-bind="$attrs"`:
+Ta muốn mọi thuộc tính kế thừa như `class` và event listener `v-on` được áp dụng vào `<button>` bên trong, không phải `<div>` bên ngoài. Ta có thể làm điều đó với `inheritAttrs: false` và `v-bind="$attrs"`:
 
 ```vue-html{2}
 <div class="btn-wrapper">

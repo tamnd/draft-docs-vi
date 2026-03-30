@@ -8,11 +8,11 @@ outline: deep
 `<Suspense>` là một tính năng thử nghiệm. Chưa có gì bảo đảm nó sẽ đạt trạng thái ổn định, và API có thể thay đổi trước khi điều đó xảy ra.
 :::
 
-`<Suspense>` là một component dựng sẵn dùng để điều phối các dependency bất đồng bộ trong cây component. Nó có thể render trạng thái loading trong lúc chờ nhiều dependency bất đồng bộ lồng sâu trong cây component được giải quyết xong.
+`<Suspense>` là một component dựng sẵn dùng để điều phối các dependency async trong cây component. Nó có thể render trạng thái loading trong lúc chờ nhiều dependency async lồng sâu trong cây component được giải quyết xong.
 
-## Dependency bất đồng bộ {#async-dependencies}
+## Dependency async {#async-dependencies}
 
-Để giải thích vấn đề mà `<Suspense>` cố gắng giải quyết và cách nó tương tác với các dependency bất đồng bộ này, hãy tưởng tượng một cấu trúc component như sau:
+Để giải thích vấn đề mà `<Suspense>` cố gắng giải quyết và cách nó tương tác với các dependency async này, hãy tưởng tượng một cấu trúc component như sau:
 
 ```
 <Suspense>
@@ -26,9 +26,9 @@ outline: deep
 
 Trong cây component này có nhiều component lồng nhau mà việc render của chúng phụ thuộc vào một số tài nguyên bất đồng bộ cần được giải quyết trước. Nếu không có `<Suspense>`, mỗi component sẽ phải tự xử lý trạng thái loading / error và trạng thái đã tải xong của riêng nó. Trong trường hợp xấu nhất, ta có thể thấy ba loading spinner cùng xuất hiện trên trang, còn nội dung thì hiển thị vào những thời điểm khác nhau.
 
-Component `<Suspense>` cho phép ta hiển thị các trạng thái loading / error ở cấp cao trong lúc chờ những dependency bất đồng bộ lồng nhau đó được giải quyết.
+Component `<Suspense>` cho phép ta hiển thị các trạng thái loading / error ở cấp cao trong lúc chờ những dependency async lồng nhau đó được giải quyết.
 
-Có hai loại dependency bất đồng bộ mà `<Suspense>` có thể chờ:
+Có hai loại dependency async mà `<Suspense>` có thể chờ:
 
 1. Component có hook `setup()` bất đồng bộ. Điều này bao gồm cả component dùng `<script setup>` với biểu thức `await` ở cấp cao nhất.
 
@@ -50,7 +50,7 @@ export default {
 }
 ```
 
-Nếu dùng `<script setup>`, việc có biểu thức `await` ở cấp cao nhất sẽ tự động biến component đó thành một dependency bất đồng bộ:
+Nếu dùng `<script setup>`, việc có biểu thức `await` ở cấp cao nhất sẽ tự động biến component đó thành một dependency async:
 
 ```vue
 <script setup>
@@ -65,7 +65,7 @@ const posts = await res.json()
 
 ### Async Component {#async-components}
 
-Async component mặc định là **"suspensible"**. Điều đó có nghĩa là nếu trong chuỗi cha của nó có một `<Suspense>`, nó sẽ được xem là dependency bất đồng bộ của `<Suspense>` đó. Khi ấy, trạng thái loading sẽ do `<Suspense>` điều khiển, còn các option loading, error, delay và timeout của chính component sẽ bị bỏ qua.
+Async component mặc định là **"suspensible"**. Điều đó có nghĩa là nếu trong chuỗi cha của nó có một `<Suspense>`, nó sẽ được xem là dependency async của `<Suspense>` đó. Khi ấy, trạng thái loading sẽ do `<Suspense>` điều khiển, còn các option loading, error, delay và timeout của chính component sẽ bị bỏ qua.
 
 Async component có thể từ chối để `Suspense` điều khiển bằng cách đặt `suspensible: false` trong option của nó, nhờ đó component luôn tự kiểm soát trạng thái loading của chính mình.
 
@@ -75,7 +75,7 @@ Component `<Suspense>` có hai slot: `#default` và `#fallback`. Cả hai slot n
 
 ```vue-html
 <Suspense>
-  <!-- component có dependency bất đồng bộ lồng nhau -->
+  <!-- component có dependency async lồng nhau -->
   <Dashboard />
 
   <!-- trạng thái loading qua slot #fallback -->
@@ -85,13 +85,13 @@ Component `<Suspense>` có hai slot: `#default` và `#fallback`. Cả hai slot n
 </Suspense>
 ```
 
-Ở lần render đầu tiên, `<Suspense>` sẽ render nội dung của default slot trong bộ nhớ. Nếu gặp bất kỳ dependency bất đồng bộ nào trong quá trình đó, nó sẽ chuyển sang trạng thái **pending**. Trong trạng thái pending, nội dung fallback sẽ được hiển thị. Khi mọi dependency bất đồng bộ đã gặp đều được giải quyết xong, `<Suspense>` sẽ chuyển sang trạng thái **resolved** và hiển thị nội dung default slot đã được giải quyết.
+Ở lần render đầu tiên, `<Suspense>` sẽ render nội dung của default slot trong bộ nhớ. Nếu gặp bất kỳ dependency async nào trong quá trình đó, nó sẽ chuyển sang trạng thái **pending**. Trong trạng thái pending, nội dung fallback sẽ được hiển thị. Khi mọi dependency async đã gặp đều được giải quyết xong, `<Suspense>` sẽ chuyển sang trạng thái **resolved** và hiển thị nội dung default slot đã được giải quyết.
 
-Nếu không gặp dependency bất đồng bộ nào ở lần render đầu tiên, `<Suspense>` sẽ đi thẳng vào trạng thái resolved.
+Nếu không gặp dependency async nào ở lần render đầu tiên, `<Suspense>` sẽ đi thẳng vào trạng thái resolved.
 
-Khi đã ở trạng thái resolved, `<Suspense>` chỉ quay lại trạng thái pending nếu root node của slot `#default` bị thay thế. Những dependency bất đồng bộ mới nằm sâu hơn trong cây sẽ **không** khiến `<Suspense>` quay lại trạng thái pending.
+Khi đã ở trạng thái resolved, `<Suspense>` chỉ quay lại trạng thái pending nếu root node của slot `#default` bị thay thế. Những dependency async mới nằm sâu hơn trong cây sẽ **không** khiến `<Suspense>` quay lại trạng thái pending.
 
-Khi việc quay lại đó xảy ra, nội dung fallback sẽ không được hiển thị ngay lập tức. Thay vào đó, `<Suspense>` sẽ tiếp tục hiển thị nội dung `#default` trước đó trong lúc chờ nội dung mới và các dependency bất đồng bộ của nó được giải quyết. Hành vi này có thể được cấu hình bằng prop `timeout`: `<Suspense>` sẽ chuyển sang hiển thị fallback nếu việc render nội dung default mới mất lâu hơn `timeout` mili giây. Nếu `timeout` bằng `0`, nội dung fallback sẽ được hiển thị ngay khi nội dung default bị thay thế.
+Khi việc quay lại đó xảy ra, nội dung fallback sẽ không được hiển thị ngay lập tức. Thay vào đó, `<Suspense>` sẽ tiếp tục hiển thị nội dung `#default` trước đó trong lúc chờ nội dung mới và các dependency async của nó được giải quyết. Hành vi này có thể được cấu hình bằng prop `timeout`: `<Suspense>` sẽ chuyển sang hiển thị fallback nếu việc render nội dung default mới mất lâu hơn `timeout` mili giây. Nếu `timeout` bằng `0`, nội dung fallback sẽ được hiển thị ngay khi nội dung default bị thay thế.
 
 ## Event {#events}
 
@@ -101,7 +101,7 @@ Những event này có thể được dùng, chẳng hạn, để hiển thị m
 
 ## Xử lý lỗi {#error-handling}
 
-Hiện tại, bản thân `<Suspense>` chưa cung cấp cơ chế xử lý lỗi riêng. Tuy vậy, bạn có thể dùng option [`errorCaptured`](/api/options-lifecycle#errorcaptured) hoặc hook [`onErrorCaptured()`](/api/composition-api-lifecycle#onerrorcaptured) để bắt và xử lý lỗi bất đồng bộ trong component cha của `<Suspense>`.
+Hiện tại, bản thân `<Suspense>` chưa cung cấp cơ chế xử lý lỗi riêng. Tuy vậy, bạn có thể dùng option [`errorCaptured`](/api/options-lifecycle#errorcaptured) hoặc hook [`onErrorCaptured()`](/api/composition-api-lifecycle#onerrorcaptured) để bắt và xử lý lỗi async trong component cha của `<Suspense>`.
 
 ## Kết hợp với component khác {#combining-with-other-components}
 
@@ -161,7 +161,7 @@ Khi ta có nhiều async component, điều thường gặp ở route lồng nha
 </Suspense>
 ```
 
-Nếu bạn không đặt prop `suspensible`, `<Suspense>` bên trong sẽ bị `<Suspense>` cha xem như một component đồng bộ. Điều đó có nghĩa là nó có fallback slot riêng, và nếu cả hai component `Dynamic` cùng thay đổi một lúc, có thể sẽ xuất hiện node rỗng và nhiều vòng patch trong lúc `<Suspense>` con đang tải cây dependency của riêng nó, điều này có thể không mong muốn. Khi prop này được bật, toàn bộ việc xử lý dependency bất đồng bộ sẽ được giao cho `<Suspense>` cha, bao gồm cả các event được phát ra, còn `<Suspense>` bên trong chỉ đóng vai trò như một boundary bổ sung cho việc giải quyết dependency và patch.
+Nếu bạn không đặt prop `suspensible`, `<Suspense>` bên trong sẽ bị `<Suspense>` cha xem như một component đồng bộ. Điều đó có nghĩa là nó có fallback slot riêng, và nếu cả hai component `Dynamic` cùng thay đổi một lúc, có thể sẽ xuất hiện node rỗng và nhiều vòng patch trong lúc `<Suspense>` con đang tải cây dependency của riêng nó, điều này có thể không mong muốn. Khi prop này được bật, toàn bộ việc xử lý dependency async sẽ được giao cho `<Suspense>` cha, bao gồm cả các event được phát ra, còn `<Suspense>` bên trong chỉ đóng vai trò như một boundary bổ sung cho việc giải quyết dependency và patch.
 
 ---
 

@@ -106,7 +106,7 @@ Một cách khác để hiển thị phần tử theo điều kiện là dùng d
 
 Trong khi đó, `v-show` đơn giản hơn nhiều: phần tử luôn được render bất kể điều kiện ban đầu là gì, rồi việc ẩn/hiện được xử lý bằng CSS.
 
-Nói chung, `v-if` có chi phí chuyển trạng thái cao hơn, còn `v-show` có chi phí render ban đầu cao hơn. Vì vậy, hãy ưu tiên `v-show` nếu bạn cần bật tắt một thứ rất thường xuyên, và ưu tiên `v-if` nếu điều kiện đó hiếm khi thay đổi trong lúc chạy.
+Nói chung, `v-if` có chi phí chuyển trạng thái cao hơn, còn `v-show` có chi phí render ban đầu cao hơn. Vì vậy, hãy ưu tiên `v-show` nếu bạn cần bật/tắt một thứ rất thường xuyên, và ưu tiên `v-if` nếu điều kiện đó hiếm khi thay đổi trong lúc chạy.
 
 ## `v-if` cùng `v-for` {#v-if-with-v-for}
 

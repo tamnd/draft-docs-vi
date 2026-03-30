@@ -10,7 +10,7 @@
 
 ## Ví dụ cơ bản {#basic-example}
 
-Biểu thức trong template rất tiện, nhưng chúng chỉ phù hợp cho những thao tác đơn giản. Nếu nhồi quá nhiều logic vào template, mã sẽ trở nên rối và khó bảo trì. Ví dụ, giả sử chúng ta có một object chứa một mảng lồng bên trong:
+Biểu thức trong template rất tiện, nhưng chúng chỉ phù hợp cho những thao tác đơn giản. Nếu nhồi quá nhiều logic vào template, mã sẽ trở nên rối và khó bảo trì. Ví dụ, giả sử chúng ta có một object chứa một mảng được lồng bên trong:
 
 <div class="options-api">
 
@@ -130,7 +130,7 @@ const publishedBooksMessage = computed(() => {
 
 [Thử trên Playground](https://play.vuejs.org/#eNp1kE9Lw0AQxb/KI5dtoTainkoaaREUoZ5EEONhm0ybYLO77J9CCfnuzta0vdjbzr6Zeb95XbIwZroPlMySzJW2MR6OfDB5oZrWaOvRwZIsfbOnCUrdmuCpQo+N1S0ET4pCFarUynnI4GttMT9PjLpCAUq2NIN41bXCkyYxiZ9rrX/cDF/xDYiPQLjDDRbVXqqSHZ5DUw2tg3zP8lK6pvxHe2DtvSasDs6TPTAT8F2ofhzh0hTygm5pc+I1Yb1rXE3VMsKsyDm5JcY/9Y5GY8xzHI+wnIpVw4nTI/10R2rra+S4xSPEJzkBvvNNs310ztK/RDlLLjy1Zic9cQVkJn+R7gIwxJGlMXiWnZEq77orhH3Pq2NH9DjvTfpfSBSbmA==)
 
-Ở đây, chúng ta đã khai báo một thuộc tính computed tên là `publishedBooksMessage`. Hàm `computed()` nhận vào một [hàm getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), và giá trị trả về là một **computed ref**. Tương tự ref thông thường, bạn có thể truy cập kết quả computed qua `publishedBooksMessage.value`. Computed ref cũng sẽ được tự động mở bọc trong template, nên bạn có thể dùng nó trong biểu thức template mà không cần `.value`.
+Ở đây, chúng ta đã khai báo một thuộc tính computed tên là `publishedBooksMessage`. Hàm `computed()` nhận vào một [hàm getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), và giá trị trả về là một **computed ref**. Tương tự như ref thông thường, bạn có thể truy cập kết quả computed qua `publishedBooksMessage.value`. Computed ref cũng sẽ được tự động mở bọc trong template, nên bạn có thể dùng nó trong biểu thức template mà không cần `.value`.
 
 Một thuộc tính computed sẽ tự động theo dõi các dependency phản ứng của nó. Vue biết rằng phép tính của `publishedBooksMessage` phụ thuộc vào `author.books`, nên nó sẽ cập nhật mọi binding đang phụ thuộc vào `publishedBooksMessage` khi `author.books` thay đổi.
 
@@ -170,7 +170,7 @@ function calculateBooksMessage() {
 
 </div>
 
-Thay vì dùng thuộc tính computed, ta có thể định nghĩa cùng logic đó dưới dạng method. Xét về kết quả cuối cùng thì hai cách này đúng là giống nhau. Tuy nhiên, điểm khác biệt nằm ở chỗ **thuộc tính computed được cache dựa trên các dependency phản ứng của nó.** Một thuộc tính computed chỉ được tính lại khi một trong các dependency phản ứng của nó thay đổi. Điều đó có nghĩa là chừng nào `author.books` chưa đổi, việc truy cập `publishedBooksMessage` nhiều lần sẽ trả về ngay kết quả đã tính trước đó mà không cần chạy lại hàm getter.
+Thay vì dùng thuộc tính computed, ta có thể định nghĩa cùng logic đó dưới dạng method. Xét về kết quả cuối cùng thì hai cách này đúng là giống nhau. Tuy nhiên, điểm khác biệt nằm ở chỗ **thuộc tính computed được cache dựa trên các dependency phản ứng của nó.** Một thuộc tính computed chỉ được tính lại khi một trong các dependency phản ứng của nó thay đổi. Điều đó có nghĩa là miễn là `author.books` chưa thay đổi, việc truy cập `publishedBooksMessage` nhiều lần sẽ trả về ngay kết quả đã tính trước đó mà không cần chạy lại hàm getter.
 
 Điều đó cũng có nghĩa là thuộc tính computed dưới đây sẽ không bao giờ cập nhật, vì `Date.now()` không phải dependency phản ứng:
 
@@ -379,8 +379,8 @@ const alwaysSmall = computed({
 
 ### Getter nên không có side effect {#getters-should-be-side-effect-free}
 
-Điều quan trọng cần nhớ là hàm getter của computed chỉ nên thực hiện phép tính thuần và không tạo side effect. Ví dụ, **đừng thay đổi state khác, gửi request bất đồng bộ, hay sửa DOM bên trong getter của computed!** Hãy xem một thuộc tính computed như cách khai báo để mô tả việc lấy ra một giá trị từ những giá trị khác. Nhiệm vụ duy nhất của nó là tính toán và trả về giá trị đó. Ở phần sau của hướng dẫn, chúng ta sẽ nói về cách thực hiện side effect khi state thay đổi bằng [watcher](./watchers).
+Điều quan trọng cần nhớ là hàm getter của computed chỉ nên thực hiện tính toán thuần túy và không tạo side effect. Ví dụ, **đừng thay đổi state khác, gửi request bất đồng bộ, hay sửa DOM bên trong getter của computed!** Hãy xem một thuộc tính computed như một khai báo mô tả cách lấy ra một giá trị dẫn xuất từ những giá trị khác. Nhiệm vụ duy nhất của nó là tính toán và trả về giá trị đó. Ở phần sau của hướng dẫn, chúng ta sẽ nói về cách thực hiện side effect khi state thay đổi bằng [watcher](./watchers).
 
 ### Tránh thay đổi giá trị computed {#avoid-mutating-computed-value}
 
-Giá trị trả về từ một thuộc tính computed là state được suy ra. Hãy xem nó như một ảnh chụp tạm thời: mỗi khi state nguồn thay đổi, một ảnh chụp mới sẽ được tạo ra. Việc sửa một ảnh chụp như vậy không có nhiều ý nghĩa, nên giá trị computed cần được xem là chỉ đọc và không nên bị thay đổi trực tiếp. Thay vào đó, hãy cập nhật state nguồn mà nó đang phụ thuộc vào để kích hoạt phép tính mới.
+Giá trị trả về từ một thuộc tính computed là state được suy ra. Hãy xem nó như một bản chụp nhanh (snapshot): mỗi khi state nguồn thay đổi, một bản chụp mới sẽ được tạo ra. Việc sửa một bản chụp như vậy không có nhiều ý nghĩa, nên giá trị computed cần được xem là chỉ đọc và không nên bị thay đổi trực tiếp. Thay vào đó, hãy cập nhật state nguồn mà nó đang phụ thuộc vào để kích hoạt tính toán lại.

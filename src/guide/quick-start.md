@@ -16,7 +16,7 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 - Nếu bạn đã quen với Node.js và build tool, bạn cũng có thể thử luôn một dự án hoàn chỉnh ngay trong trình duyệt qua [StackBlitz](https://vite.new/vue).
 
-- Để xem hướng dẫn từng bước về thiết lập được khuyến nghị, hãy xem tutorial tương tác trên [Scrimba](http://scrimba.com/links/vue-quickstart), nơi bạn sẽ được hướng dẫn cách chạy, chỉnh sửa, và triển khai ứng dụng Vue đầu tiên của mình.
+- Để xem hướng dẫn từng bước về thiết lập được khuyến nghị, hãy thử [hướng dẫn tương tác trên Scrimba](http://scrimba.com/links/vue-quickstart), nơi bạn sẽ được hướng dẫn cách chạy, chỉnh sửa, và triển khai ứng dụng Vue đầu tiên của mình.
 
 ## Tạo ứng dụng Vue {#creating-a-vue-application}
 
@@ -69,7 +69,7 @@ Lệnh này sẽ cài và chạy [create-vue](https://github.com/vuejs/create-vu
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Prettier for code formatting? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Có</span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add Vue DevTools 7 extension for debugging? (experimental) <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Có</span></span>
 <span></span>
-<span style="color:#A6ACCD;">Đang scaffold dự án vào ./<span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span>...</span>
+<span style="color:#A6ACCD;">Đang tạo dự án vào ./<span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span>...</span>
 <span style="color:#A6ACCD;">Hoàn tất.</span></code></pre></div>
 
 Nếu bạn chưa chắc về một tùy chọn nào đó, cứ nhấn Enter để chọn `No` trước. Sau khi dự án được tạo xong, hãy làm theo hướng dẫn để cài đặt dependencies và khởi động dev server:
@@ -107,8 +107,8 @@ Giờ đây bạn đã có dự án Vue đầu tiên đang chạy. Lưu ý rằn
 
 - Thiết lập IDE được khuyến nghị là [Visual Studio Code](https://code.visualstudio.com/) + [Vue - Official extension](https://marketplace.visualstudio.com/items?itemName=Vue.volar). Nếu bạn dùng editor khác, hãy xem phần [hỗ trợ IDE](/guide/scaling-up/tooling#ide-support).
 - Chi tiết hơn về công cụ phát triển, bao gồm cả tích hợp với các backend framework, được trình bày trong [Hướng dẫn công cụ](/guide/scaling-up/tooling).
-- Để hiểu thêm về Vite, build tool nằm bên dưới, hãy xem [tài liệu Vite](https://vite.dev/).
-- Nếu bạn chọn sử dụng TypeScript, hãy xem [Hướng dẫn sử dụng TypeScript](typescript/overview).
+- Để hiểu thêm về Vite, build tool nền tảng phía sau, hãy xem [tài liệu Vite](https://vite.dev/).
+- Nếu bạn chọn sử dụng TypeScript, hãy xem [Hướng dẫn sử dụng TypeScript](/guide/typescript/overview).
 
 Khi bạn sẵn sàng đưa ứng dụng lên production, hãy chạy lệnh sau:
 
@@ -264,7 +264,7 @@ Lưu ý rằng ở đây chúng ta đang dùng `<script type="module">`, và URL
 
 </div>
 
-### Bật Import maps {#enabling-import-maps}
+### Bật Import Maps {#enabling-import-maps}
 
 Trong ví dụ ở trên, chúng ta import từ URL CDN đầy đủ, nhưng ở phần còn lại của tài liệu bạn sẽ thấy đoạn mã như thế này:
 

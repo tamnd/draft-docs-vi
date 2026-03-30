@@ -10,9 +10,9 @@ Thông thường, khi cần truyền dữ liệu từ component cha sang compone
 
 <!-- https://www.figma.com/file/yNDTtReM2xVgjcGVRzChss/prop-drilling -->
 
-Hãy lưu ý rằng dù component `<Footer>` có thể hoàn toàn không cần đến những prop này, nó vẫn phải khai báo và chuyển tiếp chúng chỉ để `<DeepChild>` có thể truy cập được. Nếu chuỗi component cha còn dài hơn nữa, nhiều component khác trên đường truyền cũng sẽ bị ảnh hưởng. Điều này được gọi là "props drilling" và rõ ràng là không mấy dễ chịu.
+Hãy lưu ý rằng dù component `<Footer>` có thể hoàn toàn không cần đến những prop này, nó vẫn phải khai báo và chuyển tiếp chúng chỉ để `<DeepChild>` có thể truy cập được. Nếu chuỗi component cha còn dài hơn nữa, nhiều component khác trên đường truyền cũng sẽ bị ảnh hưởng. Điều này được gọi là "prop drilling" và rõ ràng là không mấy dễ chịu.
 
-Ta có thể giải quyết props drilling bằng `provide` và `inject`. Một component cha có thể đóng vai trò **dependency provider** cho toàn bộ hậu duệ của nó. Bất kỳ component nào trong cây hậu duệ, bất kể sâu đến đâu, đều có thể **inject** dependency do các component ở phía trên trong chuỗi cha cung cấp.
+Ta có thể giải quyết prop drilling bằng `provide` và `inject`. Một component cha có thể đóng vai trò **dependency provider** cho toàn bộ hậu duệ của nó. Bất kỳ component nào trong cây hậu duệ, bất kể sâu đến đâu, đều có thể **inject** dependency do các component ở phía trên trong chuỗi cha cung cấp.
 
 ![Provide/inject scheme](./images/provide-inject.png)
 

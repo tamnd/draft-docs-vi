@@ -73,14 +73,14 @@ vnode.key // null
 ```
 
 :::warning Lưu ý
-Interface `VNode` đầy đủ còn có nhiều property nội bộ khác, nhưng bạn nên tránh phụ thuộc vào bất kỳ property nào ngoài những thứ được liệt kê ở đây. Điều này giúp tránh vỡ ngoài ý muốn khi property nội bộ thay đổi.
+Interface `VNode` đầy đủ còn có nhiều property nội bộ khác, nhưng bạn nên tránh phụ thuộc vào bất kỳ property nào ngoài những thứ được liệt kê ở đây. Điều này giúp tránh lỗi không mong muốn khi các property nội bộ thay đổi.
 :::
 
 ### Khai Báo Render Function {#declaring-render-functions}
 
 <div class="composition-api">
 
-Khi dùng template với Composition API, giá trị trả về của hook `setup()` được dùng để lộ dữ liệu ra template. Nhưng khi dùng render function, ta có thể trả về trực tiếp chính render function:
+Khi dùng template với Composition API, giá trị trả về của hook `setup()` được dùng để expose dữ liệu ra template. Nhưng khi dùng render function, ta có thể trả về trực tiếp chính render function:
 
 ```js
 import { ref, h } from 'vue'
@@ -288,7 +288,7 @@ Nếu có mã phụ thuộc vào namespace toàn cục `JSX`, bạn có thể gi
 
 ## Một Số Mẫu Render Function Thường Gặp {#render-function-recipes}
 
-Bên dưới là một số mẫu phổ biến để hiện thực tính năng template bằng render function / JSX tương đương.
+Bên dưới là một số mẫu phổ biến để thực hiện các tính năng của template bằng render function / JSX tương đương.
 
 ### `v-if` {#v-if}
 

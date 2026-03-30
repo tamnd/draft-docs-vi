@@ -1,4 +1,4 @@
-﻿# Plugin {#plugins}
+# Plugin {#plugins}
 
 ## Giới Thiệu {#introduction}
 
@@ -10,7 +10,7 @@ import { createApp } from 'vue'
 const app = createApp({})
 
 app.use(myPlugin, {
-  /* option tùy chọn */
+  /* các option tùy chọn */
 })
 ```
 
@@ -73,7 +73,7 @@ export default {
 
 Hàm `$translate` của ta sẽ nhận một chuỗi như `greetings.hello`, tìm trong cấu hình do người dùng cung cấp và trả về giá trị đã dịch.
 
-Object chứa các khóa đã dịch nên được truyền vào plugin khi cài đặt thông qua đối số bổ sung của `app.use()`:
+Object chứa các chuỗi đã dịch nên được truyền vào plugin khi cài đặt thông qua đối số bổ sung của `app.use()`:
 
 ```js
 import i18nPlugin from './plugins/i18n'
@@ -95,7 +95,7 @@ Hãy dùng global properties một cách tiết chế, vì mọi thứ sẽ nhan
 
 ### Provide / Inject Với Plugin {#provide-inject-with-plugins}
 
-Plugin cũng cho phép ta dùng `provide` để giúp người dùng plugin truy cập được một hàm hoặc thuộc tính. Ví dụ, ta có thể cho ứng dụng quyền truy cập vào tham số `options` để dùng object chứa bản dịch.
+Plugin cũng cho phép ta dùng `provide` để giúp người dùng plugin truy cập được một hàm hoặc thuộc tính. Ví dụ, ta có thể cho ứng dụng quyền truy cập vào đối số `options` để dùng object chứa bản dịch.
 
 ```js [plugins/i18n.js]
 export default {

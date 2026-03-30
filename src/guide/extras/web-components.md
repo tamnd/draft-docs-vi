@@ -187,7 +187,7 @@ defineCustomElement(MyComponent, {
 
 `defineCustomElement` cũng hoạt động với Vue Single-File Component (SFC). Tuy nhiên, với thiết lập công cụ mặc định, phần `<style>` trong SFC vẫn sẽ bị tách ra và gộp vào một file CSS duy nhất trong build production. Khi dùng SFC như một custom element, ta thường muốn chèn các thẻ `<style>` vào shadow root của custom element thay vào đó.
 
-Bộ công cụ SFC chính thức hỗ trợ import SFC ở "custom element mode" (yêu cầu `@vitejs/plugin-vue@^1.4.0` hoặc `vue-loader@^16.5.0`). Một SFC được nạp ở chế độ custom element sẽ inline các thẻ `<style>` thành chuỗi CSS và lộ chúng qua option `styles` của component. `defineCustomElement` sẽ nhận được các chuỗi này và chèn chúng vào shadow root của phần tử khi phần tử được khởi tạo.
+Bộ công cụ SFC chính thức hỗ trợ import SFC ở "custom element mode" (yêu cầu `@vitejs/plugin-vue@^1.4.0` hoặc `vue-loader@^16.5.0`). Một SFC được nạp ở chế độ custom element sẽ inline các thẻ `<style>` thành chuỗi CSS và expose chúng qua option `styles` của component. `defineCustomElement` sẽ nhận được các chuỗi này và chèn chúng vào shadow root của phần tử khi phần tử được khởi tạo.
 
 Để bật chế độ này, chỉ cần kết thúc tên file component bằng `.ce.vue`:
 

@@ -160,7 +160,7 @@ export default {
 
 Directive này hữu ích hơn thuộc tính `autofocus` vì nó không chỉ hoạt động lúc tải trang, mà còn hoạt động khi phần tử được Vue chèn vào một cách động.
 
-Trong trường hợp có thể, hãy ưu tiên template khai báo cùng directive dựng sẵn như `v-bind`, vì chúng hiệu quả hơn và thân thiện với render phía server hơn.
+Trong trường hợp có thể, hãy ưu tiên template khai báo cùng directive dựng sẵn như `v-bind`, vì chúng hiệu quả hơn và thân thiện với kết xuất phía máy chủ hơn.
 
 ## Hook Của Directive {#directive-hooks}
 

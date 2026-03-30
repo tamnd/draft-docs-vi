@@ -43,7 +43,7 @@ App (root component)
 
 ## Mount ứng dụng {#mounting-the-app}
 
-Một application instance sẽ chưa render gì cả cho đến khi phương thức `.mount()` của nó được gọi. Phương thức này nhận vào một đối số "container", có thể là một phần tử DOM thật hoặc một chuỗi selector:
+Một application instance sẽ chưa render gì cả cho đến khi phương thức `.mount()` của nó được gọi. Phương thức này nhận vào một đối số là phần tử chứa, có thể là một phần tử DOM thật hoặc một chuỗi selector:
 
 ```html
 <div id="app"></div>
@@ -53,13 +53,13 @@ Một application instance sẽ chưa render gì cả cho đến khi phương th
 app.mount('#app')
 ```
 
-Nội dung của root component sẽ được render vào bên trong phần tử container. Bản thân phần tử container không được tính là một phần của ứng dụng.
+Nội dung của root component sẽ được render vào bên trong phần tử chứa. Bản thân phần tử chứa không được tính là một phần của ứng dụng.
 
 Phương thức `.mount()` luôn nên được gọi sau khi bạn đã cấu hình xong ứng dụng và đăng ký xong các asset cần thiết. Cũng cần lưu ý rằng giá trị trả về của nó, khác với các phương thức đăng ký asset, là root component instance chứ không phải application instance.
 
 ### Template của component gốc viết ngay trong DOM {#in-dom-root-component-template}
 
-Template của root component thường nằm ngay trong chính component đó. Tuy nhiên, bạn cũng có thể cung cấp template riêng bằng cách viết trực tiếp nó bên trong phần tử mount container:
+Template của root component thường nằm ngay trong chính component đó. Tuy nhiên, bạn cũng có thể cung cấp template riêng bằng cách viết trực tiếp nó bên trong phần tử chứa:
 
 ```html
 <div id="app">
@@ -81,13 +81,13 @@ const app = createApp({
 app.mount('#app')
 ```
 
-Vue sẽ tự động dùng `innerHTML` của container làm template nếu root component chưa có sẵn option `template`.
+Vue sẽ tự động dùng `innerHTML` của phần tử chứa làm template nếu root component chưa có sẵn option `template`.
 
 Kiểu template viết ngay trong DOM này thường được dùng trong những ứng dụng [sử dụng Vue mà không có bước build](/guide/quick-start.html#using-vue-from-cdn). Cách này cũng có thể dùng cùng với các framework phía server, nơi template gốc có thể được server tạo ra một cách động.
 
 ## Cấu hình ứng dụng {#app-configurations}
 
-Instance ứng dụng cung cấp một object `.config` để chúng ta thiết lập một số tùy chọn ở cấp ứng dụng. Ví dụ, bạn có thể định nghĩa một error handler ở cấp ứng dụng để bắt lỗi từ tất cả component con:
+Instance ứng dụng cung cấp một object `.config` để chúng ta thiết lập một số tùy chọn ở cấp ứng dụng. Ví dụ, bạn có thể định nghĩa một trình xử lý lỗi ở cấp ứng dụng để bắt lỗi từ tất cả component con:
 
 ```js
 app.config.errorHandler = (err) => {

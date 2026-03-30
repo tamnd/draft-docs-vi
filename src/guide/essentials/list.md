@@ -10,7 +10,7 @@
 
 ## `v-for` {#v-for}
 
-Chúng ta có thể dùng directive `v-for` để kết xuất một danh sách phần tử dựa trên một mảng. Directive `v-for` cần một cú pháp đặc biệt theo dạng `item in items`, trong đó `items` là mảng dữ liệu nguồn và `item` là **bí danh** cho phần tử mảng đang được lặp qua:
+Chúng ta có thể dùng directive `v-for` để kết xuất một danh sách phần tử dựa trên một mảng. Directive `v-for` cần một cú pháp đặc biệt theo dạng `item in items`, trong đó `items` là mảng dữ liệu nguồn và `item` là **bí danh** cho phần tử của mảng đang được lặp qua:
 
 <div class="composition-api">
 
@@ -278,7 +278,7 @@ Khi dùng `<template v-for>`, `key` nên được đặt trên phần tử chứ
 ```
 
 :::tip Lưu ý
-`key` ở đây là một thuộc tính đặc biệt được bind bằng `v-bind`. Đừng nhầm nó với biến key của property khi [dùng `v-for` với object](#v-for-with-an-object).
+`key` ở đây là một thuộc tính đặc biệt được bind bằng `v-bind`. Đừng nhầm nó với key của property khi [dùng `v-for` với object](#v-for-with-an-object).
 :::
 
 Bạn nên cung cấp thuộc tính `key` cho `v-for` bất cứ khi nào có thể, trừ khi nội dung DOM được lặp rất đơn giản, nghĩa là không chứa component hay phần tử DOM có state, hoặc bạn cố tình dựa vào hành vi mặc định để tối ưu hiệu năng.

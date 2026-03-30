@@ -300,7 +300,7 @@ Lúc đó bạn sẽ muốn render một component cho từng phần tử bằng
 
 </div>
 
-Hãy để ý cách [`cú pháp v-bind`](/api/built-in-directives#v-bind), tức `:title="post.title"`, được dùng để truyền giá trị prop động. Điều này đặc biệt hữu ích khi bạn không biết trước chính xác nội dung mình sẽ render.
+Hãy để ý cách [`v-bind`](/api/built-in-directives#v-bind), tức `:title="post.title"`, được dùng để truyền giá trị prop động. Điều này đặc biệt hữu ích khi bạn không biết trước chính xác nội dung mình sẽ render.
 
 Tạm thời, bạn chỉ cần biết về props đến đây là đủ. Nhưng sau khi đọc xong trang này và đã thấy quen với nội dung của nó, chúng tôi khuyên bạn nên quay lại để đọc hướng dẫn đầy đủ về [props](/guide/components/props).
 
@@ -351,7 +351,7 @@ Sau đó dùng nó trong template để điều khiển cỡ chữ của toàn b
 Bây giờ hãy thêm một nút vào template của component `<BlogPost>`:
 
 ```vue{5} [BlogPost.vue]
-<!-- omitting <script> -->
+<!-- bỏ qua phần <script> -->
 <template>
   <div class="blog-post">
     <h4>{{ title }}</h4>
@@ -369,10 +369,10 @@ Hiện tại nút này chưa làm gì cả. Chúng ta muốn khi bấm vào nút
  />
 ```
 
-Sau đó component con có thể phát event từ chính nó bằng cách gọi [phương thức built-in **`$emit`**](/api/component-instance#emit) và truyền vào tên event:
+Sau đó component con có thể phát event từ chính nó bằng cách gọi [**`$emit`**](/api/component-instance#emit) — phương thức có sẵn của Vue — và truyền vào tên event:
 
 ```vue{5} [BlogPost.vue]
-<!-- omitting <script> -->
+<!-- bỏ qua phần <script> -->
 <template>
   <div class="blog-post">
     <h4>{{ title }}</h4>

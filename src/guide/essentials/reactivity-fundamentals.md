@@ -190,18 +190,18 @@ Trong phần còn lại của hướng dẫn, chúng tôi sẽ chủ yếu dùng
 Nếu bạn không dùng SFC, bạn vẫn có thể dùng Composition API thông qua option [`setup()`](/api/composition-api-setup).
 :::
 
-### Why Refs? \*\* {#why-refs}
+### Tại sao dùng Ref? \*\* {#why-refs}
 
 Có thể bạn sẽ thắc mắc vì sao phải dùng ref với `.value` thay vì chỉ dùng biến thông thường. Để giải thích điều này, chúng ta cần nói ngắn gọn về cách hệ phản ứng của Vue hoạt động.
 
 Khi bạn dùng ref trong template rồi thay đổi giá trị của nó về sau, Vue sẽ tự động phát hiện thay đổi và cập nhật DOM tương ứng. Điều này có được nhờ một hệ phản ứng dựa trên cơ chế theo dõi dependency. Khi component được render lần đầu, Vue sẽ **theo dõi** mọi ref đã được dùng trong lần render đó. Về sau, khi ref bị thay đổi, nó sẽ **kích hoạt** render lại cho những component đang theo dõi nó.
 
-Trong JavaScript thông thường, không có cách nào để phát hiện việc truy cập hay thay đổi của một biến thường. Tuy nhiên, ta có thể chặn thao tác get và set trên property của object bằng getter và setter.
+Trong JavaScript thông thường, không có cách nào để phát hiện việc truy cập hay thay đổi của một biến thường. Tuy nhiên, ta có thể đánh chặn thao tác get và set trên property của object bằng getter và setter.
 
-Property `.value` tạo cơ hội để Vue phát hiện khi ref bị truy cập hoặc bị thay đổi. Ở bên dưới, Vue thực hiện việc theo dõi trong getter của nó, và thực hiện việc kích hoạt trong setter. Về mặt ý tưởng, bạn có thể hình dung ref như một object kiểu sau:
+Property `.value` tạo cơ hội để Vue phát hiện khi ref bị truy cập hoặc bị thay đổi. Ở phía dưới, Vue thực hiện việc theo dõi trong getter của nó, và thực hiện việc kích hoạt trong setter. Về mặt ý tưởng, bạn có thể hình dung ref như một object kiểu sau:
 
 ```js
-// mã giả, không phải hiện thực thật
+// mã giả, không phải triển khai thật sự
 const myRef = {
   _value: 0,
   get value() {
@@ -215,7 +215,7 @@ const myRef = {
 }
 ```
 
-Một điểm hay khác của ref là khác với biến thường, bạn có thể truyền ref vào hàm mà vẫn giữ được quyền truy cập tới giá trị mới nhất và giữ nguyên kết nối với hệ phản ứng. Điều này đặc biệt hữu ích khi tách logic phức tạp thành phần code có thể tái sử dụng.
+Một điểm hay khác của ref là khác với biến thường, bạn có thể truyền ref vào hàm mà vẫn giữ được quyền truy cập tới giá trị mới nhất và giữ nguyên kết nối với hệ phản ứng. Điều này đặc biệt hữu ích khi tách logic phức tạp thành code có thể tái sử dụng.
 
 Hệ phản ứng sẽ được bàn kỹ hơn trong phần [Tìm hiểu sâu về tính phản ứng](/guide/extras/reactivity-in-depth).
 </div>
