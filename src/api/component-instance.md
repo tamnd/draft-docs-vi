@@ -1,4 +1,4 @@
-# Instance Component {#component-instance}
+# Component Instance {#component-instance}
 
 :::info
 Trang này ghi lại các thuộc tính và phương thức dựng sẵn được expose trên instance công khai của component, tức là `this`.
@@ -180,7 +180,7 @@ Một object chứa các thuộc tính kế thừa của component.
 
 ## $watch() {#watch}
 
-API bắt buộc để tạo watcher.
+API mệnh lệnh (Imperative API) để tạo watcher.
 
 - **Kiểu**
 

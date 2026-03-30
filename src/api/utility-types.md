@@ -1,4 +1,4 @@
-# Utility Type {#utility-types}
+# Utility Types {#utility-types}
 
 :::info
 Trang này chỉ liệt kê một số utility type thường dùng có thể cần giải thích về cách sử dụng. Để xem danh sách đầy đủ các type được xuất, xem [mã nguồn](https://github.com/vuejs/core/blob/main/packages/runtime-core/src/index.ts#L131).
