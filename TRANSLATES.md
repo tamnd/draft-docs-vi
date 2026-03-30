@@ -99,11 +99,11 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `src/guide/best-practices/performance.md`
 - [ ] `src/guide/best-practices/production-deployment.md`
 - [ ] `src/guide/best-practices/security.md`
-- [ ] `src/guide/built-ins/keep-alive.md`
-- [ ] `src/guide/built-ins/suspense.md`
-- [ ] `src/guide/built-ins/teleport.md`
-- [ ] `src/guide/built-ins/transition-group.md`
-- [ ] `src/guide/built-ins/transition.md`
+- [x] `src/guide/built-ins/keep-alive.md`
+- [x] `src/guide/built-ins/suspense.md`
+- [x] `src/guide/built-ins/teleport.md`
+- [x] `src/guide/built-ins/transition-group.md`
+- [x] `src/guide/built-ins/transition.md`
 - [x] `src/guide/components/async.md`
 - [x] `src/guide/components/attrs.md`
 - [x] `src/guide/components/events.md`
@@ -135,9 +135,9 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `src/guide/extras/web-components.md`
 - [ ] `src/guide/introduction.md`
 - [ ] `src/guide/quick-start.md`
-- [ ] `src/guide/reusability/composables.md`
-- [ ] `src/guide/reusability/custom-directives.md`
-- [ ] `src/guide/reusability/plugins.md`
+- [x] `src/guide/reusability/composables.md`
+- [x] `src/guide/reusability/custom-directives.md`
+- [x] `src/guide/reusability/plugins.md`
 - [ ] `src/guide/scaling-up/routing.md`
 - [ ] `src/guide/scaling-up/sfc.md`
 - [ ] `src/guide/scaling-up/ssr.md`
