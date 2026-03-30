@@ -230,7 +230,7 @@ Nhận một object (reactive hoặc plain) hoặc một [ref](#ref) và trả v
 
 ## watchEffect() {#watcheffect}
 
-Chạy một hàm ngay lập tức trong khi theo dõi reactive các dependency của nó và chạy lại khi các dependency thay đổi.
+Chạy một hàm ngay lập tức trong khi theo dõi các dependency phản ứng của nó và chạy lại khi các dependency thay đổi.
 
 - **Kiểu**
 

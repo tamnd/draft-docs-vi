@@ -34,7 +34,7 @@ Khai báo rõ ràng tên hiển thị cho component.
 
 ## inheritAttrs {#inheritattrs}
 
-Kiểm soát việc hành vi fallthrough thuộc tính component mặc định có được bật hay không.
+Kiểm soát việc hành vi fallthrough (thuộc tính kế thừa) mặc định của component có được bật hay không.
 
 - **Kiểu**
 
@@ -46,7 +46,7 @@ Kiểm soát việc hành vi fallthrough thuộc tính component mặc định c
 
 - **Chi tiết**
 
-  Mặc định, các ràng buộc thuộc tính phạm vi cha không được nhận diện là props sẽ "kế thừa qua". Điều này có nghĩa là khi ta có component có root đơn, các ràng buộc này sẽ được áp dụng vào element gốc của component con như các thuộc tính HTML thông thường. Khi viết component bọc một element mục tiêu hoặc component khác, đây có thể không phải hành vi mong muốn. Bằng cách đặt `inheritAttrs` thành `false`, hành vi mặc định này có thể bị tắt. Các thuộc tính có sẵn qua thuộc tính instance `$attrs` và có thể được ràng buộc rõ ràng vào element không phải root bằng `v-bind`.
+  Mặc định, các ràng buộc thuộc tính từ phạm vi cha không được nhận diện là props sẽ tự động "kế thừa xuống" (fallthrough). Điều này có nghĩa là khi ta có component có root đơn, các ràng buộc này sẽ được áp dụng vào element gốc của component con như các thuộc tính HTML thông thường. Khi viết component bọc một element mục tiêu hoặc component khác, đây có thể không phải hành vi mong muốn. Bằng cách đặt `inheritAttrs` thành `false`, hành vi mặc định này có thể bị tắt. Các thuộc tính có sẵn qua thuộc tính instance `$attrs` và có thể được ràng buộc rõ ràng vào element không phải root bằng `v-bind`.
 
 - **Ví dụ**
 

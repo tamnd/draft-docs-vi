@@ -35,17 +35,17 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 - [ ] `src/guide/typescript/composition-api.md`
 - [ ] `src/guide/typescript/options-api.md`
 - [ ] `src/guide/typescript/overview.md`
-- [ ] `src/api/application.md`
-- [ ] `src/api/built-in-components.md`
-- [ ] `src/api/built-in-directives.md`
-- [ ] `src/api/built-in-special-attributes.md`
-- [ ] `src/api/built-in-special-elements.md`
-- [ ] `src/api/compile-time-flags.md`
-- [ ] `src/api/component-instance.md`
-- [ ] `src/api/composition-api-dependency-injection.md`
-- [ ] `src/api/composition-api-helpers.md`
-- [ ] `src/api/composition-api-lifecycle.md`
-- [ ] `src/api/composition-api-setup.md`
+- [x] `src/api/application.md`
+- [x] `src/api/built-in-components.md`
+- [x] `src/api/built-in-directives.md`
+- [x] `src/api/built-in-special-attributes.md`
+- [x] `src/api/built-in-special-elements.md`
+- [x] `src/api/compile-time-flags.md`
+- [x] `src/api/component-instance.md`
+- [x] `src/api/composition-api-dependency-injection.md`
+- [x] `src/api/composition-api-helpers.md`
+- [x] `src/api/composition-api-lifecycle.md`
+- [x] `src/api/composition-api-setup.md`
 - [ ] `src/api/custom-elements.md`
 - [ ] `src/api/custom-renderer.md`
 - [ ] `src/api/general.md`
@@ -150,17 +150,17 @@ Tài liệu này dùng để theo dõi tiến độ dịch thủ công cho repo 
 
 ## API
 
-- [ ] `src/api/application.md`
-- [ ] `src/api/built-in-components.md`
-- [ ] `src/api/built-in-directives.md`
-- [ ] `src/api/built-in-special-attributes.md`
-- [ ] `src/api/built-in-special-elements.md`
-- [ ] `src/api/compile-time-flags.md`
-- [ ] `src/api/component-instance.md`
-- [ ] `src/api/composition-api-dependency-injection.md`
-- [ ] `src/api/composition-api-helpers.md`
-- [ ] `src/api/composition-api-lifecycle.md`
-- [ ] `src/api/composition-api-setup.md`
+- [x] `src/api/application.md`
+- [x] `src/api/built-in-components.md`
+- [x] `src/api/built-in-directives.md`
+- [x] `src/api/built-in-special-attributes.md`
+- [x] `src/api/built-in-special-elements.md`
+- [x] `src/api/compile-time-flags.md`
+- [x] `src/api/component-instance.md`
+- [x] `src/api/composition-api-dependency-injection.md`
+- [x] `src/api/composition-api-helpers.md`
+- [x] `src/api/composition-api-lifecycle.md`
+- [x] `src/api/composition-api-setup.md`
 - [ ] `src/api/custom-elements.md`
 - [ ] `src/api/custom-renderer.md`
 - [ ] `src/api/general.md`
