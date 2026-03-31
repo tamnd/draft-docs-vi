@@ -337,15 +337,19 @@ Bạn có thể dùng [Import Maps](https://caniuse.com/import-maps) để map i
 
 Bạn cũng có thể thêm các dependency khác vào import map, miễn là trỏ tới bản ES modules.
 
-:::tip Lưu ý
-- Import maps chỉ hỗ trợ trên [trình duyệt mới](https://caniuse.com/import-maps) (Safari 16.4+)
-- Production cần dùng bản build tối ưu, xem [Hướng dẫn triển khai production](/guide/best-practices/production-deployment#without-build-tools)
-- Có thể cân nhắc [`vuejs/petite-vue`](https://github.com/vuejs/petite-vue) cho case nhẹ
+:::tip Hỗ trợ Import Maps trên trình duyệt
+Import Maps là một tính năng trình duyệt tương đối mới. Hãy đảm bảo bạn dùng trình duyệt nằm trong [phạm vi hỗ trợ](https://caniuse.com/import-maps). Đặc biệt, Safari chỉ hỗ trợ từ phiên bản 16.4 trở lên.
 :::
 
-### Tách module {#splitting-up-the-modules}
+:::warning Lưu ý khi dùng trong production
+Các ví dụ trên vẫn đang sử dụng bản development build của Vue. Nếu bạn định dùng Vue từ CDN trong production, hãy xem [Hướng dẫn triển khai production](/guide/best-practices/production-deployment#without-build-tools).
 
-Có thể tách component ra file riêng. Ví dụ:
+Mặc dù hoàn toàn có thể dùng Vue mà không cần hệ thống build, một hướng tiếp cận thay thế đáng cân nhắc là [`vuejs/petite-vue`](https://github.com/vuejs/petite-vue), vốn có thể phù hợp hơn trong những bối cảnh mà trước đây người ta thường dùng [`jquery/jquery`](https://github.com/jquery/jquery), hoặc hiện nay là [`alpinejs/alpine`](https://github.com/alpinejs/alpine).
+:::
+
+### Tách các module {#splitting-up-the-modules}
+
+Khi đi sâu hơn vào phần hướng dẫn, chúng ta có thể cần tách code ra thành các file JavaScript riêng để dễ quản lý hơn. Ví dụ:
 
 ```html [index.html]
 <div id="app"></div>
