@@ -1,10 +1,10 @@
-# Lifecycle Hooks {#lifecycle-hooks}
+# Hook Vòng Đời {#lifecycle-hooks}
 
-Each Vue component instance goes through a series of initialization steps when it's created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it also runs functions called lifecycle hooks, giving users the opportunity to add their own code at specific stages.
+Mỗi instance của component Vue trải qua một chuỗi các bước khởi tạo khi được tạo ra — ví dụ: thiết lập quan sát dữ liệu, biên dịch template, mount instance vào DOM, và cập nhật DOM khi dữ liệu thay đổi. Trong quá trình đó, Vue cũng gọi các hàm được gọi là hook vòng đời, giúp người dùng có cơ hội thêm code của mình vào từng giai đoạn cụ thể.
 
-## Registering Lifecycle Hooks {#registering-lifecycle-hooks}
+## Đăng Ký Hook Vòng Đời {#registering-lifecycle-hooks}
 
-For example, the <span class="composition-api">`onMounted`</span><span class="options-api">`mounted`</span> hook can be used to run code after the component has finished the initial rendering and created the DOM nodes:
+Ví dụ, hook <span class="composition-api">`onMounted`</span><span class="options-api">`mounted`</span> có thể được dùng để chạy code sau khi component đã hoàn tất lần render đầu tiên và các DOM node đã được tạo ra:
 
 <div class="composition-api">
 
@@ -31,17 +31,17 @@ export default {
 
 </div>
 
-There are also other hooks which will be called at different stages of the instance's lifecycle, with the most commonly used being <span class="composition-api">[`onMounted`](/api/composition-api-lifecycle#onmounted), [`onUpdated`](/api/composition-api-lifecycle#onupdated), and [`onUnmounted`](/api/composition-api-lifecycle#onunmounted).</span><span class="options-api">[`mounted`](/api/options-lifecycle#mounted), [`updated`](/api/options-lifecycle#updated), and [`unmounted`](/api/options-lifecycle#unmounted).</span>
+Ngoài ra còn có các hook khác được gọi ở những giai đoạn khác nhau trong vòng đời của instance, trong đó được dùng phổ biến nhất là <span class="composition-api">[`onMounted`](/api/composition-api-lifecycle#onmounted), [`onUpdated`](/api/composition-api-lifecycle#onupdated) và [`onUnmounted`](/api/composition-api-lifecycle#onunmounted).</span><span class="options-api">[`mounted`](/api/options-lifecycle#mounted), [`updated`](/api/options-lifecycle#updated) và [`unmounted`](/api/options-lifecycle#unmounted).</span>
 
 <div class="options-api">
 
-All lifecycle hooks are called with their `this` context pointing to the current active instance invoking it. Note this means you should avoid using arrow functions when declaring lifecycle hooks, as you won't be able to access the component instance via `this` if you do so.
+Tất cả hook vòng đời đều được gọi với ngữ cảnh `this` trỏ đến instance đang hoạt động hiện tại. Điều này có nghĩa là bạn nên tránh dùng arrow function khi khai báo hook vòng đời, vì nếu làm vậy bạn sẽ không thể truy cập instance của component qua `this`.
 
 </div>
 
 <div class="composition-api">
 
-When calling `onMounted`, Vue automatically associates the registered callback function with the current active component instance. This requires these hooks to be registered **synchronously** during component setup. For example, do not do this:
+Khi gọi `onMounted`, Vue tự động liên kết hàm callback được đăng ký với instance component đang hoạt động hiện tại. Điều này yêu cầu các hook phải được đăng ký **đồng bộ** trong quá trình setup của component. Ví dụ, không nên làm như sau:
 
 ```js
 setTimeout(() => {
@@ -51,16 +51,16 @@ setTimeout(() => {
 }, 100)
 ```
 
-Do note this doesn't mean that the call must be placed lexically inside `setup()` or `<script setup>`. `onMounted()` can be called in an external function as long as the call stack is synchronous and originates from within `setup()`.
+Lưu ý rằng điều này không có nghĩa là lời gọi phải được đặt theo đúng thứ tự từ điển bên trong `setup()` hay `<script setup>`. `onMounted()` có thể được gọi trong một hàm bên ngoài, miễn là call stack là đồng bộ và có nguồn gốc từ bên trong `setup()`.
 
 </div>
 
-## Lifecycle Diagram {#lifecycle-diagram}
+## Sơ Đồ Vòng Đời {#lifecycle-diagram}
 
-Below is a diagram for the instance lifecycle. You don't need to fully understand everything going on right now, but as you learn and build more, it will be a useful reference.
+Dưới đây là sơ đồ vòng đời của một instance. Bạn chưa cần hiểu hết mọi thứ ngay lúc này, nhưng khi học và xây dựng nhiều hơn, đây sẽ là tài liệu tham khảo hữu ích.
 
 ![Component lifecycle diagram](./images/lifecycle.png)
 
 <!-- https://www.figma.com/file/Xw3UeNMOralY6NV7gSjWdS/Vue-Lifecycle -->
 
-Consult the <span class="composition-api">[Lifecycle Hooks API reference](/api/composition-api-lifecycle)</span><span class="options-api">[Lifecycle Hooks API reference](/api/options-lifecycle)</span> for details on all lifecycle hooks and their respective use cases.
+Tham khảo <span class="composition-api">[tài liệu API hook vòng đời](/api/composition-api-lifecycle)</span><span class="options-api">[tài liệu API hook vòng đời](/api/options-lifecycle)</span> để biết thêm chi tiết về tất cả hook vòng đời và các trường hợp sử dụng tương ứng.
