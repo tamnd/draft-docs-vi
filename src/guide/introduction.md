@@ -25,7 +25,7 @@ footer: false
 
 ## Vue là gì? {#what-is-vue}
 
-Vue (đọc là "view") là một framework JavaScript dùng để xây dựng giao diện người dùng (UI).
+Vue (đọc giống như "view") là một framework JavaScript dùng để xây dựng giao diện người dùng (UI).
 
 Nó dựa trên HTML, CSS và JavaScript tiêu chuẩn, đồng thời cung cấp cách lập trình theo kiểu khai báo (declarative) và dựa trên component, giúp xây dựng UI từ đơn giản đến phức tạp một cách hiệu quả.
 
