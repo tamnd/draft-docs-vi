@@ -4,10 +4,10 @@ footer: false
 
 # Giới thiệu {#introduction}
 
-:::info Bạn đang đọc tài liệu cho Vue 3!
+:::info Bạn đang đọc tài liệu dành cho Vue 3!
 
 - Vue 2 đã ngừng hỗ trợ từ **31/12/2023**. Xem thêm tại [Vue 2 EOL](https://v2.vuejs.org/eol/).
-- Nếu bạn đang nâng cấp từ Vue 2, xem [Hướng dẫn migrate](https://v3-migration.vuejs.org/).
+- Nếu bạn đang nâng cấp từ Vue 2, xem [Hướng dẫn nâng cấp](https://v3-migration.vuejs.org/).
   :::
 
 <style src="@theme/styles/vue-mastery.css"></style>

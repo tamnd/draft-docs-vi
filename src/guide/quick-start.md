@@ -335,21 +335,21 @@ Bạn có thể dùng [Import Maps](https://caniuse.com/import-maps) để map i
 
 </div>
 
-Bạn cũng có thể thêm các dependency khác vào import map, miễn là trỏ tới bản ES modules.
+Bạn cũng có thể thêm các dependency khác vào import map, miễn là chúng trỏ tới phiên bản ES module của thư viện tương ứng.
 
 :::tip Hỗ trợ Import Maps trên trình duyệt
-Import Maps là một tính năng trình duyệt tương đối mới. Hãy đảm bảo bạn dùng trình duyệt nằm trong [phạm vi hỗ trợ](https://caniuse.com/import-maps). Đặc biệt, Safari chỉ hỗ trợ từ phiên bản 16.4 trở lên.
+Import Maps là một tính năng còn khá mới. Bạn nên kiểm tra xem trình duyệt mình đang dùng có nằm trong [danh sách hỗ trợ](https://caniuse.com/import-maps) hay không. Lưu ý rằng Safari chỉ hỗ trợ từ phiên bản 16.4 trở lên.
 :::
 
 :::warning Lưu ý khi dùng trong production
-Các ví dụ trên vẫn đang sử dụng bản development build của Vue. Nếu bạn định dùng Vue từ CDN trong production, hãy xem [Hướng dẫn triển khai production](/guide/best-practices/production-deployment#without-build-tools).
+Các ví dụ trên đang sử dụng bản development của Vue. Nếu bạn dùng Vue qua CDN trong môi trường production, hãy chuyển sang bản build tối ưu và tham khảo [Hướng dẫn triển khai production](/guide/best-practices/production-deployment#without-build-tools).
 
-Mặc dù hoàn toàn có thể dùng Vue mà không cần hệ thống build, một hướng tiếp cận thay thế đáng cân nhắc là [`vuejs/petite-vue`](https://github.com/vuejs/petite-vue), vốn có thể phù hợp hơn trong những bối cảnh mà trước đây người ta thường dùng [`jquery/jquery`](https://github.com/jquery/jquery), hoặc hiện nay là [`alpinejs/alpine`](https://github.com/alpinejs/alpine).
+Dù có thể dùng Vue mà không cần hệ thống build, bạn cũng có thể cân nhắc [`vuejs/petite-vue`](https://github.com/vuejs/petite-vue) cho các trường hợp đơn giản. Cách tiếp cận này phù hợp với những bối cảnh trước đây thường dùng [`jquery/jquery`](https://github.com/jquery/jquery), hoặc hiện nay là [`alpinejs/alpine`](https://github.com/alpinejs/alpine).
 :::
 
 ### Tách các module {#splitting-up-the-modules}
 
-Khi đi sâu hơn vào phần hướng dẫn, chúng ta có thể cần tách code ra thành các file JavaScript riêng để dễ quản lý hơn. Ví dụ:
+Khi dự án phức tạp hơn, bạn nên tách code thành các file JavaScript riêng để dễ quản lý và bảo trì. Ví dụ:
 
 ```html [index.html]
 <div id="app"></div>
