@@ -1,12 +1,12 @@
 # Watchers {#watchers}
 
-## Basic Example {#basic-example}
+## Ví dụ cơ bản {#basic-example}
 
-Computed properties allow us to declaratively compute derived values. However, there are cases where we need to perform "side effects" in reaction to state changes - for example, mutating the DOM, or changing another piece of state based on the result of an async operation.
+Thuộc tính computed cho phép chúng ta khai báo các giá trị dẫn xuất một cách rõ ràng. Tuy nhiên, có những trường hợp chúng ta cần thực hiện các "side effect" khi state thay đổi — ví dụ như thay đổi DOM, hoặc cập nhật một phần state khác dựa trên kết quả của một async operation.
 
 <div class="options-api">
 
-With the Options API, we can use the [`watch` option](/api/options-state#watch) to trigger a function whenever a reactive property changes:
+Với Options API, chúng ta có thể dùng [tùy chọn `watch`](/api/options-state#watch) để kích hoạt một hàm bất cứ khi nào một thuộc tính phản ứng thay đổi:
 
 ```js
 export default {
@@ -50,9 +50,9 @@ export default {
 <p>{{ answer }}</p>
 ```
 
-[Try it in the Playground](https://play.vuejs.org/#eNp9VE1v2zAM/SucLnaw1D70lqUbsiKH7rB1W4++aDYdq5ElTx9xgiD/fbT8lXZFAQO2+Mgn8pH0mW2aJjl4ZCu2trkRjfucKTw22jgosOReOjhnCqDgjseL/hvAoPNGjSeAvx6tE1qtIIqWo5Er26Ih088BteCt51KeINfKcaGAT5FQc7NP4NPNYiaQmhdC7VZQcmlxMF+61yUcWu7yajVmkabQVqjwgGZmzSuudmiX4CphofQqD+ZWSAnGqz5y9I4VtmOuS9CyGA9T3QCihGu3RKhc+gJtHH2JFld+EG5Mdug2QYZ4MSKhgBd11OgqXdipEm5PKoer0Jk2kA66wB044/EF1GtOSPRUCbUnryRJosnFnK4zpC5YR7205M9bLhyUSIrGUeVcY1dpekKrdNK6MuWNiKYKXt8V98FElDxbknGxGLCpZMi7VkGMxmjzv0pz1tvO4QPcay8LULoj5RToKoTN40MCEXyEQDJTl0KFmXpNOqsUxudN+TNFzzqdJp8ODutGcod0Alg34QWwsXsaVtIjVXqe9h5bC9V4B4ebWhco7zI24hmDVSEs/yOxIPOQEFnTnjzt2emS83nYFrhcevM6nRJhS+Ys9aoUu6Av7WqoNWO5rhsh0fxownplbBqhjJEmuv0WbN2UDNtDMRXm+zfsz/bY2TL2SH1Ec8CMTZjjhqaxh7e/v+ORvieQqvaSvN8Bf6HV0veSdG5fvSoo7Su/kO1D3f13SKInuz06VHYsahzzfl0yRj+s+3dKn9O9TW7HPrPLP624lFU=)
+[Thử trong Playground](https://play.vuejs.org/#eNp9VE1v2zAM/SucLnaw1D70lqUbsiKH7rB1W4++aDYdq5ElTx9xgiD/fbT8lXZFAQO2+Mgn8pH0mW2aJjl4ZCu2trkRjfucKTw22jgosOReOjhnCqDgjseL/hvAoPNGjSeAvx6tE1qtIIqWo5Er26Ih088BteCt51KeINfKcaGAT5FQc7NP4NPNYiaQmhdC7VZQcmlxMF+61yUcWu7yajVmkabQVqjwgGZmzSuudmiX4CphofQqD+ZWSAnGqz5y9I4VtmOuS9CyGA9T3QCihGu3RKhc+gJtHH2JFld+EG5Mdug2QYZ4MSKhgBd11OgqXdipEm5PKoer0Jk2kA66wB044/EF1GtOSPRUCbUnryRJosnFnK4zpC5YR7205M9bLhyUSIrGUeVcY1dpekKrdNK6MuWNiKYKXt8V98FElDxbknGxGLCpZMi7VkGMxmjzv0pz1tvO4QPcay8LULoj5RToKoTN40MCEXyEQDJTl0KFmXpNOqsUxudN+TNFzzqdJp8ODutGcod0Alg34QWwsXsaVtIjVXqe9h5bC9V4B4ebWhco7zI24hmDVSEs/yOxIPOQEFnTnjzt2emS83nYFrhcevM6nRJhS+Ys9aoUu6Av7WqoNWO5rhsh0fxownplbBqhjJEmuv0WbN2UDNtDMRXm+zfsz/bY2TL2SH1Ec8CMTZjjhqaxh7e/v+ORvieQqvaSvN8Bf6HV0veSdG5fvSoo7Su/kO1D3f13SKInuz06VHYsahzzfl0yRj+s+3dKn9O9TW7HPrPLP624lFU=)
 
-The `watch` option also supports a dot-delimited path as the key:
+Tùy chọn `watch` cũng hỗ trợ đường dẫn dạng dot-delimited làm key:
 
 ```js
 export default {
@@ -69,7 +69,7 @@ export default {
 
 <div class="composition-api">
 
-With Composition API, we can use the [`watch` function](/api/reactivity-core#watch) to trigger a callback whenever a piece of reactive state changes:
+Với Composition API, chúng ta có thể dùng [hàm `watch`](/api/reactivity-core#watch) để kích hoạt một callback bất cứ khi nào một phần state phản ứng thay đổi:
 
 ```vue
 <script setup>
@@ -105,11 +105,11 @@ watch(question, async (newQuestion, oldQuestion) => {
 </template>
 ```
 
-[Try it in the Playground](https://play.vuejs.org/#eNp9U8Fy0zAQ/ZVFF9tDah96C2mZ0umhHKBAj7oIe52oUSQjyXEyGf87KytyoDC9JPa+p+e3b1cndtd15b5HtmQrV1vZeXDo++6Wa7nrjPVwAovtAgbh6w2M0Fqzg4xOZFxzXRvtPPzq0XlpNNwEbp5lRUKEdgPaVP925jnoXS+UOgKxvJAaxEVjJ+y2hA9XxUVFGdFIvT7LtEI5JIzrqjrbGozdOmikxdqTKqmIQOV6gvOkvQDhjrqGXOOQvCzAqCa9FHBzCyeuAWT7F6uUulZ9gy7PPmZFETmQjJV7oXoke972GJHY+Axkzxupt4FalhRcYHh7TDIQcqA+LTriikFIDy0G59nG+84tq+qITpty8G0lOhmSiedefSaPZ0mnfHFG50VRRkbkj1BPceVorbFzF/+6fQj4O7g3vWpAm6Ao6JzfINw9PZaQwXuYNJJuK/U0z1nxdTLT0M7s8Ec/I3WxquLS0brRi8ddp4RHegNYhR0M/Du3pXFSAJU285osI7aSuus97K92pkF1w1nCOYNlI534qbCh8tkOVasoXkV1+sjplLZ0HGN5Vc1G2IJ5R8Np5XpKlK7J1CJntdl1UqH92k0bzdkyNc8ZRWGGz1MtbMQi1esN1tv/1F/cIdQ4e6LJod0jZzPmhV2jj/DDjy94oOcZpK57Rew3wO/ojOpjJIH2qdcN2f6DN7l9nC47RfTsHg4etUtNpZUeJz5ndPPv32j9Yve6vE6DZuNvu1R2Tg==)
+[Thử trong Playground](https://play.vuejs.org/#eNp9U8Fy0zAQ/ZVFF9tDah96C2mZ0umhHKBAj7oIe52oUSQjyXEyGf87KytyoDC9JPa+p+e3b1cndtd15b5HtmQrV1vZeXDo++6Wa7nrjPVwAovtAgbh6w2M0Fqzg4xOZFxzXRvtPPzq0XlpNNwEbp5lRUKEdgPaVP925jnoXS+UOgKxvJAaxEVjJ+y2hA9XxUVFGdFIvT7LtEI5JIzrqjrbGozdOmikxdqTKqmIQOV6gvOkvQDhjrqGXOOQvCzAqCa9FHBzCyeuAWT7F6uUulZ9gy7PPmZFETmQjJV7oXoke972GJHY+Axkzxupt4FalhRcYHh7TDIQcqA+LTriikFIDy0G59nG+84tq+qITpty8G0lOhmSiedefSaPZ0mnfHFG50VRRkbkj1BPceVorbFzF/+6fQj4O7g3vWpAm6Ao6JzfINw9PZaQwXuYNJJuK/U0z1nxdTLT0M7s8Ec/I3WxquLS0brRi8ddp4RHegNYhR0M/Du3pXFSAJU285osI7aSuus97K92pkF1w1nCOYNlI534qbCh8tkOVasoXkV1+sjplLZ0HGN5Vc1G2IJ5R8Np5XpKlK7J1CJntdl1UqH92k0bzdkyNc8ZRWGGz1MtbMQi1esN1tv/1F/cIdQ4e6LJod0jZzPmhV2jj/DDjy94oOcZpK57Rew3wO/ojOpjJIH2qdcN2f6DN7l9nC47RfTsHg4etUtNpZUeJz5ndPPv32j9Yve6vE6DZuNvu1R2Tg==)
 
-### Watch Source Types {#watch-source-types}
+### Các kiểu nguồn của Watch {#watch-source-types}
 
-`watch`'s first argument can be different types of reactive "sources": it can be a ref (including computed refs), a reactive object, a [getter function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), or an array of multiple sources:
+Tham số đầu tiên của `watch` có thể là nhiều kiểu "nguồn" phản ứng khác nhau: có thể là một ref (kể cả computed ref), một reactive object, một [hàm getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), hoặc một mảng gồm nhiều nguồn:
 
 ```js
 const x = ref(0)
@@ -134,7 +134,7 @@ watch([x, () => y.value], ([newX, newY]) => {
 })
 ```
 
-Do note that you can't watch a property of a reactive object like this:
+Lưu ý rằng bạn không thể watch trực tiếp một thuộc tính của reactive object theo cách này:
 
 ```js
 const obj = reactive({ count: 0 })
@@ -145,7 +145,7 @@ watch(obj.count, (count) => {
 })
 ```
 
-Instead, use a getter:
+Thay vào đó, hãy dùng getter:
 
 ```js
 // instead, use a getter:
@@ -163,7 +163,7 @@ watch(
 
 <div class="options-api">
 
-`watch` is shallow by default: the callback will only trigger when the watched property has been assigned a new value - it won't trigger on nested property changes. If you want the callback to fire on all nested mutations, you need to use a deep watcher:
+`watch` mặc định là shallow: callback chỉ kích hoạt khi thuộc tính được watch được gán giá trị mới — nó sẽ không kích hoạt khi các thuộc tính lồng nhau bên trong thay đổi. Nếu bạn muốn callback chạy với mọi thay đổi lồng nhau, hãy dùng deep watcher:
 
 ```js
 export default {
@@ -184,7 +184,7 @@ export default {
 
 <div class="composition-api">
 
-When you call `watch()` directly on a reactive object, it will implicitly create a deep watcher - the callback will be triggered on all nested mutations:
+Khi bạn gọi `watch()` trực tiếp trên một reactive object, nó sẽ ngầm tạo ra một deep watcher — callback sẽ được kích hoạt với mọi thay đổi lồng nhau:
 
 ```js
 const obj = reactive({ count: 0 })
@@ -198,7 +198,7 @@ watch(obj, (newValue, oldValue) => {
 obj.count++
 ```
 
-This should be differentiated with a getter that returns a reactive object - in the latter case, the callback will only fire if the getter returns a different object:
+Cần phân biệt trường hợp này với getter trả về một reactive object — trong trường hợp sau, callback chỉ kích hoạt nếu getter trả về một object khác:
 
 ```js
 watch(
@@ -209,7 +209,7 @@ watch(
 )
 ```
 
-You can, however, force the second case into a deep watcher by explicitly using the `deep` option:
+Tuy nhiên, bạn có thể ép trường hợp thứ hai trở thành deep watcher bằng cách dùng tùy chọn `deep` tường minh:
 
 ```js
 watch(
@@ -224,19 +224,19 @@ watch(
 
 </div>
 
-In Vue 3.5+, the `deep` option can also be a number indicating the max traversal depth - i.e. how many levels should Vue traverse an object's nested properties.
+Từ Vue 3.5+, tùy chọn `deep` cũng có thể nhận một số nguyên để chỉ định độ sâu duyệt tối đa — tức là Vue sẽ duyệt bao nhiêu cấp lồng nhau trong object được watch.
 
-:::warning Use with Caution
-Deep watch requires traversing all nested properties in the watched object, and can be expensive when used on large data structures. Use it only when necessary and beware of the performance implications.
+:::warning Sử dụng cẩn thận
+Deep watcher yêu cầu duyệt qua tất cả các thuộc tính lồng nhau trong object được watch, và có thể tốn kém khi dùng với cấu trúc dữ liệu lớn. Chỉ dùng khi thực sự cần thiết và chú ý đến ảnh hưởng hiệu năng.
 :::
 
 ## Eager Watchers {#eager-watchers}
 
-`watch` is lazy by default: the callback won't be called until the watched source has changed. But in some cases we may want the same callback logic to be run eagerly - for example, we may want to fetch some initial data, and then re-fetch the data whenever relevant state changes.
+Mặc định, `watch` là lazy: callback sẽ không được gọi cho đến khi nguồn được watch thay đổi. Tuy nhiên trong một số trường hợp, chúng ta muốn cùng logic callback đó chạy ngay lập tức — ví dụ, khi muốn tải dữ liệu khởi tạo, rồi tải lại mỗi khi state liên quan thay đổi.
 
 <div class="options-api">
 
-We can force a watcher's callback to be executed immediately by declaring it using an object with a `handler` function and the `immediate: true` option:
+Chúng ta có thể ép callback của watcher chạy ngay lập tức bằng cách khai báo nó dưới dạng object có hàm `handler` và tùy chọn `immediate: true`:
 
 ```js
 export default {
@@ -254,13 +254,13 @@ export default {
 }
 ```
 
-The initial execution of the handler function will happen just before the `created` hook. Vue will have already processed the `data`, `computed`, and `methods` options, so those properties will be available on the first invocation.
+Lần chạy đầu tiên của hàm handler sẽ xảy ra ngay trước hook `created`. Vue đã xử lý xong các tùy chọn `data`, `computed` và `methods`, nên các thuộc tính đó sẽ có sẵn trong lần gọi đầu tiên.
 
 </div>
 
 <div class="composition-api">
 
-We can force a watcher's callback to be executed immediately by passing the `immediate: true` option:
+Chúng ta có thể ép callback của watcher chạy ngay lập tức bằng cách truyền tùy chọn `immediate: true`:
 
 ```js
 watch(
@@ -276,9 +276,9 @@ watch(
 
 ## Once Watchers {#once-watchers}
 
-- Only supported in 3.4+
+- Chỉ hỗ trợ từ phiên bản 3.4+
 
-Watcher's callback will execute whenever the watched source changes. If you want the callback to trigger only once when the source changes, use the `once: true` option.
+Callback của watcher sẽ thực thi mỗi khi nguồn được watch thay đổi. Nếu bạn muốn callback chỉ kích hoạt một lần duy nhất khi nguồn thay đổi, hãy dùng tùy chọn `once: true`.
 
 <div class="options-api">
 
@@ -315,7 +315,7 @@ watch(
 
 ## `watchEffect()` \*\* {#watcheffect}
 
-It is common for the watcher callback to use exactly the same reactive state as the source. For example, consider the following code, which uses a watcher to load a remote resource whenever the `todoId` ref changes:
+Rất phổ biến khi callback của watcher dùng chính xác cùng state phản ứng như nguồn. Ví dụ, hãy xem đoạn code sau — dùng watcher để tải một tài nguyên từ xa mỗi khi ref `todoId` thay đổi:
 
 ```js
 const todoId = ref(1)
@@ -333,9 +333,9 @@ watch(
 )
 ```
 
-In particular, notice how the watcher uses `todoId` twice, once as the source and then again inside the callback.
+Đặc biệt, chú ý cách watcher dùng `todoId` hai lần: một lần làm nguồn và một lần nữa bên trong callback.
 
-This can be simplified with [`watchEffect()`](/api/reactivity-core#watcheffect). `watchEffect()` allows us to track the callback's reactive dependencies automatically. The watcher above can be rewritten as:
+Có thể rút gọn điều này với [`watchEffect()`](/api/reactivity-core#watcheffect). `watchEffect()` cho phép chúng ta tự động theo dõi các dependency phản ứng của callback. Watcher trên có thể được viết lại như sau:
 
 ```js
 watchEffect(async () => {
@@ -346,29 +346,29 @@ watchEffect(async () => {
 })
 ```
 
-Here, the callback will run immediately, there's no need to specify `immediate: true`. During its execution, it will automatically track `todoId.value` as a dependency (similar to computed properties). Whenever `todoId.value` changes, the callback will be run again. With `watchEffect()`, we no longer need to pass `todoId` explicitly as the source value.
+Ở đây, callback sẽ chạy ngay lập tức, không cần chỉ định `immediate: true`. Trong quá trình thực thi, nó sẽ tự động theo dõi `todoId.value` như một dependency (tương tự như thuộc tính computed). Mỗi khi `todoId.value` thay đổi, callback sẽ được chạy lại. Với `watchEffect()`, chúng ta không còn cần truyền `todoId` tường minh làm giá trị nguồn nữa.
 
-You can check out [this example](/examples/#fetching-data) of `watchEffect()` and reactive data-fetching in action.
+Bạn có thể xem [ví dụ này](/examples/#fetching-data) về `watchEffect()` và việc lấy dữ liệu phản ứng trong thực tế.
 
-For examples like these, with only one dependency, the benefit of `watchEffect()` is relatively small. But for watchers that have multiple dependencies, using `watchEffect()` removes the burden of having to maintain the list of dependencies manually. In addition, if you need to watch several properties in a nested data structure, `watchEffect()` may prove more efficient than a deep watcher, as it will only track the properties that are used in the callback, rather than recursively tracking all of them.
+Với các ví dụ như trên, chỉ có một dependency, lợi ích của `watchEffect()` là tương đối nhỏ. Nhưng với những watcher có nhiều dependency, dùng `watchEffect()` sẽ loại bỏ gánh nặng phải tự duy trì danh sách dependency. Ngoài ra, nếu bạn cần watch nhiều thuộc tính trong một cấu trúc dữ liệu lồng nhau, `watchEffect()` có thể hiệu quả hơn deep watcher, vì nó chỉ theo dõi những thuộc tính thực sự được dùng trong callback, thay vì duyệt đệ quy tất cả.
 
 :::tip
-`watchEffect` only tracks dependencies during its **synchronous** execution. When using it with an async callback, only properties accessed before the first `await` tick will be tracked.
+`watchEffect` chỉ theo dõi các dependency trong quá trình thực thi **đồng bộ**. Khi dùng với async callback, chỉ những thuộc tính được truy cập trước lần `await` đầu tiên mới được theo dõi.
 :::
 
-### `watch` vs. `watchEffect` {#watch-vs-watcheffect}
+### `watch` so với `watchEffect` {#watch-vs-watcheffect}
 
-`watch` and `watchEffect` both allow us to reactively perform side effects. Their main difference is the way they track their reactive dependencies:
+`watch` và `watchEffect` đều cho phép thực hiện side effect một cách phản ứng. Sự khác biệt chính là cách chúng theo dõi các dependency phản ứng:
 
-- `watch` only tracks the explicitly watched source. It won't track anything accessed inside the callback. In addition, the callback only triggers when the source has actually changed. `watch` separates dependency tracking from the side effect, giving us more precise control over when the callback should fire.
+- `watch` chỉ theo dõi nguồn được chỉ định tường minh. Nó không theo dõi bất cứ thứ gì được truy cập bên trong callback. Ngoài ra, callback chỉ kích hoạt khi nguồn thực sự thay đổi. `watch` tách biệt việc theo dõi dependency khỏi side effect, cho chúng ta kiểm soát chính xác hơn về thời điểm callback nên kích hoạt.
 
-- `watchEffect`, on the other hand, combines dependency tracking and side effect into one phase. It automatically tracks every reactive property accessed during its synchronous execution. This is more convenient and typically results in terser code, but makes its reactive dependencies less explicit.
+- `watchEffect`, ngược lại, kết hợp việc theo dõi dependency và side effect vào một giai đoạn. Nó tự động theo dõi mọi thuộc tính phản ứng được truy cập trong quá trình thực thi đồng bộ. Cách này tiện lợi hơn và thường cho ra code ngắn gọn hơn, nhưng làm cho các dependency phản ứng kém tường minh hơn.
 
 </div>
 
-## Side Effect Cleanup {#side-effect-cleanup}
+## Dọn dẹp Side Effect {#side-effect-cleanup}
 
-Sometimes we may perform side effects, e.g. asynchronous requests, in a watcher:
+Đôi khi chúng ta có thể thực hiện side effect, chẳng hạn như gửi async request, trong một watcher:
 
 <div class="composition-api">
 
@@ -397,9 +397,9 @@ export default {
 
 </div>
 
-But what if `id` changes before the request completes? When the previous request completes, it will still fire the callback with an ID value that is already stale. Ideally, we want to be able to cancel the stale request when `id` changes to a new value.
+Nhưng điều gì xảy ra nếu `id` thay đổi trước khi request hoàn thành? Khi request trước hoàn thành, nó vẫn sẽ kích hoạt callback với một giá trị ID đã lỗi thời. Lý tưởng nhất, chúng ta muốn hủy request cũ khi `id` thay đổi sang giá trị mới.
 
-We can use the [`onWatcherCleanup()`](/api/reactivity-core#onwatchercleanup) <sup class="vt-badge" data-text="3.5+" /> API to register a cleanup function that will be called when the watcher is invalidated and is about to re-run:
+Chúng ta có thể dùng API [`onWatcherCleanup()`](/api/reactivity-core#onwatchercleanup) <sup class="vt-badge" data-text="3.5+" /> để đăng ký một hàm dọn dẹp sẽ được gọi khi watcher bị vô hiệu và chuẩn bị chạy lại:
 
 <div class="composition-api">
 
@@ -446,9 +446,9 @@ export default {
 
 </div>
 
-Note that `onWatcherCleanup` is only supported in Vue 3.5+ and must be called during the synchronous execution of a `watchEffect` effect function or `watch` callback function: you cannot call it after an `await` statement in an async function.
+Lưu ý rằng `onWatcherCleanup` chỉ được hỗ trợ từ Vue 3.5+ và phải được gọi trong quá trình thực thi đồng bộ của effect function của `watchEffect` hoặc hàm callback của `watch`: bạn không thể gọi nó sau câu lệnh `await` trong một async function.
 
-Alternatively, an `onCleanup` function is also passed to watcher callbacks as the 3rd argument<span class="composition-api">, and to the `watchEffect` effect function as the first argument</span>:
+Ngoài ra, một hàm `onCleanup` cũng được truyền vào callback của watcher như tham số thứ 3<span class="composition-api">, và vào effect function của `watchEffect` như tham số đầu tiên</span>:
 
 <div class="composition-api">
 
@@ -486,19 +486,19 @@ export default {
 
 </div>
 
-`onCleanup` passed via function argument is bound to the watcher instance so it is not subject to the synchronous constraint of `onWatcherCleanup`.
+`onCleanup` được truyền qua tham số hàm được gắn với instance của watcher, nên nó không bị ràng buộc bởi giới hạn đồng bộ như `onWatcherCleanup`.
 
-## Callback Flush Timing {#callback-flush-timing}
+## Thời điểm Flush của Callback {#callback-flush-timing}
 
-When you mutate reactive state, it may trigger both Vue component updates and watcher callbacks created by you.
+Khi bạn thay đổi state phản ứng, nó có thể kích hoạt cả các cập nhật component Vue và các callback của watcher mà bạn tạo.
 
-Similar to component updates, user-created watcher callbacks are batched to avoid duplicate invocations. For example, we probably don't want a watcher to fire a thousand times if we synchronously push a thousand items into an array being watched.
+Tương tự như cập nhật component, các callback watcher do người dùng tạo được gom lại để tránh gọi trùng lặp. Ví dụ, chúng ta không muốn watcher kích hoạt hàng nghìn lần nếu ta đồng bộ đẩy hàng nghìn phần tử vào một mảng đang được watch.
 
-By default, a watcher's callback is called **after** parent component updates (if any), and **before** the owner component's DOM updates. This means if you attempt to access the owner component's own DOM inside a watcher callback, the DOM will be in a pre-update state.
+Mặc định, callback của watcher được gọi **sau** khi component cha cập nhật (nếu có), và **trước** khi DOM của component chủ cập nhật. Điều này có nghĩa là nếu bạn cố truy cập DOM của component chủ bên trong callback watcher, DOM sẽ ở trạng thái chưa được cập nhật.
 
 ### Post Watchers {#post-watchers}
 
-If you want to access the owner component's DOM in a watcher callback **after** Vue has updated it, you need to specify the `flush: 'post'` option:
+Nếu bạn muốn truy cập DOM của component chủ trong callback watcher **sau khi** Vue đã cập nhật nó, bạn cần chỉ định tùy chọn `flush: 'post'`:
 
 <div class="options-api">
 
@@ -528,7 +528,7 @@ watchEffect(callback, {
 })
 ```
 
-Post-flush `watchEffect()` also has a convenience alias, `watchPostEffect()`:
+`watchEffect()` với flush post cũng có alias tiện lợi là `watchPostEffect()`:
 
 ```js
 import { watchPostEffect } from 'vue'
@@ -542,7 +542,7 @@ watchPostEffect(() => {
 
 ### Sync Watchers {#sync-watchers}
 
-It's also possible to create a watcher that fires synchronously, before any Vue-managed updates:
+Bạn cũng có thể tạo watcher kích hoạt đồng bộ, trước mọi cập nhật do Vue quản lý:
 
 <div class="options-api">
 
@@ -572,7 +572,7 @@ watchEffect(callback, {
 })
 ```
 
-Sync `watchEffect()` also has a convenience alias, `watchSyncEffect()`:
+Sync `watchEffect()` cũng có alias tiện lợi là `watchSyncEffect()`:
 
 ```js
 import { watchSyncEffect } from 'vue'
@@ -584,15 +584,15 @@ watchSyncEffect(() => {
 
 </div>
 
-:::warning Use with Caution
-Sync watchers do not have batching and triggers every time a reactive mutation is detected. It's ok to use them to watch simple boolean values, but avoid using them on data sources that might be synchronously mutated many times, e.g. arrays.
+:::warning Sử dụng cẩn thận
+Sync watcher không được gom lại và kích hoạt mỗi khi phát hiện một thay đổi phản ứng. Bạn có thể dùng chúng để watch các giá trị boolean đơn giản, nhưng tránh dùng với các nguồn dữ liệu có thể bị thay đổi đồng bộ nhiều lần, ví dụ như mảng.
 :::
 
 <div class="options-api">
 
 ## `this.$watch()` \* {#this-watch}
 
-It's also possible to imperatively create watchers using the [`$watch()` instance method](/api/component-instance#watch):
+Bạn cũng có thể tạo watcher theo kiểu lập trình bằng [phương thức instance `$watch()`](/api/component-instance#watch):
 
 ```js
 export default {
@@ -604,17 +604,17 @@ export default {
 }
 ```
 
-This is useful when you need to conditionally set up a watcher, or only watch something in response to user interaction. It also allows you to stop the watcher early.
+Cách này hữu ích khi bạn cần thiết lập watcher theo điều kiện, hoặc chỉ watch thứ gì đó khi người dùng tương tác. Nó cũng cho phép bạn dừng watcher sớm.
 
 </div>
 
-## Stopping a Watcher {#stopping-a-watcher}
+## Dừng một Watcher {#stopping-a-watcher}
 
 <div class="options-api">
 
-Watchers declared using the `watch` option or the `$watch()` instance method are automatically stopped when the owner component is unmounted, so in most cases you don't need to worry about stopping the watcher yourself.
+Các watcher khai báo bằng tùy chọn `watch` hoặc phương thức instance `$watch()` sẽ tự động dừng khi component chủ bị unmount, vì vậy trong hầu hết trường hợp bạn không cần lo về việc tự dừng watcher.
 
-In the rare case where you need to stop a watcher before the owner component unmounts, the `$watch()` API returns a function for that:
+Trong trường hợp hiếm gặp khi bạn cần dừng watcher trước khi component chủ bị unmount, API `$watch()` trả về một hàm để làm điều đó:
 
 ```js
 const unwatch = this.$watch('foo', callback)
@@ -627,9 +627,9 @@ unwatch()
 
 <div class="composition-api">
 
-Watchers declared synchronously inside `setup()` or `<script setup>` are bound to the owner component instance, and will be automatically stopped when the owner component is unmounted. In most cases, you don't need to worry about stopping the watcher yourself.
+Các watcher được khai báo đồng bộ bên trong `setup()` hoặc `<script setup>` được gắn với instance của component chủ, và sẽ tự động dừng khi component chủ bị unmount. Trong hầu hết trường hợp, bạn không cần lo về việc tự dừng watcher.
 
-The key here is that the watcher must be created **synchronously**: if the watcher is created in an async callback, it won't be bound to the owner component and must be stopped manually to avoid memory leaks. Here's an example:
+Điều quan trọng ở đây là watcher phải được tạo **đồng bộ**: nếu watcher được tạo trong một async callback, nó sẽ không được gắn với component chủ và phải được dừng thủ công để tránh rò rỉ bộ nhớ. Đây là ví dụ:
 
 ```vue
 <script setup>
@@ -645,7 +645,7 @@ setTimeout(() => {
 </script>
 ```
 
-To manually stop a watcher, use the returned handle function. This works for both `watch` and `watchEffect`:
+Để dừng watcher thủ công, hãy dùng hàm handle được trả về. Cách này hoạt động với cả `watch` và `watchEffect`:
 
 ```js
 const unwatch = watchEffect(() => {})
@@ -654,7 +654,7 @@ const unwatch = watchEffect(() => {})
 unwatch()
 ```
 
-Note that there should be very few cases where you need to create watchers asynchronously, and synchronous creation should be preferred whenever possible. If you need to wait for some async data, you can make your watch logic conditional instead:
+Lưu ý rằng sẽ rất ít trường hợp bạn cần tạo watcher bất đồng bộ, và nên ưu tiên tạo đồng bộ bất cứ khi nào có thể. Nếu bạn cần chờ dữ liệu async, bạn có thể đưa logic watch vào dạng có điều kiện:
 
 ```js
 // data to be loaded asynchronously
