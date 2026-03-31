@@ -1,18 +1,18 @@
 # Template Refs {#template-refs}
 
-While Vue's declarative rendering model abstracts away most of the direct DOM operations for you, there may still be cases where we need direct access to the underlying DOM elements. To achieve this, we can use the special `ref` attribute:
+Mặc dù mô hình render khai báo của Vue giúp trừu tượng hóa hầu hết các thao tác DOM trực tiếp, vẫn có những trường hợp chúng ta cần truy cập trực tiếp vào các phần tử DOM bên dưới. Để làm điều này, chúng ta có thể sử dụng thuộc tính đặc biệt `ref`:
 
 ```vue-html
 <input ref="input">
 ```
 
-`ref` is a special attribute, similar to the `key` attribute discussed in the `v-for` chapter. It allows us to obtain a direct reference to a specific DOM element or child component instance after it's mounted. This may be useful when you want to, for example, programmatically focus an input on component mount, or initialize a 3rd party library on an element.
+`ref` là một thuộc tính đặc biệt, tương tự thuộc tính `key` đã đề cập trong chương `v-for`. Nó cho phép chúng ta lấy tham chiếu trực tiếp đến một phần tử DOM cụ thể hoặc instance của component con sau khi được mount. Điều này hữu ích khi bạn muốn, chẳng hạn, lập trình cho input được focus khi component mount, hoặc khởi tạo một thư viện bên thứ ba trên một phần tử.
 
-## Accessing the Refs {#accessing-the-refs}
+## Truy cập các Ref {#accessing-the-refs}
 
 <div class="composition-api">
 
-To obtain the reference with Composition API, we can use the [`useTemplateRef()`](/api/composition-api-helpers#usetemplateref) <sup class="vt-badge" data-text="3.5+" /> helper:
+Để lấy tham chiếu bằng Composition API, chúng ta có thể dùng helper [`useTemplateRef()`](/api/composition-api-helpers#usetemplateref) <sup class="vt-badge" data-text="3.5+" />:
 
 ```vue
 <script setup>
@@ -31,7 +31,7 @@ onMounted(() => {
 </template>
 ```
 
-When using TypeScript, Vue's IDE support and `vue-tsc` will automatically infer the type of `input.value` based on what element or component the matching `ref` attribute is used on.
+Khi sử dụng TypeScript, hỗ trợ IDE của Vue và `vue-tsc` sẽ tự động suy luận kiểu của `input.value` dựa trên phần tử hoặc component mà thuộc tính `ref` tương ứng được dùng trên đó.
 
 <details>
 <summary>Usage before 3.5</summary>
@@ -75,7 +75,7 @@ export default {
 </div>
 <div class="options-api">
 
-The resulting ref is exposed on `this.$refs`:
+Ref kết quả được expose trên `this.$refs`:
 
 ```vue
 <script>
@@ -93,11 +93,11 @@ export default {
 
 </div>
 
-Note that you can only access the ref **after the component is mounted.** If you try to access <span class="options-api">`$refs.input`</span><span class="composition-api">`input`</span> in a template expression, it will be <span class="options-api">`undefined`</span><span class="composition-api">`null`</span> on the first render. This is because the element doesn't exist until after the first render!
+Lưu ý rằng bạn chỉ có thể truy cập ref **sau khi component đã được mount.** Nếu bạn cố truy cập <span class="options-api">`$refs.input`</span><span class="composition-api">`input`</span> trong một biểu thức template, giá trị sẽ là <span class="options-api">`undefined`</span><span class="composition-api">`null`</span> ở lần render đầu tiên. Lý do là phần tử chưa tồn tại cho đến sau lần render đầu tiên!
 
 <div class="composition-api">
 
-If you are trying to watch the changes of a template ref, make sure to account for the case where the ref has `null` value:
+Nếu bạn muốn theo dõi các thay đổi của một template ref, hãy đảm bảo xử lý trường hợp ref có giá trị `null`:
 
 ```js
 watchEffect(() => {
@@ -109,15 +109,15 @@ watchEffect(() => {
 })
 ```
 
-See also: [Typing Template Refs](/guide/typescript/composition-api#typing-template-refs) <sup class="vt-badge ts" />
+Xem thêm: [Typing Template Refs](/guide/typescript/composition-api#typing-template-refs) <sup class="vt-badge ts" />
 
 </div>
 
-## Ref on Component {#ref-on-component}
+## Ref trên Component {#ref-on-component}
 
-> This section assumes knowledge of [Components](/guide/essentials/component-basics). Feel free to skip it and come back later.
+> Phần này yêu cầu bạn đã có kiến thức về [Components](/guide/essentials/component-basics). Bạn có thể bỏ qua và quay lại sau.
 
-`ref` can also be used on a child component. In this case the reference will be that of a component instance:
+`ref` cũng có thể được dùng trên một component con. Trong trường hợp này, tham chiếu sẽ là instance của component đó:
 
 <div class="composition-api">
 
@@ -184,11 +184,11 @@ export default {
 
 </div>
 
-<span class="composition-api">If the child component is using Options API or not using `<script setup>`, the</span><span class="options-api">The</span> referenced instance will be identical to the child component's `this`, which means the parent component will have full access to every property and method of the child component. This makes it easy to create tightly coupled implementation details between the parent and the child, so component refs should be only used when absolutely needed - in most cases, you should try to implement parent / child interactions using the standard props and emit interfaces first.
+<span class="composition-api">Nếu component con sử dụng Options API hoặc không dùng `<script setup>`, instance</span><span class="options-api">Instance</span> được tham chiếu sẽ giống hệt `this` của component con, nghĩa là component cha sẽ có toàn quyền truy cập vào mọi thuộc tính và phương thức của component con. Điều này dễ dẫn đến sự phụ thuộc chặt chẽ về chi tiết triển khai giữa cha và con, vì vậy nên dùng template ref cho component chỉ khi thực sự cần thiết — trong hầu hết trường hợp, hãy ưu tiên tương tác cha/con thông qua props và emit trước.
 
 <div class="composition-api">
 
-An exception here is that components using `<script setup>` are **private by default**: a parent component referencing a child component using `<script setup>` won't be able to access anything unless the child component chooses to expose a public interface using the `defineExpose` macro:
+Ngoại lệ ở đây là các component dùng `<script setup>` — chúng **mặc định là private**: một component cha tham chiếu đến component con dùng `<script setup>` sẽ không thể truy cập bất kỳ thứ gì trừ khi component con chủ động expose một giao diện công khai bằng macro `defineExpose`:
 
 ```vue
 <script setup>
@@ -205,16 +205,16 @@ defineExpose({
 </script>
 ```
 
-When a parent gets an instance of this component via template refs, the retrieved instance will be of the shape `{ a: number, b: number }` (refs are automatically unwrapped just like on normal instances).
+Khi component cha lấy được instance của component này qua template ref, instance nhận được sẽ có dạng `{ a: number, b: number }` (các ref được tự động mở bọc ref giống như trên các instance thông thường).
 
-Note that defineExpose must be called before any await operation. Otherwise, properties and methods exposed after the await operation will not be accessible. 
+Lưu ý rằng `defineExpose` phải được gọi trước bất kỳ thao tác `await` nào. Nếu không, các thuộc tính và phương thức được expose sau thao tác `await` sẽ không thể truy cập được.
 
-See also: [Typing Component Template Refs](/guide/typescript/composition-api#typing-component-template-refs) <sup class="vt-badge ts" />
+Xem thêm: [Typing Component Template Refs](/guide/typescript/composition-api#typing-component-template-refs) <sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">
 
-The `expose` option can be used to limit the access to a child instance:
+Tùy chọn `expose` có thể được dùng để giới hạn quyền truy cập vào instance của component con:
 
 ```js
 export default {
@@ -236,17 +236,17 @@ export default {
 }
 ```
 
-In the above example, a parent referencing this component via template ref will only be able to access `publicData` and `publicMethod`.
+Trong ví dụ trên, một component cha tham chiếu đến component này qua template ref sẽ chỉ có thể truy cập `publicData` và `publicMethod`.
 
 </div>
 
-## Refs inside `v-for` {#refs-inside-v-for}
+## Refs bên trong `v-for` {#refs-inside-v-for}
 
-> Requires v3.5 or above
+> Yêu cầu v3.5 trở lên
 
 <div class="composition-api">
 
-When `ref` is used inside `v-for`, the corresponding ref should contain an Array value, which will be populated with the elements after mount:
+Khi `ref` được dùng bên trong `v-for`, ref tương ứng cần chứa giá trị là một mảng (Array), và mảng này sẽ được điền đầy đủ các phần tử sau khi mount:
 
 ```vue
 <script setup>
@@ -304,7 +304,7 @@ onMounted(() => console.log(itemRefs.value))
 </div>
 <div class="options-api">
 
-When `ref` is used inside `v-for`, the resulting ref value will be an array containing the corresponding elements:
+Khi `ref` được dùng bên trong `v-for`, giá trị ref kết quả sẽ là một mảng chứa các phần tử tương ứng:
 
 ```vue
 <script>
@@ -335,14 +335,14 @@ export default {
 
 </div>
 
-It should be noted that the ref array does **not** guarantee the same order as the source array.
+Cần lưu ý rằng mảng ref **không** đảm bảo thứ tự giống với mảng nguồn.
 
 ## Function Refs {#function-refs}
 
-Instead of a string key, the `ref` attribute can also be bound to a function, which will be called on each component update and gives you full flexibility on where to store the element reference. The function receives the element reference as the first argument:
+Thay vì một chuỗi key, thuộc tính `ref` cũng có thể được gắn với một hàm, hàm này sẽ được gọi mỗi khi component cập nhật và cho bạn toàn quyền kiểm soát nơi lưu trữ tham chiếu phần tử. Hàm nhận tham chiếu phần tử làm đối số đầu tiên:
 
 ```vue-html
 <input :ref="(el) => { /* assign el to a property or ref */ }">
 ```
 
-Note we are using a dynamic `:ref` binding so we can pass it a function instead of a ref name string. When the element is unmounted, the argument will be `null`. You can, of course, use a method instead of an inline function.
+Lưu ý chúng ta đang dùng binding động `:ref` để có thể truyền vào một hàm thay vì một chuỗi tên ref. Khi phần tử được unmount, đối số sẽ là `null`. Tất nhiên, bạn có thể dùng một phương thức thay vì hàm inline.
