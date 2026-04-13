@@ -25,19 +25,19 @@ Step-by-step translation plan for [`vuejs-translations/docs-vi`](https://github.
 > 13 pages covering the core of Vue. 
 > ~4,870 lines, ~20,000 words
 
-- [ ] `src/guide/essentials/application.md`
-- [ ] `src/guide/essentials/template-syntax.md`
-- [ ] `src/guide/essentials/reactivity-fundamentals.md`
-- [ ] `src/guide/essentials/computed.md`
-- [ ] `src/guide/essentials/class-and-style.md`
-- [ ] `src/guide/essentials/conditional.md`
-- [ ] `src/guide/essentials/list.md`
-- [ ] `src/guide/essentials/event-handling.md`
-- [ ] `src/guide/essentials/forms.md`
-- [ ] `src/guide/essentials/lifecycle.md`
-- [ ] `src/guide/essentials/template-refs.md`
-- [ ] `src/guide/essentials/watchers.md`
-- [ ] `src/guide/essentials/component-basics.md`
+- [x] `src/guide/essentials/application.md`
+- [x] `src/guide/essentials/template-syntax.md`
+- [x] `src/guide/essentials/reactivity-fundamentals.md`
+- [x] `src/guide/essentials/computed.md`
+- [x] `src/guide/essentials/class-and-style.md`
+- [x] `src/guide/essentials/conditional.md`
+- [x] `src/guide/essentials/list.md`
+- [x] `src/guide/essentials/event-handling.md`
+- [x] `src/guide/essentials/forms.md`
+- [x] `src/guide/essentials/lifecycle.md`
+- [x] `src/guide/essentials/template-refs.md`
+- [x] `src/guide/essentials/watchers.md`
+- [x] `src/guide/essentials/component-basics.md`
 
 ## Components In-Depth
 
