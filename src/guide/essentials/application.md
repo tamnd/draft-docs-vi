@@ -43,7 +43,7 @@ App (root component)
 
 ## Mounting App (gắn ứng dụng vào DOM) {#mounting-the-app}
 
-Một application instance sẽ không render (hiển thị) gì cho đến khi phương thức `.mount()` của nó được gọi. Nó yêu cầu một đối số "container (phần tử chứa)", có thể là một DOM element thật hoặc một chuỗi selector:
+Một application instance sẽ không render (hiển thị) gì cho đến khi phương thức `.mount()` được gọi. Nó yêu cầu một đối số "container (phần tử chứa)", có thể là một DOM element thật hoặc một chuỗi selector:
 
 ```html
 <div id="app"></div>
