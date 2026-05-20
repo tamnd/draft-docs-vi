@@ -8,15 +8,15 @@ Mỗi ứng dụng Vue bắt đầu bằng việc tạo một **application inst
 import { createApp } from 'vue'
 
 const app = createApp({
-  /* root component options (các tùy chọn của component gốc) */
+  /* các tùy chọn của component gốc */
 })
 ```
 
 ## Root Component (Component gốc) {#the-root-component}
 
-Đối tượng mà chúng ta truyền vào `createApp` thực chất là một component. Mỗi app đều cần một "root component (component gốc)" có thể chứa các component khác như là các phần tử con của nó.
+Đối tượng mà chúng ta truyền vào `createApp` thực chất là một component. Mỗi app đều cần một "root component (component gốc)" có thể chứa các component khác với vai trò phần tử con.
 
-Nếu bạn đang sử dụng Single-File Components (SFC - component trong một file), thông thường chúng ta import root component từ một file khác:
+Nếu sử dụng Single-File Components (SFC - component trong một file), thông thường chúng ta import root component từ một file khác:
 
 ```js
 import { createApp } from 'vue'
@@ -26,7 +26,7 @@ import App from './App.vue'
 const app = createApp(App)
 ```
 
-Trong khi nhiều ví dụ trong hướng dẫn này chỉ cần một component, hầu hết các ứng dụng thực tế được tổ chức thành một cây (tree) gồm nhiều component lồng nhau và có thể tái sử dụng. Ví dụ, cây component của một ứng dụng Todo có thể trông như sau:
+Tuy nhiều ví dụ trong hướng dẫn này chỉ cần một component, hầu hết các ứng dụng thực tế được tổ chức thành một cây (tree) gồm nhiều component lồng nhau và có thể tái sử dụng. Ví dụ, cây component của một ứng dụng Todo có thể trông như sau:
 
 ```
 App (root component)
@@ -103,7 +103,7 @@ app.component('TodoDeleteButton', TodoDeleteButton)
 
 Điều này giúp `TodoDeleteButton` có thể được sử dụng ở bất kỳ đâu trong app của chúng ta. Chúng ta sẽ thảo luận về việc đăng ký component và các loại asset khác ở các phần sau của hướng dẫn. Bạn cũng có thể xem toàn bộ danh sách API của application instance trong phần [API reference (tài liệu API)](/api/application).
 
-Hãy đảm bảo áp dụng tất cả cấu hình của app trước khi mount app!
+Nhớ áp dụng tất cả cấu hình của app trước khi mount app!
 
 ## Nhiều Application Instance {#multiple-application-instances}
 
@@ -121,4 +121,4 @@ const app2 = createApp({
 app2.mount('#container-2')
 ```
 
-Nếu bạn sử dụng Vue để tăng cường (enhance) HTML được render từ server và chỉ cần Vue kiểm soát một số phần cụ thể của trang lớn, hãy tránh mount một application instance duy nhất cho toàn bộ trang. Thay vào đó, tạo nhiều application instance nhỏ và mount chúng vào các phần tử mà chúng chịu trách nhiệm quản lý.
+Nếu bạn sử dụng Vue để tăng cường (enhance) HTML được render từ server và chỉ cần Vue kiểm soát một vài phần trên trang, tránh mount một application instance duy nhất cho toàn bộ trang. Thay vào đó, tạo nhiều application instance nhỏ và mount chúng vào các phần tử mà chúng chịu trách nhiệm quản lý.
